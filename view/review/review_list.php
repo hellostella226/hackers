@@ -14,6 +14,8 @@ $sql= "SELECT r.userName, r.reviewNo, c.cateName, r.title, l.lecName, r.starChk
         FROM review r, lecture l, category c
          WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo
           ORDER BY r.reviewNo DESC";
+
+
 $result = mysql_query($sql);
 $total_cnt = mysql_num_rows($result);
 
@@ -39,7 +41,7 @@ if($page_cnt > $page_num_cnt) {
 
 $sql2 = "SELECT r.userName, r.reviewNo, c.cateName, r.title, l.lecName, r.starChk
         FROM review r, lecture l, category c
-         WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo
+         WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo and c.cateNo = '".$_GET['searchType']."'
           ORDER BY r.reviewNo DESC limit $start, $list_cnt";
 
 $result2 = mysql_query($sql2);
@@ -57,23 +59,14 @@ $result2 = mysql_query($sql2);
 		</div>
 
 		<ul class="tab-list tab5">
-            <li class="on"><a href="#" id="searchT" name="c.cateNo">전체</a></li>
-			<li><a href="#" id="searchT" name="1">일반직무</a></li>
-			<li><a href="#" id="searchT" name="2">산업직무</a></li>
-			<li><a href="#" id="searchT" name="3">공통역량</a></li>
-			<li><a href="#" id="searchT" name="4">어학 및 자격증</a></li>
+            <li class="on"><a href="/view/review/review_list.php?p=1" id="searchT" name="c.cateNo">전체</a></li>
+			<li><a href="?searchType=1" id="searchT" name="1">일반직무</a></li>
+			<li><a href="?searchType=2" id="searchT" name="2">산업직무</a></li>
+			<li><a href="?searchType=3" id="searchT" name="3">공통역량</a></li>
+			<li><a href="?searchType=4" id="searchT" name="4">어학 및 자격증</a></li>
 		</ul>
-        <input type="hidden" id="st" name="st">
-        <script>
-            $('a#searchT').on('click', function() {
-                var searchType = $(this).attr('name');
-/*                alert(searchType);*/
-                var a = $('input:hidden[name=st]').attr(searchType);
-                /*alert($('input:hidden[name=st]').val());*/
-                alert(searchType);
+        <input type="hidden" id="st" name="st" value="">
 
-            })
-        </script>
 
 		<div class="search-info">
 			<div class="search-form f-r">
