@@ -1,0 +1,181 @@
+<?php
+session_start();
+include '../common/header.php';
+?>
+<?php
+include '../common/review_leftNav.php';
+?>
+<?php
+//강의 분류 불러오기
+include '../../model/selectLecture.php';
+?>
+
+	<div id="content" class="content">
+		<div class="tit-box-h3">
+			<h3 class="tit-h3">수강후기</h3>
+			<div class="sub-depth">
+				<span><i class="icon-home"><span>홈</span></i></span>
+				<span>직무교육 안내</span>
+				<strong>수강후기</strong>
+			</div>
+		</div>
+
+		<div class="user-notice">
+			<strong class="fs16">유의사항 안내</strong>
+			<ul class="list-guide mt15">
+				<li class="tc-brand">수강후기는 신청하신 강의의 학습진도율 25%이상 달성시 작성가능합니다. </li>
+				<li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
+			</ul>
+		</div>
+
+		<table border="0" cellpadding="0" cellspacing="0" class="tbl-col">
+			<caption class="hidden">강의정보</caption>
+			<colgroup>
+				<col style="width:15%"/>
+				<col style="*"/>
+			</colgroup>
+
+            <form id="reviewFrm" method="post">
+			<tbody>
+				<tr>
+					<th scope="col">강의</th>
+					<td>
+						<select class="input-sel" style="width:160px" id="selectBox1">
+                            <option>분류</option>
+                            <? while($cate=mysql_fetch_array($data)) {
+                                echo "<option id='".$cate['cateNo']."' name='".$cate['cateNo']."'>".$cate['cateName']."</option>";
+                             } ?>
+						</select>
+						<select class="input-sel ml5" style="width:454px" id="selectBox2" name="lecNo">
+							<!--동적 이벤트 박스-->
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th scope="col">제목</th>
+					<td><input type="text" class="input-text" style="width:611px" id="title" name="title"/></td>
+				</tr>
+				<tr>
+					<th scope="col">강의만족도</th>
+					<td>
+						<ul class="list-rating-choice">
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="starChk" id="starChk5" value="100" checked="checked"/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:100%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="starChk" id="starChk4" value="80"/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:80%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="starChk" id="starChk3" value="60"/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:60%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="starChk" id="starChk2" value="40"/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:40%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="starChk" id="starChk1" value="20"/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:20%"></span>
+								</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+       <!--스마트에디터 소스-->
+        <script type="text/javascript" src="/nse_files/js/HuskyEZCreator.js" charset="EUC-KR"></script>
+        <style>
+            .nse_content{width:660px;height:500px}
+        </style>
+		<div class="editor-wrap">
+                <textarea name="ir1" id="ir1" class="nse_content" ></textarea>
+		</div>
+		<div class="box-btn t-r">
+			<a href="#" class="btn-m-gray">목록</a>
+			<a href="#" class="btn-m ml5" id="sendContents">저장</a>
+		</div>
+        </form>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+    var oEditors = [];
+
+    nhn.husky.EZCreator.createInIFrame ({
+        oAppRef: oEditors,
+        elPlaceHolder: "ir1",
+        sSkinURI: "/nse_files/SmartEditor2Skin.html",
+        fCreator: "createSEditor2"
+    });
+
+    $('#sendContents').on('click',function() {
+
+        // 에디터 내용 textarea에 적용
+        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+
+
+        //수강후기 폼 값 전송
+        $('#reviewFrm').attr('action','/model/insertReview.php');
+        $('#reviewFrm').submit();
+
+    });
+</script>
+<script>
+
+    /*분류 선택시 강의명 셀렉트박스 동적 변경*/
+    $(document).on('change', $('#selectBox1'),function() {
+
+        //동적쿼리를 위한 변수 searchType 생성
+        var searchType = $('option:selected').val();
+
+        $.ajax ({
+            url: '/model/selectDynamicLecName.php',
+            type: 'post',
+            data: {
+                /*searchType : encodeURIComponent(searchType)*/
+                searchType : searchType
+            },
+            success: function(data) {
+
+                //이벤트박스 동적 생성
+                $('#selectBox2').html(data);
+
+            }
+
+        });
+
+    })
+</script>
+<?php
+include '../common/footer.php';
+?>
