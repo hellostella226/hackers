@@ -1,9 +1,19 @@
 <?php
 
-    include_once 'DBconfig.php';
+include_once 'DBconfig.php';
+
+$password = $_POST['userPw'];
+$password_hash = hash("sha256", $password);
+
+/*echo "암호화 전 : ".$password."<br/>";
+echo "암호화 후 : ".$password_hash."<br/>";*/
+
+$userPw = strtoupper($password_hash);
+
+
 
 /*    $sql= "SELECT userId FROM member WHERE userId= '".$_POST['userId']."'";*/
-    $sql= "INSERT INTO member (userName,userId,userPw,email,phone,tel,address1,address2,address3,sendSms,sendMail) values ('".$_POST['userName']."','".$_POST['userId']."','".$_POST['userPw']."','".$_POST['email']."','".$_POST['phone']."','".$_POST['tel']."','".$_POST['address1']."','".$_POST['address2']."','".$_POST['address3']."','".$_POST['sendSms']."','".$_POST['sendMail']."')";
+    $sql= "INSERT INTO member (userName,userId,userPw,email,phone,tel,address1,address2,address3,sendSms,sendMail) values ('".$_POST['userName']."','".$_POST['userId']."','".$userPw."','".$_POST['email']."','".$_POST['phone']."','".$_POST['tel']."','".$_POST['address1']."','".$_POST['address2']."','".$_POST['address3']."','".$_POST['sendSms']."','".$_POST['sendMail']."')";
     $result = mysql_query($sql);
 
     Header("Location:/view/member/complete.php");

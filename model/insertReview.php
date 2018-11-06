@@ -15,7 +15,7 @@ $sql = "INSERT INTO review (`userNo`,`userName`,`title`,`content`,`lecNo`,`starC
 $result = mysql_query($sql);
 
 
-    echo "<script> alert('수강후기가 입력되었습니다.'); location.href='/view/review/review_list.php'</script>";
+    echo "<script> alert('수강후기가 입력되었습니다.'); location.href='/view/review/review_list.php';</script>";
 
 ?>
 

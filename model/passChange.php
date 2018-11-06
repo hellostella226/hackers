@@ -3,10 +3,15 @@ session_start();
 include_once 'DBconfig.php';
 ?>
 <?php
-$userPw = $_POST['userPw'];
+$password = $_POST['userPw'];
+$password_hash = hash("sha256", $password);
+$userPw = strtoupper($password_hash);
+
+
 $userId = $_POST['userId'];
 
-$sql= "UPDATE member SET userPw = '$userPw' where token = '".$_SESSION['token']."' ";
+
+$sql= "UPDATE member SET userPw = '".$userPw."' where token = '".$_SESSION['token']."' ";
 
 
 $sql = mysql_query($sql);

@@ -52,6 +52,7 @@ include '../common//header.php';
 							<td>
 								<input type="text" class="input-text" id="mail_1" name="mail_1" style="width:138px" required/> @ <input type="text" id="mail_2" name="mail_2" class="input-text" style="width:138px" placeholder="직접입력" required/>
 								<select class="input-sel" id="selmail" name="selmail" style="width:160px">
+                                    <option id="naver" value="naver.com">---분류---</option>
 									<option id="naver" value="naver.com">naver.com</option>
 									<option id="gmail" value="gmail.com">gmail.com</option>
 									<option id="daum" value="daum.net">daum.net</option>
@@ -76,7 +77,7 @@ include '../common//header.php';
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input type="text" class="input-text ml5" id="address1" name="address1"  style="width:242px" required/></label><a href="#" class="btn-s-tin ml10" <!--onclick="address()"-->>주소찾기</a>
+									<label>우편번호 <input type="text" class="input-text ml5" id="address1" name="address1"  style="width:242px" required/></label><a href="#" class="btn-s-tin ml10" onclick="address()">주소찾기</a>
 								</p>
 								<p class="mt10">
 									<label>기본주소 <input type="text" class="input-text ml5" id="address2" name="address2" style="width:719px" required/></label>
@@ -136,6 +137,48 @@ include '../common//header.php';
 
 <script>
 $('.box-btn').on('click',function(){
+
+    if($('#userPw').val() == "" || $('#userPw2').val() == "" || $('#userId').val() == "" || $('#p1').val() == "" || $('#p2').val() == "" || $('#p3').val() == "" || $('#address1').val() == "" || $('#address2').val() == ""
+        || $('#address3').val() == "") {
+        alert('필수항목을 모두 입력해주세요.');
+        return false;
+    }
+
+    if($("#userPw").val() != $("#userPw2").val()) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return false;
+    }
+
+    // 이메일 검증 스크립트 작성
+    var emailVal = $("#mail_1").val()+"@"+$("#mail_2").val();
+    if (emailVal.match(regExp) != null) {
+        var a = $('input:hidden[name=email]').val(emailVal);
+
+        var p1 = $('#p1').val();
+        var p2 = $('#p2').val();
+        var p3 = $('#p3').val();
+        var pAll = p1+"-"+p2+"-"+p3;
+        var b = $('input:hidden[name=phone]').val(pAll);
+
+        if($('#t1').val() != "") {
+            alert("hi");
+
+            var t1 = $('#t1').val();
+            var t2 = $('#t2').val();
+            var t3 = $('#t3').val();
+            var tAll = t1+"-"+t2+"-"+t3;
+            var c = $('input:hidden[name=tel]').val(tAll);
+        }
+        /* alert("send mail address is "+$('input:hidden[name=email]').val());
+         alert("send phone is "+$('input:hidden[name=phone]').val());
+         alert("send tel is "+$('input:hidden[name=tel]').val());*/
+    }
+    else {
+        alert('올바르지 않은 형식의 이메일입니다. 다시 입력해 주세요');
+        return false;
+
+    }
+
     $("#SignUp").attr("action","/model/regist.php");
     $("#SignUp").submit();
 })
@@ -166,128 +209,62 @@ var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?
 
 /*var nameRules= /^[가-?]{2,4}$/;*/
 
-$(function(){
-    $("#idEnrollChk").on('click',function(){
+$(function() {
+    $("#idEnrollChk").on('click', function () {
         $.ajax({
             /*?php 방식?*/
-            url:"/model/config.php",
-            type:"post",
-            data:{"userId":$("#userId").val().trim()},
-            success:function(data){
+            url: "/model/config.php",
+            type: "post",
+            data: {"userId": $("#userId").val().trim()},
+            success: function (data) {
                 /*alert(data);*/
                 console.log(data);
-                if(idRules.test($("#userId").val())){
-                    if(data==$("#userId").val()){
-                        alert($('#userId').val()+ "는 이미 존재하는 ID입니다. 아이디를 변경해주세요");
+                if (idRules.test($("#userId").val())) {
+                    if (data == $("#userId").val()) {
+                        alert($('#userId').val() + "는 이미 존재하는 ID입니다. 아이디를 변경해주세요");
                         $('#userId').val("");
                         $('#userId').focus();
-                    }else{
-                        alert($('#userId').val()+"는 사용 가능한 ID입니다");
+                    } else {
+                        alert($('#userId').val() + "는 사용 가능한 ID입니다");
                         $('#userPw').focus();
                     }
-                }else{
-                       alert("ID는 영문대소문자+숫자 4~12글자로 구성하여야 합니다.");
+                } else {
+                    alert("ID는 영문대소문자+숫자 4~12글자로 구성하여야 합니다.");
                 }
             }
         });
     });
-    $("#userPw").keyup(function(){
-        if(passwordRules.test($("#userPw").val())){
-            $("#pwd1Result").html(" 는 사용가능한 비밀번호입니다").css("color","green");
-            pw1Flag=1;
-        }else{
-            $("#pwd1Result").html(" 사용 불가능한 비밀번호입니다. 다시 입력해 주세요").css("color","red");
-            pw1Flag=0;
+    $("#userPw").keyup(function () {
+        if (passwordRules.test($("#userPw").val())) {
+            $("#pwd1Result").html(" 는 사용가능한 비밀번호입니다").css("color", "green");
+            pw1Flag = 1;
+        } else {
+            $("#pwd1Result").html(" 사용 불가능한 비밀번호입니다. 다시 입력해 주세요").css("color", "red");
+            pw1Flag = 0;
         }
     });
-    $("#userPw2").keyup(function(){
-        if($("#userPw").val()!=$("#userPw2").val()){
-            $("#pwd2Result").html(" 비밀번호가 일치하지 않습니다. 다시 입력해 주세요").css("color","red");
-            pw2Flag=0;
-        }else{
-            $("#pwd2Result").html(" 비밀번호 일치"). css("color","green");
-            pw2Flag=1;
+    $("#userPw2").keyup(function () {
+        if ($("#userPw").val() != $("#userPw2").val()) {
+            $("#pwd2Result").html(" 비밀번호가 일치하지 않습니다. 다시 입력해 주세요").css("color", "red");
+            pw2Flag = 0;
+        } else {
+            $("#pwd2Result").html(" 비밀번호 일치").css("color", "green");
+            pw2Flag = 1;
             $("#mail_1").focus();
         }
     });
 
-    /*function Encrypt($str, $secret_key='secret key', $secret_iv='secret iv')
-    비밀번호 암호화
-    {
-        $key = hash('sha256', $secret_key);
-        $iv = substr(hash('sha256', $secret_iv), 0, 32)    ;
-
-        return str_replace("=", "", base64_encode(
-            openssl_encrypt($str, "AES-256-CBC", $key, 0, $iv))
-        );
-    }
-
-
-    function Decrypt($str, $secret_key='secret key', $secret_iv='secret iv')
-    {
-        $key = hash('sha256', $secret_key);
-        $iv = substr(hash('sha256', $secret_iv), 0, 32);
-
-        return openssl_decrypt(
-            base64_decode($str), "AES-256-CBC", $key, 0, $iv
-        );
-    }
-
-
-    $str = $('#userPw');
-
-    $secret_key = "123456789";
-    $secret_iv = "#@$%^&*()_+=-";
-
-
-    $encrypted = Encrypt($str, $secret_key, $secret_iv);
-    echo "암호화 문자열 => " .$encrypted. "<br />\n";
-
-    $decrypted = Decrypt($encrypted, $secret_key, $secret_iv);
-    echo "복호화 문자열 => " .$decrypted. "\n";*/
-
-
-});
     /*주소 select시 value 삽입*/
-    $("#selmail").change(function(){
-/*       alert($(this).val());*/
-       $("input:text[id=mail_2]").val($(this).val());
-       $("#telNum").focus();
+    $("#selmail").change(function () {
+
+        $("input:text[id=mail_2]").val($(this).val());
+        $("#telNum").focus();
     });
+});
 
-    $("#address2").on("click",function() {
-        // 이메일 검증 스크립트 작성
-        var emailVal = $("#mail_1").val()+"@"+$("#mail_2").val();
-        if (emailVal.match(regExp) != null) {
-            var a = $('input:hidden[name=email]').val(emailVal);
-
-            var p1 = $('#p1').val();
-            var p2 = $('#p2').val();
-            var p3 = $('#p3').val();
-            var pAll = p1+"-"+p2+"-"+p3;
-            var b = $('input:hidden[name=phone]').val(pAll);
-
-            if($('#t1').val() != "") {
-                alert("hi");
-
-                var t1 = $('#t1').val();
-                var t2 = $('#t2').val();
-                var t3 = $('#t3').val();
-                var tAll = t1+"-"+t2+"-"+t3;
-                var c = $('input:hidden[name=tel]').val(tAll);
-            }
-           /* alert("send mail address is "+$('input:hidden[name=email]').val());
-            alert("send phone is "+$('input:hidden[name=phone]').val());
-            alert("send tel is "+$('input:hidden[name=tel]').val());*/
-        }
-        else {
-            alert('올바르지 않은 형식의 이메일입니다. 다시 입력해 주세요');
-
-        }
-    });
 </script>
 <!--주소 api 가능하다는 전제-->
-<!--<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 function address() {
     new daum.Postcode({
@@ -317,7 +294,7 @@ function address() {
         }
     }).open();
 }
-</script>-->
+</script>
 <?php
 include '../common//footer.php';
 ?>

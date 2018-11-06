@@ -1,18 +1,14 @@
-<?php
+<?
 session_start();
 include '../common/header.php';
-?>
-<?php
 include '../common/review_leftNav.php';
-?>
-<?php
-//강의 분류 불러오기
-include '../../model/selectLecture.php';
+include_once '../../model/selectLecture.php';
+include_once '../../model/selectDetails.php';
 ?>
 
 	<div id="content" class="content">
 		<div class="tit-box-h3">
-			<h3 class="tit-h3">수강후기</h3>
+			<h3 class="tit-h3">수강후기 수정</h3>
 			<div class="sub-depth">
 				<span><i class="icon-home"><span>홈</span></i></span>
 				<span>직무교육 안내</span>
@@ -35,25 +31,28 @@ include '../../model/selectLecture.php';
 				<col style="*"/>
 			</colgroup>
 
+
             <form id="reviewFrm" method="post">
 			<tbody>
 				<tr>
 					<th scope="col">강의</th>
 					<td>
-						<select class="input-sel" style="width:160px" id="selectBox1">
-                            <option>분류</option>
-                            <? while($cate=mysql_fetch_array($data)) {
-                                echo "<option id='".$cate['cateNo']."' name='".$cate['cateNo']."'>".$cate['cateName']."</option>";
-                             } ?>
+						<select class="input-sel" style="width:160px" id = "selectBox1" >
+                            <? while($cate=mysql_fetch_array($data)) { ?>
+                                <option id='<?=$cate['cateNo']?>' name='cateNo' <? if($cate['cateNo'] == $row['cateNo']) { ?>selected<? } ?>><?=$cate['cateName']?></option>
+                            <? } ?>
 						</select>
-						<select class="input-sel ml5" style="width:454px" id="selectBox2" name="lecNo">
-							<!--동적 이벤트 박스-->
-                        </select>
+						<select class="input-sel ml5" style="width:454px" id = "selectBox2">
+                            <? while($lec=mysql_fetch_array($result2)) { ?>
+                                <option id='<?=$lec['lecNo']?>' name='<?=$lec['lecNo']?>' <? if($lec['lecNo'] == $row['lecNo']) { ?>selected<? } ?>><?=$lec['lecName']?></option>
+                                <input type="hidden" id="lecNo" name="lecNo" value="<?=$lec['lecNo']?>">
+                            <? } ?>
+						</select>
 					</td>
 				</tr>
 				<tr>
 					<th scope="col">제목</th>
-					<td><input type="text" class="input-text" style="width:611px" id="title" name="title"/></td>
+					<td><input type="text" class="input-text" id="title" name="title" style="width:611px" value="<?=$row['title']?>"/></td>
 				</tr>
 				<tr>
 					<th scope="col">강의만족도</th>
@@ -61,7 +60,7 @@ include '../../model/selectLecture.php';
 						<ul class="list-rating-choice">
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="starChk" id="starChk5" value="100" checked="checked"/>
+									<input type="radio" name="starChk" id="starChk1" <? if($row['starChk'] == '100'){ echo 'checked'; }?> value="100"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -70,7 +69,7 @@ include '../../model/selectLecture.php';
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="starChk" id="starChk4" value="80"/>
+									<input type="radio" name="starChk" id="starChk2"  <? if($row['starChk'] == '80'){ echo 'checked'; }?> value="80"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -79,7 +78,7 @@ include '../../model/selectLecture.php';
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="starChk" id="starChk3" value="60"/>
+									<input type="radio" name="starChk" id="starChk3"  <? if($row['starChk'] == '60'){ echo 'checked'; }?> value="60"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -88,7 +87,7 @@ include '../../model/selectLecture.php';
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="starChk" id="starChk2" value="40"/>
+									<input type="radio" name="starChk" id="starChk4"  <? if($row['starChk'] == '40'){ echo 'checked'; }?> value="40"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -97,7 +96,7 @@ include '../../model/selectLecture.php';
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="starChk" id="starChk1" value="20"/>
+									<input type="radio" name="starChk" id="starChk5"  <? if($row['starChk'] == '20'){ echo 'checked'; }?> value="20"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -108,24 +107,29 @@ include '../../model/selectLecture.php';
 					</td>
 				</tr>
 			</tbody>
+
 		</table>
 
-       <!--스마트에디터 소스-->
+
+        <!--스마트에디터 소스-->
         <script type="text/javascript" src="/nse_files/js/HuskyEZCreator.js" charset="EUC-KR"></script>
         <style>
             .nse_content{width:660px;height:500px}
         </style>
-		<div class="editor-wrap">
-                <textarea name="ir1" id="ir1" class="nse_content" ></textarea>
-		</div>
-		<div class="box-btn t-r">
-			<a href="#" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5" id="sendContents">저장</a>
-		</div>
+        <div class="editor-wrap">
+            <textarea name="ir1" id="ir1" class="nse_content" ><?=$row['content']?></textarea>
+        </div>
+
         </form>
+
+        <div class="box-btn t-r">
+            <a href="#" class="btn-m-gray">목록</a>
+            <a href="#" class="btn-m ml5" id="sendContents">수정</a>
+        </div>
+
+
 	</div>
 </div>
-
 
 <script type="text/javascript">
 
@@ -145,7 +149,7 @@ include '../../model/selectLecture.php';
 
 
         //수강후기 폼 값 전송
-        $('#reviewFrm').attr('action','/model/insertReview.php');
+        $('#reviewFrm').attr('action','/model/updateReview.php?reviewNo=<?=$_GET['reviewNo']?>');
         $('#reviewFrm').submit();
 
     });
@@ -154,27 +158,26 @@ include '../../model/selectLecture.php';
 
     /*분류 선택시 강의명 셀렉트박스 동적 변경*/
     //$(document).on('change', $('#selectBox1'),function() {
-        $('select#selectBox1').change(function() {
-            //동적쿼리를 위한 변수 searchType 생성
-            var searchType = $('option:selected').val();
+    $('select#selectBox1').change(function() {
+        //동적쿼리를 위한 변수 searchType 생성
+        var searchType = $('option:selected').val();
+        $.ajax({
+            url: '/model/selectDynamicLecName.php',
+            type: 'post',
+            data: {
+                /*searchType : encodeURIComponent(searchType)*/
+                searchType: searchType
+            },
+            success: function (data) {
 
-            $.ajax({
-                url: '/model/selectDynamicLecName.php',
-                type: 'post',
-                data: {
-                    /*searchType : encodeURIComponent(searchType)*/
-                    searchType: searchType
-                },
-                success: function (data) {
+                //이벤트박스 동적 생성
+                var htmls = "<option>-----강의명 선택-----</option>" + data;
+                $('#selectBox2').empty().append(htmls);
 
-                    //이벤트박스 동적 생성
-                    var htmls = "<option>-----강의명 선택-----</option>" + data;
-                    $('#selectBox2').empty().append(htmls);
-
-                }
-            });
+            }
         });
+    });
 </script>
-<?php
+<?
 include '../common/footer.php';
 ?>
