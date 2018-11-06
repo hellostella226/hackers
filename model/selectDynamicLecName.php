@@ -20,6 +20,6 @@ $sql = "SELECT c.cateNo, l.lecNo, l.lecName
 $data = mysql_query($sql);
 
 while($lec = mysql_fetch_array($data)) {
-    print_r("<option id='lecNos' name='lecNos' value='".$lec['lecNo']."'>".$lec['lecName']."</option>");
+    print_r("<option value='".$lec['lecNo']."'>".$lec['lecName']."</option>");
 }
 ?>

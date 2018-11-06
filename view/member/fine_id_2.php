@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../common//header.php';
 ?>
 <div id="container" class="container-full">
@@ -22,7 +23,7 @@ include '../common//header.php';
 			</div>
 
 			<div class="guide-box">
-				<p class="fs16 mb5">이진아 회원님의 아이디는 아래와 같습니다.</p>
+				<p class="fs16 mb5">회원님의 아이디는 아래와 같습니다.</p>
 				<strong class="big-title tc-brand"><?php echo $_POST["userId"];?></strong>
 			</div>
 

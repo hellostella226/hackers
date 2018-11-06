@@ -71,7 +71,7 @@ include '../common//header.php';
                             <th scope="col"><span class="icons">*</span>주소</th>
                             <td>
                                 <p >
-                                    <label>우편번호 <input type="text" class="input-text ml5" id="address1" name="address1" value="<?php echo $_POST['address1'];?>"style="width:242px" required/></label><a href="#" class="btn-s-tin ml10" <!--onclick="address()"-->>주소찾기</a>
+                                    <label>우편번호 <input type="text" class="input-text ml5" id="address1" name="address1" value="<?php echo $_POST['address1'];?>"style="width:242px" required/></label><a href="#" class="btn-s-tin ml10" onclick="address()">주소찾기</a>
                                 </p>
                                 <p class="mt10">
                                     <label>기본주소 <input type="text" class="input-text ml5" id="address2" name="address2" value="<?php echo $_POST['address2'];?>" style="width:719px" required/></label>
@@ -201,41 +201,6 @@ include '../common//header.php';
             }
         });
 
-        /*function Encrypt($str, $secret_key='secret key', $secret_iv='secret iv')
-        비밀번호 암호화
-        {
-            $key = hash('sha256', $secret_key);
-            $iv = substr(hash('sha256', $secret_iv), 0, 32)    ;
-
-            return str_replace("=", "", base64_encode(
-                openssl_encrypt($str, "AES-256-CBC", $key, 0, $iv))
-            );
-        }
-
-
-        function Decrypt($str, $secret_key='secret key', $secret_iv='secret iv')
-        {
-            $key = hash('sha256', $secret_key);
-            $iv = substr(hash('sha256', $secret_iv), 0, 32);
-
-            return openssl_decrypt(
-                base64_decode($str), "AES-256-CBC", $key, 0, $iv
-            );
-        }
-
-
-        $str = $('#userPw');
-
-        $secret_key = "123456789";
-        $secret_iv = "#@$%^&*()_+=-";
-
-
-        $encrypted = Encrypt($str, $secret_key, $secret_iv);
-        echo "암호화 문자열 => " .$encrypted. "<br />\n";
-
-        $decrypted = Decrypt($encrypted, $secret_key, $secret_iv);
-        echo "복호화 문자열 => " .$decrypted. "\n";*/
-
 
     });
     /*주소 select시 value 삽입*/
@@ -273,12 +238,23 @@ include '../common//header.php';
             return false;
         }
 
+        if($('#userPw').val() == "" || $('#userPw2').val() == "" || $('#userId').val() == "" || $('#p1').val() == "" || $('#p2').val() == "" || $('#p3').val() == "" || $('#address1').val() == "" || $('#address2').val() == ""
+            || $('#address3').val() == "") {
+            alert('필수항목을 모두 입력해주세요.');
+            return false;
+        }
+
+        if($("#userPw").val() != $("#userPw2").val()) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+
         $("#SignUp").attr("action","/model/updateMem.php");
         $("#SignUp").submit();
     });
 </script>
 <!--주소 api 가능하다는 전제-->
-<!--<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 function address() {
     new daum.Postcode({
@@ -308,7 +284,7 @@ function address() {
         }
     }).open();
 }
-</script>-->
+</script>
 <?php
 include '../common//footer.php';
 ?>?>

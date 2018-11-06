@@ -59,11 +59,7 @@ session_start();
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu2">
@@ -73,21 +69,12 @@ session_start();
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu3">
                             <a href="#">공통역량</a>
                             <ul class="nav-sub-lst">
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
@@ -101,35 +88,22 @@ session_start();
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu5">
                             <a href="#">직무교육 안내</a>
                             <ul class="nav-sub-lst">
+                                <li><a href="#">해커스 HRD 소개</a></li>
+                                <li><a href="#">사업주훈련</a></li>
+                                <li><a href="#">근로자카드</a></li>
+                                <li><a href="#">학습안내</a></li>
                                 <li><a href="/view/review/review_list.php">수강후기</a></li>
-                                <li><a href="/view/review/wirteReview.php">s</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
                             </ul>
                         </li>
                         <li class="mnu6">
                             <a href="#">내 강의실</a>
                             <ul class="nav-sub-lst">
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
                                 <li><a href="#">서브메뉴</a></li>
@@ -148,22 +122,20 @@ session_start();
 
         <div class="top-section">
             <div class="inner">
-                    <?php
-                    if(!isset($_SESSION['token'])!=null) {
-                        echo " <div class='link-box'><a href=\"/view/member/login.php\" id=\"logIn\">로그인</a>
-                                <a href=\"/view/member/step_01.php\">회원가입</a>
-                               <a href=\"#\">상담/고객센터</a></div>";
-                    } else {
-                        echo " <div class='link-box'><a href='/model/logOut.php'id=\"logIn\">로그아웃</a>
-                                <a href=\"/model/selectMemInfo.php\" ' >내정보</a>
-                                <a href=\"#\">상담/고객센터</a>    
-                                </div>";
-                        if($_SESSION['userId'] == "admin") {
-                            echo "<a href=\"#\">강의Admin</a></div>";
-                        }
-                    }
-
-                    ?>
+                    <? if(!isset($_SESSION['token'])!=null) { ?>
+                         <div class='link-box'><a href="/view/member/login.php" id="logIn">로그인</a>
+                             <a href="/view/member/step_01.php">회원가입</a>
+                             <a href="#">상담/고객센터</a>
+                         </div>
+                    <? } else { ?>
+                        <div class='link-box'><a href='/model/logOut.php'id="logIn">로그아웃</a>
+                            <a href="/model/selectMemInfo.php" ' >내정보</a>
+                            <a href="#">상담/고객센터</a>
+                            <? if($_SESSION['userId'] == "admin") { ?>
+                                <a href="/view/admin/index.php">강의Admin</a></div>
+                            <? } ?>
+                        </div>
+                    <? } ?>
             </div>
         </div>
     </div>
