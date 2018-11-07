@@ -4,6 +4,7 @@
  * @fileOverview This file contains a function that takes care of various operations related to find and replace
  * @name N_FindReplace.js
  */
+
 nhn.FindReplace = jindo.$Class({
 	sKeyword : "",
 	window : null,
@@ -165,8 +166,8 @@ nhn.FindReplace = jindo.$Class({
 		var oSelection = new nhn.HuskyRange(this.window);
 		oSelection.setFromSelection();
 
-		// ì‹œì‘ì ì˜ ë¶ë§ˆí¬ê°€ ì§€ì›Œì§€ë©´ì„œ ì‹œì‘ì ì„ ì§€ë‚˜ì„œ replaceê°€ ë˜ëŠ” í˜„ìƒ ë°©ì§€ìš©
-		// ì²« ë‹¨ì–´ ì•ìª½ì— íŠ¹ìˆ˜ ë¬¸ì ì‚½ì… í•´ì„œ, replaceì™€ í•¨ê»˜ ë¶ë§ˆí¬ê°€ ì‚¬ë¼ì§€ëŠ” ê²ƒ ë°©ì§€
+		// ½ÃÀÛÁ¡ÀÇ ºÏ¸¶Å©°¡ Áö¿öÁö¸é¼­ ½ÃÀÛÁ¡À» Áö³ª¼­ replace°¡ µÇ´Â Çö»ó ¹æÁö¿ë
+		// Ã¹ ´Ü¾î ¾ÕÂÊ¿¡ Æ¯¼ö ¹®ÀÚ »ğÀÔ ÇØ¼­, replace¿Í ÇÔ²² ºÏ¸¶Å©°¡ »ç¶óÁö´Â °Í ¹æÁö
 		oSelection.collapseToStart();
 		var oTmpNode = this.window.document.createElement("SPAN");
 		oTmpNode.innerHTML = unescape("%uFEFF");
@@ -204,7 +205,7 @@ nhn.FindReplace = jindo.$Class({
 		oSelection.select();
 		oSelection.removeStringBookmark(sBookmark);
 
-		// setTimeout ì—†ì´ ë°”ë¡œ ì§€ìš°ë©´ IE8 ë¸Œë¼ìš°ì €ê°€ ë¹ˆë²ˆí•˜ê²Œ ì£½ì–´ë²„ë¦¼
+		// setTimeout ¾øÀÌ ¹Ù·Î Áö¿ì¸é IE8 ºê¶ó¿ìÀú°¡ ºó¹øÇÏ°Ô Á×¾î¹ö¸²
 		setTimeout(function(){
 			oTmpNode.parentNode.removeChild(oTmpNode);
 		}, 0);
@@ -256,18 +257,18 @@ nhn.FindReplace = jindo.$Class({
 	},
 	
 	_getFirstTextNode : function(){
-		// ë¬¸ì„œì—ì„œ ì œì¼ ì•ìª½ì— ìœ„ì¹˜í•œ ì•„ë¬´ ë…¸ë“œ ì°¾ê¸°
+		// ¹®¼­¿¡¼­ Á¦ÀÏ ¾ÕÂÊ¿¡ À§Ä¡ÇÑ ¾Æ¹« ³ëµå Ã£±â
 		var elFirstNode = this.document.body.firstChild;
 		while(!!elFirstNode && elFirstNode.firstChild){
 			elFirstNode = elFirstNode.firstChild;
 		}
 		
-		// ë¬¸ì„œì— ì•„ë¬´ ë…¸ë“œë„ ì—†ìŒ
+		// ¹®¼­¿¡ ¾Æ¹« ³ëµåµµ ¾øÀ½
 		if(!elFirstNode){
 			return null;
 		}
 		
-		// ì²˜ìŒ ë…¸ë“œê°€ í…ìŠ¤íŠ¸ ë…¸ë“œê°€ ì•„ë‹ˆê±°ë‚˜ bogus ë…¸ë“œë¼ë©´ ë‹¤ìŒ í…ìŠ¤íŠ¸ ë…¸ë“œë¥¼ ì°¾ìŒ
+		// Ã³À½ ³ëµå°¡ ÅØ½ºÆ® ³ëµå°¡ ¾Æ´Ï°Å³ª bogus ³ëµå¶ó¸é ´ÙÀ½ ÅØ½ºÆ® ³ëµå¸¦ Ã£À½
 		if(elFirstNode.nodeType != 3 || this._isBlankTextNode(elFirstNode)){
 			var htTmp = this._getNextTextNode(elFirstNode, false);
 			elFirstNode = htTmp.elNextText;
@@ -325,15 +326,15 @@ nhn.FindReplace = jindo.$Class({
 			
 			var nOriginLen = sOriginalWord.length;
 
-			// ë‹¨ì–´ í•œê°œì”© ë¹„êµ
+			// ´Ü¾î ÇÑ°³¾¿ ºñ±³
 			for(var i=0, niLen=aTexts.length; i<niLen; i++){
 				var sText = aTexts[i];
-				// ë‹¨ì–´ ì•ˆì— í•œê¸€ìì”© ë¹„êµ
+				// ´Ü¾î ¾È¿¡ ÇÑ±ÛÀÚ¾¿ ºñ±³
 				//for(var j=0, njLen=sText.length - nOriginLen; j<njLen; j++){
 				for(var j=sText.length-nOriginLen; j>=0; j--){
 					var sTmp = sText.substring(j, j+nOriginLen);
 					if(bWholeWord && 
-						(j > 0 && sText.charAt(j-1).match(/[a-zA-Zê°€-í£]/))
+						(j > 0 && sText.charAt(j-1).match(/[a-zA-Z°¡-?]/))
 					){
 						continue;
 					}
@@ -342,7 +343,7 @@ nhn.FindReplace = jindo.$Class({
 						nMatchCnt++;
 
 						var oSelection = new nhn.HuskyRange(this.window);
-						// ë§ˆì§€ë§‰ ê¸€ìì˜ ë’·ë¶€ë¶„ ì²˜ë¦¬
+						// ¸¶Áö¸· ±ÛÀÚÀÇ µŞºÎºĞ Ã³¸®
 						var elContainer, nOffset;
 						if(j+nOriginLen < aElTexts[i].length){
 							elContainer = aElTexts[i][j+nOriginLen][0];
@@ -2294,10 +2295,10 @@ nhn.HuskyRange = jindo.$Class({
 		oStartMarker.id = this.HUSKY_BOOMARK_START_ID_PREFIX+sTmpId;
 		oInsertionPoint.insertNode(oStartMarker);
 
-		// IEì—ì„œ ë¹ˆ SPANì˜ ì•ë’¤ë¡œ ì»¤ì„œê°€ ì´ë™í•˜ì§€ ì•Šì•„ ë¬¸ì œê°€ ë°œìƒ í•  ìˆ˜ ìˆì–´, ë³´ì´ì§€ ì•ŠëŠ” íŠ¹ìˆ˜ ë¬¸ìë¥¼ ì„ì‹œë¡œ ë„£ì–´ ì¤Œ.
+		// IE¿¡¼­ ºó SPANÀÇ ¾ÕµÚ·Î Ä¿¼­°¡ ÀÌµ¿ÇÏÁö ¾Ê¾Æ ¹®Á¦°¡ ¹ß»ı ÇÒ ¼ö ÀÖ¾î, º¸ÀÌÁö ¾Ê´Â Æ¯¼ö ¹®ÀÚ¸¦ ÀÓ½Ã·Î ³Ö¾î ÁÜ.
 		if(jindo.$Agent().navigator().ie){
-			// SPANì˜ ìœ„ì¹˜ê°€ TDì™€ TD ì‚¬ì´ì— ìˆì„ ê²½ìš°, í…ìŠ¤íŠ¸ ì‚½ì… ì‹œ ì•Œìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ê°€ ë°œìƒí•œë‹¤.
-			// TDì™€ TDì‚¬ì´ì—ì„œëŠ” í…ìŠ¤íŠ¸ ì‚½ì…ì´ í•„ìš” ì—†ìŒìœ¼ë¡œ ê·¸ëƒ¥ try/catchë¡œ ì²˜ë¦¬
+			// SPANÀÇ À§Ä¡°¡ TD¿Í TD »çÀÌ¿¡ ÀÖÀ» °æ¿ì, ÅØ½ºÆ® »ğÀÔ ½Ã ¾Ë¼ö ¾ø´Â ¿À·ù°¡ ¹ß»ıÇÑ´Ù.
+			// TD¿Í TD»çÀÌ¿¡¼­´Â ÅØ½ºÆ® »ğÀÔÀÌ ÇÊ¿ä ¾øÀ½À¸·Î ±×³É try/catch·Î Ã³¸®
 			try{
 				oStartMarker.innerHTML = unescape("%uFEFF");
 			}catch(e){}
@@ -2557,10 +2558,10 @@ nhn.HuskyRange = jindo.$Class({
 	},
 
 	/**
-	 * ë…¸ë“œì˜ ì·¨ì†Œì„ /ë°‘ì¤„ ì •ë³´ë¥¼ í™•ì¸í•œë‹¤
-	 * ê´€ë ¨ BTS [SMARTEDITORSUS-26]
-	 * @param {Node} 	oNode	ì·¨ì†Œì„ /ë°‘ì¤„ì„ í™•ì¸í•  ë…¸ë“œ
-	 * @param {String}	sValue 	textDecoration ì •ë³´
+	 * ³ëµåÀÇ Ãë¼Ò¼±/¹ØÁÙ Á¤º¸¸¦ È®ÀÎÇÑ´Ù
+	 * °ü·Ã BTS [SMARTEDITORSUS-26]
+	 * @param {Node} 	oNode	Ãë¼Ò¼±/¹ØÁÙÀ» È®ÀÎÇÒ ³ëµå
+	 * @param {String}	sValue 	textDecoration Á¤º¸
 	 * @see nhn.HuskyRange#_checkTextDecoration
 	 */
 	_hasTextDecoration : function(oNode, sValue){
@@ -2584,12 +2585,12 @@ nhn.HuskyRange = jindo.$Class({
 	},
 	
 	/**
-	 * ë…¸ë“œì— ì·¨ì†Œì„ /ë°‘ì¤„ì„ ì ìš©í•œë‹¤
-	 * ê´€ë ¨ BTS [SMARTEDITORSUS-26]
-	 * [FF] ë…¸ë“œì˜ Style ì— textDecoration ì„ ì¶”ê°€í•œë‹¤
-	 * [FF ì™¸] U/STRIKE íƒœê·¸ë¥¼ ì¶”ê°€í•œë‹¤
-	 * @param {Node} 	oNode	ì·¨ì†Œì„ /ë°‘ì¤„ì„ ì ìš©í•  ë…¸ë“œ
-	 * @param {String}	sValue 	textDecoration ì •ë³´
+	 * ³ëµå¿¡ Ãë¼Ò¼±/¹ØÁÙÀ» Àû¿ëÇÑ´Ù
+	 * °ü·Ã BTS [SMARTEDITORSUS-26]
+	 * [FF] ³ëµåÀÇ Style ¿¡ textDecoration À» Ãß°¡ÇÑ´Ù
+	 * [FF ¿Ü] U/STRIKE ÅÂ±×¸¦ Ãß°¡ÇÑ´Ù
+	 * @param {Node} 	oNode	Ãë¼Ò¼±/¹ØÁÙÀ» Àû¿ëÇÒ ³ëµå
+	 * @param {String}	sValue 	textDecoration Á¤º¸
 	 * @see nhn.HuskyRange#_checkTextDecoration
 	 */
 	_setTextDecoration : function(oNode, sValue){
@@ -2606,9 +2607,9 @@ nhn.HuskyRange = jindo.$Class({
 	},
 		
 	/**
-	 * ì¸ìë¡œ ì „ë‹¬ë°›ì€ ë…¸ë“œ ìƒìœ„ì˜ ì·¨ì†Œì„ /ë°‘ì¤„ ì •ë³´ë¥¼ í™•ì¸í•˜ì—¬ ë…¸ë“œì— ì ìš©í•œë‹¤
-	 * ê´€ë ¨ BTS [SMARTEDITORSUS-26]
-	 * @param {Node} oNode ì·¨ì†Œì„ /ë°‘ì¤„ì„ ì ìš©í•  ë…¸ë“œ
+	 * ÀÎÀÚ·Î Àü´Ş¹ŞÀº ³ëµå »óÀ§ÀÇ Ãë¼Ò¼±/¹ØÁÙ Á¤º¸¸¦ È®ÀÎÇÏ¿© ³ëµå¿¡ Àû¿ëÇÑ´Ù
+	 * °ü·Ã BTS [SMARTEDITORSUS-26]
+	 * @param {Node} oNode Ãë¼Ò¼±/¹ØÁÙÀ» Àû¿ëÇÒ ³ëµå
 	 */
 	_checkTextDecoration : function(oNode){
 		if(oNode.tagName !== "SPAN"){
@@ -2663,12 +2664,12 @@ nhn.HuskyRange = jindo.$Class({
 	},
 
 	/**
-	 * Rangeì— ì†í•œ ë…¸ë“œë“¤ì— ìŠ¤íƒ€ì¼ì„ ì ìš©í•œë‹¤
-	 * @param {Object} 	oStyle 					ì ìš©í•  ìŠ¤íƒ€ì¼ì„ ê°€ì§€ëŠ” Object (ì˜ˆ) ê¸€ê¼´ ìƒ‰ ì ìš©ì˜ ê²½ìš° { color : "#0075c8" }
-	 * @param {Object} 	[oAttribute] 			ì ìš©í•  ì†ì„±ì„ ê°€ì§€ëŠ” Object (ì˜ˆ) ë§ì¶¤ë²” ê²€ì‚¬ì˜ ê²½ìš° { _sm2_spchk: "ê°•ë‚¨ì½©", class: "se2_check_spell" }
-	 * @param {String} 	[sNewSpanMarker] 		ìƒˆë¡œ ì¶”ê°€ëœ SPAN ë…¸ë“œë¥¼ ë‚˜ì¤‘ì— ë”°ë¡œ ì²˜ë¦¬í•´ì•¼í•˜ëŠ” ê²½ìš° ë§ˆí‚¹ì„ ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ë¬¸ìì—´
-	 * @param {Boolean} [bIncludeLI] 			LI ë„ ìŠ¤íƒ€ì¼ ì ìš©ì— í¬í•¨í•  ê²ƒì¸ì§€ì˜ ì—¬ë¶€ [COM-1051] _getStyleParentNodes ë©”ì„œë“œ ì°¸ê³ í•˜ê¸°
-	 * @param {Boolean} [bCheckTextDecoration] 	ì·¨ì†Œì„ /ë°‘ì¤„ ì²˜ë¦¬ë¥¼ ì ìš©í•  ê²ƒì¸ì§€ ì—¬ë¶€ [SMARTEDITORSUS-26] _setTextDecoration ë©”ì„œë“œ ì°¸ê³ í•˜ê¸°
+	 * Range¿¡ ¼ÓÇÑ ³ëµåµé¿¡ ½ºÅ¸ÀÏÀ» Àû¿ëÇÑ´Ù
+	 * @param {Object} 	oStyle 					Àû¿ëÇÒ ½ºÅ¸ÀÏÀ» °¡Áö´Â Object (¿¹) ±Û²Ã »ö Àû¿ëÀÇ °æ¿ì { color : "#0075c8" }
+	 * @param {Object} 	[oAttribute] 			Àû¿ëÇÒ ¼Ó¼ºÀ» °¡Áö´Â Object (¿¹) ¸ÂÃã¹ü °Ë»çÀÇ °æ¿ì { _sm2_spchk: "°­³²Äá", class: "se2_check_spell" }
+	 * @param {String} 	[sNewSpanMarker] 		»õ·Î Ãß°¡µÈ SPAN ³ëµå¸¦ ³ªÁß¿¡ µû·Î Ã³¸®ÇØ¾ßÇÏ´Â °æ¿ì ¸¶Å·À» À§ÇØ »ç¿ëÇÏ´Â ¹®ÀÚ¿­
+	 * @param {Boolean} [bIncludeLI] 			LI µµ ½ºÅ¸ÀÏ Àû¿ë¿¡ Æ÷ÇÔÇÒ °ÍÀÎÁöÀÇ ¿©ºÎ [COM-1051] _getStyleParentNodes ¸Ş¼­µå Âü°íÇÏ±â
+	 * @param {Boolean} [bCheckTextDecoration] 	Ãë¼Ò¼±/¹ØÁÙ Ã³¸®¸¦ Àû¿ëÇÒ °ÍÀÎÁö ¿©ºÎ [SMARTEDITORSUS-26] _setTextDecoration ¸Ş¼­µå Âü°íÇÏ±â
 	 */
 	styleRange : function(oStyle, oAttribute, sNewSpanMarker, bIncludeLI, bCheckTextDecoration){
 		var aStyleParents = this.aStyleParents = this._getStyleParentNodes(sNewSpanMarker, bIncludeLI);
@@ -2683,7 +2684,7 @@ nhn.HuskyRange = jindo.$Class({
 
 				if(typeof sValue != "string"){continue;}
 
-				// [SMARTEDITORSUS-26] ê¸€ê¼´ ìƒ‰ì„ ì ìš©í•  ë•Œ ì·¨ì†Œì„ /ë°‘ì¤„ì˜ ìƒ‰ìƒë„ ì²˜ë¦¬ë˜ë„ë¡ ì¶”ê°€
+				// [SMARTEDITORSUS-26] ±Û²Ã »öÀ» Àû¿ëÇÒ ¶§ Ãë¼Ò¼±/¹ØÁÙÀÇ »ö»óµµ Ã³¸®µÇµµ·Ï Ãß°¡
 				if(bCheckTextDecoration && oStyle.color){
 					this._checkTextDecoration(aStyleParents[i]);
 				}
@@ -2744,10 +2745,10 @@ nhn.HuskyRange = jindo.$Class({
 	},
 	
 	/**
-	 * Style ì„ ì ìš©í•  ë…¸ë“œë¥¼ ê°€ì ¸ì˜¨ë‹¤
-	 * @param {String}	[sNewSpanMarker]	ìƒˆë¡œ ì¶”ê°€í•˜ëŠ” SPAN ë…¸ë“œë¥¼ ë§ˆí‚¹ì„ ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ë¬¸ìì—´
-	 * @param {Boolean}	[bIncludeLI]		LI ë„ ìŠ¤íƒ€ì¼ ì ìš©ì— í¬í•¨í•  ê²ƒì¸ì§€ì˜ ì—¬ë¶€
-	 * @return {Array}	Style ì„ ì ìš©í•  ë…¸ë“œ ë°°ì—´
+	 * Style À» Àû¿ëÇÒ ³ëµå¸¦ °¡Á®¿Â´Ù
+	 * @param {String}	[sNewSpanMarker]	»õ·Î Ãß°¡ÇÏ´Â SPAN ³ëµå¸¦ ¸¶Å·À» À§ÇØ »ç¿ëÇÏ´Â ¹®ÀÚ¿­
+	 * @param {Boolean}	[bIncludeLI]		LI µµ ½ºÅ¸ÀÏ Àû¿ë¿¡ Æ÷ÇÔÇÒ °ÍÀÎÁöÀÇ ¿©ºÎ
+	 * @return {Array}	Style À» Àû¿ëÇÒ ³ëµå ¹è¿­
 	 */
 	_getStyleParentNodes : function(sNewSpanMarker, bIncludeLI){
 		this._splitTextEndNodesOfTheRange();
@@ -2763,9 +2764,9 @@ nhn.HuskyRange = jindo.$Class({
 		var nInitialLength = aAllNodes.length;
 		var arAllBottomNodes = jindo.$A(aAllNodes).filter(function(v){return (!v.firstChild || (bIncludeLI && v.tagName=="LI"));});
 
-		// [COM-1051] ë³¸ë¬¸ë‚´ìš©ì„ í•œ ì¤„ë§Œ ì…ë ¥í•˜ê³  ë²ˆí˜¸ ë§¤ê¸´ ìƒíƒœì—ì„œ ê¸€ìí¬ê¸°ë¥¼ ë³€ê²½í•˜ë©´ ë²ˆí˜¸í¬ê¸°ëŠ” ë³€í•˜ì§€ ì•ŠëŠ” ë¬¸ì œ
-		// ë¶€ëª¨ ë…¸ë“œ ì¤‘ LI ê°€ ìˆê³ , í•´ë‹¹ LI ì˜ ëª¨ë“  ìì‹ ë…¸ë“œê°€ ì„ íƒëœ ìƒíƒœë¼ë©´ LIì—ë„ ìŠ¤íƒ€ì¼ì„ ì ìš©í•˜ë„ë¡ ì²˜ë¦¬í•¨
-		// --- Range ì— LI ê°€ í¬í•¨ë˜ì§€ ì•Šì€ ê²½ìš°, LI ë¥¼ í¬í•¨í•˜ë„ë¡ ì²˜ë¦¬
+		// [COM-1051] º»¹®³»¿ëÀ» ÇÑ ÁÙ¸¸ ÀÔ·ÂÇÏ°í ¹øÈ£ ¸Å±ä »óÅÂ¿¡¼­ ±ÛÀÚÅ©±â¸¦ º¯°æÇÏ¸é ¹øÈ£Å©±â´Â º¯ÇÏÁö ¾Ê´Â ¹®Á¦
+		// ºÎ¸ğ ³ëµå Áß LI °¡ ÀÖ°í, ÇØ´ç LI ÀÇ ¸ğµç ÀÚ½Ä ³ëµå°¡ ¼±ÅÃµÈ »óÅÂ¶ó¸é LI¿¡µµ ½ºÅ¸ÀÏÀ» Àû¿ëÇÏµµ·Ï Ã³¸®ÇÔ
+		// --- Range ¿¡ LI °¡ Æ÷ÇÔµÇÁö ¾ÊÀº °æ¿ì, LI ¸¦ Æ÷ÇÔÇÏµµ·Ï Ã³¸®
 		var elTmpNode = this.commonAncestorContainer;
 		if(bIncludeLI){
 			while(elTmpNode){
@@ -2785,7 +2786,7 @@ nhn.HuskyRange = jindo.$Class({
 
 			if(!oNode){continue;}
 			
-			// --- Range ì— LI ê°€ í¬í•¨ëœ ê²½ìš°ì— ëŒ€í•œ LI í™•ì¸
+			// --- Range ¿¡ LI °¡ Æ÷ÇÔµÈ °æ¿ì¿¡ ´ëÇÑ LI È®ÀÎ
 			if(bIncludeLI && oNode.tagName == "LI" && this._isFullyContained(oNode, arAllBottomNodes)){
 				aResult[nResult++] = oNode;
 				continue;
@@ -2796,7 +2797,7 @@ nhn.HuskyRange = jindo.$Class({
 
 			var oParentNode = nhn.DOMFix.parentNode(oNode);
 
-			// ë¶€ëª¨ ë…¸ë“œê°€ SPAN ì¸ ê²½ìš°ì—ëŠ” ìƒˆë¡œìš´ SPAN ì„ ìƒì„±í•˜ì§€ ì•Šê³  SPAN ì„ ë¦¬í„´ ë°°ì—´ì— ì¶”ê°€í•¨
+			// ºÎ¸ğ ³ëµå°¡ SPAN ÀÎ °æ¿ì¿¡´Â »õ·Î¿î SPAN À» »ı¼ºÇÏÁö ¾Ê°í SPAN À» ¸®ÅÏ ¹è¿­¿¡ Ãß°¡ÇÔ
 			if(oParentNode.tagName == "SPAN"){
 				if(this._isFullyContained(oParentNode, arAllBottomNodes, oNode)){
 					aResult[nResult++] = oParentNode;
@@ -2819,12 +2820,12 @@ nhn.HuskyRange = jindo.$Class({
 	},
 	
 	/**
-	 * ì»¨í…Œì´ë„ˆ ì—˜ë¦¬ë¨¼íŠ¸(elContainer)ì˜ ëª¨ë“  ìì‹ë…¸ë“œê°€ ë…¸ë“œ ë°°ì—´(waAllNodes)ì— ì†í•˜ëŠ”ì§€ í™•ì¸í•œë‹¤
-	 * ì²« ë²ˆì§¸ ìì‹ ë…¸ë“œì™€ ë§ˆì§€ë§‰ ìì‹ ë…¸ë“œê°€ ë…¸ë“œ ë°°ì—´ì— ì†í•˜ëŠ”ì§€ë¥¼ í™•ì¸í•œë‹¤
-	 * @param {Element}		elContainer	ì»¨í…Œì´ë„ˆ ì—˜ë¦¬ë¨¼íŠ¸
-	 * @param {jindo.$A}	waAllNodes	Node ì˜ $A ë°°ì—´
-	 * @param {Node}		[oNode] ì„±ëŠ¥ì„ ìœ„í•œ ì˜µì…˜ ë…¸ë“œë¡œ ì»¨í…Œì´ë„ˆì˜ ì²« ë²ˆì§¸ í˜¹ì€ ë§ˆì§€ë§‰ ìì‹ ë…¸ë“œì™€ ê°™ìœ¼ë©´ indexOf í•¨ìˆ˜ ì‚¬ìš©ì„ ì¤„ì¼ ìˆ˜ ìˆìŒ
-	 * @return {Array}	Style ì„ ì ìš©í•  ë…¸ë“œ ë°°ì—´
+	 * ÄÁÅ×ÀÌ³Ê ¿¤¸®¸ÕÆ®(elContainer)ÀÇ ¸ğµç ÀÚ½Ä³ëµå°¡ ³ëµå ¹è¿­(waAllNodes)¿¡ ¼ÓÇÏ´ÂÁö È®ÀÎÇÑ´Ù
+	 * Ã¹ ¹øÂ° ÀÚ½Ä ³ëµå¿Í ¸¶Áö¸· ÀÚ½Ä ³ëµå°¡ ³ëµå ¹è¿­¿¡ ¼ÓÇÏ´ÂÁö¸¦ È®ÀÎÇÑ´Ù
+	 * @param {Element}		elContainer	ÄÁÅ×ÀÌ³Ê ¿¤¸®¸ÕÆ®
+	 * @param {jindo.$A}	waAllNodes	Node ÀÇ $A ¹è¿­
+	 * @param {Node}		[oNode] ¼º´ÉÀ» À§ÇÑ ¿É¼Ç ³ëµå·Î ÄÁÅ×ÀÌ³ÊÀÇ Ã¹ ¹øÂ° È¤Àº ¸¶Áö¸· ÀÚ½Ä ³ëµå¿Í °°À¸¸é indexOf ÇÔ¼ö »ç¿ëÀ» ÁÙÀÏ ¼ö ÀÖÀ½
+	 * @return {Array}	Style À» Àû¿ëÇÒ ³ëµå ¹è¿­
 	 */
 	// check if all the child nodes of elContainer are in waAllNodes
 	_isFullyContained : function(elContainer, waAllNodes, oNode){
@@ -3069,7 +3070,7 @@ nhn.BrowserSelection = function(win){
 
 	this.init(win);
 
-	// [SMARTEDITORSUS-888] IE9 ì´í›„ë¡œ document.createRange ë¥¼ ì§€ì›
+	// [SMARTEDITORSUS-888] IE9 ÀÌÈÄ·Î document.createRange ¸¦ Áö¿ø
 /*	var oAgentInfo = jindo.$Agent().navigator();
 	if(oAgentInfo.ie){
 		nhn.BrowserSelectionImpl_IE.apply(this);
@@ -3474,51 +3475,51 @@ nhn.DOMFix = new (jindo.$Class({
 /*[
  * ADD_APP_PROPERTY
  *
- * ì£¼ìš” ì˜¤ë¸Œì íŠ¸ë¥¼ ëª¨ë“  í”ŒëŸ¬ê·¸ì¸ì—ì„œ this.oAppë¥¼ í†µí•´ì„œ ì§ì ‘ ì ‘ê·¼ ê°€ëŠ¥ í•˜ë„ë¡ ë“±ë¡í•œë‹¤.
+ * ÁÖ¿ä ¿ÀºêÁ§Æ®¸¦ ¸ğµç ÇÃ·¯±×ÀÎ¿¡¼­ this.oApp¸¦ ÅëÇØ¼­ Á÷Á¢ Á¢±Ù °¡´É ÇÏµµ·Ï µî·ÏÇÑ´Ù.
  *
- * sPropertyName string ë“±ë¡ëª…
- * oProperty object ë“±ë¡ì‹œí‚¬ ì˜¤ë¸Œì íŠ¸
+ * sPropertyName string µî·Ï¸í
+ * oProperty object µî·Ï½ÃÅ³ ¿ÀºêÁ§Æ®
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * REGISTER_BROWSER_EVENT
  *
- * íŠ¹ì • ë¸Œë¼ìš°ì € ì´ë²¤íŠ¸ê°€ ë°œìƒ í–ˆì„ë•Œ Husky ë©”ì‹œì§€ë¥¼ ë°œìƒ ì‹œí‚¨ë‹¤.
+ * Æ¯Á¤ ºê¶ó¿ìÀú ÀÌº¥Æ®°¡ ¹ß»ı ÇßÀ»¶§ Husky ¸Ş½ÃÁö¸¦ ¹ß»ı ½ÃÅ²´Ù.
  *
- * obj HTMLElement ë¸Œë¼ìš°ì € ì´ë²¤íŠ¸ë¥¼ ë°œìƒ ì‹œí‚¬ HTML ì—˜ë¦¬ë¨¼íŠ¸
- * sEvent string ë°œìƒ ëŒ€ê¸° í•  ë¸Œë¼ìš°ì € ì´ë²¤íŠ¸
- * sMsg string ë°œìƒ í•  Husky ë©”ì‹œì§€
- * aParams array ë©”ì‹œì§€ì— ë„˜ê¸¸ íŒŒë¼ë¯¸í„°
- * nDelay number ë¸Œë¼ìš°ì € ì´ë²¤íŠ¸ ë°œìƒ í›„ Husky ë©”ì‹œì§€ ë°œìƒ ì‚¬ì´ì— ë”œë ˆì´ë¥¼ ì£¼ê³  ì‹¶ì„ ê²½ìš° ì„¤ì •. (1/1000ì´ˆ ë‹¨ìœ„)
+ * obj HTMLElement ºê¶ó¿ìÀú ÀÌº¥Æ®¸¦ ¹ß»ı ½ÃÅ³ HTML ¿¤¸®¸ÕÆ®
+ * sEvent string ¹ß»ı ´ë±â ÇÒ ºê¶ó¿ìÀú ÀÌº¥Æ®
+ * sMsg string ¹ß»ı ÇÒ Husky ¸Ş½ÃÁö
+ * aParams array ¸Ş½ÃÁö¿¡ ³Ñ±æ ÆÄ¶ó¹ÌÅÍ
+ * nDelay number ºê¶ó¿ìÀú ÀÌº¥Æ® ¹ß»ı ÈÄ Husky ¸Ş½ÃÁö ¹ß»ı »çÀÌ¿¡ µô·¹ÀÌ¸¦ ÁÖ°í ½ÍÀ» °æ¿ì ¼³Á¤. (1/1000ÃÊ ´ÜÀ§)
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * DISABLE_MESSAGE
  *
- * íŠ¹ì • ë©”ì‹œì§€ë¥¼ ì½”ì–´ì—ì„œ ë¬´ì‹œí•˜ê³  ë¼ìš°íŒ… í•˜ì§€ ì•Šë„ë¡ ë¹„í™œì„±í™” í•œë‹¤.
+ * Æ¯Á¤ ¸Ş½ÃÁö¸¦ ÄÚ¾î¿¡¼­ ¹«½ÃÇÏ°í ¶ó¿ìÆÃ ÇÏÁö ¾Êµµ·Ï ºñÈ°¼ºÈ­ ÇÑ´Ù.
  *
- * sMsg string ë¹„í™œì„±í™” ì‹œí‚¬ ë©”ì‹œì§€
+ * sMsg string ºñÈ°¼ºÈ­ ½ÃÅ³ ¸Ş½ÃÁö
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * ENABLE_MESSAGE
  *
- * ë¬´ì‹œí•˜ë„ë¡ ì„¤ì •ëœ ë©”ì‹œì§€ë¥¼ ë¬´ì‹œí•˜ì§€ ì•Šë„ë¡ í™œì„±í™” í•œë‹¤.
+ * ¹«½ÃÇÏµµ·Ï ¼³Á¤µÈ ¸Ş½ÃÁö¸¦ ¹«½ÃÇÏÁö ¾Êµµ·Ï È°¼ºÈ­ ÇÑ´Ù.
  *
- * sMsg string í™œì„±í™” ì‹œí‚¬ ë©”ì‹œì§€
+ * sMsg string È°¼ºÈ­ ½ÃÅ³ ¸Ş½ÃÁö
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * EXEC_ON_READY_FUNCTION
  *
- * oApp.run({fnOnAppReady:fnOnAppReady})ì™€ ê°™ì´ run í˜¸ì¶œ ì‹œì ì— ì§€ì •ëœ í•¨ìˆ˜ê°€ ìˆì„ ê²½ìš° ì´ë¥¼ MSG_APP_READY ì‹œì ì— ì‹¤í–‰ ì‹œí‚¨ë‹¤.
- * ì½”ì–´ì—ì„œ ìë™ìœ¼ë¡œ ë°œìƒì‹œí‚¤ëŠ” ë©”ì‹œì§€ë¡œ ì§ì ‘ ë°œìƒì‹œí‚¤ì§€ëŠ” ì•Šë„ë¡ í•œë‹¤.
+ * oApp.run({fnOnAppReady:fnOnAppReady})¿Í °°ÀÌ run È£Ãâ ½ÃÁ¡¿¡ ÁöÁ¤µÈ ÇÔ¼ö°¡ ÀÖÀ» °æ¿ì ÀÌ¸¦ MSG_APP_READY ½ÃÁ¡¿¡ ½ÇÇà ½ÃÅ²´Ù.
+ * ÄÚ¾î¿¡¼­ ÀÚµ¿À¸·Î ¹ß»ı½ÃÅ°´Â ¸Ş½ÃÁö·Î Á÷Á¢ ¹ß»ı½ÃÅ°Áö´Â ¾Êµµ·Ï ÇÑ´Ù.
  *
  * none
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc Husky Frameworkì—ì„œ ìì£¼ ì‚¬ìš©ë˜ëŠ” ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc Husky Framework¿¡¼­ ÀÚÁÖ »ç¿ëµÇ´Â ¸Ş½ÃÁö¸¦ Ã³¸®ÇÏ´Â ÇÃ·¯±×ÀÎ
  */
 nhn.husky.CorePlugin = jindo.$Class({
 	name : "CorePlugin",
@@ -3584,14 +3585,14 @@ nhn.husky.CorePlugin = jindo.$Class({
 				this._loadFullPlugin(aFilenames, sClassName, sMsgName, oThisRef, oArguments, nIdx+1);
 			}, this).bind(aFilenames, sClassName, sMsgName, oThisRef, oArguments, nIdx),
 			
-			"utf-8"
+			"EUC-KR"
 		);
 	},
 	
 	$ON_MSG_FULL_PLUGIN_LOADED : function(aFilenames, sClassName, sMsgName, oThisRef, oArguments, oRes){
-		// oThisRef.$thisëŠ” í˜„ì¬ ë¡œë“œë˜ëŠ” í”ŒëŸ¬ê·¸ì¸ì´ parent ì¸ìŠ¤í„´ìŠ¤ì¼ ê²½ìš° ì¡´ì¬ í•¨. oThisRef.$thisëŠ” í˜„ì¬ í”ŒëŸ¬ê·¸ì¸(oThisRef)ë¥¼ parentë¡œ ì‚¼ê³  ìˆëŠ” ì¸ìŠ¤í„´ìŠ¤
-		// oThisRefì— $this ì†ì„±ì´ ì—†ë‹¤ë©´ parentê°€ ì•„ë‹Œ ì¼ë°˜ ì¸ìŠ¤í„´ìŠ¤
-		// oPluginRefëŠ” ê²°ê³¼ì ìœ¼ë¡œ ìƒì† ê´€ê³„ê°€ ìˆë‹¤ë©´ ìì‹ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì•„ë‹ˆë¼ë©´ ì¼ë°˜ì ì¸ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ê°€ì§
+		// oThisRef.$this´Â ÇöÀç ·ÎµåµÇ´Â ÇÃ·¯±×ÀÎÀÌ parent ÀÎ½ºÅÏ½ºÀÏ °æ¿ì Á¸Àç ÇÔ. oThisRef.$this´Â ÇöÀç ÇÃ·¯±×ÀÎ(oThisRef)¸¦ parent·Î »ï°í ÀÖ´Â ÀÎ½ºÅÏ½º
+		// oThisRef¿¡ $this ¼Ó¼ºÀÌ ¾ø´Ù¸é parent°¡ ¾Æ´Ñ ÀÏ¹İ ÀÎ½ºÅÏ½º
+		// oPluginRef´Â °á°úÀûÀ¸·Î »ó¼Ó °ü°è°¡ ÀÖ´Ù¸é ÀÚ½Ä ÀÎ½ºÅÏ½º¸¦ ¾Æ´Ï¶ó¸é ÀÏ¹İÀûÀÎ ÀÎ½ºÅÏ½º¸¦ °¡Áü
 		var oPluginRef = oThisRef.$this || oThisRef;
 		
 		var sFilename = aFilenames;
@@ -3616,16 +3617,16 @@ nhn.husky.CorePlugin = jindo.$Class({
 		}
 		
 		for(var x in oPlugin){
-			// ìì‹ ì¸ìŠ¤í„´ìŠ¤ì— parentë¥¼ overrideí•˜ëŠ” í•¨ìˆ˜ê°€ ì—†ë‹¤ë©´ parent ì¸ìŠ¤í„´ìŠ¤ì— í•¨ìˆ˜ ë³µì‚¬ í•´ ì¤Œ. ì´ë•Œ í•¨ìˆ˜ë§Œ ë³µì‚¬í•˜ê³ , ë‚˜ë¨¸ì§€ ì†ì„±ë“¤ì€ í˜„ì¬ ì¸ìŠ¤í„´ìŠ¤ì— ì¡´ì¬ í•˜ì§€ ì•Šì„ ê²½ìš°ì—ë§Œ ë³µì‚¬.
+			// ÀÚ½Ä ÀÎ½ºÅÏ½º¿¡ parent¸¦ overrideÇÏ´Â ÇÔ¼ö°¡ ¾ø´Ù¸é parent ÀÎ½ºÅÏ½º¿¡ ÇÔ¼ö º¹»ç ÇØ ÁÜ. ÀÌ¶§ ÇÔ¼ö¸¸ º¹»çÇÏ°í, ³ª¸ÓÁö ¼Ó¼ºµéÀº ÇöÀç ÀÎ½ºÅÏ½º¿¡ Á¸Àç ÇÏÁö ¾ÊÀ» °æ¿ì¿¡¸¸ º¹»ç.
 			if(oThisRef.$this && (!oThisRef[x] || (typeof oPlugin[x] === "function" && x != "constructor"))){
 				oThisRef[x] = jindo.$Fn(oPlugin[x], oPluginRef).bind();
 			}
 
-			// í˜„ì¬ ì¸ìŠ¤í„´ìŠ¤ì— í•¨ìˆ˜ ë³µì‚¬ í•´ ì¤Œ. ì´ë•Œ í•¨ìˆ˜ë§Œ ë³µì‚¬í•˜ê³ , ë‚˜ë¨¸ì§€ ì†ì„±ë“¤ì€ í˜„ì¬ ì¸ìŠ¤í„´ìŠ¤ì— ì¡´ì¬ í•˜ì§€ ì•Šì„ ê²½ìš°ì—ë§Œ ë³µì‚¬
+			// ÇöÀç ÀÎ½ºÅÏ½º¿¡ ÇÔ¼ö º¹»ç ÇØ ÁÜ. ÀÌ¶§ ÇÔ¼ö¸¸ º¹»çÇÏ°í, ³ª¸ÓÁö ¼Ó¼ºµéÀº ÇöÀç ÀÎ½ºÅÏ½º¿¡ Á¸Àç ÇÏÁö ¾ÊÀ» °æ¿ì¿¡¸¸ º¹»ç
 			if(oPlugin[x] && (!oPluginRef[x] || (typeof oPlugin[x] === "function" && x != "constructor"))){
 				oPluginRef[x] = oPlugin[x];
 
-				// ìƒˆë¡œ ì¶”ê°€ë˜ëŠ” í•¨ìˆ˜ê°€ ë©”ì‹œì§€ í•¸ë“¤ëŸ¬ë¼ë©´ ë©”ì‹œì§€ ë§¤í•‘ì— ì¶”ê°€ í•´ ì¤Œ
+				// »õ·Î Ãß°¡µÇ´Â ÇÔ¼ö°¡ ¸Ş½ÃÁö ÇÚµé·¯¶ó¸é ¸Ş½ÃÁö ¸ÅÇÎ¿¡ Ãß°¡ ÇØ ÁÜ
 				if(x.match(/^\$(LOCAL|BEFORE|ON|AFTER)_/)){
 					this.oApp.addToMessageMap(x, oPluginRef);
 				}
@@ -3738,7 +3739,7 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 		//@ec[
 		this.toolbarArea = jindo.$$.getSingle(".se2_tool", oAppContainer);
 		this.aAllUI = jindo.$$("[class*=" + this.sUIClassPrefix + "]", this.toolbarArea);
-		this.elTextTool = jindo.$$.getSingle("div.husky_seditor_text_tool", this.toolbarArea);	// [SMARTEDITORSUS-1124] í…ìŠ¤íŠ¸ íˆ´ë°” ë²„íŠ¼ì˜ ë¼ìš´ë“œ ì²˜ë¦¬
+		this.elTextTool = jindo.$$.getSingle("div.husky_seditor_text_tool", this.toolbarArea);	// [SMARTEDITORSUS-1124] ÅØ½ºÆ® Åø¹Ù ¹öÆ°ÀÇ ¶ó¿îµå Ã³¸®
 		//@ec]
 		
 		this.welToolbarArea = jindo.$Element(this.toolbarArea);		
@@ -3776,7 +3777,7 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 
 		this.aUICmdMap = {};
 		this._assignHTMLElements(oAppContainer);
-		this._setRoundedCornerButton();	// [SMARTEDITORSUS-1124] í…ìŠ¤íŠ¸ íˆ´ë°” ë²„íŠ¼ì˜ ë¼ìš´ë“œ ì²˜ë¦¬
+		this._setRoundedCornerButton();	// [SMARTEDITORSUS-1124] ÅØ½ºÆ® Åø¹Ù ¹öÆ°ÀÇ ¶ó¿îµå Ã³¸®
 	},
 
 	$ON_MSG_APP_READY : function(){
@@ -3793,8 +3794,8 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 */
 		this.oApp.exec("ADD_APP_PROPERTY", ["getToolbarButtonByUIName", jindo.$Fn(this.getToolbarButtonByUIName, this).bind()]);
 		
-		//ì›¹ì ‘ê·¼ì„± 
-		//ì´ ë‹¨ê³„ì—ì„œ oAppContainerê°€ ì •ì˜ë˜ì§€ ì•Šì€ ìƒíƒœë¼ì„œ this.toolbarAreaë³€ìˆ˜ê°’ì„ ì‚¬ìš©í•˜ì§€ ëª»í•˜ê³  ì•„ë˜ì™€ ê°™ì´ ë‹¤ì‹œ ì •ì˜í•˜ì˜€ìŒ.
+		//À¥Á¢±Ù¼º 
+		//ÀÌ ´Ü°è¿¡¼­ oAppContainer°¡ Á¤ÀÇµÇÁö ¾ÊÀº »óÅÂ¶ó¼­ this.toolbarAreaº¯¼ö°ªÀ» »ç¿ëÇÏÁö ¸øÇÏ°í ¾Æ·¡¿Í °°ÀÌ ´Ù½Ã Á¤ÀÇÇÏ¿´À½.
 		var elTool = jindo.$$.getSingle(".se2_tool");
 		this.oApp.exec("REGISTER_HOTKEY", ["esc", "FOCUS_EDITING_AREA", [], elTool]);  
 	},
@@ -3803,7 +3804,7 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 	$ON_NAVIGATE_TOOLBAR : function(weEvent) {
 
 		var TAB_KEY_CODE = 9;
-		//ì´ë²¤íŠ¸ê°€ ë°œìƒí•œ ì—˜ë¦¬ë¨¼íŠ¸ê°€ ë§ˆì§€ë§‰ ì•„ì´í…œì´ê³  TAB í‚¤ê°€ ëˆŒë ¤ì¡Œë‹¤ë©´   
+		//ÀÌº¥Æ®°¡ ¹ß»ıÇÑ ¿¤¸®¸ÕÆ®°¡ ¸¶Áö¸· ¾ÆÀÌÅÛÀÌ°í TAB Å°°¡ ´­·ÁÁ³´Ù¸é   
 		if ((weEvent.element == this.elLastToolbarItem) && (weEvent.key().keyCode == TAB_KEY_CODE) ) {
 			
 
@@ -3816,7 +3817,7 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 		}
 
 
-		//ì´ë²¤íŠ¸ê°€ ë°œìƒí•œ ì—˜ë¦¬ë¨¼íŠ¸ê°€ ì²«ë²ˆì§¸ ì•„ì´í…œì´ê³  TAB í‚¤ê°€ ëˆŒë ¤ì¡Œë‹¤ë©´ 		
+		//ÀÌº¥Æ®°¡ ¹ß»ıÇÑ ¿¤¸®¸ÕÆ®°¡ Ã¹¹øÂ° ¾ÆÀÌÅÛÀÌ°í TAB Å°°¡ ´­·ÁÁ³´Ù¸é 		
 		if (weEvent.element == this.elFirstToolbarItem && (weEvent.key().keyCode == TAB_KEY_CODE)) {
 			if (weEvent.key().shift) {
 				weEvent.stopDefault();
@@ -3826,7 +3827,7 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 	},   
 
 
-	//í¬ì»¤ìŠ¤ê°€ íˆ´ë°”ì— ìˆëŠ” ìƒíƒœì—ì„œ ë‹¨ì¶•í‚¤ë¥¼ ëˆ„ë¥´ë©´ ì—ë””íŒ… ì˜ì—­ìœ¼ë¡œ ë‹¤ì‹œ í¬ì»¤ìŠ¤ê°€ ê°€ë„ë¡ í•˜ëŠ” í•¨ìˆ˜. (ì›¹ì ‘ê·¼ì„±)  
+	//Æ÷Ä¿½º°¡ Åø¹Ù¿¡ ÀÖ´Â »óÅÂ¿¡¼­ ´ÜÃàÅ°¸¦ ´©¸£¸é ¿¡µğÆÃ ¿µ¿ªÀ¸·Î ´Ù½Ã Æ÷Ä¿½º°¡ °¡µµ·Ï ÇÏ´Â ÇÔ¼ö. (À¥Á¢±Ù¼º)  
 	$ON_FOCUS_EDITING_AREA : function() {
 		this.oApp.exec("FOCUS");
 	},
@@ -4072,8 +4073,8 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 	_getAffectedElements : function(el){
 		var elLi, welLi;
 		
-		// ë²„íŠ¼ í´ë¦­ì‹œì— return falseë¥¼ í•´ ì£¼ì§€ ì•Šìœ¼ë©´ chromeì—ì„œ ë²„íŠ¼ì´ í¬ì»¤ìŠ¤ ê°€ì ¸ê°€ ë²„ë¦¼.
-		// ì—ë””í„° ë¡œë”© ì‹œì— ì¼ê´„ì²˜ë¦¬ í•  ê²½ìš° ë¡œë”© ì†ë„ê°€ ëŠë ¤ì§ìœ¼ë¡œ hoverì‹œì— í•˜ë‚˜ì”© ì²˜ë¦¬
+		// ¹öÆ° Å¬¸¯½Ã¿¡ return false¸¦ ÇØ ÁÖÁö ¾ÊÀ¸¸é chrome¿¡¼­ ¹öÆ°ÀÌ Æ÷Ä¿½º °¡Á®°¡ ¹ö¸².
+		// ¿¡µğÅÍ ·Îµù ½Ã¿¡ ÀÏ°ıÃ³¸® ÇÒ °æ¿ì ·Îµù ¼Óµµ°¡ ´À·ÁÁüÀ¸·Î hover½Ã¿¡ ÇÏ³ª¾¿ Ã³¸®
 		if(!el.bSE2_MDCancelled){
 			el.bSE2_MDCancelled = true;
 			var aBtns = el.getElementsByTagName("BUTTON");
@@ -4118,7 +4119,7 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 
 			// <LI>
 			//     <SPAN>
-			//ê¸€ê°ê³¼ ê¸€ì–‘ì‹
+			//±Û°¨°ú ±Û¾ç½Ä
 			if((elLi = elLi.parentNode) && elLi.tagName == "LI" && this.rxUI.test(elLi.className)){
 				return [jindo.$Element(elLi)];
 			}
@@ -4128,16 +4129,16 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 	},
 	
 	/*
-	 * í…ìŠ¤íŠ¸ íˆ´ë°”ì˜ ë²„íŠ¼ ë¼ìš´ë”© ì²˜ë¦¬
-	 * [MOSS] "[UIê°œë°œ1íŒ€] ìŠ¤ë§ˆíŠ¸ì—ë””í„° í…ìŠ¤íŠ¸íˆ´ë°”ë²„íŠ¼ ë¼ìš´ë”©ì²˜ë¦¬ê°€ì´ë“œ" ì°¸ê³ 
-	 *		- ë²„íŠ¼ ë¼ìš´ë“œ ì²˜ë¦¬ë¥¼ ìœ„í•œ tool_bg í´ë˜ìŠ¤ ì¶”ê°€ë¥¼ ìœ„í•œ ì—˜ë¦¬ë¨¼íŠ¸ íƒìƒ‰ì€ _buttonRound í´ë˜ìŠ¤ ì‚¬ìš© (AU ì¶”ê°€í´ë˜ìŠ¤)
+	 * ÅØ½ºÆ® Åø¹ÙÀÇ ¹öÆ° ¶ó¿îµù Ã³¸®
+	 * [MOSS] "[UI°³¹ß1ÆÀ] ½º¸¶Æ®¿¡µğÅÍ ÅØ½ºÆ®Åø¹Ù¹öÆ° ¶ó¿îµùÃ³¸®°¡ÀÌµå" Âü°í
+	 *		- ¹öÆ° ¶ó¿îµå Ã³¸®¸¦ À§ÇÑ tool_bg Å¬·¡½º Ãß°¡¸¦ À§ÇÑ ¿¤¸®¸ÕÆ® Å½»öÀº _buttonRound Å¬·¡½º »ç¿ë (AU Ãß°¡Å¬·¡½º)
 	 */
 	_setRoundedCornerButton : function(){
 		var i, nLiLen, elLi, welLi, elSpan, aSingleLi, aFirstLi, aLastLi;
 		
 		aSingleLi = jindo.$$(">ul>li[class*=" + this.sUIClassPrefix + "]:only-child", this.elTextTool);
 		
-		// ë‹¨ë…í˜• ë²„íŠ¼ ì¢Œ/ìš°ì¸¡ ë¼ìš´ë“œ ì²˜ë¦¬
+		// ´Üµ¶Çü ¹öÆ° ÁÂ/¿ìÃø ¶ó¿îµå Ã³¸®
 		for(i=0, nLiLen=aSingleLi.length; i<nLiLen; i++){
 			elLi = aSingleLi[i];
 			welLi = jindo.$Element(elLi);
@@ -4152,8 +4153,8 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 			jindo.$Element(jindo.$$.getSingle('button>span._buttonRound', elLi)).addClass("tool_bg");
 		}
 		
-		// ë²„íŠ¼ ì¢Œì¸¡ ë¼ìš´ë“œ ì²˜ë¦¬
-		// â€» ì£¼ì˜: ë”ë³´ê¸° í•˜ìœ„ì˜ ë²„íŠ¼ ë¼ìš´ë“œ ì²˜ë¦¬ì˜ ê²½ìš°ë„ ìˆìœ¼ë¯€ë¡œ ë°”ë¡œ í•˜ìœ„ ULì´ ì•„ë‹Œ ê²½ìš°ë„ ìˆìŒ
+		// ¹öÆ° ÁÂÃø ¶ó¿îµå Ã³¸®
+		// ¡Ø ÁÖÀÇ: ´õº¸±â ÇÏÀ§ÀÇ ¹öÆ° ¶ó¿îµå Ã³¸®ÀÇ °æ¿ìµµ ÀÖÀ¸¹Ç·Î ¹Ù·Î ÇÏÀ§ ULÀÌ ¾Æ´Ñ °æ¿ìµµ ÀÖÀ½
 		aFirstLi = jindo.$$("ul>li[class*=" + this.sUIClassPrefix + "]:first-child", this.elTextTool);
 		
 		for(i=0, nLiLen=aFirstLi.length; i<nLiLen; i++){
@@ -4172,8 +4173,8 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 			jindo.$Element(jindo.$$.getSingle('button>span._buttonRound', elLi)).addClass("tool_bg");
 		}
 		
-		// ë²„íŠ¼ ìš°ì¸¡ ë¼ìš´ë“œ ì²˜ë¦¬
-		// â€» ì£¼ì˜: ë”ë³´ê¸° í•˜ìœ„ì˜ ë²„íŠ¼ ë¼ìš´ë“œ ì²˜ë¦¬ì˜ ê²½ìš°ë„ ìˆìœ¼ë¯€ë¡œ ë°”ë¡œ í•˜ìœ„ ULì´ ì•„ë‹Œ ê²½ìš°ë„ ìˆìŒ
+		// ¹öÆ° ¿ìÃø ¶ó¿îµå Ã³¸®
+		// ¡Ø ÁÖÀÇ: ´õº¸±â ÇÏÀ§ÀÇ ¹öÆ° ¶ó¿îµå Ã³¸®ÀÇ °æ¿ìµµ ÀÖÀ¸¹Ç·Î ¹Ù·Î ÇÏÀ§ ULÀÌ ¾Æ´Ñ °æ¿ìµµ ÀÖÀ½
 		aLastLi = jindo.$$("ul>li[class*=" + this.sUIClassPrefix + "]:last-child", this.elTextTool);
 		
 		for(i=0, nLiLen=aLastLi.length; i<nLiLen; i++){
@@ -4194,11 +4195,11 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 	},
 	
 	$ON_REGISTER_UI_EVENT : function(sUIName, sEvent, sCmd, aParams){
-		//[SMARTEDITORSUS-966][IE8 í‘œì¤€/IE 10] í˜¸í™˜ ëª¨ë“œë¥¼ ì œê±°í•˜ê³  ì‚¬ì§„ ì²¨ë¶€ ì‹œ ì—ë””íŒ… ì˜ì—­ì˜ 
-		//						ì»¤ì„œ ì£¼ìœ„ì— <sub><sup> íƒœê·¸ê°€ ë¶™ì–´ì„œ ê¸€ìê°€ ë§¤ìš° ì‘ê²Œ ë˜ëŠ” í˜„ìƒ
-		//ì›ì¸ : ì•„ë˜ì˜ [SMARTEDITORSUS-901] ìˆ˜ì • ë‚´ìš©ì—ì„œ ìœ—ì²¨ì ì•„ë«ì²¨ì ì´ë²¤íŠ¸ ë“±ë¡ ì‹œ 
-		//í•´ë‹¹ í”ŒëŸ¬ê·¸ì¸ì´ ë§ˆí¬ì—…ì— ì—†ìœ¼ë©´ this.htUIListì— ì¡´ì¬í•˜ì§€ ì•Šì•„ getsingle ì‚¬ìš©ì‹œ ì‚¬ì§„ì²¨ë¶€ì— ì´ë²¤íŠ¸ê°€ ê±¸ë ¸ìŒ
-		//í•´ê²° : this.htUIListì— ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡í•˜ì§€ ì•ŠìŒ
+		//[SMARTEDITORSUS-966][IE8 Ç¥ÁØ/IE 10] È£È¯ ¸ğµå¸¦ Á¦°ÅÇÏ°í »çÁø Ã·ºÎ ½Ã ¿¡µğÆÃ ¿µ¿ªÀÇ 
+		//						Ä¿¼­ ÁÖÀ§¿¡ <sub><sup> ÅÂ±×°¡ ºÙ¾î¼­ ±ÛÀÚ°¡ ¸Å¿ì ÀÛ°Ô µÇ´Â Çö»ó
+		//¿øÀÎ : ¾Æ·¡ÀÇ [SMARTEDITORSUS-901] ¼öÁ¤ ³»¿ë¿¡¼­ À­Ã·ÀÚ ¾Æ·§Ã·ÀÚ ÀÌº¥Æ® µî·Ï ½Ã 
+		//ÇØ´ç ÇÃ·¯±×ÀÎÀÌ ¸¶Å©¾÷¿¡ ¾øÀ¸¸é this.htUIList¿¡ Á¸ÀçÇÏÁö ¾Ê¾Æ getsingle »ç¿ë½Ã »çÁøÃ·ºÎ¿¡ ÀÌº¥Æ®°¡ °É·ÈÀ½
+		//ÇØ°á : this.htUIList¿¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é ÀÌº¥Æ®¸¦ µî·ÏÇÏÁö ¾ÊÀ½
 		if(!this.htUIList[sUIName]){
 			return;
 		}
@@ -4206,9 +4207,9 @@ nhn.husky.SE2M_Toolbar = jindo.$Class({
 		var elButton;
 		if(!this.aUICmdMap[sUIName]){this.aUICmdMap[sUIName] = [];}
 		this.aUICmdMap[sUIName][this.aUICmdMap[sUIName].length] = sCmd;
-		//[SMARTEDITORSUS-901]í”ŒëŸ¬ê·¸ì¸ íƒœê·¸ ì½”ë“œ ì¶”ê°€ ì‹œ <li>íƒœê·¸ì™€<button>íƒœê·¸ ì‚¬ì´ì— ê°œí–‰ì´ ìˆìœ¼ë©´ ì´ë²¤íŠ¸ê°€ ë“±ë¡ë˜ì§€ ì•ŠëŠ” í˜„ìƒ
-		//ì›ì¸ : IE9, Chrome, FF, Safari ì—ì„œëŠ” íƒœê·¸ë¥¼ ê°œí–‰ ì‹œ ê·¸ ê°œí–‰ì„ text nodeë¡œ ì¸ì‹í•˜ì—¬ firstchildê°€ text ë…¸ë“œê°€ ë˜ì–´ ë²„íŠ¼ ì´ë²¤íŠ¸ê°€ í• ë‹¹ë˜ì§€ ì•ŠìŒ 
-		//í•´ê²° : firstchildì— ì´ë²¤íŠ¸ë¥¼ ê±°ëŠ” ê²ƒì´ ì•„ë‹ˆë¼, child ì¤‘ button ì¸ ê²ƒì— ì´ë²¤íŠ¸ë¥¼ ê±¸ë„ë¡ ë³€ê²½
+		//[SMARTEDITORSUS-901]ÇÃ·¯±×ÀÎ ÅÂ±× ÄÚµå Ãß°¡ ½Ã <li>ÅÂ±×¿Í<button>ÅÂ±× »çÀÌ¿¡ °³ÇàÀÌ ÀÖÀ¸¸é ÀÌº¥Æ®°¡ µî·ÏµÇÁö ¾Ê´Â Çö»ó
+		//¿øÀÎ : IE9, Chrome, FF, Safari ¿¡¼­´Â ÅÂ±×¸¦ °³Çà ½Ã ±× °³ÇàÀ» text node·Î ÀÎ½ÄÇÏ¿© firstchild°¡ text ³ëµå°¡ µÇ¾î ¹öÆ° ÀÌº¥Æ®°¡ ÇÒ´çµÇÁö ¾ÊÀ½ 
+		//ÇØ°á : firstchild¿¡ ÀÌº¥Æ®¸¦ °Å´Â °ÍÀÌ ¾Æ´Ï¶ó, child Áß button ÀÎ °Í¿¡ ÀÌº¥Æ®¸¦ °Éµµ·Ï º¯°æ
 		elButton = jindo.$$.getSingle('button', this.htUIList[sUIName]);
 	
 		if(!elButton){return;}
@@ -4247,7 +4248,7 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 		this.welHTMLSrcButtonLi = jindo.$Element(this.elHTMLSrcButton.parentNode);
 		this.welTEXTButtonLi = jindo.$Element(this.elTEXTButton.parentNode);
 		
-		// [SMARTEDITORSUS-906] Editing Mode ì‚¬ìš© ì—¬ë¶€ ì²˜ë¦¬ (true:ì‚¬ìš©í•¨/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+		// [SMARTEDITORSUS-906] Editing Mode »ç¿ë ¿©ºÎ Ã³¸® (true:»ç¿ëÇÔ/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
 		if(typeof(htConversionMode) === 'undefined' || (typeof(htConversionMode.bUseModeChanger) === 'undefined' || htConversionMode.bUseModeChanger === true)) {
 			this.elWYSIWYGButton.style.display = 'block';
 			this.elHTMLSrcButton.style.display = 'block';
@@ -4271,10 +4272,10 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 	
 	$ON_EVENT_CHANGE_EDITING_MODE_CLICKED : function(sMode, bNoAlertMsg){
 		if (sMode == 'TEXT') {
-			//ì—ë””í„° ì˜ì—­ ë‚´ì— ëª¨ë“  ë‚´ìš© ê°€ì ¸ì˜´. 
+			//¿¡µğÅÍ ¿µ¿ª ³»¿¡ ¸ğµç ³»¿ë °¡Á®¿È. 
 	    	var sContent = this.oApp.getIR();
 	    	
-			// ë‚´ìš©ì´ ìˆìœ¼ë©´ ê²½ê³ ì°½ ë„ìš°ê¸°
+			// ³»¿ëÀÌ ÀÖÀ¸¸é °æ°íÃ¢ ¶ç¿ì±â
 			if (sContent.length > 0 && !bNoAlertMsg) {
 				if ( !confirm(this.oApp.$MSG("SE2M_EditingModeChanger.confirmTextMode")) ) {
 					return false;
@@ -4372,15 +4373,15 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 /*[
  * LOAD_CONTENTS_FIELD
  *
- * ì—ë””í„° ì´ˆê¸°í™” ì‹œì— ë„˜ì–´ì˜¨ Contents(DB ì €ì¥ ê°’)í•„ë“œë¥¼ ì½ì–´ ì—ë””í„°ì— ì„¤ì •í•œë‹¤.
+ * ¿¡µğÅÍ ÃÊ±âÈ­ ½Ã¿¡ ³Ñ¾î¿Â Contents(DB ÀúÀå °ª)ÇÊµå¸¦ ÀĞ¾î ¿¡µğÅÍ¿¡ ¼³Á¤ÇÑ´Ù.
  *
- * bDontAddUndo boolean Contentsë¥¼ ì„¤ì •í•˜ë©´ì„œ UNDO íˆìŠ¤í† ë¦¬ëŠ” ì¶”ê°€ í•˜ì§€ì•ŠëŠ”ë‹¤.
+ * bDontAddUndo boolean Contents¸¦ ¼³Á¤ÇÏ¸é¼­ UNDO È÷½ºÅä¸®´Â Ãß°¡ ÇÏÁö¾Ê´Â´Ù.
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * UPDATE_IR_FIELD
  *
- * ì—ë””í„°ì˜ IRê°’ì„ IRí•„ë“œì— ì„¤ì • í•œë‹¤.
+ * ¿¡µğÅÍÀÇ IR°ªÀ» IRÇÊµå¿¡ ¼³Á¤ ÇÑ´Ù.
  *
  * none
  *
@@ -4388,16 +4389,16 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 /*[
  * CHANGE_EDITING_MODE
  *
- * ì—ë””í„°ì˜ í¸ì§‘ ëª¨ë“œë¥¼ ë³€ê²½í•œë‹¤.
+ * ¿¡µğÅÍÀÇ ÆíÁı ¸ğµå¸¦ º¯°æÇÑ´Ù.
  *
- * sMode string ì „í™˜ í•  ëª¨ë“œëª…
- * bNoFocus boolean ëª¨ë“œ ì „í™˜ í›„ì— ì—ë””í„°ì— í¬ì»¤ìŠ¤ë¥¼ ê°•ì œë¡œ í• ë‹¹í•˜ì§€ ì•ŠëŠ”ë‹¤.
+ * sMode string ÀüÈ¯ ÇÒ ¸ğµå¸í
+ * bNoFocus boolean ¸ğµå ÀüÈ¯ ÈÄ¿¡ ¿¡µğÅÍ¿¡ Æ÷Ä¿½º¸¦ °­Á¦·Î ÇÒ´çÇÏÁö ¾Ê´Â´Ù.
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * FOCUS
  *
- * ì—ë””í„° í¸ì§‘ ì˜ì—­ì— í¬ì»¤ìŠ¤ë¥¼ ì¤€ë‹¤.
+ * ¿¡µğÅÍ ÆíÁı ¿µ¿ª¿¡ Æ÷Ä¿½º¸¦ ÁØ´Ù.
  *
  * none
  *
@@ -4405,7 +4406,7 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 /*[
  * SET_IR
  *
- * IRê°’ì„ ì—ë””í„°ì— ì„¤ì • í•œë‹¤.
+ * IR°ªÀ» ¿¡µğÅÍ¿¡ ¼³Á¤ ÇÑ´Ù.
  *
  * none
  *
@@ -4413,15 +4414,15 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 /*[
  * REGISTER_EDITING_AREA
  *
- * í¸ì§‘ ì˜ì—­ì„ í”ŒëŸ¬ê·¸ì¸ì„ ë“±ë¡ ì‹œí‚¨ë‹¤. ì›í™œí•œ ëª¨ë“œ ì „í™˜ê³¼ IRê°’ ê³µìœ ë“±ë¥¼ ìœ„í•´ì„œ ì´ˆê¸°í™” ì‹œì— ë“±ë¡ì´ í•„ìš”í•˜ë‹¤. 
+ * ÆíÁı ¿µ¿ªÀ» ÇÃ·¯±×ÀÎÀ» µî·Ï ½ÃÅ²´Ù. ¿øÈ°ÇÑ ¸ğµå ÀüÈ¯°ú IR°ª °øÀ¯µî¸¦ À§ÇØ¼­ ÃÊ±âÈ­ ½Ã¿¡ µî·ÏÀÌ ÇÊ¿äÇÏ´Ù. 
  *
- * oEditingAreaPlugin object í¸ì§‘ ì˜ì—­ í”ŒëŸ¬ê·¸ì¸ ì¸ìŠ¤í„´ìŠ¤
+ * oEditingAreaPlugin object ÆíÁı ¿µ¿ª ÇÃ·¯±×ÀÎ ÀÎ½ºÅÏ½º
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * MSG_EDITING_AREA_RESIZE_STARTED
  *
- * í¸ì§‘ ì˜ì—­ ì‚¬ì´ì¦ˆ ì¡°ì ˆì´ ì‹œì‘ ë˜ì—ˆìŒì„ ì•Œë¦¬ëŠ” ë©”ì‹œì§€.
+ * ÆíÁı ¿µ¿ª »çÀÌÁî Á¶ÀıÀÌ ½ÃÀÛ µÇ¾úÀ½À» ¾Ë¸®´Â ¸Ş½ÃÁö.
  *
  * none
  *
@@ -4429,32 +4430,32 @@ nhn.husky.SE2M_EditingModeChanger = jindo.$Class({
 /*[
  * RESIZE_EDITING_AREA
  *
- * í¸ì§‘ ì˜ì—­ ì‚¬ì´ì¦ˆë¥¼ ì„¤ì • í•œë‹¤. ë³€ê²½ ì „í›„ì— MSG_EDITIING_AREA_RESIZE_STARTED/MSG_EDITING_AREA_RESIZE_ENEDë¥¼ ë°œìƒ ì‹œì¼œ ì¤˜ì•¼ ëœë‹¤.
+ * ÆíÁı ¿µ¿ª »çÀÌÁî¸¦ ¼³Á¤ ÇÑ´Ù. º¯°æ ÀüÈÄ¿¡ MSG_EDITIING_AREA_RESIZE_STARTED/MSG_EDITING_AREA_RESIZE_ENED¸¦ ¹ß»ı ½ÃÄÑ Áà¾ß µÈ´Ù.
  *
- * ipNewWidth number ìƒˆ í­
- * ipNewHeight number ìƒˆ ë†’ì´
+ * ipNewWidth number »õ Æø
+ * ipNewHeight number »õ ³ôÀÌ
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * RESIZE_EDITING_AREA_BY
  *
- * í¸ì§‘ ì˜ì—­ ì‚¬ì´ì¦ˆë¥¼ ëŠ˜ë¦¬ê±°ë‚˜ ì¤„ì¸ë‹¤. ë³€ê²½ ì „í›„ì— MSG_EDITIING_AREA_RESIZE_STARTED/MSG_EDITING_AREA_RESIZE_ENEDë¥¼ ë°œìƒ ì‹œì¼œ ì¤˜ì•¼ ëœë‹¤.
- * ë³€ê²½ì¹˜ë¥¼ ì…ë ¥í•˜ë©´ ì›ë˜ ì‚¬ì´ì¦ˆì—ì„œ ë³€ê²½í•˜ì—¬ pxë¡œ ì ìš©í•˜ë©°, widthê°€ %ë¡œ ì„¤ì •ëœ ê²½ìš°ì—ëŠ” í­ ë³€ê²½ì¹˜ê°€ ì…ë ¥ë˜ì–´ë„ ì ìš©ë˜ì§€ ì•ŠëŠ”ë‹¤.
+ * ÆíÁı ¿µ¿ª »çÀÌÁî¸¦ ´Ã¸®°Å³ª ÁÙÀÎ´Ù. º¯°æ ÀüÈÄ¿¡ MSG_EDITIING_AREA_RESIZE_STARTED/MSG_EDITING_AREA_RESIZE_ENED¸¦ ¹ß»ı ½ÃÄÑ Áà¾ß µÈ´Ù.
+ * º¯°æÄ¡¸¦ ÀÔ·ÂÇÏ¸é ¿ø·¡ »çÀÌÁî¿¡¼­ º¯°æÇÏ¿© px·Î Àû¿ëÇÏ¸ç, width°¡ %·Î ¼³Á¤µÈ °æ¿ì¿¡´Â Æø º¯°æÄ¡°¡ ÀÔ·ÂµÇ¾îµµ Àû¿ëµÇÁö ¾Ê´Â´Ù.
  *
- * ipWidthChange number í­ ë³€ê²½ì¹˜
- * ipHeightChange number ë†’ì´ ë³€ê²½ì¹˜
+ * ipWidthChange number Æø º¯°æÄ¡
+ * ipHeightChange number ³ôÀÌ º¯°æÄ¡
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * MSG_EDITING_AREA_RESIZE_ENDED
  *
- * í¸ì§‘ ì˜ì—­ ì‚¬ì´ì¦ˆ ì¡°ì ˆì´ ëë‚¬ìŒì„ ì•Œë¦¬ëŠ” ë©”ì‹œì§€.
+ * ÆíÁı ¿µ¿ª »çÀÌÁî Á¶ÀıÀÌ ³¡³µÀ½À» ¾Ë¸®´Â ¸Ş½ÃÁö.
  *
  * none
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc IR ê°’ê³¼ ë³µìˆ˜ê°œì˜ í¸ì§‘ ì˜ì—­ì„ ê´€ë¦¬í•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc IR °ª°ú º¹¼ö°³ÀÇ ÆíÁı ¿µ¿ªÀ» °ü¸®ÇÏ´Â ÇÃ·¯±×ÀÎ
  */
 nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	name : "SE_EditingAreaManager",
@@ -4467,7 +4468,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	elContentsField : null,
 	
 	bIsDirty : false,
-	bAutoResize : false, // [SMARTEDITORSUS-677] ì—ë””í„°ì˜ ìë™í™•ì¥ ê¸°ëŠ¥ On/Off ì—¬ë¶€
+	bAutoResize : false, // [SMARTEDITORSUS-677] ¿¡µğÅÍÀÇ ÀÚµ¿È®Àå ±â´É On/Off ¿©ºÎ
 	
 	$init : function(sDefaultEditingMode, elContentsField, oDimension, fOnBeforeUnload, elAppContainer){
 		this.sDefaultEditingMode = sDefaultEditingMode;
@@ -4571,7 +4572,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 		this.oApp.exec("CHANGE_EDITING_MODE", [this.sDefaultEditingMode, true]);
 		this.oApp.exec("LOAD_CONTENTS_FIELD", [false]);
 		
-		//[SMARTEDITORSUS-1327] IE 7/8ì—ì„œ ALT+0ìœ¼ë¡œ íŒì—… ë„ìš°ê³  escí´ë¦­ì‹œ íŒì—…ì°½ ë‹«íˆê²Œ í•˜ë ¤ë©´ ì•„ë˜ ë¶€ë¶„ ê¼­ í•„ìš”í•¨. 
+		//[SMARTEDITORSUS-1327] IE 7/8¿¡¼­ ALT+0À¸·Î ÆË¾÷ ¶ç¿ì°í escÅ¬¸¯½Ã ÆË¾÷Ã¢ ´İÈ÷°Ô ÇÏ·Á¸é ¾Æ·¡ ºÎºĞ ²À ÇÊ¿äÇÔ. 
 		this.oApp.exec("REGISTER_HOTKEY", ["esc", "CLOSE_LAYER_POPUP", [], document]); 
 		
 		if(!!this.fOnBeforeUnload){
@@ -4588,10 +4589,10 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	},
 	
 	$ON_CLOSE_LAYER_POPUP : function() {
-         this.oApp.exec("ENABLE_ALL_UI");                // ëª¨ë“  UI í™œì„±í™”.
+         this.oApp.exec("ENABLE_ALL_UI");                // ¸ğµç UI È°¼ºÈ­.
          this.oApp.exec("DESELECT_UI", ["helpPopup"]);       
          this.oApp.exec("HIDE_ALL_DIALOG_LAYER", []);
-         this.oApp.exec("HIDE_EDITING_AREA_COVER");              // í¸ì§‘ ì˜ì—­ í™œì„±í™”.
+         this.oApp.exec("HIDE_EDITING_AREA_COVER");              // ÆíÁı ¿µ¿ª È°¼ºÈ­.
 
          this.oApp.exec("FOCUS");
 	},  
@@ -4603,21 +4604,21 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 			this.bAutoResize = this.oApp.htOptions[this.name].bAutoResize;
 		}
 		
-		this.startAutoResize();	// [SMARTEDITORSUS-677] í¸ì§‘ì˜ì—­ ìë™ í™•ì¥ ì˜µì…˜ì´ TRUEì´ë©´ ìë™í™•ì¥ ì‹œì‘
+		this.startAutoResize();	// [SMARTEDITORSUS-677] ÆíÁı¿µ¿ª ÀÚµ¿ È®Àå ¿É¼ÇÀÌ TRUEÀÌ¸é ÀÚµ¿È®Àå ½ÃÀÛ
 	},
 	
 	$ON_LOAD_CONTENTS_FIELD : function(bDontAddUndo){
 		var sContentsFieldValue = this.elContentsField.value;
 		
-		// [SMARTEDITORSUS-177] [IE9] ê¸€ ì“°ê¸°, ìˆ˜ì • ì‹œì— elContentsField ì— ë“¤ì–´ê°„ ê³µë°±ì„ ì œê±°
-		// [SMARTEDITORSUS-312] [FF4] ì¸ìš©êµ¬ ì²«ë²ˆì§¸,ë‘ë²ˆì§¸ ë””ìì¸ 1íšŒ ì„ íƒ ì‹œ ì—ë””í„°ì— ì ìš©ë˜ì§€ ì•ŠìŒ
+		// [SMARTEDITORSUS-177] [IE9] ±Û ¾²±â, ¼öÁ¤ ½Ã¿¡ elContentsField ¿¡ µé¾î°£ °ø¹éÀ» Á¦°Å
+		// [SMARTEDITORSUS-312] [FF4] ÀÎ¿ë±¸ Ã¹¹øÂ°,µÎ¹øÂ° µğÀÚÀÎ 1È¸ ¼±ÅÃ ½Ã ¿¡µğÅÍ¿¡ Àû¿ëµÇÁö ¾ÊÀ½
 		sContentsFieldValue = sContentsFieldValue.replace(/^\s+/, "");
 				
 		this.oApp.exec("SET_CONTENTS", [sContentsFieldValue, bDontAddUndo]);
 	},
 	
-	// í˜„ì¬ contentsë¥¼ formì˜ textareaì— ì„¸íŒ… í•´ ì¤Œ.
-	// form submit ì „ì— ì´ ë¶€ë¶„ì„ ì‹¤í–‰ì‹œì¼œì•¼ ë¨.
+	// ÇöÀç contents¸¦ formÀÇ textarea¿¡ ¼¼ÆÃ ÇØ ÁÜ.
+	// form submit Àü¿¡ ÀÌ ºÎºĞÀ» ½ÇÇà½ÃÄÑ¾ß µÊ.
 	$ON_UPDATE_CONTENTS_FIELD : function(){
 		//this.oIRField.value = this.oApp.getIR();
 		this.elContentsField.value = this.oApp.getContents();
@@ -4625,8 +4626,8 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 		//this.sCurrentRawContents = this.elContentsField.value;
 	},
 	
-	// ì—ë””í„°ì˜ í˜„ì¬ ìƒíƒœë¥¼ ê¸°ì–µí•´ ë‘ . í˜ì´ì§€ë¥¼ ë– ë‚  ë•Œ ì´ ê°’ì´ ë³€ê²½ ëëŠ”ì§€ í™•ì¸ í•´ì„œ ë‚´ìš©ì´ ë³€ê²½ ëë‹¤ëŠ” ê²½ê³ ì°½ì„ ë„ì›€
-	// RawContents ëŒ€ì‹  contentsë¥¼ ì´ìš©í•´ë„ ë˜ì§€ë§Œ, contents íšë“ì„ ìœ„í•´ì„œëŠ” ë³€í™˜ê¸°ë¥¼ ì‹¤í–‰í•´ì•¼ ë˜ê¸° ë•Œë¬¸ì— RawContents ì´ìš©
+	// ¿¡µğÅÍÀÇ ÇöÀç »óÅÂ¸¦ ±â¾ïÇØ µÒ. ÆäÀÌÁö¸¦ ¶°³¯ ¶§ ÀÌ °ªÀÌ º¯°æ µÆ´ÂÁö È®ÀÎ ÇØ¼­ ³»¿ëÀÌ º¯°æ µÆ´Ù´Â °æ°íÃ¢À» ¶ç¿ò
+	// RawContents ´ë½Å contents¸¦ ÀÌ¿ëÇØµµ µÇÁö¸¸, contents È¹µæÀ» À§ÇØ¼­´Â º¯È¯±â¸¦ ½ÇÇàÇØ¾ß µÇ±â ¶§¹®¿¡ RawContents ÀÌ¿ë
 	$ON_UPDATE_RAW_CONTENTS : function(){
 		this.sCurrentRawContents = this.oApp.getRawContents();
 	},
@@ -4636,7 +4637,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 			return false;
 		}
 		
-		this.stopAutoResize();	// [SMARTEDITORSUS-677] í•´ë‹¹ í¸ì§‘ ëª¨ë“œì—ì„œì˜ ìë™í™•ì¥ì„ ì¤‘ì§€í•¨
+		this.stopAutoResize();	// [SMARTEDITORSUS-677] ÇØ´ç ÆíÁı ¸ğµå¿¡¼­ÀÇ ÀÚµ¿È®ÀåÀ» ÁßÁöÇÔ
 		
 		this._oPrevActivePlugin = this.oActivePlugin;
 		this.oActivePlugin = this.oEditingMode[sMode];
@@ -4653,7 +4654,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 		}
 		//this.oApp.exec("DISABLE_UI", [this.oActivePlugin.sMode]);
 		
-		this.startAutoResize();	// [SMARTEDITORSUS-677] ë³€ê²½ëœ í¸ì§‘ ëª¨ë“œì—ì„œì˜ ìë™í™•ì¥ì„ ì‹œì‘
+		this.startAutoResize();	// [SMARTEDITORSUS-677] º¯°æµÈ ÆíÁı ¸ğµå¿¡¼­ÀÇ ÀÚµ¿È®ÀåÀ» ½ÃÀÛ
 
 		if(!bNoFocus){
 			this.oApp.delayedExec("FOCUS", [], 0);
@@ -4661,7 +4662,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	},
 	
 	/** 
-	 * í˜ì´ì§€ë¥¼ ë– ë‚  ë•Œ alertì„ í‘œì‹œí• ì§€ ì—¬ë¶€ë¥¼ ì…‹íŒ…í•˜ëŠ” í•¨ìˆ˜.
+	 * ÆäÀÌÁö¸¦ ¶°³¯ ¶§ alertÀ» Ç¥½ÃÇÒÁö ¿©ºÎ¸¦ ¼ÂÆÃÇÏ´Â ÇÔ¼ö.
 	 */
 	$ON_SET_IS_DIRTY : function(bIsDirty){
 		this.bIsDirty = bIsDirty;
@@ -4672,13 +4673,13 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 			return;
 		}
 
-		// [SMARTEDITORSUS-599] ipad ëŒ€ì‘ ì´ìŠˆ.
-		// ios5ì—ì„œëŠ” this.iframe.contentWindow focusê°€ ì—†ì–´ì„œ ìƒê¸´ ì´ìŠˆ. 
-		// documentê°€ ì•„ë‹Œ windowì— focus() ì£¼ì–´ì•¼ë§Œ ë³¸ë¬¸ì— focusê°€ ê°€ê³  ì…ë ¥ì´ë¨.
+		// [SMARTEDITORSUS-599] ipad ´ëÀÀ ÀÌ½´.
+		// ios5¿¡¼­´Â this.iframe.contentWindow focus°¡ ¾ø¾î¼­ »ı±ä ÀÌ½´. 
+		// document°¡ ¾Æ´Ñ window¿¡ focus() ÁÖ¾î¾ß¸¸ º»¹®¿¡ focus°¡ °¡°í ÀÔ·ÂÀÌµÊ.
 		
-		//[SMARTEDITORSUS-1017] [iOS5ëŒ€ì‘] ëª¨ë“œ ì „í™˜ ì‹œ textareaì— í¬ì»¤ìŠ¤ê°€ ìˆì–´ë„ ê¸€ìê°€ ì…ë ¥ì´ ì•ˆë˜ëŠ” í˜„ìƒ
-		//ì›ì¸ : WYSIWYGëª¨ë“œê°€ ì•„ë‹ ë•Œì—ë„ iframeì˜ contentWindowì— focusê°€ ê°€ë©´ì„œ focusê¸°ëŠ¥ì´ ì‘ë™í•˜ì§€ ì•ŠìŒ
-		//í•´ê²° : WYSIWYGëª¨ë“œ ì¼ë•Œë§Œ ì‹¤í–‰ ë˜ë„ë¡ ì¡°ê±´ì‹ ì¶”ê°€ ë° ê¸°ì¡´ì— blurì²˜ë¦¬ ì½”ë“œ ì‚­ì œ
+		//[SMARTEDITORSUS-1017] [iOS5´ëÀÀ] ¸ğµå ÀüÈ¯ ½Ã textarea¿¡ Æ÷Ä¿½º°¡ ÀÖ¾îµµ ±ÛÀÚ°¡ ÀÔ·ÂÀÌ ¾ÈµÇ´Â Çö»ó
+		//¿øÀÎ : WYSIWYG¸ğµå°¡ ¾Æ´Ò ¶§¿¡µµ iframeÀÇ contentWindow¿¡ focus°¡ °¡¸é¼­ focus±â´ÉÀÌ ÀÛµ¿ÇÏÁö ¾ÊÀ½
+		//ÇØ°á : WYSIWYG¸ğµå ÀÏ¶§¸¸ ½ÇÇà µÇµµ·Ï Á¶°Ç½Ä Ãß°¡ ¹× ±âÁ¸¿¡ blurÃ³¸® ÄÚµå »èÁ¦
 		if(!!this.oNavigator.msafari && !!this.iframeWindow && !this.iframeWindow.document.hasFocus() && this.oActivePlugin.sMode == "WYSIWYG"){
 			this.iframeWindow.focus();
 		}
@@ -4729,7 +4730,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 
 	$ON_MSG_EDITING_AREA_RESIZE_STARTED : function(){
 		this._fitElementInEditingArea(this.elEditingAreaContainer);
-		this.oApp.exec("STOP_AUTORESIZE_EDITING_AREA");	// [SMARTEDITORSUS-677] ì‚¬ìš©ìê°€ í¸ì§‘ì˜ì—­ ì‚¬ì´ì¦ˆë¥¼ ë³€ê²½í•˜ë©´ ìë™í™•ì¥ ê¸°ëŠ¥ ì¤‘ì§€
+		this.oApp.exec("STOP_AUTORESIZE_EDITING_AREA");	// [SMARTEDITORSUS-677] »ç¿ëÀÚ°¡ ÆíÁı¿µ¿ª »çÀÌÁî¸¦ º¯°æÇÏ¸é ÀÚµ¿È®Àå ±â´É ÁßÁö
 		this.oApp.exec("SHOW_EDITING_AREA_COVER");
 		this.elEditingAreaContainer.style.overflow = "hidden";
 //		this.elResizingBoard.style.display = "block";
@@ -4738,7 +4739,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] í¸ì§‘ì˜ì—­ ìë™í™•ì¥ ê¸°ëŠ¥ì„ ì¤‘ì§€í•¨
+	 * [SMARTEDITORSUS-677] ÆíÁı¿µ¿ª ÀÚµ¿È®Àå ±â´ÉÀ» ÁßÁöÇÔ
 	 */
 	$ON_STOP_AUTORESIZE_EDITING_AREA : function(){
 		if(!this.bAutoResize){
@@ -4750,7 +4751,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] í•´ë‹¹ í¸ì§‘ ëª¨ë“œì—ì„œì˜ ìë™í™•ì¥ì„ ì‹œì‘í•¨
+	 * [SMARTEDITORSUS-677] ÇØ´ç ÆíÁı ¸ğµå¿¡¼­ÀÇ ÀÚµ¿È®ÀåÀ» ½ÃÀÛÇÔ
 	 */
 	startAutoResize : function(){
 		if(!this.bAutoResize || !this.oActivePlugin || typeof this.oActivePlugin.startAutoResize != "function"){
@@ -4761,7 +4762,7 @@ nhn.husky.SE_EditingAreaManager = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] í•´ë‹¹ í¸ì§‘ ëª¨ë“œì—ì„œì˜ ìë™í™•ì¥ì„ ì¤‘ì§€í•¨
+	 * [SMARTEDITORSUS-677] ÇØ´ç ÆíÁı ¸ğµå¿¡¼­ÀÇ ÀÚµ¿È®ÀåÀ» ÁßÁöÇÔ
 	 */
 	stopAutoResize : function(){
 		if(!this.bAutoResize || !this.oActivePlugin || typeof this.oActivePlugin.stopAutoResize != "function"){
@@ -5003,7 +5004,7 @@ nhn.husky.SE_EditingAreaVerticalResizer = jindo.$Class({
 	oResizeGrip : null,
 	sCookieNotice : "bHideResizeNotice",
 	
-	nEditingAreaMinHeight : null,	// [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ì˜ ìµœì†Œ ë†’ì´
+	nEditingAreaMinHeight : null,	// [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ªÀÇ ÃÖ¼Ò ³ôÀÌ
 	htConversionMode : null,
 	
 	$init : function(elAppContainer, htConversionMode){
@@ -5012,11 +5013,11 @@ nhn.husky.SE_EditingAreaVerticalResizer = jindo.$Class({
 
 	$ON_MSG_APP_READY : function(){
 		
-		//[SMARTEDITORSUS-941][iOS5ëŒ€ì‘]ì•„ì´íŒ¨ë“œì˜ ìë™ í™•ì¥ ê¸°ëŠ¥ì´ ë™ì‘í•˜ì§€ ì•Šì„ ë•Œ ì—ë””í„° ì°½ë³´ë‹¤ ê¸´ ë‚´ìš©ì„ ì‘ì„±í•˜ë©´ ì—ë””í„°ë¥¼ ëš«ê³  ë‚˜ì˜¤ëŠ” í˜„ìƒ 
-		//ì›ì¸ : ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì •ì§€ ë  ê²½ìš° iframeì— ìŠ¤í¬ë¡¤ì´ ìƒê¸°ì§€ ì•Šê³ , ì°½ì„ ëš«ê³  ë‚˜ì˜´
-		//í•´ê²° : í•­ìƒ ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì¼œì ¸ìˆë„ë¡ ë³€ê²½. ìë™ í™•ì¥ ê¸°ëŠ¥ ê´€ë ¨í•œ ì´ë²¤íŠ¸ ì½”ë“œë„ ëª¨ë°”ì¼ ì‚¬íŒŒë¦¬ì—ì„œ ì˜ˆì™¸ ì²˜ë¦¬
+		//[SMARTEDITORSUS-941][iOS5´ëÀÀ]¾ÆÀÌÆĞµåÀÇ ÀÚµ¿ È®Àå ±â´ÉÀÌ µ¿ÀÛÇÏÁö ¾ÊÀ» ¶§ ¿¡µğÅÍ Ã¢º¸´Ù ±ä ³»¿ëÀ» ÀÛ¼ºÇÏ¸é ¿¡µğÅÍ¸¦ ¶Õ°í ³ª¿À´Â Çö»ó 
+		//¿øÀÎ : ÀÚµ¿È®Àå ±â´ÉÀÌ Á¤Áö µÉ °æ¿ì iframe¿¡ ½ºÅ©·ÑÀÌ »ı±âÁö ¾Ê°í, Ã¢À» ¶Õ°í ³ª¿È
+		//ÇØ°á : Ç×»ó ÀÚµ¿È®Àå ±â´ÉÀÌ ÄÑÁ®ÀÖµµ·Ï º¯°æ. ÀÚµ¿ È®Àå ±â´É °ü·ÃÇÑ ÀÌº¥Æ® ÄÚµåµµ ¸ğ¹ÙÀÏ »çÆÄ¸®¿¡¼­ ¿¹¿Ü Ã³¸®
 		if(jindo.$Agent().navigator().msafari){
-			jindo.$Element(this.oResizeGrip).first().text('ì…ë ¥ì°½ ë†’ì´ ìë™ ì¡°ì • ë°”');
+			jindo.$Element(this.oResizeGrip).first().text('ÀÔ·ÂÃ¢ ³ôÀÌ ÀÚµ¿ Á¶Á¤ ¹Ù');
 			this.oResizeGrip.disabled = true;
 			return;
 		}
@@ -5042,13 +5043,13 @@ nhn.husky.SE_EditingAreaVerticalResizer = jindo.$Class({
 		}
 		
 		if(!!this.oApp.getEditingAreaHeight){
-			this.nEditingAreaMinHeight = this.oApp.getEditingAreaHeight();	// [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ì˜ ìµœì†Œ ë†’ì´ë¥¼ ê°€ì ¸ì™€ Gap ì²˜ë¦¬ ì‹œ ì‚¬ìš©
+			this.nEditingAreaMinHeight = this.oApp.getEditingAreaHeight();	// [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ªÀÇ ÃÖ¼Ò ³ôÀÌ¸¦ °¡Á®¿Í Gap Ã³¸® ½Ã »ç¿ë
 		}
 	},
 
 	/**
-	 * [SMARTEDITORSUS-677] [ì—ë””í„° ìë™í™•ì¥ ONì¸ ê²½ìš°]
-	 * ì…ë ¥ì°½ í¬ê¸° ì¡°ì ˆ ë°”ì˜ ìœ„ì¹˜ë¥¼ í™•ì¸í•˜ì—¬ ë¸Œë¼ìš°ì € í•˜ë‹¨ì— ìœ„ì¹˜í•œ ê²½ìš° ìë™í™•ì¥ì„ ë©ˆì¶¤
+	 * [SMARTEDITORSUS-677] [¿¡µğÅÍ ÀÚµ¿È®Àå ONÀÎ °æ¿ì]
+	 * ÀÔ·ÂÃ¢ Å©±â Á¶Àı ¹ÙÀÇ À§Ä¡¸¦ È®ÀÎÇÏ¿© ºê¶ó¿ìÀú ÇÏ´Ü¿¡ À§Ä¡ÇÑ °æ¿ì ÀÚµ¿È®ÀåÀ» ¸ØÃã
 	 */	
 	checkResizeGripPosition : function(bExpand){
 		var oDocument = jindo.$Document();
@@ -5059,12 +5060,12 @@ nhn.husky.SE_EditingAreaVerticalResizer = jindo.$Class({
 		}
 
 		if(bExpand){
-			if(this.nEditingAreaMinHeight > this.oApp.getEditingAreaHeight() - nGap){	// [SMARTEDITORSUS-822] ìˆ˜ì • ëª¨ë“œì¸ ê²½ìš°ì— ëŒ€ë¹„
+			if(this.nEditingAreaMinHeight > this.oApp.getEditingAreaHeight() - nGap){	// [SMARTEDITORSUS-822] ¼öÁ¤ ¸ğµåÀÎ °æ¿ì¿¡ ´ëºñ
 				nGap = (-1) * (this.nEditingAreaMinHeight - this.oApp.getEditingAreaHeight());
 			}
 	
-			// Gap ë§Œí¼ í¸ì§‘ì˜ì—­ ì‚¬ì´ì¦ˆë¥¼ ì¡°ì ˆí•˜ì—¬
-			// ì‚¬ì§„ ì²¨ë¶€ë‚˜ ë¶™ì—¬ë„£ê¸° ë“±ì˜ ì‚¬ì´ì¦ˆê°€ í° ë‚´ìš© ì¶”ê°€ê°€ ìˆì—ˆì„ ë•Œ ì…ë ¥ì°½ í¬ê¸° ì¡°ì ˆ ë°”ê°€ ìˆ¨ê²¨ì§€ì§€ ì•Šë„ë¡ í•¨
+			// Gap ¸¸Å­ ÆíÁı¿µ¿ª »çÀÌÁî¸¦ Á¶ÀıÇÏ¿©
+			// »çÁø Ã·ºÎ³ª ºÙ¿©³Ö±â µîÀÇ »çÀÌÁî°¡ Å« ³»¿ë Ãß°¡°¡ ÀÖ¾úÀ» ¶§ ÀÔ·ÂÃ¢ Å©±â Á¶Àı ¹Ù°¡ ¼û°ÜÁöÁö ¾Êµµ·Ï ÇÔ
 			this.oApp.exec("MSG_EDITING_AREA_RESIZE_STARTED");
 			this.oApp.exec("RESIZE_EDITING_AREA_BY", [0, (-1) * nGap]);
 			this.oApp.exec("MSG_EDITING_AREA_RESIZE_ENDED");
@@ -5092,7 +5093,7 @@ nhn.husky.SE_EditingAreaVerticalResizer = jindo.$Class({
 			this.elCloseLayerBtn = jindo.$$.getSingle("BUTTON.bt_clse", this.elNoticeLayer);
 		}
 		
-		// [SMARTEDITORSUS-906] Resizbar ì‚¬ìš© ì—¬ë¶€ ì²˜ë¦¬ (true:ì‚¬ìš©í•¨/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+		// [SMARTEDITORSUS-906] Resizbar »ç¿ë ¿©ºÎ Ã³¸® (true:»ç¿ëÇÔ/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
 		if(typeof(htConversionMode) === 'undefined' || typeof(htConversionMode.bUseVerticalResizer) === 'undefined' || htConversionMode.bUseVerticalResizer === true) {
 			this.oResizeGrip.style.display = 'block';
 		}else{
@@ -5157,8 +5158,8 @@ nhn.husky.SE_EditingAreaVerticalResizer = jindo.$Class({
 nhn.husky.SE_EditingArea_HTMLSrc = jindo.$Class({
 	name : "SE_EditingArea_HTMLSrc",
 	sMode : "HTMLSrc",
-	bAutoResize : false,	// [SMARTEDITORSUS-677] í•´ë‹¹ í¸ì§‘ëª¨ë“œì˜ ìë™í™•ì¥ ê¸°ëŠ¥ On/Off ì—¬ë¶€
-	nMinHeight : null,		// [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ì˜ ìµœì†Œ ë†’ì´
+	bAutoResize : false,	// [SMARTEDITORSUS-677] ÇØ´ç ÆíÁı¸ğµåÀÇ ÀÚµ¿È®Àå ±â´É On/Off ¿©ºÎ
+	nMinHeight : null,		// [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ªÀÇ ÃÖ¼Ò ³ôÀÌ
 	
 	$init : function(sTextArea) { 
 		this.elEditingArea = jindo.$(sTextArea);
@@ -5171,7 +5172,7 @@ nhn.husky.SE_EditingArea_HTMLSrc = jindo.$Class({
 	
 	$ON_MSG_APP_READY : function() {
 		if(!!this.oApp.getEditingAreaHeight){
-			this.nMinHeight = this.oApp.getEditingAreaHeight();	// [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ì˜ ìµœì†Œ ë†’ì´ë¥¼ ê°€ì ¸ì™€ ìë™ í™•ì¥ ì²˜ë¦¬ë¥¼ í•  ë•Œ ì‚¬ìš©
+			this.nMinHeight = this.oApp.getEditingAreaHeight();	// [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ªÀÇ ÃÖ¼Ò ³ôÀÌ¸¦ °¡Á®¿Í ÀÚµ¿ È®Àå Ã³¸®¸¦ ÇÒ ¶§ »ç¿ë
 		}
 	},
 
@@ -5188,10 +5189,10 @@ nhn.husky.SE_EditingArea_HTMLSrc = jindo.$Class({
 			var o = new TextRange(this.elEditingArea);
 			o.setSelection(0, 0);
 			
-			//[SMARTEDITORSUS-1017] [iOS5ëŒ€ì‘] ëª¨ë“œ ì „í™˜ ì‹œ textareaì— í¬ì»¤ìŠ¤ê°€ ìˆì–´ë„ ê¸€ìê°€ ì…ë ¥ì´ ì•ˆë˜ëŠ” í˜„ìƒ
-			//ì›ì¸ : WYSIWYGëª¨ë“œê°€ ì•„ë‹ ë•Œì—ë„ iframeì˜ contentWindowì— focusê°€ ê°€ë©´ì„œ focusê¸°ëŠ¥ì´ ì‘ë™í•˜ì§€ ì•ŠìŒ
-			//í•´ê²° : WYSIWYGëª¨ë“œ ì¼ë•Œë§Œ ì‹¤í–‰ ë˜ë„ë¡ ì¡°ê±´ì‹ ì¶”ê°€ ë° ê¸°ì¡´ì— blurì²˜ë¦¬ ì½”ë“œ ì‚­ì œ
-			//ëª¨ë°”ì¼ textareaì—ì„œëŠ” ì§ì ‘ í´ë¦­ì„í•´ì•¼ë§Œ í‚¤ë³´ë“œê°€ ë¨¹íˆê¸° ë•Œë¬¸ì— ìš°ì„ ì€ ì»¤ì„œê°€ ì•ˆë³´ì´ê²Œ í•´ì„œ ì‚¬ìš©ìê°€ ì§ì ‘ í´ë¦­ì„ ìœ ë„.
+			//[SMARTEDITORSUS-1017] [iOS5´ëÀÀ] ¸ğµå ÀüÈ¯ ½Ã textarea¿¡ Æ÷Ä¿½º°¡ ÀÖ¾îµµ ±ÛÀÚ°¡ ÀÔ·ÂÀÌ ¾ÈµÇ´Â Çö»ó
+			//¿øÀÎ : WYSIWYG¸ğµå°¡ ¾Æ´Ò ¶§¿¡µµ iframeÀÇ contentWindow¿¡ focus°¡ °¡¸é¼­ focus±â´ÉÀÌ ÀÛµ¿ÇÏÁö ¾ÊÀ½
+			//ÇØ°á : WYSIWYG¸ğµå ÀÏ¶§¸¸ ½ÇÇà µÇµµ·Ï Á¶°Ç½Ä Ãß°¡ ¹× ±âÁ¸¿¡ blurÃ³¸® ÄÚµå »èÁ¦
+			//¸ğ¹ÙÀÏ textarea¿¡¼­´Â Á÷Á¢ Å¬¸¯À»ÇØ¾ß¸¸ Å°º¸µå°¡ ¸ÔÈ÷±â ¶§¹®¿¡ ¿ì¼±Àº Ä¿¼­°¡ ¾Èº¸ÀÌ°Ô ÇØ¼­ »ç¿ëÀÚ°¡ Á÷Á¢ Å¬¸¯À» À¯µµ.
 			// if(!!this.oNavigator.msafari){
 				// this.elEditingArea.blur();
 			// }
@@ -5199,16 +5200,16 @@ nhn.husky.SE_EditingArea_HTMLSrc = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] HTML í¸ì§‘ ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬ ì‹œì‘
+	 * [SMARTEDITORSUS-677] HTML ÆíÁı ¿µ¿ª ÀÚµ¿ È®Àå Ã³¸® ½ÃÀÛ
 	 */ 
 	startAutoResize : function(){
 		var htOption = {
 			nMinHeight : this.nMinHeight,
 			wfnCallback : jindo.$Fn(this.oApp.checkResizeGripPosition, this).bind()
 		};
-		//[SMARTEDITORSUS-941][iOS5ëŒ€ì‘]ì•„ì´íŒ¨ë“œì˜ ìë™ í™•ì¥ ê¸°ëŠ¥ì´ ë™ì‘í•˜ì§€ ì•Šì„ ë•Œ ì—ë””í„° ì°½ë³´ë‹¤ ê¸´ ë‚´ìš©ì„ ì‘ì„±í•˜ë©´ ì—ë””í„°ë¥¼ ëš«ê³  ë‚˜ì˜¤ëŠ” í˜„ìƒ 
-		//ì›ì¸ : ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì •ì§€ ë  ê²½ìš° iframeì— ìŠ¤í¬ë¡¤ì´ ìƒê¸°ì§€ ì•Šê³ , ì°½ì„ ëš«ê³  ë‚˜ì˜´
-		//í•´ê²° : í•­ìƒ ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì¼œì ¸ìˆë„ë¡ ë³€ê²½. ìë™ í™•ì¥ ê¸°ëŠ¥ ê´€ë ¨í•œ ì´ë²¤íŠ¸ ì½”ë“œë„ ëª¨ë°”ì¼ ì‚¬íŒŒë¦¬ì—ì„œ ì˜ˆì™¸ ì²˜ë¦¬
+		//[SMARTEDITORSUS-941][iOS5´ëÀÀ]¾ÆÀÌÆĞµåÀÇ ÀÚµ¿ È®Àå ±â´ÉÀÌ µ¿ÀÛÇÏÁö ¾ÊÀ» ¶§ ¿¡µğÅÍ Ã¢º¸´Ù ±ä ³»¿ëÀ» ÀÛ¼ºÇÏ¸é ¿¡µğÅÍ¸¦ ¶Õ°í ³ª¿À´Â Çö»ó 
+		//¿øÀÎ : ÀÚµ¿È®Àå ±â´ÉÀÌ Á¤Áö µÉ °æ¿ì iframe¿¡ ½ºÅ©·ÑÀÌ »ı±âÁö ¾Ê°í, Ã¢À» ¶Õ°í ³ª¿È
+		//ÇØ°á : Ç×»ó ÀÚµ¿È®Àå ±â´ÉÀÌ ÄÑÁ®ÀÖµµ·Ï º¯°æ. ÀÚµ¿ È®Àå ±â´É °ü·ÃÇÑ ÀÌº¥Æ® ÄÚµåµµ ¸ğ¹ÙÀÏ »çÆÄ¸®¿¡¼­ ¿¹¿Ü Ã³¸®
 		if(this.oNavigator.msafari){
 			htOption.wfnCallback = function(){};
 		}
@@ -5219,7 +5220,7 @@ nhn.husky.SE_EditingArea_HTMLSrc = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] HTML í¸ì§‘ ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬ ì¢…ë£Œ
+	 * [SMARTEDITORSUS-677] HTML ÆíÁı ¿µ¿ª ÀÚµ¿ È®Àå Ã³¸® Á¾·á
 	 */ 
 	stopAutoResize : function(){
 		this.AutoResizer.unbind();
@@ -5361,8 +5362,8 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	name : "SE_EditingArea_TEXT",
 	sMode : "TEXT",
 	sRxConverter : '@[0-9]+@',
-	bAutoResize : false,	// [SMARTEDITORSUS-677] í•´ë‹¹ í¸ì§‘ëª¨ë“œì˜ ìë™í™•ì¥ ê¸°ëŠ¥ On/Off ì—¬ë¶€
-	nMinHeight : null,		// [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ì˜ ìµœì†Œ ë†’ì´
+	bAutoResize : false,	// [SMARTEDITORSUS-677] ÇØ´ç ÆíÁı¸ğµåÀÇ ÀÚµ¿È®Àå ±â´É On/Off ¿©ºÎ
+	nMinHeight : null,		// [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ªÀÇ ÃÖ¼Ò ³ôÀÌ
 	
 	$init : function(sTextArea) {
 		this.elEditingArea = jindo.$(sTextArea);
@@ -5376,7 +5377,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	
 	$ON_MSG_APP_READY : function() {
 		if(!!this.oApp.getEditingAreaHeight){
-			this.nMinHeight = this.oApp.getEditingAreaHeight();	// [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ì˜ ìµœì†Œ ë†’ì´ë¥¼ ê°€ì ¸ì™€ ìë™ í™•ì¥ ì²˜ë¦¬ë¥¼ í•  ë•Œ ì‚¬ìš©
+			this.nMinHeight = this.oApp.getEditingAreaHeight();	// [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ªÀÇ ÃÖ¼Ò ³ôÀÌ¸¦ °¡Á®¿Í ÀÚµ¿ È®Àå Ã³¸®¸¦ ÇÒ ¶§ »ç¿ë
 		}
 	},
 	
@@ -5399,10 +5400,10 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 			o.setSelection(0, 0);
 		}
 		
-		//[SMARTEDITORSUS-1017] [iOS5ëŒ€ì‘] ëª¨ë“œ ì „í™˜ ì‹œ textareaì— í¬ì»¤ìŠ¤ê°€ ìˆì–´ë„ ê¸€ìê°€ ì…ë ¥ì´ ì•ˆë˜ëŠ” í˜„ìƒ
-		//ì›ì¸ : WYSIWYGëª¨ë“œê°€ ì•„ë‹ ë•Œì—ë„ iframeì˜ contentWindowì— focusê°€ ê°€ë©´ì„œ focusê¸°ëŠ¥ì´ ì‘ë™í•˜ì§€ ì•ŠìŒ
-		//í•´ê²° : WYSIWYGëª¨ë“œ ì¼ë•Œë§Œ ì‹¤í–‰ ë˜ë„ë¡ ì¡°ê±´ì‹ ì¶”ê°€ ë° ê¸°ì¡´ì— blurì²˜ë¦¬ ì½”ë“œ ì‚­ì œ
-		//ëª¨ë°”ì¼ textareaì—ì„œëŠ” ì§ì ‘ í´ë¦­ì„í•´ì•¼ë§Œ í‚¤ë³´ë“œê°€ ë¨¹íˆê¸° ë•Œë¬¸ì— ìš°ì„ ì€ ì»¤ì„œê°€ ì•ˆë³´ì´ê²Œ í•´ì„œ ì‚¬ìš©ìê°€ ì§ì ‘ í´ë¦­ì„ ìœ ë„.
+		//[SMARTEDITORSUS-1017] [iOS5´ëÀÀ] ¸ğµå ÀüÈ¯ ½Ã textarea¿¡ Æ÷Ä¿½º°¡ ÀÖ¾îµµ ±ÛÀÚ°¡ ÀÔ·ÂÀÌ ¾ÈµÇ´Â Çö»ó
+		//¿øÀÎ : WYSIWYG¸ğµå°¡ ¾Æ´Ò ¶§¿¡µµ iframeÀÇ contentWindow¿¡ focus°¡ °¡¸é¼­ focus±â´ÉÀÌ ÀÛµ¿ÇÏÁö ¾ÊÀ½
+		//ÇØ°á : WYSIWYG¸ğµå ÀÏ¶§¸¸ ½ÇÇà µÇµµ·Ï Á¶°Ç½Ä Ãß°¡ ¹× ±âÁ¸¿¡ blurÃ³¸® ÄÚµå »èÁ¦
+		//¸ğ¹ÙÀÏ textarea¿¡¼­´Â Á÷Á¢ Å¬¸¯À»ÇØ¾ß¸¸ Å°º¸µå°¡ ¸ÔÈ÷±â ¶§¹®¿¡ ¿ì¼±Àº Ä¿¼­°¡ ¾Èº¸ÀÌ°Ô ÇØ¼­ »ç¿ëÀÚ°¡ Á÷Á¢ Å¬¸¯À» À¯µµ.
 		// if(!!this.oNavigator.msafari){
 			// this.elEditingArea.blur();
 		// }
@@ -5410,28 +5411,28 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	
 	irToText : function(sHtml) {
 		var sContent = sHtml, nIdx = 0;		
-		var aTemp = sContent.match(new RegExp(this.sRxConverter)); // applyConverterì—ì„œ ì¶”ê°€í•œ sTmpStrë¥¼ ì ì‹œ ì œê±°í•´ì¤€ë‹¤.
+		var aTemp = sContent.match(new RegExp(this.sRxConverter)); // applyConverter¿¡¼­ Ãß°¡ÇÑ sTmpStr¸¦ Àá½Ã Á¦°ÅÇØÁØ´Ù.
 		if (aTemp !== null) {
 			sContent = sContent.replace(new RegExp(this.sRxConverter), "");
 		}
 		
-		//0.ì•ˆë³´ì´ëŠ” ê°’ë“¤ì— ëŒ€í•œ ì •ë¦¬. (ì—ë””í„° ëª¨ë“œì— viewì™€ textëª¨ë“œì˜ viewë¥¼ ë™ì¼í•˜ê²Œ í•´ì£¼ê¸° ìœ„í•´ì„œ)		
-		sContent = sContent.replace(/\r/g, '');// MSì—‘ì…€ í…Œì´ë¸”ì—ì„œ trë³„ë¡œ ë¶„ë¦¬í•´ì£¼ëŠ” ì—­í• ì´\rì´ê¸° ë•Œë¬¸ì—  textëª¨ë“œë¡œ ë³€ê²½ì‹œì— ê°€ë…ì„±ì„ ìœ„í•´ \r ì œê±°í•˜ëŠ” ê²ƒì€ ì„ì‹œ ë³´ë¥˜. - 11.01.28 by cielo 
-		sContent = sContent.replace(/[\n|\t]/g, ''); // ê°œí–‰ë¬¸ì, ì•ˆë³´ì´ëŠ” ê³µë°± ì œê±°
-		sContent = sContent.replace(/[\v|\f]/g, ''); // ê°œí–‰ë¬¸ì, ì•ˆë³´ì´ëŠ” ê³µë°± ì œê±°
-		//1. ë¨¼ì €, ë¹ˆ ë¼ì¸ ì²˜ë¦¬ .
+		//0.¾Èº¸ÀÌ´Â °ªµé¿¡ ´ëÇÑ Á¤¸®. (¿¡µğÅÍ ¸ğµå¿¡ view¿Í text¸ğµåÀÇ view¸¦ µ¿ÀÏÇÏ°Ô ÇØÁÖ±â À§ÇØ¼­)		
+		sContent = sContent.replace(/\r/g, '');// MS¿¢¼¿ Å×ÀÌºí¿¡¼­ trº°·Î ºĞ¸®ÇØÁÖ´Â ¿ªÇÒÀÌ\rÀÌ±â ¶§¹®¿¡  text¸ğµå·Î º¯°æ½Ã¿¡ °¡µ¶¼ºÀ» À§ÇØ \r Á¦°ÅÇÏ´Â °ÍÀº ÀÓ½Ã º¸·ù. - 11.01.28 by cielo 
+		sContent = sContent.replace(/[\n|\t]/g, ''); // °³Çà¹®ÀÚ, ¾Èº¸ÀÌ´Â °ø¹é Á¦°Å
+		sContent = sContent.replace(/[\v|\f]/g, ''); // °³Çà¹®ÀÚ, ¾Èº¸ÀÌ´Â °ø¹é Á¦°Å
+		//1. ¸ÕÀú, ºó ¶óÀÎ Ã³¸® .
 		sContent = sContent.replace(/<p><br><\/p>/gi, '\n');
 		sContent = sContent.replace(/<P>&nbsp;<\/P>/gi, '\n');
 		
-		//2. ë¹ˆ ë¼ì¸ ì´ì™¸ì— linebreak ì²˜ë¦¬.
-		sContent = sContent.replace(/<br(\s)*\/?>/gi, '\n'); // br íƒœê·¸ë¥¼ ê°œí–‰ë¬¸ìë¡œ
-		sContent = sContent.replace(/<br(\s[^\/]*)?>/gi, '\n'); // br íƒœê·¸ë¥¼ ê°œí–‰ë¬¸ìë¡œ
-		sContent = sContent.replace(/<\/p(\s[^\/]*)?>/gi, '\n'); // p íƒœê·¸ë¥¼ ê°œí–‰ë¬¸ìë¡œ
+		//2. ºó ¶óÀÎ ÀÌ¿Ü¿¡ linebreak Ã³¸®.
+		sContent = sContent.replace(/<br(\s)*\/?>/gi, '\n'); // br ÅÂ±×¸¦ °³Çà¹®ÀÚ·Î
+		sContent = sContent.replace(/<br(\s[^\/]*)?>/gi, '\n'); // br ÅÂ±×¸¦ °³Çà¹®ÀÚ·Î
+		sContent = sContent.replace(/<\/p(\s[^\/]*)?>/gi, '\n'); // p ÅÂ±×¸¦ °³Çà¹®ÀÚ·Î
 		
-		sContent = sContent.replace(/<\/li(\s[^\/]*)?>/gi, '\n'); // li íƒœê·¸ë¥¼ ê°œí–‰ë¬¸ìë¡œ [SMARTEDITORSUS-107]ê°œí–‰ ì¶”ê°€
-		sContent = sContent.replace(/<\/tr(\s[^\/]*)?>/gi, '\n'); // tr íƒœê·¸ë¥¼ ê°œí–‰ë¬¸ìë¡œ [SMARTEDITORSUS-107]ê°œí–‰ ì¶”ê°€
+		sContent = sContent.replace(/<\/li(\s[^\/]*)?>/gi, '\n'); // li ÅÂ±×¸¦ °³Çà¹®ÀÚ·Î [SMARTEDITORSUS-107]°³Çà Ãß°¡
+		sContent = sContent.replace(/<\/tr(\s[^\/]*)?>/gi, '\n'); // tr ÅÂ±×¸¦ °³Çà¹®ÀÚ·Î [SMARTEDITORSUS-107]°³Çà Ãß°¡
 	
-		// ë§ˆì§€ë§‰ \nì€ ë¡œì§ìƒ ë¶ˆí•„ìš”í•œ linebreakë¥¼ ì œê³µí•˜ë¯€ë¡œ ì œê±°í•´ì¤€ë‹¤.
+		// ¸¶Áö¸· \nÀº ·ÎÁ÷»ó ºÒÇÊ¿äÇÑ linebreak¸¦ Á¦°øÇÏ¹Ç·Î Á¦°ÅÇØÁØ´Ù.
 		nIdx = sContent.lastIndexOf('\n');
 		if (nIdx > -1 && sContent.substring(nIdx) == '\n') {
 			sContent = sContent.substring(0, nIdx);
@@ -5439,7 +5440,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 		
 		sContent = jindo.$S(sContent).stripTags().toString();
 		sContent = this.unhtmlSpecialChars(sContent);
-		if (aTemp !== null) { // ì œê±°í–ˆë˜sTmpStrë¥¼ ì¶”ê°€í•´ì¤€ë‹¤.
+		if (aTemp !== null) { // Á¦°ÅÇß´øsTmpStr¸¦ Ãß°¡ÇØÁØ´Ù.
 			sContent = aTemp[0] + sContent;
 		}
 		
@@ -5453,7 +5454,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 
 		var sContent = sHtml, aTemp = null;
 		
-		// applyConverterì—ì„œ ì¶”ê°€í•œ sTmpStrë¥¼ ì ì‹œ ì œê±°í•´ì¤€ë‹¤. sTmpStrë„ í•˜ë‚˜ì˜ stringìœ¼ë¡œ ì¸ì‹í•˜ëŠ” ê²½ìš°ê°€ ìˆê¸° ë•Œë¬¸.
+		// applyConverter¿¡¼­ Ãß°¡ÇÑ sTmpStr¸¦ Àá½Ã Á¦°ÅÇØÁØ´Ù. sTmpStrµµ ÇÏ³ªÀÇ stringÀ¸·Î ÀÎ½ÄÇÏ´Â °æ¿ì°¡ ÀÖ±â ¶§¹®.
 		aTemp = sContent.match(new RegExp(this.sRxConverter));
 		if (aTemp !== null) {
 			sContent = sContent.replace(aTemp[0], "");
@@ -5475,7 +5476,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 		}
 		
 		var oContent = new StringBuffer(),
-			aContent = sContent.split('\n'), // \nì„ ê¸°ì¤€ìœ¼ë¡œ ë¸”ëŸ­ì„ ë‚˜ëˆˆë‹¤.
+			aContent = sContent.split('\n'), // \nÀ» ±âÁØÀ¸·Î ºí·°À» ³ª´«´Ù.
 			aContentLng = aContent.length, 
 			sTemp = "";
 		
@@ -5502,7 +5503,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	},
 
 	/**
-	 * [SMARTEDITORSUS-677] HTML í¸ì§‘ ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬ ì‹œì‘
+	 * [SMARTEDITORSUS-677] HTML ÆíÁı ¿µ¿ª ÀÚµ¿ È®Àå Ã³¸® ½ÃÀÛ
 	 */ 
 	startAutoResize : function(){
 		var htOption = {
@@ -5510,9 +5511,9 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 			wfnCallback : jindo.$Fn(this.oApp.checkResizeGripPosition, this).bind()
 		};
 		
-		//[SMARTEDITORSUS-941][iOS5ëŒ€ì‘]ì•„ì´íŒ¨ë“œì˜ ìë™ í™•ì¥ ê¸°ëŠ¥ì´ ë™ì‘í•˜ì§€ ì•Šì„ ë•Œ ì—ë””í„° ì°½ë³´ë‹¤ ê¸´ ë‚´ìš©ì„ ì‘ì„±í•˜ë©´ ì—ë””í„°ë¥¼ ëš«ê³  ë‚˜ì˜¤ëŠ” í˜„ìƒ 
-		//ì›ì¸ : ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì •ì§€ ë  ê²½ìš° iframeì— ìŠ¤í¬ë¡¤ì´ ìƒê¸°ì§€ ì•Šê³ , ì°½ì„ ëš«ê³  ë‚˜ì˜´
-		//í•´ê²° : í•­ìƒ ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì¼œì ¸ìˆë„ë¡ ë³€ê²½. ìë™ í™•ì¥ ê¸°ëŠ¥ ê´€ë ¨í•œ ì´ë²¤íŠ¸ ì½”ë“œë„ ëª¨ë°”ì¼ ì‚¬íŒŒë¦¬ì—ì„œ ì˜ˆì™¸ ì²˜ë¦¬
+		//[SMARTEDITORSUS-941][iOS5´ëÀÀ]¾ÆÀÌÆĞµåÀÇ ÀÚµ¿ È®Àå ±â´ÉÀÌ µ¿ÀÛÇÏÁö ¾ÊÀ» ¶§ ¿¡µğÅÍ Ã¢º¸´Ù ±ä ³»¿ëÀ» ÀÛ¼ºÇÏ¸é ¿¡µğÅÍ¸¦ ¶Õ°í ³ª¿À´Â Çö»ó 
+		//¿øÀÎ : ÀÚµ¿È®Àå ±â´ÉÀÌ Á¤Áö µÉ °æ¿ì iframe¿¡ ½ºÅ©·ÑÀÌ »ı±âÁö ¾Ê°í, Ã¢À» ¶Õ°í ³ª¿È
+		//ÇØ°á : Ç×»ó ÀÚµ¿È®Àå ±â´ÉÀÌ ÄÑÁ®ÀÖµµ·Ï º¯°æ. ÀÚµ¿ È®Àå ±â´É °ü·ÃÇÑ ÀÌº¥Æ® ÄÚµåµµ ¸ğ¹ÙÀÏ »çÆÄ¸®¿¡¼­ ¿¹¿Ü Ã³¸®
 		if(this.oNavigator.msafari){
 			htOption.wfnCallback = function(){};
 		}
@@ -5523,7 +5524,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] HTML í¸ì§‘ ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬ ì¢…ë£Œ
+	 * [SMARTEDITORSUS-677] HTML ÆíÁı ¿µ¿ª ÀÚµ¿ È®Àå Ã³¸® Á¾·á
 	 */ 
 	stopAutoResize : function(){
 		this.AutoResizer.unbind();
@@ -5561,9 +5562,9 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	},
 
 	/**
-	 * HTML íƒœê·¸ì— í•´ë‹¹í•˜ëŠ” ê¸€ìê°€ ë¨¹íˆì§€ ì•Šë„ë¡ ë°”ê¿”ì£¼ê¸°
+	 * HTML ÅÂ±×¿¡ ÇØ´çÇÏ´Â ±ÛÀÚ°¡ ¸ÔÈ÷Áö ¾Êµµ·Ï ¹Ù²ãÁÖ±â
 	 *
-	 * ë™ì‘) & ë¥¼ &amp; ë¡œ, < ë¥¼ &lt; ë¡œ, > ë¥¼ &gt; ë¡œ ë°”ê¿”ì¤€ë‹¤
+	 * µ¿ÀÛ) & ¸¦ &amp; ·Î, < ¸¦ &lt; ·Î, > ¸¦ &gt; ·Î ¹Ù²ãÁØ´Ù
 	 *
 	 * @param {String} sText
 	 * @return {String}
@@ -5573,9 +5574,9 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 	},
 
 	/**
-	 * htmlSpecialChars ì˜ ë°˜ëŒ€ ê¸°ëŠ¥ì˜ í•¨ìˆ˜
+	 * htmlSpecialChars ÀÇ ¹İ´ë ±â´ÉÀÇ ÇÔ¼ö
 	 *
-	 * ë™ì‘) &amp, &lt, &gt, &nbsp ë¥¼ ê°ê° &, <, >, ë¹ˆì¹¸ìœ¼ë¡œ ë°”ê¿”ì¤€ë‹¤
+	 * µ¿ÀÛ) &amp, &lt, &gt, &nbsp ¸¦ °¢°¢ &, <, >, ºóÄ­À¸·Î ¹Ù²ãÁØ´Ù
 	 *
 	 * @param {String} sText
 	 * @return {String}
@@ -5587,8 +5588,8 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 /*[
  * REFRESH_WYSIWYG
  *
- * (FFì „ìš©) WYSIWYG ëª¨ë“œë¥¼ ë¹„í™œì„±í™” í›„ ë‹¤ì‹œ í™œì„±í™” ì‹œí‚¨ë‹¤. FFì—ì„œ WYSIWYG ëª¨ë“œê°€ ì¼ë¶€ ë¹„í™œì„±í™” ë˜ëŠ” ë¬¸ì œìš©
- * ì£¼ì˜] REFRESH_WYSIWYGí›„ì—ëŠ” ë³¸ë¬¸ì˜ selectionì´ ê¹¨ì ¸ì„œ ì»¤ì„œ ì œì¼ ì•ìœ¼ë¡œ ê°€ëŠ” í˜„ìƒì´ ìˆìŒ. (stringbookmarkë¡œ ì²˜ë¦¬í•´ì•¼í•¨.)
+ * (FFÀü¿ë) WYSIWYG ¸ğµå¸¦ ºñÈ°¼ºÈ­ ÈÄ ´Ù½Ã È°¼ºÈ­ ½ÃÅ²´Ù. FF¿¡¼­ WYSIWYG ¸ğµå°¡ ÀÏºÎ ºñÈ°¼ºÈ­ µÇ´Â ¹®Á¦¿ë
+ * ÁÖÀÇ] REFRESH_WYSIWYGÈÄ¿¡´Â º»¹®ÀÇ selectionÀÌ ±úÁ®¼­ Ä¿¼­ Á¦ÀÏ ¾ÕÀ¸·Î °¡´Â Çö»óÀÌ ÀÖÀ½. (stringbookmark·Î Ã³¸®ÇØ¾ßÇÔ.)
  *  
  * none
  *
@@ -5596,7 +5597,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 /*[
  * ENABLE_WYSIWYG
  *
- * ë¹„í™œì„±í™”ëœ WYSIWYG í¸ì§‘ ì˜ì—­ì„ í™œì„±í™” ì‹œí‚¨ë‹¤.
+ * ºñÈ°¼ºÈ­µÈ WYSIWYG ÆíÁı ¿µ¿ªÀ» È°¼ºÈ­ ½ÃÅ²´Ù.
  *
  * none
  *
@@ -5604,7 +5605,7 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 /*[
  * DISABLE_WYSIWYG
  *
- * WYSIWYG í¸ì§‘ ì˜ì—­ì„ ë¹„í™œì„±í™” ì‹œí‚¨ë‹¤.
+ * WYSIWYG ÆíÁı ¿µ¿ªÀ» ºñÈ°¼ºÈ­ ½ÃÅ²´Ù.
  *
  * none
  *
@@ -5612,22 +5613,22 @@ nhn.husky.SE_EditingArea_TEXT = jindo.$Class({
 /*[
  * PASTE_HTML
  *
- * HTMLì„ í¸ì§‘ ì˜ì—­ì— ì‚½ì…í•œë‹¤.
+ * HTMLÀ» ÆíÁı ¿µ¿ª¿¡ »ğÀÔÇÑ´Ù.
  *
- * sHTML string ì‚½ì…í•  HTML
- * oPSelection object ë¶™ì—¬ ë„£ê¸° í•  ì˜ì—­, ìƒëµì‹œ í˜„ì¬ ì»¤ì„œ ìœ„ì¹˜
+ * sHTML string »ğÀÔÇÒ HTML
+ * oPSelection object ºÙ¿© ³Ö±â ÇÒ ¿µ¿ª, »ı·«½Ã ÇöÀç Ä¿¼­ À§Ä¡
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * RESTORE_IE_SELECTION
  *
- * (IEì „ìš©) ì—ë””í„°ì—ì„œ í¬ì»¤ìŠ¤ê°€ ë‚˜ê°€ëŠ” ì‹œì ì— ê¸°ì–µí•´ë‘” í¬ì»¤ìŠ¤ë¥¼ ë³µêµ¬í•œë‹¤.
+ * (IEÀü¿ë) ¿¡µğÅÍ¿¡¼­ Æ÷Ä¿½º°¡ ³ª°¡´Â ½ÃÁ¡¿¡ ±â¾ïÇØµĞ Æ÷Ä¿½º¸¦ º¹±¸ÇÑ´Ù.
  *
  * none
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc WYSIWYG ëª¨ë“œë¥¼ ì œê³µí•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc WYSIWYG ¸ğµå¸¦ Á¦°øÇÏ´Â ÇÃ·¯±×ÀÎ
  */
 nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	name : "SE_EditingArea_WYSIWYG",
@@ -5638,7 +5639,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	doc : null,
 	
 	bStopCheckingBodyHeight : false, 
-	bAutoResize : false,	// [SMARTEDITORSUS-677] í•´ë‹¹ í¸ì§‘ëª¨ë“œì˜ ìë™í™•ì¥ ê¸°ëŠ¥ On/Off ì—¬ë¶€
+	bAutoResize : false,	// [SMARTEDITORSUS-677] ÇØ´ç ÆíÁı¸ğµåÀÇ ÀÚµ¿È®Àå ±â´É On/Off ¿©ºÎ
 	
 	nBodyMinHeight : 0,
 	nScrollbarWidth : 0,
@@ -5653,15 +5654,15 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	$init : function(iframe){
 		this.iframe = jindo.$(iframe);		
 		var oAgent = jindo.$Agent().navigator();		
-		// IEì—ì„œ ì—ë””í„° ì´ˆê¸°í™” ì‹œì— ì„ì˜ì ìœ¼ë¡œ iframeì— í¬ì»¤ìŠ¤ë¥¼ ë°˜ì¯¤(IME ì…ë ¥ ì•ˆë˜ê³  ì»¤ì„œë§Œ ê¹œë°•ì´ëŠ” ìƒíƒœ) ì£¼ëŠ” í˜„ìƒì„ ë§‰ê¸° ìœ„í•´ì„œ ì¼ë‹¨ iframeì„ ìˆ¨ê²¨ ë’€ë‹¤ê°€ CHANGE_EDITING_MODEì—ì„œ ìœ„ì§€ìœ… ì „í™˜ ì‹œ ë³´ì—¬ì¤€ë‹¤.
-		// ì´ëŸ° í˜„ìƒì´ ë‹¤ì–‘í•œ ìš”ì†Œì— ì˜í•´ì„œ ë°œìƒí•˜ë©° ë°œê²¬ëœ ëª‡ê°€ì§€ ê²½ìš°ëŠ”,
-		// - framesetìœ¼ë¡œ í˜ì´ì§€ë¥¼ êµ¬ì„±í•œ í›„ì— í•œê°œì˜ frameì•ˆì— ë²„íŠ¼ì„ ë‘ì–´ ì—ë””í„°ë¡œ ë§í¬ í•  ê²½ìš°
-		// - iframeê³¼ ë™ì¼ í˜ì´ì§€ì— ì¡´ì¬í•˜ëŠ” text fieldì— ê°’ì„ í• ë‹¹ í•  ê²½ìš°
+		// IE¿¡¼­ ¿¡µğÅÍ ÃÊ±âÈ­ ½Ã¿¡ ÀÓÀÇÀûÀ¸·Î iframe¿¡ Æ÷Ä¿½º¸¦ ¹İÂë(IME ÀÔ·Â ¾ÈµÇ°í Ä¿¼­¸¸ ±ô¹ÚÀÌ´Â »óÅÂ) ÁÖ´Â Çö»óÀ» ¸·±â À§ÇØ¼­ ÀÏ´Ü iframeÀ» ¼û°Ü µ×´Ù°¡ CHANGE_EDITING_MODE¿¡¼­ À§ÁöÀ¨ ÀüÈ¯ ½Ã º¸¿©ÁØ´Ù.
+		// ÀÌ·± Çö»óÀÌ ´Ù¾çÇÑ ¿ä¼Ò¿¡ ÀÇÇØ¼­ ¹ß»ıÇÏ¸ç ¹ß°ßµÈ ¸î°¡Áö °æ¿ì´Â,
+		// - framesetÀ¸·Î ÆäÀÌÁö¸¦ ±¸¼ºÇÑ ÈÄ¿¡ ÇÑ°³ÀÇ frame¾È¿¡ ¹öÆ°À» µÎ¾î ¿¡µğÅÍ·Î ¸µÅ© ÇÒ °æ¿ì
+		// - iframe°ú µ¿ÀÏ ÆäÀÌÁö¿¡ Á¸ÀçÇÏ´Â text field¿¡ °ªÀ» ÇÒ´ç ÇÒ °æ¿ì
 		if(oAgent.ie){
 			this.iframe.style.display = "none";
 		}
 	
-		// IE8 : ì°¾ê¸°/ë°”ê¾¸ê¸°ì—ì„œ ê¸€ì ì¼ë¶€ì— ìŠ¤íƒ€ì¼ì´ ì ìš©ëœ ê²½ìš° ì°¾ê¸°ê°€ ì•ˆë˜ëŠ” ë¸Œë¼ìš°ì € ë²„ê·¸ë¡œ ì¸í•´ EmulateIE7 íŒŒì¼ì„ ì‚¬ìš©
+		// IE8 : Ã£±â/¹Ù²Ù±â¿¡¼­ ±ÛÀÚ ÀÏºÎ¿¡ ½ºÅ¸ÀÏÀÌ Àû¿ëµÈ °æ¿ì Ã£±â°¡ ¾ÈµÇ´Â ºê¶ó¿ìÀú ¹ö±×·Î ÀÎÇØ EmulateIE7 ÆÄÀÏÀ» »ç¿ë
 		// <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
 		this.sBlankPageURL = "smart_editor2_inputarea.html";
 		this.sBlankPageURL_EmulateIE7 = "smart_editor2_inputarea_ie8.html";
@@ -5674,7 +5675,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			this.aAddtionalEmulateIE7 = this.htOptions.aAddtionalEmulateIE7 || this.aAddtionalEmulateIE7;
 		}
 		
-		this.aAddtionalEmulateIE7.push(8); // IE8ì€ Default ì‚¬ìš©
+		this.aAddtionalEmulateIE7.push(8); // IE8Àº Default »ç¿ë
 
 		this.sIFrameSrc = this.sBlankPageURL;
 		if(oAgent.ie && jindo.$A(this.aAddtionalEmulateIE7).has(oAgent.nativeVersion)) {
@@ -5758,8 +5759,8 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			//this.document.execCommand("insertBrOnReturn", false, false);
 		}
 		
-		// DTDê°€ quirksê°€ ì•„ë‹ ê²½ìš° body ë†’ì´ 100%ê°€ ì œëŒ€ë¡œ ë™ì‘í•˜ì§€ ì•Šì•„ì„œ íƒ€ì„ì•„ì›ƒì„ ëŒë©° ë†’ì´ë¥¼ ìˆ˜ë™ìœ¼ë¡œ ê³„ì† í• ë‹¹ í•´ ì¤Œ 
-		// body ë†’ì´ê°€ ì œëŒ€ë¡œ ì„¤ì • ë˜ì§€ ì•Šì„ ê²½ìš°, ë³´ê¸°ì—ëŠ” ì´ìƒì—†ì–´ ë³´ì´ë‚˜ ë§ˆìš°ìŠ¤ë¡œ í…ìŠ¤íŠ¸ ì„ íƒì´ ì˜ ì•ˆëœë‹¤ë“ ì§€ í•˜ëŠ” ì´ìŠˆê°€ ìˆìŒ
+		// DTD°¡ quirks°¡ ¾Æ´Ò °æ¿ì body ³ôÀÌ 100%°¡ Á¦´ë·Î µ¿ÀÛÇÏÁö ¾Ê¾Æ¼­ Å¸ÀÓ¾Æ¿ôÀ» µ¹¸ç ³ôÀÌ¸¦ ¼öµ¿À¸·Î °è¼Ó ÇÒ´ç ÇØ ÁÜ 
+		// body ³ôÀÌ°¡ Á¦´ë·Î ¼³Á¤ µÇÁö ¾ÊÀ» °æ¿ì, º¸±â¿¡´Â ÀÌ»ó¾ø¾î º¸ÀÌ³ª ¸¶¿ì½º·Î ÅØ½ºÆ® ¼±ÅÃÀÌ Àß ¾ÈµÈ´ÙµçÁö ÇÏ´Â ÀÌ½´°¡ ÀÖÀ½
 		this.fnSetBodyHeight = jindo.$Fn(this._setBodyHeight, this).bind();
 		this.fnCheckBodyChange = jindo.$Fn(this._checkBodyChange, this).bind();
 
@@ -5769,7 +5770,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * ìŠ¤í¬ë¡¤ë°”ì˜ ì‚¬ì´ì¦ˆ ì¸¡ì •í•˜ì—¬ ì„¤ì •
+	 * ½ºÅ©·Ñ¹ÙÀÇ »çÀÌÁî ÃøÁ¤ÇÏ¿© ¼³Á¤
 	 */
 	_setScrollbarWidth : function(){
 		var oDocument = this.getDocument(),
@@ -5789,7 +5790,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] ë¶™ì—¬ë„£ê¸°ë‚˜ ë‚´ìš© ì…ë ¥ì— ëŒ€í•œ í¸ì§‘ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬
+	 * [SMARTEDITORSUS-677] ºÙ¿©³Ö±â³ª ³»¿ë ÀÔ·Â¿¡ ´ëÇÑ ÆíÁı¿µ¿ª ÀÚµ¿ È®Àå Ã³¸®
 	 */ 
 	$AFTER_EVENT_EDITING_AREA_KEYUP : function(oEvent){		
 		if(!this.bAutoResize){
@@ -5806,7 +5807,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] ë¶™ì—¬ë„£ê¸°ë‚˜ ë‚´ìš© ì…ë ¥ì— ëŒ€í•œ í¸ì§‘ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬
+	 * [SMARTEDITORSUS-677] ºÙ¿©³Ö±â³ª ³»¿ë ÀÔ·Â¿¡ ´ëÇÑ ÆíÁı¿µ¿ª ÀÚµ¿ È®Àå Ã³¸®
 	 */
 	$AFTER_PASTE_HTML : function(){
 		if(!this.bAutoResize){
@@ -5817,7 +5818,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 
 	/**
-	 * [SMARTEDITORSUS-677] WYSIWYG í¸ì§‘ ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬ ì‹œì‘
+	 * [SMARTEDITORSUS-677] WYSIWYG ÆíÁı ¿µ¿ª ÀÚµ¿ È®Àå Ã³¸® ½ÃÀÛ
 	 */ 
 	startAutoResize : function(){
 		this.oApp.exec("STOP_CHECKING_BODY_HEIGHT");
@@ -5825,13 +5826,13 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		
 		var oBrowser = this.oApp.oNavigator;
 
-		// [SMARTEDITORSUS-887] [ë¸”ë¡œê·¸ 1ë‹¨] ìë™í™•ì¥ ëª¨ë“œì—ì„œ ì—ë””í„° ê°€ë¡œì‚¬ì´ì¦ˆë³´ë‹¤ í° ì‚¬ì§„ì„ ì¶”ê°€í–ˆì„ ë•Œ ê°€ë¡œìŠ¤í¬ë¡¤ì´ ì•ˆìƒê¸°ëŠ” ë¬¸ì œ
+		// [SMARTEDITORSUS-887] [ºí·Î±× 1´Ü] ÀÚµ¿È®Àå ¸ğµå¿¡¼­ ¿¡µğÅÍ °¡·Î»çÀÌÁîº¸´Ù Å« »çÁøÀ» Ãß°¡ÇßÀ» ¶§ °¡·Î½ºÅ©·ÑÀÌ ¾È»ı±â´Â ¹®Á¦
 		if(oBrowser.ie && oBrowser.version < 9){
 			jindo.$Element(this.getDocument().body).css({ "overflow" : "visible" });
 
-			// { "overflowX" : "visible", "overflowY" : "hidden" } ìœ¼ë¡œ ì„¤ì •í•˜ë©´ ì„¸ë¡œ ìŠ¤í¬ë¡¤ ë¿ ì•„ë‹ˆë¼ ê°€ë¡œ ìŠ¤í¬ë¡¤ë„ ë³´ì´ì§€ ì•ŠëŠ” ë¬¸ì œê°€ ìˆì–´
-			// { "overflow" : "visible" } ë¡œ ì²˜ë¦¬í•˜ê³  ì—ë””í„°ì˜ container ì‚¬ì´ì¦ˆë¥¼ ëŠ˜ë ¤ ì„¸ë¡œ ìŠ¤í¬ë¡¤ì´ ë³´ì´ì§€ ì•Šë„ë¡ ì²˜ë¦¬í•´ì•¼ í•¨
-			// [í•œê³„] ìë™ í™•ì¥ ëª¨ë“œì—ì„œ ë‚´ìš©ì´ ëŠ˜ì–´ë‚  ë•Œ ì„¸ë¡œ ìŠ¤í¬ë¡¤ì´ ë³´ì˜€ë‹¤ê°€ ì—†ì–´ì§€ëŠ” ë¬¸ì œ
+			// { "overflowX" : "visible", "overflowY" : "hidden" } À¸·Î ¼³Á¤ÇÏ¸é ¼¼·Î ½ºÅ©·Ñ »Ó ¾Æ´Ï¶ó °¡·Î ½ºÅ©·Ñµµ º¸ÀÌÁö ¾Ê´Â ¹®Á¦°¡ ÀÖ¾î
+			// { "overflow" : "visible" } ·Î Ã³¸®ÇÏ°í ¿¡µğÅÍÀÇ container »çÀÌÁî¸¦ ´Ã·Á ¼¼·Î ½ºÅ©·ÑÀÌ º¸ÀÌÁö ¾Êµµ·Ï Ã³¸®ÇØ¾ß ÇÔ
+			// [ÇÑ°è] ÀÚµ¿ È®Àå ¸ğµå¿¡¼­ ³»¿ëÀÌ ´Ã¾î³¯ ¶§ ¼¼·Î ½ºÅ©·ÑÀÌ º¸¿´´Ù°¡ ¾ø¾îÁö´Â ¹®Á¦
 		}else{
 			jindo.$Element(this.getDocument().body).css({ "overflowX" : "visible", "overflowY" : "hidden" });
 		}
@@ -5843,7 +5844,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] WYSIWYG í¸ì§‘ ì˜ì—­ ìë™ í™•ì¥ ì²˜ë¦¬ ì¢…ë£Œ
+	 * [SMARTEDITORSUS-677] WYSIWYG ÆíÁı ¿µ¿ª ÀÚµ¿ È®Àå Ã³¸® Á¾·á
 	 */ 
 	stopAutoResize : function(){
 		this.bAutoResize = false;
@@ -5857,7 +5858,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] í¸ì§‘ ì˜ì—­ Bodyê°€ ë³€ê²½ë˜ì—ˆëŠ”ì§€ ì£¼ê¸°ì ìœ¼ë¡œ í™•ì¸
+	 * [SMARTEDITORSUS-677] ÆíÁı ¿µ¿ª Body°¡ º¯°æµÇ¾ú´ÂÁö ÁÖ±âÀûÀ¸·Î È®ÀÎ
 	 */ 
 	_checkBodyChange : function(){
 		if(!this.bAutoResize){
@@ -5874,7 +5875,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] ìë™ í™•ì¥ ì²˜ë¦¬ì—ì„œ ì ìš©í•  Resize Body Heightë¥¼ êµ¬í•¨
+	 * [SMARTEDITORSUS-677] ÀÚµ¿ È®Àå Ã³¸®¿¡¼­ Àû¿ëÇÒ Resize Body Height¸¦ ±¸ÇÔ
 	 */ 
 	_getResizeHeight : function(){
 		var elBody = this.getDocument().body,
@@ -5929,7 +5930,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-677] WYSIWYG ìë™ í™•ì¥ ì²˜ë¦¬
+	 * [SMARTEDITORSUS-677] WYSIWYG ÀÚµ¿ È®Àå Ã³¸®
 	 */ 
 	_setAutoResize : function(){		
 		var elBody = this.getDocument().body,
@@ -5944,7 +5945,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		this.nTopBottomMargin = this.nTopBottomMargin || (parseInt(welBody.css("marginTop"), 10) + parseInt(welBody.css("marginBottom"), 10));
 		this.nBodyMinHeight = this.nBodyMinHeight || (this.oApp.getEditingAreaHeight() - this.nTopBottomMargin);
 
-		if((oBrowser.ie && oBrowser.nativeVersion >= 9) || oBrowser.chrome){	// ë‚´ìš©ì´ ì¤„ì–´ë„ scrollHeightê°€ ì¤„ì–´ë“¤ì§€ ì•ŠìŒ
+		if((oBrowser.ie && oBrowser.nativeVersion >= 9) || oBrowser.chrome){	// ³»¿ëÀÌ ÁÙ¾îµµ scrollHeight°¡ ÁÙ¾îµéÁö ¾ÊÀ½
 			welBody.css("height", "0px");
 			this.iframe.style.height = "0px";
 		}
@@ -5952,8 +5953,8 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		nBodyHeight = this._getResizeHeight();
 
 		if(oBrowser.ie){
-			// ë‚´ìš© ë’¤ë¡œ ê³µê°„ì´ ë‚¨ì•„ ë³´ì¼ ìˆ˜ ìˆìœ¼ë‚˜ ì¶”ê°€ë¡œ Containerë†’ì´ë¥¼ ë”í•˜ì§€ ì•Šìœ¼ë©´
-			// ë‚´ìš© ê°€ì¥ ë’¤ì—ì„œ Enterë¥¼ í•˜ëŠ” ê²½ìš° ì•„ë˜ìœ„ë¡œ í”ë“¤ë ¤ ë³´ì´ëŠ” ë¬¸ì œê°€ ë°œìƒ
+			// ³»¿ë µÚ·Î °ø°£ÀÌ ³²¾Æ º¸ÀÏ ¼ö ÀÖÀ¸³ª Ãß°¡·Î Container³ôÀÌ¸¦ ´õÇÏÁö ¾ÊÀ¸¸é
+			// ³»¿ë °¡Àå µÚ¿¡¼­ Enter¸¦ ÇÏ´Â °æ¿ì ¾Æ·¡À§·Î Èçµé·Á º¸ÀÌ´Â ¹®Á¦°¡ ¹ß»ı
 			if(nBodyHeight > this.nBodyMinHeight){
 				oCurrentStyle = this.oApp.getCurrentStyle();
 				nStyleSize = parseInt(oCurrentStyle.fontSize, 10) * oCurrentStyle.lineHeight;
@@ -5970,13 +5971,13 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 				nBodyHeight = this.nBodyMinHeight;
 				nContainerHeight = this.nBodyMinHeight + this.nTopBottomMargin;
 			}
-		// }else if(oBrowser.safari){	// -- ì‚¬íŒŒë¦¬ì—ì„œ ë‚´ìš©ì´ ì¤„ì–´ë“¤ì§€ ì•ŠëŠ” ë¬¸ì œê°€ ìˆì–´ Firefox ë°©ì‹ìœ¼ë¡œ ë³€ê²½í•¨
-			// // [Chrome/Safari] í¬ë¡¬ì´ë‚˜ ì‚¬íŒŒë¦¬ì—ì„œëŠ” Bodyì™€ iframeë†’ì´ì„œ ì„œë¡œ ì—°ê´€ë˜ì–´ ëŠ˜ì–´ë‚˜ë¯€ë¡œ,
-			// // nContainerHeightë¥¼ ì¶”ê°€ë¡œ ë”í•˜ëŠ” ê²½ìš° setTimeout ì‹œ ë¬´í•œ ì¦ì‹ë˜ëŠ” ë¬¸ì œê°€ ë°œìƒí•  ìˆ˜ ìˆìŒ
+		// }else if(oBrowser.safari){	// -- »çÆÄ¸®¿¡¼­ ³»¿ëÀÌ ÁÙ¾îµéÁö ¾Ê´Â ¹®Á¦°¡ ÀÖ¾î Firefox ¹æ½ÄÀ¸·Î º¯°æÇÔ
+			// // [Chrome/Safari] Å©·ÒÀÌ³ª »çÆÄ¸®¿¡¼­´Â Body¿Í iframe³ôÀÌ¼­ ¼­·Î ¿¬°üµÇ¾î ´Ã¾î³ª¹Ç·Î,
+			// // nContainerHeight¸¦ Ãß°¡·Î ´õÇÏ´Â °æ¿ì setTimeout ½Ã ¹«ÇÑ Áõ½ÄµÇ´Â ¹®Á¦°¡ ¹ß»ıÇÒ ¼ö ÀÖÀ½
 			// nBodyHeight = nBodyHeight > this.nBodyMinHeight ? nBodyHeight - this.nTopBottomMargin : this.nBodyMinHeight;
 			// nContainerHeight = nBodyHeight + this.nTopBottomMargin;
 		}else{
-			// [FF] nContainerHeightë¥¼ ì¶”ê°€ë¡œ ë”í•˜ì˜€ìŒ. setTimeout ì‹œ ë¬´í•œ ì¦ì‹ë˜ëŠ” ë¬¸ì œê°€ ë°œìƒí•  ìˆ˜ ìˆìŒ
+			// [FF] nContainerHeight¸¦ Ãß°¡·Î ´õÇÏ¿´À½. setTimeout ½Ã ¹«ÇÑ Áõ½ÄµÇ´Â ¹®Á¦°¡ ¹ß»ıÇÒ ¼ö ÀÖÀ½
 			if(nBodyHeight > this.nBodyMinHeight){
 				oCurrentStyle = this.oApp.getCurrentStyle();
 				nStyleSize = parseInt(oCurrentStyle.fontSize, 10) * oCurrentStyle.lineHeight;
@@ -5998,25 +5999,25 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			welBody.css("height", nBodyHeight + "px");
 		}
 
-		this.iframe.style.height = nContainerHeight + "px";				// í¸ì§‘ì˜ì—­ IFRAMEì˜ ë†’ì´ ë³€ê²½
-		this.oApp.welEditingAreaContainer.height(nContainerHeight);		// í¸ì§‘ì˜ì—­ IFRAMEì„ ê°ì‹¸ëŠ” DIV ë†’ì´ ë³€ê²½
+		this.iframe.style.height = nContainerHeight + "px";				// ÆíÁı¿µ¿ª IFRAMEÀÇ ³ôÀÌ º¯°æ
+		this.oApp.welEditingAreaContainer.height(nContainerHeight);		// ÆíÁı¿µ¿ª IFRAMEÀ» °¨½Î´Â DIV ³ôÀÌ º¯°æ
 		
-		//[SMARTEDITORSUS-941][iOS5ëŒ€ì‘]ì•„ì´íŒ¨ë“œì˜ ìë™ í™•ì¥ ê¸°ëŠ¥ì´ ë™ì‘í•˜ì§€ ì•Šì„ ë•Œ ì—ë””í„° ì°½ë³´ë‹¤ ê¸´ ë‚´ìš©ì„ ì‘ì„±í•˜ë©´ ì—ë””í„°ë¥¼ ëš«ê³  ë‚˜ì˜¤ëŠ” í˜„ìƒ 
-		//ì›ì¸ : ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì •ì§€ ë  ê²½ìš° iframeì— ìŠ¤í¬ë¡¤ì´ ìƒê¸°ì§€ ì•Šê³ , ì°½ì„ ëš«ê³  ë‚˜ì˜´
-		//í•´ê²° : í•­ìƒ ìë™í™•ì¥ ê¸°ëŠ¥ì´ ì¼œì ¸ìˆë„ë¡ ë³€ê²½. ìë™ í™•ì¥ ê¸°ëŠ¥ ê´€ë ¨í•œ ì´ë²¤íŠ¸ ì½”ë“œë„ ëª¨ë°”ì¼ ì‚¬íŒŒë¦¬ì—ì„œ ì˜ˆì™¸ ì²˜ë¦¬
+		//[SMARTEDITORSUS-941][iOS5´ëÀÀ]¾ÆÀÌÆĞµåÀÇ ÀÚµ¿ È®Àå ±â´ÉÀÌ µ¿ÀÛÇÏÁö ¾ÊÀ» ¶§ ¿¡µğÅÍ Ã¢º¸´Ù ±ä ³»¿ëÀ» ÀÛ¼ºÇÏ¸é ¿¡µğÅÍ¸¦ ¶Õ°í ³ª¿À´Â Çö»ó 
+		//¿øÀÎ : ÀÚµ¿È®Àå ±â´ÉÀÌ Á¤Áö µÉ °æ¿ì iframe¿¡ ½ºÅ©·ÑÀÌ »ı±âÁö ¾Ê°í, Ã¢À» ¶Õ°í ³ª¿È
+		//ÇØ°á : Ç×»ó ÀÚµ¿È®Àå ±â´ÉÀÌ ÄÑÁ®ÀÖµµ·Ï º¯°æ. ÀÚµ¿ È®Àå ±â´É °ü·ÃÇÑ ÀÌº¥Æ® ÄÚµåµµ ¸ğ¹ÙÀÏ »çÆÄ¸®¿¡¼­ ¿¹¿Ü Ã³¸®
 		if(!this.oApp.oNavigator.msafari){
 			this.oApp.checkResizeGripPosition(bExpand);
 		}
 	},
 	
 	/**
-	 * ìŠ¤í¬ë¡¤ ì²˜ë¦¬ë¥¼ ìœ„í•´ í¸ì§‘ì˜ì—­ Bodyì˜ ì‚¬ì´ì¦ˆë¥¼ í™•ì¸í•˜ê³  ì„¤ì •í•¨
-	 * í¸ì§‘ì˜ì—­ ìë™í™•ì¥ ê¸°ëŠ¥ì´ Offì¸ ê²½ìš°ì— ì£¼ê¸°ì ìœ¼ë¡œ ì‹¤í–‰ë¨
+	 * ½ºÅ©·Ñ Ã³¸®¸¦ À§ÇØ ÆíÁı¿µ¿ª BodyÀÇ »çÀÌÁî¸¦ È®ÀÎÇÏ°í ¼³Á¤ÇÔ
+	 * ÆíÁı¿µ¿ª ÀÚµ¿È®Àå ±â´ÉÀÌ OffÀÎ °æ¿ì¿¡ ÁÖ±âÀûÀ¸·Î ½ÇÇàµÊ
 	 */ 
 	_setBodyHeight : function(){
-		if( this.bStopCheckingBodyHeight ){ // ë©ˆì¶°ì•¼ í•˜ëŠ” ê²½ìš° true, ê³„ì† ì²´í¬í•´ì•¼ í•˜ë©´ false
-			// ìœ„ì§€ìœ… ëª¨ë“œì—ì„œ ë‹¤ë¥¸ ëª¨ë“œë¡œ ë³€ê²½í•  ë•Œ "documentëŠ” cssë¥¼ ì‚¬ìš© í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤." ë¼ëŠ” error ê°€ ë°œìƒ.
-			// ê·¸ë˜ì„œ on_change_modeì—ì„œ bStopCheckingBodyHeight ë¥¼ trueë¡œ ë³€ê²½ì‹œì¼œì¤˜ì•¼ í•¨.
+		if( this.bStopCheckingBodyHeight ){ // ¸ØÃç¾ß ÇÏ´Â °æ¿ì true, °è¼Ó Ã¼Å©ÇØ¾ß ÇÏ¸é false
+			// À§ÁöÀ¨ ¸ğµå¿¡¼­ ´Ù¸¥ ¸ğµå·Î º¯°æÇÒ ¶§ "document´Â css¸¦ »ç¿ë ÇÒ¼ö ¾ø½À´Ï´Ù." ¶ó´Â error °¡ ¹ß»ı.
+			// ±×·¡¼­ on_change_mode¿¡¼­ bStopCheckingBodyHeight ¸¦ true·Î º¯°æ½ÃÄÑÁà¾ß ÇÔ.
 			return;
 		}
 
@@ -6031,7 +6032,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		
 		this.nTopBottomMargin = nMarginTopBottom;
 		
-		if(nBodyHeight === 0){	// [SMARTEDITORSUS-144] height ê°€ 0 ì´ê³  ë‚´ìš©ì´ ì—†ìœ¼ë©´ í¬ë¡¬10 ì—ì„œ ìºëŸ¿ì´ ë³´ì´ì§€ ì•ŠìŒ
+		if(nBodyHeight === 0){	// [SMARTEDITORSUS-144] height °¡ 0 ÀÌ°í ³»¿ëÀÌ ¾øÀ¸¸é Å©·Ò10 ¿¡¼­ Ä³·µÀÌ º¸ÀÌÁö ¾ÊÀ½
 			welBody.css("height", nMinBodyHeight + "px");
 
 			setTimeout(this.fnSetBodyHeight, 500);	
@@ -6039,13 +6040,13 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		}
 		
 		welBody.css("height", "0px");
-		// [SMARTEDITORSUS-257] IE9, í¬ë¡¬ì—ì„œ ë‚´ìš©ì„ ì‚­ì œí•´ë„ ìŠ¤í¬ë¡¤ì´ ë‚¨ì•„ìˆëŠ” ë¬¸ì œ ì²˜ë¦¬
-		// body ì— ë‚´ìš©ì´ ì—†ì–´ì ¸ë„ scrollHeight ê°€ ì¤„ì–´ë“¤ì§€ ì•Šì•„ height ë¥¼ ê°•ì œë¡œ 0 ìœ¼ë¡œ ì„¤ì •
+		// [SMARTEDITORSUS-257] IE9, Å©·Ò¿¡¼­ ³»¿ëÀ» »èÁ¦ÇØµµ ½ºÅ©·ÑÀÌ ³²¾ÆÀÖ´Â ¹®Á¦ Ã³¸®
+		// body ¿¡ ³»¿ëÀÌ ¾ø¾îÁ®µµ scrollHeight °¡ ÁÙ¾îµéÁö ¾Ê¾Æ height ¸¦ °­Á¦·Î 0 À¸·Î ¼³Á¤
 		
 		nScrollHeight = parseInt(elBody.scrollHeight, 10);
 
 		nNewBodyHeight = (nScrollHeight > nContainerOffset ? nScrollHeight - nMarginTopBottom : nMinBodyHeight);
-		// nMarginTopBottom ì„ ë¹¼ì§€ ì•Šìœ¼ë©´ ìŠ¤í¬ë¡¤ì´ ê³„ì† ëŠ˜ì–´ë‚˜ëŠ” ê²½ìš°ê°€ ìˆìŒ (ì°¸ê³  [BLOGSUS-17421])
+		// nMarginTopBottom À» »©Áö ¾ÊÀ¸¸é ½ºÅ©·ÑÀÌ °è¼Ó ´Ã¾î³ª´Â °æ¿ì°¡ ÀÖÀ½ (Âü°í [BLOGSUS-17421])
 
 		if(this._isHorizontalScrollbarVisible()){
 			nNewBodyHeight -= this.nScrollbarWidth;
@@ -6057,7 +6058,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 * ê°€ë¡œ ìŠ¤í¬ë¡¤ë°” ìƒì„± í™•ì¸
+	 * °¡·Î ½ºÅ©·Ñ¹Ù »ı¼º È®ÀÎ
 	 */
 	_isHorizontalScrollbarVisible : function(){
 		var oDocument = this.getDocument();
@@ -6072,7 +6073,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 *  bodyì˜ offsetì²´í¬ë¥¼ ë©ˆì¶”ê²Œ í•˜ëŠ” í•¨ìˆ˜.
+	 *  bodyÀÇ offsetÃ¼Å©¸¦ ¸ØÃß°Ô ÇÏ´Â ÇÔ¼ö.
 	 */
 	$ON_STOP_CHECKING_BODY_HEIGHT :function(){
 		if(!this.bStopCheckingBodyHeight){
@@ -6081,7 +6082,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	 *  bodyì˜ offsetì²´í¬ë¥¼ ê³„ì† ì§„í–‰.
+	 *  bodyÀÇ offsetÃ¼Å©¸¦ °è¼Ó ÁøÇà.
 	 */
 	$ON_START_CHECKING_BODY_HEIGHT :function(){
 		if(this.bStopCheckingBodyHeight){
@@ -6091,14 +6092,14 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	$ON_IE_CHECK_EXCEPTION_FOR_SELECTION_PRESERVATION : function(){
-		// í˜„ì¬ ì„ íƒëœ ì•¨ë¦¬ë¨¼íŠ¸ê°€ iframeì´ë¼ë©´, ì…€ë ‰ì…˜ì„ ë”°ë¡œ ê¸°ì–µ í•´ ë‘ì§€ ì•Šì•„ë„ ìœ ì§€ ë¨ìœ¼ë¡œ RESTORE_IE_SELECTIONì„ íƒ€ì§€ ì•Šë„ë¡ this._oIERangeì„ ì§€ì›Œì¤€ë‹¤.
-		// (í•„ìš” ì—†ì„ ë¿ë”ëŸ¬ ì €ì¥ ì‹œ ë¬¸ì œ ë°œìƒ)
+		// ÇöÀç ¼±ÅÃµÈ ¾Ù¸®¸ÕÆ®°¡ iframeÀÌ¶ó¸é, ¼¿·º¼ÇÀ» µû·Î ±â¾ï ÇØ µÎÁö ¾Ê¾Æµµ À¯Áö µÊÀ¸·Î RESTORE_IE_SELECTIONÀ» Å¸Áö ¾Êµµ·Ï this._oIERangeÀ» Áö¿öÁØ´Ù.
+		// (ÇÊ¿ä ¾øÀ» »Ó´õ·¯ ÀúÀå ½Ã ¹®Á¦ ¹ß»ı)
 		
         if(this.getDocument().selection.type === "Control"){
             this._oIERange = null;
         }
         
-		/* // [SMARTEDITORSUS-978] HuskyRange.js ì˜ [SMARTEDITORSUS-888] ì´ìŠˆ ìˆ˜ì •ê³¼ ê´€ë ¨
+		/* // [SMARTEDITORSUS-978] HuskyRange.js ÀÇ [SMARTEDITORSUS-888] ÀÌ½´ ¼öÁ¤°ú °ü·Ã
 		var tmpSelection = this.getDocument().selection,
 			oRange, elNode;
 
@@ -6130,7 +6131,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 
 		this._oIERange = this.oApp.getSelection().cloneRange();
 		
-		/* [SMARTEDITORSUS-978] HuskyRange.js ì˜ [SMARTEDITORSUS-888] ì´ìŠˆ ìˆ˜ì •ê³¼ ê´€ë ¨
+		/* [SMARTEDITORSUS-978] HuskyRange.js ÀÇ [SMARTEDITORSUS-888] ÀÌ½´ ¼öÁ¤°ú °ü·Ã
 		tmpSelection = this.getDocument().selection;
 		tmpRange = tmpSelection.createRange();
 		// Control range does not have parentElement
@@ -6184,9 +6185,9 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		this._onIEBeforeDeactivate();
 
 		// De-select the default selection.
-		// [SMARTEDITORSUS-978] IE9ì—ì„œ removeAllRangesë¡œ ì œê±°ë˜ì§€ ì•Šì•„
-		// ì´ì „ IEì™€ ë™ì¼í•˜ê²Œ empty ë°©ì‹ì„ ì‚¬ìš©í•˜ë„ë¡ í•˜ì˜€ìœ¼ë‚˜ doc.selection.typeì´ Noneì¸ ê²½ìš° ì—ëŸ¬
-		// Rangeë¥¼ ì¬ì„¤ì • í•´ì£¼ì–´ selectNone ìœ¼ë¡œ ì²˜ë¦¬ë˜ë„ë¡ ì˜ˆì™¸ì²˜ë¦¬
+		// [SMARTEDITORSUS-978] IE9¿¡¼­ removeAllRanges·Î Á¦°ÅµÇÁö ¾Ê¾Æ
+		// ÀÌÀü IE¿Í µ¿ÀÏÇÏ°Ô empty ¹æ½ÄÀ» »ç¿ëÇÏµµ·Ï ÇÏ¿´À¸³ª doc.selection.typeÀÌ NoneÀÎ °æ¿ì ¿¡·¯
+		// Range¸¦ Àç¼³Á¤ ÇØÁÖ¾î selectNone À¸·Î Ã³¸®µÇµµ·Ï ¿¹¿ÜÃ³¸®
         if(this.oApp.getWYSIWYGDocument().selection.createRange){
         	try{
         		this.oApp.getWYSIWYGDocument().selection.empty();
@@ -6226,19 +6227,19 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 				case 34:
 					this._pageDown(oEvent);
 					break;
-				case 8:		// [SMARTEDITORSUS-495][SMARTEDITORSUS-548] IEì—ì„œ í‘œê°€ ì‚­ì œë˜ì§€ ì•ŠëŠ” ë¬¸ì œ
+				case 8:		// [SMARTEDITORSUS-495][SMARTEDITORSUS-548] IE¿¡¼­ Ç¥°¡ »èÁ¦µÇÁö ¾Ê´Â ¹®Á¦
 					this._backspaceTable(oEvent);
 					break;
 				default:
 			}
 		}else if(this.oApp.oNavigator.firefox){
-			// [SMARTEDITORSUS-151] FF ì—ì„œ í‘œê°€ ì‚­ì œë˜ì§€ ì•ŠëŠ” ë¬¸ì œ
+			// [SMARTEDITORSUS-151] FF ¿¡¼­ Ç¥°¡ »èÁ¦µÇÁö ¾Ê´Â ¹®Á¦
 			if(oKeyInfo.keyCode === 8){				// backspace
 				this._backspaceTable(oEvent);
 			}
 		}
 		
-		this._recordUndo(oKeyInfo);	// ì²«ë²ˆì§¸ Delete í‚¤ ì…ë ¥ ì „ì˜ ìƒíƒœê°€ ì €ì¥ë˜ë„ë¡ KEYDOWN ì‹œì ì— ì €ì¥
+		this._recordUndo(oKeyInfo);	// Ã¹¹øÂ° Delete Å° ÀÔ·Â ÀüÀÇ »óÅÂ°¡ ÀúÀåµÇµµ·Ï KEYDOWN ½ÃÁ¡¿¡ ÀúÀå
 	},
 	
 	_backspaceTable : function(weEvent){
@@ -6294,8 +6295,8 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		oNavigator = jindo.$Agent().navigator();
 		oSelection = oPSelection || this.oApp.getSelection();
 
-		//[SMARTEDITORSUS-888] ë¸Œë¼ìš°ì € ë³„ í…ŒìŠ¤íŠ¸ í›„ ì•„ë˜ ë¶€ë¶„ì´ ë¶ˆí•„ìš”í•˜ì—¬ ì œê±°í•¨
-		//	- [SMARTEDITORSUS-387] IE9 í‘œì¤€ëª¨ë“œì—ì„œ ì—˜ë¦¬ë¨¼íŠ¸ ë’¤ì— ì–´ë– í•œ ì—˜ë¦¬ë¨¼íŠ¸ë„ ì—†ëŠ” ìƒíƒœì—ì„œ ì»¤ì„œê°€ ì•ˆë“¤ì–´ê°€ëŠ” í˜„ìƒ.
+		//[SMARTEDITORSUS-888] ºê¶ó¿ìÀú º° Å×½ºÆ® ÈÄ ¾Æ·¡ ºÎºĞÀÌ ºÒÇÊ¿äÇÏ¿© Á¦°ÅÇÔ
+		//	- [SMARTEDITORSUS-387] IE9 Ç¥ÁØ¸ğµå¿¡¼­ ¿¤¸®¸ÕÆ® µÚ¿¡ ¾î¶°ÇÑ ¿¤¸®¸ÕÆ®µµ ¾ø´Â »óÅÂ¿¡¼­ Ä¿¼­°¡ ¾Èµé¾î°¡´Â Çö»ó.
 		// if(oNavigator.ie && oNavigator.nativeVersion >= 9 && document.documentMode >= 9){
 		//		sHTML = sHTML + unescape("%uFEFF");
 		// }
@@ -6313,23 +6314,23 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			oSelection.collapseToEnd();
 			oSelection.select();
 			oSelection.removeStringBookmark(sTmpBookmark);
-			// [SMARTEDITORSUS-56] ì‚¬ì§„ì„ ì—°ì†ìœ¼ë¡œ ì²¨ë¶€í•  ê²½ìš° ì—°ì´ì–´ ì‚½ì…ë˜ì§€ ì•ŠëŠ” í˜„ìƒìœ¼ë¡œ ì´ìŠˆë¥¼ ë°œê²¬í•˜ê²Œ ë˜ì—ˆìŠµë‹ˆë‹¤.
-			// ê·¸ëŸ¬ë‚˜ ì´ëŠ” ë¹„ë‹¨ 'ë‹¤ìˆ˜ì˜ ì‚¬ì§„ì„ ì²¨ë¶€í•  ê²½ìš°'ì—ë§Œ ë°œìƒí•˜ëŠ” ë¬¸ì œëŠ” ì•„ë‹ˆì—ˆê³ , 
-			// ì›ì¸ í™•ì¸ ê²°ê³¼ ì»¨í…ì¸  ì‚½ì… í›„ ê¸°ì¡´ Bookmark ì‚­ì œ ì‹œ ê°±ì‹ ëœ Selection ì´ ì œëŒ€ë¡œ ë°˜ì˜ë˜ì§€ ì•ŠëŠ” ì ì´ ìˆì—ˆìŠµë‹ˆë‹¤.
-			// ì´ì—, Selection ì„ ê°±ì‹ í•˜ëŠ” ì½”ë“œë¥¼ ì¶”ê°€í•˜ì˜€ìŠµë‹ˆë‹¤.
+			// [SMARTEDITORSUS-56] »çÁøÀ» ¿¬¼ÓÀ¸·Î Ã·ºÎÇÒ °æ¿ì ¿¬ÀÌ¾î »ğÀÔµÇÁö ¾Ê´Â Çö»óÀ¸·Î ÀÌ½´¸¦ ¹ß°ßÇÏ°Ô µÇ¾ú½À´Ï´Ù.
+			// ±×·¯³ª ÀÌ´Â ºñ´Ü '´Ù¼öÀÇ »çÁøÀ» Ã·ºÎÇÒ °æ¿ì'¿¡¸¸ ¹ß»ıÇÏ´Â ¹®Á¦´Â ¾Æ´Ï¾ú°í, 
+			// ¿øÀÎ È®ÀÎ °á°ú ÄÁÅÙÃ÷ »ğÀÔ ÈÄ ±âÁ¸ Bookmark »èÁ¦ ½Ã °»½ÅµÈ Selection ÀÌ Á¦´ë·Î ¹İ¿µµÇÁö ¾Ê´Â Á¡ÀÌ ÀÖ¾ú½À´Ï´Ù.
+			// ÀÌ¿¡, Selection À» °»½ÅÇÏ´Â ÄÚµå¸¦ Ãß°¡ÇÏ¿´½À´Ï´Ù.
 			oSelection = this.oApp.getSelection();
 			
-			//[SMARTEDITORSUS-831] ë¹„IE ê³„ì—´ ë¸Œë¼ìš°ì €ì—ì„œ ìŠ¤í¬ë¡¤ë°”ê°€ ìƒê¸°ê²Œ ë¬¸ìì…ë ¥ í›„ ì—”í„° í´ë¦­í•˜ì§€ ì•Šì€ ìƒíƒœì—ì„œ 
-			//ì´ë¯¸ì§€ í•˜ë‚˜ ì‚½ì… ì‹œ ì´ë¯¸ì§€ì— í¬ì»¤ì‹±ì´ ë†“ì´ì§€ ì•ŠìŠµë‹ˆë‹¤.
-			//ì›ì¸ : parameterë¡œ ë„˜ê²¨ ë°›ì€ oPSelecionì— ë³€ê²½ëœ ê°’ì„ ë³µì‚¬í•´ ì£¼ì§€ ì•Šì•„ì„œ ë°œìƒ
-			//í•´ê²° : parameterë¡œ ë„˜ê²¨ ë°›ì€ oPSelecionì— ë³€ê²½ëœ ê°’ì„ ë³µì‚¬í•´ì¤€ë‹¤
-			//       call by referenceë¡œ ë„˜ê²¨ ë°›ì•˜ìœ¼ë¯€ë¡œ ì§ì ‘ ê°ì²´ ì•ˆì˜ ì¸ì ê°’ì„ ë°”ê¿”ì£¼ëŠ” setRange í•¨ìˆ˜ ì‚¬ìš©
+			//[SMARTEDITORSUS-831] ºñIE °è¿­ ºê¶ó¿ìÀú¿¡¼­ ½ºÅ©·Ñ¹Ù°¡ »ı±â°Ô ¹®ÀÚÀÔ·Â ÈÄ ¿£ÅÍ Å¬¸¯ÇÏÁö ¾ÊÀº »óÅÂ¿¡¼­ 
+			//ÀÌ¹ÌÁö ÇÏ³ª »ğÀÔ ½Ã ÀÌ¹ÌÁö¿¡ Æ÷Ä¿½ÌÀÌ ³õÀÌÁö ¾Ê½À´Ï´Ù.
+			//¿øÀÎ : parameter·Î ³Ñ°Ü ¹ŞÀº oPSelecion¿¡ º¯°æµÈ °ªÀ» º¹»çÇØ ÁÖÁö ¾Ê¾Æ¼­ ¹ß»ı
+			//ÇØ°á : parameter·Î ³Ñ°Ü ¹ŞÀº oPSelecion¿¡ º¯°æµÈ °ªÀ» º¹»çÇØÁØ´Ù
+			//       call by reference·Î ³Ñ°Ü ¹Ş¾ÒÀ¸¹Ç·Î Á÷Á¢ °´Ã¼ ¾ÈÀÇ ÀÎÀÚ °ªÀ» ¹Ù²ãÁÖ´Â setRange ÇÔ¼ö »ç¿ë
 			if(!!oPSelection){
 				oPSelection.setRange(oSelection);
 			}
 		}else{
-			// [SMARTEDITORSUS-428] [IE9.0] IE9ì—ì„œ í¬ìŠ¤íŠ¸ ì“°ê¸°ì— ì ‘ê·¼í•˜ì—¬ ë§¨ìœ„ì— ì„ì˜ì˜ ê¸€ê° ì²¨ë¶€ í›„ ì—”í„°ë¥¼ í´ë¦­ ì‹œ ê¸€ê°ì´ ì‚¬ë¼ì§
-			// PASTE_HTML í›„ì— IFRAME ë¶€ë¶„ì´ ì„ íƒëœ ìƒíƒœì—¬ì„œ Enter ì‹œ ë‚´ìš©ì´ ì œê±°ë˜ì–´ ë°œìƒí•œ ë¬¸ì œ
+			// [SMARTEDITORSUS-428] [IE9.0] IE9¿¡¼­ Æ÷½ºÆ® ¾²±â¿¡ Á¢±ÙÇÏ¿© ¸ÇÀ§¿¡ ÀÓÀÇÀÇ ±Û°¨ Ã·ºÎ ÈÄ ¿£ÅÍ¸¦ Å¬¸¯ ½Ã ±Û°¨ÀÌ »ç¶óÁü
+			// PASTE_HTML ÈÄ¿¡ IFRAME ºÎºĞÀÌ ¼±ÅÃµÈ »óÅÂ¿©¼­ Enter ½Ã ³»¿ëÀÌ Á¦°ÅµÇ¾î ¹ß»ıÇÑ ¹®Á¦
 			oSelection.collapseToEnd();
 			oSelection.select();
 			
@@ -6337,7 +6338,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			this._bIERangeReset = false;
 		}
 		
-		// [SMARTEDITORSUS-639] ì‚¬ì§„ ì²¨ë¶€ í›„ ì´ë¯¸ì§€ ë’¤ì˜ ê³µë°±ìœ¼ë¡œ ì¸í•´ ìŠ¤í¬ë¡¤ì´ ìƒê¸°ëŠ” ë¬¸ì œ
+		// [SMARTEDITORSUS-639] »çÁø Ã·ºÎ ÈÄ ÀÌ¹ÌÁö µÚÀÇ °ø¹éÀ¸·Î ÀÎÇØ ½ºÅ©·ÑÀÌ »ı±â´Â ¹®Á¦
 		if(sHTML.indexOf("<img") > -1){
 			oStartContainer = oSelection.startContainer;
 				
@@ -6369,10 +6370,10 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 
 	/**
-	 * [SMARTEDITORSUS-344]ì‚¬ì§„/ë™ì˜ìƒ/ì§€ë„ ì—°ì†ì²¨ë¶€ì‹œ í¬ì»¤ì‹± ê°œì„ ì´ìŠˆë¡œ ì¶”ê°€ë˜ í•¨ìˆ˜.
+	 * [SMARTEDITORSUS-344]»çÁø/µ¿¿µ»ó/Áöµµ ¿¬¼ÓÃ·ºÎ½Ã Æ÷Ä¿½Ì °³¼±ÀÌ½´·Î Ãß°¡µÇ ÇÔ¼ö.
 	 */
 	$ON_FOCUS_N_CURSOR : function (bEndCursor, sId){
-		//ì§€ë„ ì¶”ê°€ í›„ í¬ì»¤ì‹±ì„ ì£¼ê¸° ìœ„í•´ì„œ
+		//Áöµµ Ãß°¡ ÈÄ Æ÷Ä¿½ÌÀ» ÁÖ±â À§ÇØ¼­
 		bEndCursor = bEndCursor || true;		
 		var oSelection = this.oApp.getSelection();	
 		if(jindo.$Agent().navigator().ie && !oSelection.collapsed){
@@ -6393,7 +6394,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/* 
-	 * ì—˜ë¦¬ë¨¼íŠ¸ì˜ top, bottom ê°’ì„ ë°˜í™˜
+	 * ¿¤¸®¸ÕÆ®ÀÇ top, bottom °ªÀ» ¹İÈ¯
 	 */
 	_getElementVerticalPosition : function(el){
 	    var nTop = 0,
@@ -6416,7 +6417,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/* 
-	 * Windowì—ì„œ í˜„ì¬ ë³´ì—¬ì§€ëŠ” ì˜ì—­ì˜ top, bottom ê°’ì„ ë°˜í™˜
+	 * Window¿¡¼­ ÇöÀç º¸¿©Áö´Â ¿µ¿ªÀÇ top, bottom °ªÀ» ¹İÈ¯
 	 */
 	_getVisibleVerticalPosition : function(){
 		var oWindow, oDocument, nVisibleHeight,
@@ -6433,14 +6434,14 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/* 
-	 * ì—˜ë¦¬ë¨¼íŠ¸ê°€ WYSIWYG Windowì˜ Visible ë¶€ë¶„ì—ì„œ ì™„ì „íˆ ë³´ì´ëŠ” ìƒíƒœì¸ì§€ í™•ì¸ (ì¼ë¶€ë§Œ ë³´ì´ë©´ false)
+	 * ¿¤¸®¸ÕÆ®°¡ WYSIWYG WindowÀÇ Visible ºÎºĞ¿¡¼­ ¿ÏÀüÈ÷ º¸ÀÌ´Â »óÅÂÀÎÁö È®ÀÎ (ÀÏºÎ¸¸ º¸ÀÌ¸é false)
 	 */
 	_isElementVisible : function(htElementPos, htVisiblePos){					
 		return (htElementPos.nTop >= htVisiblePos.nTop && htElementPos.nBottom <= htVisiblePos.nBottom);
 	},
 	
 	/* 
-	 * [SMARTEDITORSUS-824] [SMARTEDITORSUS-828] ìë™ ìŠ¤í¬ë¡¤ ì²˜ë¦¬
+	 * [SMARTEDITORSUS-824] [SMARTEDITORSUS-828] ÀÚµ¿ ½ºÅ©·Ñ Ã³¸®
 	 */
 	_scrollIntoView : function(el){
 		var htElementPos = this._getElementVerticalPosition(el),
@@ -6460,8 +6461,8 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	$BEFORE_MSG_EDITING_AREA_RESIZE_STARTED  : function(){
-		// FFì—ì„œ Heightì¡°ì • ì‹œì— ë³¸ë¬¸ì˜ _fitElementInEditingArea()í•¨ìˆ˜ ë¶€ë¶„ì—ì„œ selectionì´ ê¹¨ì§€ëŠ” í˜„ìƒì„ ì¡ê¸° ìœ„í•´ì„œ
-		// StringBookmarkë¥¼ ì‚¬ìš©í•´ì„œ ìœ„ì¹˜ë¥¼ ì €ì¥í•´ë‘ . (step1)
+		// FF¿¡¼­ HeightÁ¶Á¤ ½Ã¿¡ º»¹®ÀÇ _fitElementInEditingArea()ÇÔ¼ö ºÎºĞ¿¡¼­ selectionÀÌ ±úÁö´Â Çö»óÀ» Àâ±â À§ÇØ¼­
+		// StringBookmark¸¦ »ç¿ëÇØ¼­ À§Ä¡¸¦ ÀúÀåÇØµÒ. (step1)
 		if(!jindo.$Agent().navigator().ie){
 			var oSelection = null;
 			oSelection = this.oApp.getSelection();
@@ -6476,7 +6477,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		
 		this.oApp.exec("REFRESH_WYSIWYG", []);
 		// bts.nhncorp.com/nhnbts/browse/COM-1042
-		// $BEFORE_MSG_EDITING_AREA_RESIZE_STARTEDì—ì„œ ì €ì¥í•œ StringBookmarkë¥¼ ì…‹íŒ…í•´ì£¼ê³  ì‚­ì œí•¨.(step2)
+		// $BEFORE_MSG_EDITING_AREA_RESIZE_STARTED¿¡¼­ ÀúÀåÇÑ StringBookmark¸¦ ¼ÂÆÃÇØÁÖ°í »èÁ¦ÇÔ.(step2)
 		if(!jindo.$Agent().navigator().ie){
 			var oSelection = this.oApp.getEmptySelection();
 			oSelection.moveToBookmark(this.sBM);
@@ -6502,9 +6503,9 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	},
 	
 	/**
-	  * EVENT_EDITING_AREA_PASTE ì˜ ON ë©”ì‹œì§€ í•¸ë“¤ëŸ¬
-	  *		ìœ„ì§€ìœ… ëª¨ë“œì—ì„œ ì—ë””í„° ë³¸ë¬¸ì˜ paste ì´ë²¤íŠ¸ì— ëŒ€í•œ ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•œë‹¤.
-	  *		paste ì‹œì— ë‚´ìš©ì´ ë¶™ì—¬ì§„ ë³¸ë¬¸ì˜ ë‚´ìš©ì„ ë°”ë¡œ ê°€ì ¸ì˜¬ ìˆ˜ ì—†ì–´ delay ë¥¼ ì¤€ë‹¤.
+	  * EVENT_EDITING_AREA_PASTE ÀÇ ON ¸Ş½ÃÁö ÇÚµé·¯
+	  *		À§ÁöÀ¨ ¸ğµå¿¡¼­ ¿¡µğÅÍ º»¹®ÀÇ paste ÀÌº¥Æ®¿¡ ´ëÇÑ ¸Ş½ÃÁö¸¦ Ã³¸®ÇÑ´Ù.
+	  *		paste ½Ã¿¡ ³»¿ëÀÌ ºÙ¿©Áø º»¹®ÀÇ ³»¿ëÀ» ¹Ù·Î °¡Á®¿Ã ¼ö ¾ø¾î delay ¸¦ ÁØ´Ù.
 	  */	
 	$ON_EVENT_EDITING_AREA_PASTE : function(oEvent){
 		this.oApp.delayedExec('EVENT_EDITING_AREA_PASTE_DELAY', [oEvent], 0);
@@ -6514,7 +6515,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		this._replaceBlankToNbsp(weEvent.element);
 	},
 	
-	// [SMARTEDITORSUS-855] IEì—ì„œ íŠ¹ì • ë¸”ë¡œê·¸ ê¸€ì„ ë³µì‚¬í•˜ì—¬ ë¶™ì—¬ë„£ê¸° í–ˆì„ ë•Œ ê°œí–‰ì´ ì œê±°ë˜ëŠ” ë¬¸ì œ
+	// [SMARTEDITORSUS-855] IE¿¡¼­ Æ¯Á¤ ºí·Î±× ±ÛÀ» º¹»çÇÏ¿© ºÙ¿©³Ö±â ÇßÀ» ¶§ °³ÇàÀÌ Á¦°ÅµÇ´Â ¹®Á¦
 	_replaceBlankToNbsp : function(el){
 		var oNavigator = this.oApp.oNavigator;
 		
@@ -6522,7 +6523,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			return;
 		}
 		
-		if(oNavigator.nativeVersion !== 9 || document.documentMode !== 7) { // IE9 í˜¸í™˜ëª¨ë“œì—ì„œë§Œ ë°œìƒ
+		if(oNavigator.nativeVersion !== 9 || document.documentMode !== 7) { // IE9 È£È¯¸ğµå¿¡¼­¸¸ ¹ß»ı
 			return;
 		}
 
@@ -6652,7 +6653,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		}
 		
 		if(oNavigator.ie && oNavigator.nativeVersion >= 9 && document.documentMode >= 9){
-			// [SMARTEDITORSUS-704] \r\nì´ ìˆëŠ” ê²½ìš° IE9 í‘œì¤€ëª¨ë“œì—ì„œ ì •ë ¬ ì‹œ ë¸Œë¼ìš°ì €ê°€ <p>ë¥¼ ì¶”ê°€í•˜ëŠ” ë¬¸ì œ
+			// [SMARTEDITORSUS-704] \r\nÀÌ ÀÖ´Â °æ¿ì IE9 Ç¥ÁØ¸ğµå¿¡¼­ Á¤·Ä ½Ã ºê¶ó¿ìÀú°¡ <p>¸¦ Ãß°¡ÇÏ´Â ¹®Á¦
 			sContent = sContent.replace(/[\r\n]/g,"");
 		}
 
@@ -6721,7 +6722,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		
 		this.oApp.setLastKey(oKeyInfo.keyCode);
 
-		// && oKeyInfo.keyCode != 32		// ì†ë„ ë¬¸ì œë¡œ ì¸í•˜ì—¬ Space ëŠ” ì œì™¸í•¨
+		// && oKeyInfo.keyCode != 32		// ¼Óµµ ¹®Á¦·Î ÀÎÇÏ¿© Space ´Â Á¦¿ÜÇÔ
 		if(!oKeyInfo.enter && oKeyInfo.keyCode !== 46 && oKeyInfo.keyCode !== 8){
 			return;
 		}
@@ -6762,7 +6763,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 });
 //}
 /**
- * @pluginDesc Enterí‚¤ ì…ë ¥ì‹œì— í˜„ì¬ ì¤„ì„ P íƒœê·¸ë¡œ ê°ê±°ë‚˜ <br> íƒœê·¸ë¥¼ ì‚½ì…í•œë‹¤.
+ * @pluginDesc EnterÅ° ÀÔ·Â½Ã¿¡ ÇöÀç ÁÙÀ» P ÅÂ±×·Î °¨°Å³ª <br> ÅÂ±×¸¦ »ğÀÔÇÑ´Ù.
  */
 nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 	name : "SE_WYSIWYGEnterKey",
@@ -6776,21 +6777,21 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		
 		this.htBrowser = jindo.$Agent().navigator();
 		
-		// [SMARTEDITORSUS-227] IE ì¸ ê²½ìš°ì—ë„ ì—ë””í„° Enter ì²˜ë¦¬ ë¡œì§ì„ ì‚¬ìš©í•˜ë„ë¡ ìˆ˜ì •
+		// [SMARTEDITORSUS-227] IE ÀÎ °æ¿ì¿¡µµ ¿¡µğÅÍ Enter Ã³¸® ·ÎÁ÷À» »ç¿ëÇÏµµ·Ï ¼öÁ¤
 		if(this.htBrowser.opera && this.sLineBreaker == "P"){
 			this.$ON_MSG_APP_READY = function(){};
 		}
 
 		/**
-		 *	[SMARTEDITORSUS-230] ë°‘ì¤„+ìƒ‰ìƒë³€ê²½ í›„, ì—”í„°ì¹˜ë©´ ìŠ¤í¬ë¦½íŠ¸ ì˜¤ë¥˜
-		 *	[SMARTEDITORSUS-180] [IE9] ë°°ê²½ìƒ‰ ì ìš© í›„, ì—”í„°í‚¤ 2íšŒì´ìƒ ì…ë ¥ì‹œ ì»¤ì„œìœ„ì¹˜ê°€ ë‹¤ìŒ ë¼ì¸ìœ¼ë¡œ ì´ë™í•˜ì§€ ì•ŠìŒ
-		 * 		ì˜¤ë¥˜ í˜„ìƒ : 	IE9 ì—ì„œ ì—”í„° í›„ ìƒì„±ëœ P íƒœê·¸ê°€ "ë¹ˆ SPAN íƒœê·¸ë§Œ ê°€ì§€ëŠ” ê²½ìš°" P íƒœê·¸ ì˜ì—­ì´ ë³´ì´ì§€ ì•Šê±°ë‚˜ í¬ì»¤ìŠ¤ê°€ ìœ„ë¡œ ì˜¬ë¼ê°€ ë³´ì„
-		 *		í•´ê²° ë°©ë²• : 	ì»¤ì„œ í™€ë”ë¡œ IE ì´ì™¸ì—ì„œëŠ” <br> ì„ ì‚¬ìš©
-		 *						- IE ì—ì„œëŠ” ë Œë”ë§ ì‹œ <br> ë¶€ë¶„ì—ì„œ ë¹„ì •ìƒì ì¸ P íƒœê·¸ê°€ ìƒì„±ë˜ì–´ [SMARTEDITORSUS-230] ì˜¤ë¥˜ ë°œìƒ
-		 *						unescape("%uFEFF") (BOM) ì„ ì¶”ê°€
-		 *						- IE9 í‘œì¤€ëª¨ë“œì—ì„œ [SMARTEDITORSUS-180] ì˜ ë¬¸ì œê°€ ë°œìƒí•¨
-		 *						(unescape("%u2028") (Line separator) ë¥¼ ì‚¬ìš©í•˜ë©´ P ê°€ ë³´ì—¬ì§€ë‚˜ ì‚¬ì´ë“œì´í™íŠ¸ê°€ ìš°ë ¤ë˜ì–´ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
-		 *	IE ë¸Œë¼ìš°ì €ì—ì„œ Enter ì²˜ë¦¬ ì‹œ, &nbsp; ë¥¼ ë„£ì–´ì£¼ë¯€ë¡œ í•´ë‹¹ ë°©ì‹ì„ ê·¸ëŒ€ë¡œ ì‚¬ìš©í•˜ë„ë¡ ìˆ˜ì •í•¨
+		 *	[SMARTEDITORSUS-230] ¹ØÁÙ+»ö»óº¯°æ ÈÄ, ¿£ÅÍÄ¡¸é ½ºÅ©¸³Æ® ¿À·ù
+		 *	[SMARTEDITORSUS-180] [IE9] ¹è°æ»ö Àû¿ë ÈÄ, ¿£ÅÍÅ° 2È¸ÀÌ»ó ÀÔ·Â½Ã Ä¿¼­À§Ä¡°¡ ´ÙÀ½ ¶óÀÎÀ¸·Î ÀÌµ¿ÇÏÁö ¾ÊÀ½
+		 * 		¿À·ù Çö»ó : 	IE9 ¿¡¼­ ¿£ÅÍ ÈÄ »ı¼ºµÈ P ÅÂ±×°¡ "ºó SPAN ÅÂ±×¸¸ °¡Áö´Â °æ¿ì" P ÅÂ±× ¿µ¿ªÀÌ º¸ÀÌÁö ¾Ê°Å³ª Æ÷Ä¿½º°¡ À§·Î ¿Ã¶ó°¡ º¸ÀÓ
+		 *		ÇØ°á ¹æ¹ı : 	Ä¿¼­ È¦´õ·Î IE ÀÌ¿Ü¿¡¼­´Â <br> À» »ç¿ë
+		 *						- IE ¿¡¼­´Â ·»´õ¸µ ½Ã <br> ºÎºĞ¿¡¼­ ºñÁ¤»óÀûÀÎ P ÅÂ±×°¡ »ı¼ºµÇ¾î [SMARTEDITORSUS-230] ¿À·ù ¹ß»ı
+		 *						unescape("%uFEFF") (BOM) À» Ãß°¡
+		 *						- IE9 Ç¥ÁØ¸ğµå¿¡¼­ [SMARTEDITORSUS-180] ÀÇ ¹®Á¦°¡ ¹ß»ıÇÔ
+		 *						(unescape("%u2028") (Line separator) ¸¦ »ç¿ëÇÏ¸é P °¡ º¸¿©Áö³ª »çÀÌµåÀÌÆåÆ®°¡ ¿ì·ÁµÇ¾î »ç¿ëÇÏÁö ¾ÊÀ½)
+		 *	IE ºê¶ó¿ìÀú¿¡¼­ Enter Ã³¸® ½Ã, &nbsp; ¸¦ ³Ö¾îÁÖ¹Ç·Î ÇØ´ç ¹æ½ÄÀ» ±×´ë·Î »ç¿ëÇÏµµ·Ï ¼öÁ¤ÇÔ
 		 */
 		if(this.htBrowser.ie){
 			this._addCursorHolder = this._addCursorHolderSpace;
@@ -6810,7 +6811,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		this.oApp.exec("ADD_APP_PROPERTY", ["sLineBreaker", this.sLineBreaker]);
 		
 		this.oSelection = this.oApp.getEmptySelection();
-		this.tmpTextNode = this.oSelection._document.createTextNode(unescape("%u00A0"));	// ê³µë°±(&nbsp;) ì¶”ê°€ ì‹œ ì‚¬ìš©í•  ë…¸ë“œ
+		this.tmpTextNode = this.oSelection._document.createTextNode(unescape("%u00A0"));	// °ø¹é(&nbsp;) Ãß°¡ ½Ã »ç¿ëÇÒ ³ëµå
 		jindo.$Fn(this._onKeyDown, this).attach(this.oApp.getWYSIWYGDocument(), "keydown");
 	},
 	
@@ -6831,16 +6832,16 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 	},
 	
 	/**
-	 * [SMARTEDITORSUS-950] ì—ë””í„° ì ìš© í˜ì´ì§€ì˜ Compatible meta IE=edge ì„¤ì • ì‹œ ì¤„ê°„ê²© ë²Œì–´ì§ ì´ìŠˆ (<BR>)
+	 * [SMARTEDITORSUS-950] ¿¡µğÅÍ Àû¿ë ÆäÀÌÁöÀÇ Compatible meta IE=edge ¼³Á¤ ½Ã ÁÙ°£°İ ¹ú¾îÁü ÀÌ½´ (<BR>)
 	 */
 	$ON_REGISTER_CONVERTERS : function(){
 		this.oApp.exec("ADD_CONVERTER", ["IR_TO_DB", jindo.$Fn(this.onIrToDB, this).bind()]);
 	},
 	
 	/**
-	 * IR_TO_DB ë³€í™˜ê¸° ì²˜ë¦¬
-	 *	Chrome, FireFoxì¸ ê²½ìš°ì—ë§Œ ì•„ë˜ì™€ ê°™ì€ ì²˜ë¦¬ë¥¼ í•©ë‹ˆë‹¤. 
-	 *	: ì €ì¥ ì‹œ ë³¸ë¬¸ ì˜ì—­ì—ì„œ P ì•„ë˜ì˜ ëª¨ë“  í•˜ìœ„ íƒœê·¸ ì¤‘ ê°€ì¥ ë§ˆì§€ë§‰ childNodeê°€ BRì¸ ê²½ìš°ë¥¼ íƒìƒ‰í•˜ì—¬ ì´ë¥¼ &nbsp;ë¡œ ë³€ê²½í•´ ì¤ë‹ˆë‹¤.
+	 * IR_TO_DB º¯È¯±â Ã³¸®
+	 *	Chrome, FireFoxÀÎ °æ¿ì¿¡¸¸ ¾Æ·¡¿Í °°Àº Ã³¸®¸¦ ÇÕ´Ï´Ù. 
+	 *	: ÀúÀå ½Ã º»¹® ¿µ¿ª¿¡¼­ P ¾Æ·¡ÀÇ ¸ğµç ÇÏÀ§ ÅÂ±× Áß °¡Àå ¸¶Áö¸· childNode°¡ BRÀÎ °æ¿ì¸¦ Å½»öÇÏ¿© ÀÌ¸¦ &nbsp;·Î º¯°æÇØ Áİ´Ï´Ù.
 	 */
 	onIrToDB : function(sHTML){
 		var sContents = sHTML,
@@ -6853,7 +6854,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		return sContents;
 	},
 	
-	// [IE] Selection ë‚´ì˜ ë…¸ë“œë¥¼ ê°€ì ¸ì™€ ë¹ˆ ë…¸ë“œì— unescape("%uFEFF") (BOM) ì„ ì¶”ê°€
+	// [IE] Selection ³»ÀÇ ³ëµå¸¦ °¡Á®¿Í ºó ³ëµå¿¡ unescape("%uFEFF") (BOM) À» Ãß°¡
 	_addBlankText : function(oSelection){
 		var oNodes = oSelection.getNodes(),
 			i, nLen, oNode, oNodeChild, tmpTextNode;
@@ -6882,7 +6883,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		}
 	},
 	
-	// [IE ì´ì™¸] ë¹ˆ ë…¸ë“œ ë‚´ì— ì»¤ì„œë¥¼ í‘œì‹œí•˜ê¸° ìœ„í•œ ì²˜ë¦¬
+	// [IE ÀÌ¿Ü] ºó ³ëµå ³»¿¡ Ä¿¼­¸¦ Ç¥½ÃÇÏ±â À§ÇÑ Ã³¸®
 	_addCursorHolder : function(elWrapper){
 		var elStyleOnlyNode = elWrapper;
 		
@@ -6897,7 +6898,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		return elStyleOnlyNode;
 	},
 	
-	// [IE] ë¹ˆ ë…¸ë“œ ë‚´ì— ì»¤ì„œë¥¼ í‘œì‹œí•˜ê¸° ìœ„í•œ ì²˜ë¦¬ (_addSpace ì‚¬ìš©)
+	// [IE] ºó ³ëµå ³»¿¡ Ä¿¼­¸¦ Ç¥½ÃÇÏ±â À§ÇÑ Ã³¸® (_addSpace »ç¿ë)
 	_addCursorHolderSpace : function(elWrapper){
 		var elNode;
 		
@@ -6928,10 +6929,10 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		if(!oStart.bParentBreak || oSelection.rxBlockContainer.test(oStart.oLineBreaker.tagName)){
 			oEvent.stop();
 			
-			//	ì„ íƒëœ ë‚´ìš©ì€ ì‚­ì œ
+			//	¼±ÅÃµÈ ³»¿ëÀº »èÁ¦
 			oSelection.deleteContents();
 			if(!!oStart.oNode.parentNode && oStart.oNode.parentNode.nodeType !== 11){
-				//	LineBreaker ë¡œ ê°ì‹¸ì„œ ë¶„ë¦¬		
+				//	LineBreaker ·Î °¨½Î¼­ ºĞ¸®		
 				oSWrapper = this.oApp.getWYSIWYGDocument().createElement(this.sLineBreaker);
 				oSelection.moveToBookmark(sBM);	//oSelection.moveToStringBookmark(sBM, true);
 				oSelection.setStartBefore(oStart.oNode);
@@ -6943,13 +6944,13 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 				oSelection.setEndAfter(oEnd.oNode);
 				this._addBlankText(oSelection);
 				oSelection.surroundContents(oEWrapper);
-				oSelection.moveToStringBookmark(sBM, true);	// [SMARTEDITORSUS-180] í¬ì»¤ìŠ¤ ë¦¬ì…‹
-				oSelection.collapseToEnd();					// [SMARTEDITORSUS-180] í¬ì»¤ìŠ¤ ë¦¬ì…‹
+				oSelection.moveToStringBookmark(sBM, true);	// [SMARTEDITORSUS-180] Æ÷Ä¿½º ¸®¼Â
+				oSelection.collapseToEnd();					// [SMARTEDITORSUS-180] Æ÷Ä¿½º ¸®¼Â
 				oSelection.removeStringBookmark(sBM);
 				
 				oSelection.select();
 				
-				//	Cursor Holder ì¶”ê°€	
+				//	Cursor Holder Ãß°¡	
 				// insert a cursor holder(br) if there's an empty-styling-only-tag surrounding current cursor
 				elStyleOnlyNode = this._addCursorHolder(oSWrapper);
 				
@@ -6985,7 +6986,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 
 		var elBookmark;
 		
-		// ì•„ë˜ëŠ” ê¸°ë³¸ì ìœ¼ë¡œ ë¸Œë¼ìš°ì € ê¸°ë³¸ ê¸°ëŠ¥ì— ë§¡ê²¨ì„œ ì²˜ë¦¬í•¨
+		// ¾Æ·¡´Â ±âº»ÀûÀ¸·Î ºê¶ó¿ìÀú ±âº» ±â´É¿¡ ¸Ã°Ü¼­ Ã³¸®ÇÔ
 		if(this.htBrowser.firefox){
 			elBookmark = oSelection.getStringBookmark(sBM, true);
 			
@@ -7019,21 +7020,21 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 			bAddLineThrough = (elParentNode.tagName === "S" || elParentNode.tagName === "STRIKE" ||
 							(nhn.husky.SE2M_Utils.findAncestorByTagName("S", elParentNode) !== null && nhn.husky.SE2M_Utils.findAncestorByTagName("STRIKE", elParentNode) !== null));
 			
-			// [SMARTEDITORSUS-26] Enter í›„ì— ë°‘ì¤„/ì·¨ì†Œì„ ì´ ë³µì‚¬ë˜ì§€ ì•ŠëŠ” ë¬¸ì œë¥¼ ì²˜ë¦¬ (ë¸Œë¼ìš°ì € Enter ì²˜ë¦¬ í›„ ì‹¤í–‰ë˜ë„ë¡ setTimeout ì‚¬ìš©)
+			// [SMARTEDITORSUS-26] Enter ÈÄ¿¡ ¹ØÁÙ/Ãë¼Ò¼±ÀÌ º¹»çµÇÁö ¾Ê´Â ¹®Á¦¸¦ Ã³¸® (ºê¶ó¿ìÀú Enter Ã³¸® ÈÄ ½ÇÇàµÇµµ·Ï setTimeout »ç¿ë)
 			if(bAddUnderline || bAddLineThrough){
 				setTimeout(jindo.$Fn(this._addTextDecorationTag, this).bind(bAddUnderline, bAddLineThrough), 0);
 				
 				return;
 			}
 
-			// [SMARTEDITORSUS-180] ë¹ˆ SPAN íƒœê·¸ì— ì˜í•´ ì—”í„° í›„ ì—”í„°ê°€ ë˜ì§€ ì•Šì€ ê²ƒìœ¼ë¡œ ë³´ì´ëŠ” ë¬¸ì œ (ë¸Œë¼ìš°ì € Enter ì²˜ë¦¬ í›„ ì‹¤í–‰ë˜ë„ë¡ setTimeout ì‚¬ìš©)
+			// [SMARTEDITORSUS-180] ºó SPAN ÅÂ±×¿¡ ÀÇÇØ ¿£ÅÍ ÈÄ ¿£ÅÍ°¡ µÇÁö ¾ÊÀº °ÍÀ¸·Î º¸ÀÌ´Â ¹®Á¦ (ºê¶ó¿ìÀú Enter Ã³¸® ÈÄ ½ÇÇàµÇµµ·Ï setTimeout »ç¿ë)
 			setTimeout(jindo.$Fn(this._addExtraCursorHolder, this).bind(elParentNode), 0);
 		}else{
 			oSelection.removeStringBookmark(sBM);
 		}
 	},
 	
-	// [IE9 standard mode] ì—”í„° í›„ì˜ ìƒ/í•˜ë‹¨ P íƒœê·¸ë¥¼ í™•ì¸í•˜ì—¬ BOM, ê³µë°±(&nbsp;) ì¶”ê°€
+	// [IE9 standard mode] ¿£ÅÍ ÈÄÀÇ »ó/ÇÏ´Ü P ÅÂ±×¸¦ È®ÀÎÇÏ¿© BOM, °ø¹é(&nbsp;) Ãß°¡
 	_addExtraCursorHolder : function(elUpperNode){
 		var oNodeChild,
 			oPrevChild,
@@ -7041,12 +7042,12 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		
 		elUpperNode = this._getStyleOnlyNode(elUpperNode);
 		
-		// ì—”í„° í›„ì˜ ìƒë‹¨ SPAN ë…¸ë“œì— BOM ì¶”ê°€
+		// ¿£ÅÍ ÈÄÀÇ »ó´Ü SPAN ³ëµå¿¡ BOM Ãß°¡
 		//if(!!elUpperNode && /^(B|EM|I|LABEL|SPAN|STRONG|SUB|SUP|U|STRIKE)$/.test(elUpperNode.tagName) === false){
-		if(!!elUpperNode && elUpperNode.tagName === "SPAN"){ // SPAN ì¸ ê²½ìš°ì—ë§Œ ë°œìƒí•¨
+		if(!!elUpperNode && elUpperNode.tagName === "SPAN"){ // SPAN ÀÎ °æ¿ì¿¡¸¸ ¹ß»ıÇÔ
 			oNodeChild = elUpperNode.lastChild;
 									
-			while(!!oNodeChild){	// ë¹ˆ Text ì œê±°
+			while(!!oNodeChild){	// ºó Text Á¦°Å
 				oPrevChild = oNodeChild.previousSibling;
 				
 				if(oNodeChild.nodeType !== 3){
@@ -7068,7 +7069,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 			}
 		}
 
-		// ì—”í„° í›„ì— ë¹„ì–´ìˆëŠ” í•˜ë‹¨ SPAN ë…¸ë“œì— BOM ì¶”ê°€
+		// ¿£ÅÍ ÈÄ¿¡ ºñ¾îÀÖ´Â ÇÏ´Ü SPAN ³ëµå¿¡ BOM Ãß°¡
 		var oSelection = this.oApp.getSelection(),
 			sBM,
 			elLowerNode,
@@ -7107,8 +7108,8 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		
 		sBM = oSelection.placeStringBookmark();
 
-		this._addSpace(elParent.previousSibling);	// ìƒë‹¨ P ë…¸ë“œì— ê³µë°±ë¬¸ì ì¶”ê°€
-		this._addSpace(elParent);					// í•˜ë‹¨ P ë…¸ë“œì— ê³µë°±ë¬¸ì ì¶”ê°€
+		this._addSpace(elParent.previousSibling);	// »ó´Ü P ³ëµå¿¡ °ø¹é¹®ÀÚ Ãß°¡
+		this._addSpace(elParent);					// ÇÏ´Ü P ³ëµå¿¡ °ø¹é¹®ÀÚ Ãß°¡
 
 		oSelection.moveToBookmark(sBM);		
 		oSelection.selectNodeContents(elLowerNode);
@@ -7118,7 +7119,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		oSelection.removeStringBookmark(sBM);
 	},
 	
-	// [IE] P íƒœê·¸ ê°€ì¥ ë’¤ ìì‹ë…¸ë“œë¡œ ê³µë°±(&nbsp;)ì„ ê°’ìœ¼ë¡œ í•˜ëŠ” í…ìŠ¤íŠ¸ ë…¸ë“œë¥¼ ì¶”ê°€
+	// [IE] P ÅÂ±× °¡Àå µÚ ÀÚ½Ä³ëµå·Î °ø¹é(&nbsp;)À» °ªÀ¸·Î ÇÏ´Â ÅØ½ºÆ® ³ëµå¸¦ Ãß°¡
 	_addSpace : function(elNode){
 		var tmpTextNode, sInnerHTML, elChild, elNextChild, bHasNBSP, aImgChild, elLastImg;
 
@@ -7160,7 +7161,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		elNextChild = elChild;
 		bHasNBSP = false;
 		
-		while(elChild){	// &nbsp;ë¥¼ ë¶™ì¼êº¼ë‹ˆê¹Œ P ë°”ë¡œ ì•„ë˜ì˜ "%uFEFF"ëŠ” ì œê±°í•¨
+		while(elChild){	// &nbsp;¸¦ ºÙÀÏ²¨´Ï±î P ¹Ù·Î ¾Æ·¡ÀÇ "%uFEFF"´Â Á¦°ÅÇÔ
 			elNextChild = elChild.nextSibling;
 			
 			if(elChild.nodeType === 3){
@@ -7181,10 +7182,10 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 			elNode.appendChild(tmpTextNode);
 		}
 		
-		return elNode;	// [SMARTEDITORSUS-418] return ì—˜ë¦¬ë¨¼íŠ¸ ì¶”ê°€
+		return elNode;	// [SMARTEDITORSUS-418] return ¿¤¸®¸ÕÆ® Ãß°¡
 	},
 	
-	// [IE] ì—”í„° í›„ì— ì·¨ì†Œì„ /ë°‘ì¤„ íƒœê·¸ë¥¼ ì„ì˜ë¡œ ì¶”ê°€ (ì·¨ì†Œì„ /ë°‘ì¤„ì— ìƒ‰ìƒì„ í‘œì‹œí•˜ê¸° ìœ„í•¨)
+	// [IE] ¿£ÅÍ ÈÄ¿¡ Ãë¼Ò¼±/¹ØÁÙ ÅÂ±×¸¦ ÀÓÀÇ·Î Ãß°¡ (Ãë¼Ò¼±/¹ØÁÙ¿¡ »ö»óÀ» Ç¥½ÃÇÏ±â À§ÇÔ)
 	_addTextDecorationTag : function(bAddUnderline, bAddLineThrough){
 		var oTargetNode, oNewNode,
 			oSelection = this.oApp.getSelection();
@@ -7236,11 +7237,11 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		
 		oNewNode.innerHTML = unescape("%uFEFF");
 		oSelection.selectNodeContents(oNewNode);	
-		oSelection.collapseToEnd(); // End ë¡œ í•´ì•¼ ìƒˆë¡œ ìƒì„±ëœ ë…¸ë“œ ì•ˆìœ¼ë¡œ Selection ì´ ë“¤ì–´ê°
+		oSelection.collapseToEnd(); // End ·Î ÇØ¾ß »õ·Î »ı¼ºµÈ ³ëµå ¾ÈÀ¸·Î Selection ÀÌ µé¾î°¨
 		oSelection.select();
 	},
 	
-	// [IE9 standard mode] _getStyleOnlyNode ì—ì„œ ë…¸ë“œë¥¼ ê²€ìƒ‰í•˜ ë•Œ ë¹ˆ ë…¸ë“œê°€ ìˆìœ¼ë©´ BOM ì¶”ê°€ 
+	// [IE9 standard mode] _getStyleOnlyNode ¿¡¼­ ³ëµå¸¦ °Ë»öÇÏ ¶§ ºó ³ëµå°¡ ÀÖÀ¸¸é BOM Ãß°¡ 
 	_addBlankTextAllSpan : function(elNode){
 		var aSpanList,
 			nSpanLen,
@@ -7317,7 +7318,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 			return elNode;
 		}
 		
-		// [SMARTEDITORSUS-227] TEXT_NODE ê°€ return ë˜ëŠ” ë¬¸ì œë¥¼ ìˆ˜ì •í•¨. IE ì—ì„œ TEXT_NODE ì˜ innrHTML ì— ì ‘ê·¼í•˜ë©´ ì˜¤ë¥˜ ë°œìƒ
+		// [SMARTEDITORSUS-227] TEXT_NODE °¡ return µÇ´Â ¹®Á¦¸¦ ¼öÁ¤ÇÔ. IE ¿¡¼­ TEXT_NODE ÀÇ innrHTML ¿¡ Á¢±ÙÇÏ¸é ¿À·ù ¹ß»ı
 		if(elNode.firstChild.nodeType === 3){
 			return nhn.husky.SE2M_Utils.isBlankTextNode(elNode.firstChild) ? elNode : null;
 			//return (elNode.firstChild.textContents === null || elNode.firstChild.textContents === "") ? elNode : null;
@@ -7341,8 +7342,8 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 			var oEnd = oLineInfo.oEnd;
 
 			// line break by Parent
-			// <div> 1234<br></div>ì¸ê²½ìš°, FFì—ì„œëŠ” ë‹¤ìŒ ë¼ì¸ìœ¼ë¡œ ì»¤ì„œ ì´ë™ì´ ì•ˆ ì¼ì–´ë‚¨.
-			// ê·¸ë˜ì„œ  <div> 1234<br><br type='_moz'/></div> ì´ì™€ ê°™ì´ ìƒì„±í•´ì£¼ì–´ì•¼ ì—ë””í„° ìƒì— 2ì¤„ë¡œ ë˜ì–´ ë³´ì„.
+			// <div> 1234<br></div>ÀÎ°æ¿ì, FF¿¡¼­´Â ´ÙÀ½ ¶óÀÎÀ¸·Î Ä¿¼­ ÀÌµ¿ÀÌ ¾È ÀÏ¾î³².
+			// ±×·¡¼­  <div> 1234<br><br type='_moz'/></div> ÀÌ¿Í °°ÀÌ »ı¼ºÇØÁÖ¾î¾ß ¿¡µğÅÍ »ó¿¡ 2ÁÙ·Î µÇ¾î º¸ÀÓ.
 			if(oEnd.bParentBreak){
 				while(oEnd.oNode && oEnd.oNode.nodeType == 3 && oEnd.oNode.nodeValue == ""){
 					oEnd.oNode = oEnd.oNode.previousSibling;
@@ -7596,7 +7597,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 
 		var nPanelBorderWidth = parseInt(this.huePanel.css('borderWidth'), 10);
 		if (!!isNaN(nPanelBorderWidth)) { nPanelBorderWidth = 0; }		
-		w -= nPanelBorderWidth * 2; // borderWidthë¥¼ ì œì™¸í•œ ë‚´ì¸¡ í­ì„ êµ¬í•¨  
+		w -= nPanelBorderWidth * 2; // borderWidth¸¦ Á¦¿ÜÇÑ ³»Ãø ÆøÀ» ±¸ÇÔ  
 		
 		for(var i=1; i < 7; i++) {
 			sp = Math.floor((i-1)/6 * (vert?h:w));
@@ -7612,7 +7613,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 				filter : "progid:DXImageTransform.Microsoft.Gradient(GradientType="+(vert?0:1)+",StartColorStr='"+s_hex+"',EndColorStr='"+e_hex+"')"
 			});
 			
-			var width = (ep - sp) + 1; // IEì—ì„œ í­ì„ ë„“í˜€ì£¼ì§€ ì•Šìœ¼ë©´ í™•ëŒ€ ì‹œ ë²Œì–´ì§, ê·¸ë˜ì„œ 1px ë³´ì • 			
+			var width = (ep - sp) + 1; // IE¿¡¼­ ÆøÀ» ³ĞÇôÁÖÁö ¾ÊÀ¸¸é È®´ë ½Ã ¹ú¾îÁü, ±×·¡¼­ 1px º¸Á¤ 			
 			elDiv.appendTo(this.huePanel);
 			elDiv.css(vert?"left":"top", 0).css(vert?"width":"height", '100%');
 			elDiv.css(vert?"top":"left", sp + "px").css(vert?"height":"width", width + "px");
@@ -7878,7 +7879,7 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
         } else {
                 this.oApp.exec("REGISTER_HOTKEY", ["alt+0", "OPEN_HELP_POPUP", []]);  
                 
-                //[SMARTEDITORSUS-1327] IE 7/8ì—ì„œ ALT+0ìœ¼ë¡œ íŒì—… ë„ìš°ê³  escí´ë¦­ì‹œ íŒì—…ì°½ ë‹«íˆê²Œ í•˜ë ¤ë©´ ì•„ë˜ ë¶€ë¶„ ê¼­ í•„ìš”í•¨. (targetì€ documentê°€ ë˜ì–´ì•¼ í•¨!)
+                //[SMARTEDITORSUS-1327] IE 7/8¿¡¼­ ALT+0À¸·Î ÆË¾÷ ¶ç¿ì°í escÅ¬¸¯½Ã ÆË¾÷Ã¢ ´İÈ÷°Ô ÇÏ·Á¸é ¾Æ·¡ ºÎºĞ ²À ÇÊ¿äÇÔ. (targetÀº document°¡ µÇ¾î¾ß ÇÔ!)
                 this.oApp.exec("REGISTER_HOTKEY", ["esc", "CLOSE_HELP_POPUP", [], document]);  
         }   
 
@@ -7901,7 +7902,7 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
 		jindo.$Fn(jindo.$Fn(this.oApp.exec, this.oApp).bind("CLOSE_HELP_POPUP", [this.oCloseButton]), this).attach(this.oCloseButton, "click");
 		jindo.$Fn(jindo.$Fn(this.oApp.exec, this.oApp).bind("CLOSE_HELP_POPUP", [this.oCloseButton2]), this).attach(this.oCloseButton2, "click");
 	
-		//ë ˆì´ì–´ì˜ ì´ë™ ë²”ìœ„ ì„¤ì •.
+		//·¹ÀÌ¾îÀÇ ÀÌµ¿ ¹üÀ§ ¼³Á¤.
 		var elIframe = this.oApp.getWYSIWYGWindow().frameElement;
         this.htOffsetPos = jindo.$Element(elIframe).offset();
         this.nEditorWidth = elIframe.offsetWidth;
@@ -7913,11 +7914,11 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
         this.nLayerHeight = 480;   		
 
         this.htTopLeftCorner = {x:parseInt(this.htOffsetPos.left, 10), y:parseInt(this.htOffsetPos.top, 10)};
-        //[css markup] left:11 top:74ë¡œ ë˜ì–´ ìˆìŒ
+        //[css markup] left:11 top:74·Î µÇ¾î ÀÖÀ½
 	},
 
 	
-	//SE2M_Configuration_General ì—ì„œ ì§€ì •í•œ ì—ë””í„° ì˜ì—­ ì´í›„ì˜ ì—˜ë ˆë¨¼íŠ¸ë¡œ í¬ì»¤ìŠ¤ê°€ ì´ë™í•˜ë„ë¡ í•œë‹¤. 
+	//SE2M_Configuration_General ¿¡¼­ ÁöÁ¤ÇÑ ¿¡µğÅÍ ¿µ¿ª ÀÌÈÄÀÇ ¿¤·¹¸ÕÆ®·Î Æ÷Ä¿½º°¡ ÀÌµ¿ÇÏµµ·Ï ÇÑ´Ù. 
 	$ON_FOCUS_NEXT_ELEMENT : function() {
 		if (!!this.htAccessOption.sNextElementId) {
 			var sNextElementId = this.htAccessOption.sNextElementId;
@@ -7939,7 +7940,7 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
 		}
 	},
 
-	//SE2M_Configuration_Generalì—ì„œ ì§€ì •í•œ ì—ë””í„° ì˜ì—­ ì´ì „ì˜ ì—˜ë ˆë¨¼íŠ¸ë¡œ í¬ì»¤ìŠ¤ê°€ ì´ë™í•˜ë„ë¡ í•œë‹¤. 
+	//SE2M_Configuration_General¿¡¼­ ÁöÁ¤ÇÑ ¿¡µğÅÍ ¿µ¿ª ÀÌÀüÀÇ ¿¤·¹¸ÕÆ®·Î Æ÷Ä¿½º°¡ ÀÌµ¿ÇÏµµ·Ï ÇÑ´Ù. 
 	$ON_FOCUS_BEFORE_ELEMENT : function() {
 		if (!!this.htAccessOption.sBeforeElementId) {
 			var sBeforeElementId = this.htAccessOption.sBeforeElementId;
@@ -7957,7 +7958,7 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
 	$ON_FOCUS_TOOLBAR_AREA : function(){
 		this.oButton = jindo.$$.getSingle("BUTTON.se2_font_family", this.oAppContainer);
 		
-		//IE7ì—ì„œëŠ” ALT+F10 ì‹¤í–‰í–ˆì„ ë•Œ í¬ì»¤ìŠ¤ê°€ ì—ë””íŒ… ì˜ì—­ì—ë„ ê°€ëŠ” í˜„ìƒì´ ìƒê¸°ë¯€ë¡œ ë¸Œë¼ìš°ì € ë²„ì „ ì²´í¬í•´ì„œ window.focus ë„£ì–´ì¤Œ.   
+		//IE7¿¡¼­´Â ALT+F10 ½ÇÇàÇßÀ» ¶§ Æ÷Ä¿½º°¡ ¿¡µğÆÃ ¿µ¿ª¿¡µµ °¡´Â Çö»óÀÌ »ı±â¹Ç·Î ºê¶ó¿ìÀú ¹öÀü Ã¼Å©ÇØ¼­ window.focus ³Ö¾îÁÜ.   
 		if(jindo.$Agent().navigator().ie && jindo.$Agent().navigator().version == 7) {
             window.focus();
 		}
@@ -7970,7 +7971,7 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
         this.oApp.exec("SELECT_UI", ["se2_accessibility"]);
 
         
-        //ì•„ë˜ ì½”ë“œ ì—†ì–´ì•¼ ë¸”ë¡œê·¸ì—ì„œë„ ë™ì¼í•œ ìœ„ì¹˜ì— íŒì—… ëœ¸..
+        //¾Æ·¡ ÄÚµå ¾ø¾î¾ß ºí·Î±×¿¡¼­µµ µ¿ÀÏÇÑ À§Ä¡¿¡ ÆË¾÷ ¶ä..
         //this.elHelpPopupLayer.style.top = this.nDefaultTop+"px";
         
         
@@ -7989,7 +7990,7 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
         this.welHelpPopupLayer.offset(this.nCalcY , (this.nCalcX)/2);
        
 
-        //[SMARTEDITORSUS-1327] IEì—ì„œ í¬ì»¤ìŠ¤ ì´ìŠˆë¡œ IEì— ëŒ€í•´ì„œë§Œ window.focusì‹¤í–‰í•¨. 
+        //[SMARTEDITORSUS-1327] IE¿¡¼­ Æ÷Ä¿½º ÀÌ½´·Î IE¿¡ ´ëÇØ¼­¸¸ window.focus½ÇÇàÇÔ. 
         if(jindo.$Agent().navigator().ie) {
         	window.focus();
         }
@@ -8004,10 +8005,10 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
 	},
 	
 	$ON_CLOSE_HELP_POPUP : function() {
-		this.oApp.exec("ENABLE_ALL_UI");		// ëª¨ë“  UI í™œì„±í™”.
+		this.oApp.exec("ENABLE_ALL_UI");		// ¸ğµç UI È°¼ºÈ­.
 		this.oApp.exec("DESELECT_UI", ["helpPopup"]);  
 		this.oApp.exec("HIDE_ALL_DIALOG_LAYER", []);
-		this.oApp.exec("HIDE_EDITING_AREA_COVER");		// í¸ì§‘ ì˜ì—­ í™œì„±í™”.
+		this.oApp.exec("HIDE_EDITING_AREA_COVER");		// ÆíÁı ¿µ¿ª È°¼ºÈ­.
 		
 		this.oApp.exec("FOCUS");
 	}
@@ -8115,7 +8116,7 @@ nhn.husky.SE2M_BGColor = jindo.$Class({
 	nLimitRecentColor : 17,
 	rxRGBColorPattern : /rgb\((\d+), ?(\d+), ?(\d+)\)/i,
 	rxColorPattern : /^#?[0-9a-fA-F]{6}$|^rgb\(\d+, ?\d+, ?\d+\)$/i,
-	aRecentColor : [],	// ìµœê·¼ ì‚¬ìš©í•œ ìƒ‰ ëª©ë¡, ê°€ì¥ ìµœê·¼ì— ë“±ë¡í•œ ìƒ‰ì˜ indexê°€ ê°€ì¥ ì‘ìŒ
+	aRecentColor : [],	// ÃÖ±Ù »ç¿ëÇÑ »ö ¸ñ·Ï, °¡Àå ÃÖ±Ù¿¡ µî·ÏÇÑ »öÀÇ index°¡ °¡Àå ÀÛÀ½
 	URL_COLOR_LIST : "",
 	URL_COLOR_ADD : "",
 	URL_COLOR_UPDATE : "",
@@ -8190,7 +8191,7 @@ nhn.husky.SE2M_BGColor = jindo.$Class({
 		while(elHovered && elHovered.tagName && elHovered.tagName.toLowerCase() != "li"){
 			elHovered = elHovered.parentNode;
 		}
-		//ì¡°ê±´ ì¶”ê°€-by cielo 2010.04.20
+		//Á¶°Ç Ãß°¡-by cielo 2010.04.20
 		if(!elHovered || !elHovered.nodeType || elHovered.nodeType == 9){return;}
 		if(elHovered.className == "" || (!elHovered.className) || typeof(elHovered.className) == 'undefined'){jindo.$Element(elHovered).addClass("hover");}
 	},
@@ -8229,7 +8230,7 @@ nhn.husky.SE2M_BGColor = jindo.$Class({
 			this.elInputColorCode.value = sColorCode;
 		}
 		
-		// ì…ë ¥ ë²„íŠ¼ì¸ ê²½ìš°
+		// ÀÔ·Â ¹öÆ°ÀÎ °æ¿ì
 		if(elButton == this.elOkBtn){
 			if(!this._verifyColorCode(sColorCode)){
 				this.elInputColorCode.value = "";
@@ -8244,13 +8245,13 @@ nhn.husky.SE2M_BGColor = jindo.$Class({
 			return;
 		}
 		
-		// ìƒ‰ìƒ ë²„íŠ¼ì¸ ê²½ìš°
+		// »ö»ó ¹öÆ°ÀÎ °æ¿ì
 		welColorParent = jindo.$Element(elButton.parentNode.parentNode.parentNode);
 		sColorCode = elButton.title;
 		
-		if(welColorParent.hasClass("husky_se2m_color_palette")){				// í…œí”Œë¦¿ ìƒ‰ìƒ ì ìš©
+		if(welColorParent.hasClass("husky_se2m_color_palette")){				// ÅÛÇÃ¸´ »ö»ó Àû¿ë
 			this.oApp.exec("COLOR_PALETTE_APPLY_COLOR", [sColorCode,false]);
-		}else if(welColorParent.hasClass("husky_se2m_color_palette_recent")){	// ìµœê·¼ ìƒ‰ìƒ ì ìš©
+		}else if(welColorParent.hasClass("husky_se2m_color_palette_recent")){	// ÃÖ±Ù »ö»ó Àû¿ë
 			this.oApp.exec("COLOR_PALETTE_APPLY_COLOR", [sColorCode,true]);
 		}
 	},
@@ -8306,7 +8307,7 @@ nhn.husky.SE2M_BGColor = jindo.$Class({
 		bAddRecentColor = (!bAddRecentColor)? false : bAddRecentColor;
 		sColorCode = this._getHexColorCode(sColorCode);
 		
-		//ë”ë³´ê¸° ë ˆì´ì–´ì—ì„œ ì ìš©í•œ ìƒ‰ìƒë§Œ ìµœê·¼ ì‚¬ìš©í•œ ìƒ‰ì— ì¶”ê°€í•œë‹¤. 
+		//´õº¸±â ·¹ÀÌ¾î¿¡¼­ Àû¿ëÇÑ »ö»ó¸¸ ÃÖ±Ù »ç¿ëÇÑ »ö¿¡ Ãß°¡ÇÑ´Ù. 
 		if( this.bUseRecentColor && !!bAddRecentColor ){
 			this.oApp.exec("ADD_RECENT_COLOR", [sColorCode]);
 		}
@@ -8534,7 +8535,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 	$BEFORE_EXECCOMMAND : function(sCommand, bUserInterface, vValue, htOptions){
 		var elTmp, oSelection;
 		
-		//ë³¸ë¬¸ì— ì „í˜€ í´ë¦­ì´ í•œë²ˆë„ ì•ˆ ì¼ì–´ë‚œ ìƒíƒœì—ì„œ í¬ë¡¬ê³¼ IEì—ì„œ EXECCOMMANDê°€ ì •ìƒì ìœ¼ë¡œ ì•ˆ ë¨¹íˆëŠ” í˜„ìƒ. 
+		//º»¹®¿¡ ÀüÇô Å¬¸¯ÀÌ ÇÑ¹øµµ ¾È ÀÏ¾î³­ »óÅÂ¿¡¼­ Å©·Ò°ú IE¿¡¼­ EXECCOMMAND°¡ Á¤»óÀûÀ¸·Î ¾È ¸ÔÈ÷´Â Çö»ó. 
 		this.oApp.exec("FOCUS");
 		this._bOnlyCursorChanged = false;		
 		oSelection = this.oApp.getSelection();
@@ -8553,7 +8554,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			if( nhn.CurrentSelection.isCollapsed()){
 				this._bOnlyCursorChanged = true;
 
-				//[SMARTEDITORSUS-228] ê¸€ê¼´ íš¨ê³¼ë¥¼ ë¯¸ë¦¬ ì§€ì • í•œ í›„ì— í…ìŠ¤íŠ¸ ì…ë ¥ ì‹œ, ìƒ‰ìƒ ë³€ê²½ì€ ì ìš©ë˜ë‚˜ êµµê²Œ ê¸°ìš¸ì„ ë°‘ì¤„ ì·¨ì†Œì„  ë“±ì˜ íš¨ê³¼ëŠ” ì ìš©ì•ˆë¨
+				//[SMARTEDITORSUS-228] ±Û²Ã È¿°ú¸¦ ¹Ì¸® ÁöÁ¤ ÇÑ ÈÄ¿¡ ÅØ½ºÆ® ÀÔ·Â ½Ã, »ö»ó º¯°æÀº Àû¿ëµÇ³ª ±½°Ô ±â¿ïÀÓ ¹ØÁÙ Ãë¼Ò¼± µîÀÇ È¿°ú´Â Àû¿ë¾ÈµÊ
 				if( this.oNavigator.ie ){
 					if(oSelection.startContainer.tagName == "BODY" && oSelection.startOffset === 0){
 						elTmp = this.oApp.getWYSIWYGDocument().createElement("SPAN");					
@@ -8696,7 +8697,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 		for(var i=0, nLen=aNodes.length; i<nLen; i++){
 			elNode = aNodes[i];
 			
-			// [SMARTEDITORSUS-704] SPANì—ì„œ ì ìš©ëœ Alignì„ ì œê±°
+			// [SMARTEDITORSUS-704] SPAN¿¡¼­ Àû¿ëµÈ AlignÀ» Á¦°Å
 			if(elNode.tagName && elNode.tagName === "SPAN"){
 				elNode.style.textAlign = "";
 				elNode.removeAttribute("align");
@@ -8704,7 +8705,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 		}
 	},
 	
-	// [SMARTEDITORSUS-851] align, text-alignì„ fixí•´ì•¼ í•  ëŒ€ìƒ ë…¸ë“œë¥¼ ì°¾ìŒ
+	// [SMARTEDITORSUS-851] align, text-alignÀ» fixÇØ¾ß ÇÒ ´ë»ó ³ëµå¸¦ Ã£À½
 	_getAlignNode : function(elNode){
 		if(elNode.tagName && (elNode.tagName === "P" || elNode.tagName === "DIV")){
 			return elNode;
@@ -8738,7 +8739,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 		};
 		
 		if(oSelection.collapsed){
-			aNodes[0] = oSelection.startContainer;	// collapsedì¸ ê²½ìš°ì—ëŠ” getNodesì˜ ê²°ê³¼ëŠ” []
+			aNodes[0] = oSelection.startContainer;	// collapsedÀÎ °æ¿ì¿¡´Â getNodesÀÇ °á°ú´Â []
 		}else{
 			aNodes = oSelection.getNodes();
 		}
@@ -8756,7 +8757,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			
 			elParentNode = this._getAlignNode(elNode);
 			
-			if(elParentNode && elParentNode.align !== elParentNode.style.textAlign){ // [SMARTEDITORSUS-704] align ì†ì„±ê³¼ text-align ì†ì„±ì˜ ê°’ì„ ë§ì¶°ì¤Œ
+			if(elParentNode && elParentNode.align !== elParentNode.style.textAlign){ // [SMARTEDITORSUS-704] align ¼Ó¼º°ú text-align ¼Ó¼ºÀÇ °ªÀ» ¸ÂÃçÁÜ
 				elParentNode.style.textAlign = sAlign;
 				elParentNode.setAttribute("align", sAlign);
 			}
@@ -8766,8 +8767,8 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 	_getDocumentBR : function(){
 		var i, nLen;
 		
-		// [COM-715] <Chrome/Safari> ìš”ì•½ê¸€ ì‚½ì… > ë”ë³´ê¸° ì˜ì—­ì—ì„œ ê¸°í˜¸ë§¤ê¸°ê¸°, ë²ˆí˜¸ë§¤ê¸°ê¸° ì„¤ì •í• ë•Œë§ˆë‹¤ ìš”ì•½ê¸€ ë°•ìŠ¤ê°€ ì•„ë˜ë¡œ ì´ë™ë¨
-		// ExecCommandë¥¼ ì²˜ë¦¬í•˜ê¸° ì „ì— í˜„ì¬ì˜ BRì„ ì €ì¥
+		// [COM-715] <Chrome/Safari> ¿ä¾à±Û »ğÀÔ > ´õº¸±â ¿µ¿ª¿¡¼­ ±âÈ£¸Å±â±â, ¹øÈ£¸Å±â±â ¼³Á¤ÇÒ¶§¸¶´Ù ¿ä¾à±Û ¹Ú½º°¡ ¾Æ·¡·Î ÀÌµ¿µÊ
+		// ExecCommand¸¦ Ã³¸®ÇÏ±â Àü¿¡ ÇöÀçÀÇ BRÀ» ÀúÀå
 		
 		this.aBRs = this.oApp.getWYSIWYGDocument().getElementsByTagName("BR");
 		this.aBeforeBRs = [];
@@ -8778,7 +8779,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 	},
 	
 	_fixDocumentBR : function(){
-		// [COM-715] ExecCommandê°€ ì²˜ë¦¬ëœ í›„ì— ì—…ë°ì´íŠ¸ëœ BRì„ ì²˜ë¦¬ ì „ì— ì €ì¥í•œ BRê³¼ ë¹„êµí•˜ì—¬ ìƒì„±ëœ BRì„ ì œê±°
+		// [COM-715] ExecCommand°¡ Ã³¸®µÈ ÈÄ¿¡ ¾÷µ¥ÀÌÆ®µÈ BRÀ» Ã³¸® Àü¿¡ ÀúÀåÇÑ BR°ú ºñ±³ÇÏ¿© »ı¼ºµÈ BRÀ» Á¦°Å
 		
 		if(this.aBeforeBRs.length === this.aBRs.length){	// this.aBRs gets updated automatically when the document is updated
 			return;
@@ -8806,7 +8807,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			this.oSelection.select();
 			
 			if(this.oNavigator.firefox){
-				this.oEditingArea.execCommand("styleWithCSS", bUserInterface, false); //styleWithCSSëŠ” ffì „ìš©ì„.
+				this.oEditingArea.execCommand("styleWithCSS", bUserInterface, false); //styleWithCSS´Â ffÀü¿ëÀÓ.
 			}
 			
 			aChildrenNode = this.oSelection.getNodes();
@@ -8838,7 +8839,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			//	</OL>
 			//	<LI>33</LI>
 			//</OL>
-			//ì™€ ê°™ì€ í˜•íƒœë¼ë©´ 33ì„ ë“¤ì—¬ì“°ê¸° í–ˆì„ ë•Œ, ìƒë‹¨ì˜ silbling OLê³¼ í•©ì³ì„œ ì•„ë˜ì™€ ê°™ì´ ë§Œë“¤ì–´ ì¤Œ.
+			//¿Í °°Àº ÇüÅÂ¶ó¸é 33À» µé¿©¾²±â ÇßÀ» ¶§, »ó´ÜÀÇ silbling OL°ú ÇÕÃÄ¼­ ¾Æ·¡¿Í °°ÀÌ ¸¸µé¾î ÁÜ.
 			//<OL>
 			//	<OL>
 			// 		<LI>22</LI>
@@ -8846,7 +8847,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			//	</OL>
 			//</OL>
 			if(elDiv.previousSibling && elDiv.previousSibling.tagName && elDiv.previousSibling.tagName === elDiv.parentNode.tagName){
-				// í•˜ë‹¨ì— ë˜ë‹¤ë¥¸ OLì´ ìˆì–´ ì•„ë˜ì™€ ê°™ì€ í˜•íƒœë¼ë©´,
+				// ÇÏ´Ü¿¡ ¶Ç´Ù¸¥ OLÀÌ ÀÖ¾î ¾Æ·¡¿Í °°Àº ÇüÅÂ¶ó¸é,
 				//<OL>
 				//	<OL>
 				// 		<LI>22</LI>
@@ -8856,7 +8857,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 				// 		<LI>44</LI>
 				//	</OL>
 				//</OL>
-				//22,33,44ë¥¼ í•©ì³ì„œ ì•„ë˜ì™€ ê°™ì´ ë§Œë“¤ì–´ ì¤Œ.
+				//22,33,44¸¦ ÇÕÃÄ¼­ ¾Æ·¡¿Í °°ÀÌ ¸¸µé¾î ÁÜ.
 				//<OL>
 				//	<OL>
 				// 		<LI>22</LI>
@@ -8892,7 +8893,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			// 		<LI>33</LI>
 			//	</OL>
 			//</OL>
-			//ì™€ ê°™ì€ í˜•íƒœë¼ë©´ 22ì„ ë“¤ì—¬ì“°ê¸° í–ˆì„ ë•Œ, í•˜ë‹¨ì˜ silbling OLê³¼ í•©ì¹œë‹¤.
+			//¿Í °°Àº ÇüÅÂ¶ó¸é 22À» µé¿©¾²±â ÇßÀ» ¶§, ÇÏ´ÜÀÇ silbling OL°ú ÇÕÄ£´Ù.
 			if(elDiv.nextSibling && elDiv.nextSibling.tagName && elDiv.nextSibling.tagName === elDiv.parentNode.tagName){
 				elDiv.nextSibling.insertBefore(elDiv, elDiv.nextSibling.firstChild);
 				return;
@@ -8929,10 +8930,10 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			elParentNode = elDiv.parentNode;
 			elInsertBefore = elDiv.parentNode;
 			
-			// LIë¥¼ ì ì ˆ ìœ„ì¹˜ë¡œ ì´ë™.
-			// ìœ„ì— ë‹¤ë¥¸ li/ol/ulê°€ ìˆëŠ”ê°€?
+			// LI¸¦ ÀûÀı À§Ä¡·Î ÀÌµ¿.
+			// À§¿¡ ´Ù¸¥ li/ol/ul°¡ ÀÖ´Â°¡?
 			if(elDiv.previousSibling && elDiv.previousSibling.tagName && elDiv.previousSibling.tagName.match(/LI|UL|OL/)){
-				// ìœ„ì•„ë˜ë¡œ sibling li/ol/ulê°€ ìˆë‹¤ë©´ ol/ulë¥¼ 2ê°œë¡œ ë‚˜ëˆ„ì–´ì•¼ë¨
+				// À§¾Æ·¡·Î sibling li/ol/ul°¡ ÀÖ´Ù¸é ol/ul¸¦ 2°³·Î ³ª´©¾î¾ßµÊ
 				if(elDiv.nextSibling && elDiv.nextSibling.tagName && elDiv.nextSibling.tagName.match(/LI|UL|OL/)){
 					elNewParent = elParentNode.cloneNode(false);
 					
@@ -8942,24 +8943,24 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 					
 					elParentNode.parentNode.insertBefore(elNewParent, elParentNode.nextSibling);
 					elInsertBefore = elNewParent;
-				// í˜„ì¬ LIê°€ ë§ˆì§€ë§‰ LIë¼ë©´ ë¶€ëª¨ OL/UL í•˜ë‹¨ì— ì‚½ì…
+				// ÇöÀç LI°¡ ¸¶Áö¸· LI¶ó¸é ºÎ¸ğ OL/UL ÇÏ´Ü¿¡ »ğÀÔ
 				}else{
 					elInsertBefore = elParentNode.nextSibling;
 				}
 			}
 			elParentNode.parentNode.insertBefore(elDiv, elInsertBefore);
 			
-			// ë‚´ì–´ì“°ê¸° í•œ LI ì™¸ì— ë‹¤ë¥¸ LIê°€ ì¡´ì¬ í•˜ì§€ ì•Šì„ ê²½ìš° ë¶€ëª¨ ë…¸ë“œ ì§€ì›Œì¤Œ
+			// ³»¾î¾²±â ÇÑ LI ¿Ü¿¡ ´Ù¸¥ LI°¡ Á¸Àç ÇÏÁö ¾ÊÀ» °æ¿ì ºÎ¸ğ ³ëµå Áö¿öÁÜ
 			if(!elParentNode.innerHTML.match(/LI/i)){
 				elParentNode.parentNode.removeChild(elParentNode);
 			}
 
-			// OLì´ë‚˜ UL ìœ„ë¡œê¹Œì§€ ë‚´ì–´ì“°ê¸°ê°€ ëœ ìƒíƒœë¼ë©´ LIë¥¼ ë²—ê²¨ëƒ„
+			// OLÀÌ³ª UL À§·Î±îÁö ³»¾î¾²±â°¡ µÈ »óÅÂ¶ó¸é LI¸¦ ¹ş°Ü³¿
 			if(!elDiv.parentNode.tagName.match(/OL|UL/)){
 				elInsertParent = elDiv.parentNode;
 				elInsertBefore = elDiv;
 
-				// ë‚´ìš©ë¬¼ì„ Pë¡œ ê°ì‹¸ê¸°
+				// ³»¿ë¹°À» P·Î °¨½Î±â
 				oDoc = this.oApp.getWYSIWYGDocument();
 				elInsertParent = oDoc.createElement("P");
 				elInsertBefore = null;
@@ -8991,7 +8992,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 	// Fix IE's execcommand bug
 	// When insertorderedlist/insertunorderedlist is executed on a blockquote, the blockquote will "suck in" directly neighboring OL, UL's if there's any.
 	// To prevent this, insert empty P tags right before and after the blockquote and remove them after the execution.
-	// [SMARTEDITORSUS-793] Chrome ì—ì„œ ë™ì¼í•œ ì´ìŠˆ ë°œìƒ, Chrome ì€ ë¹ˆ P íƒœê·¸ë¡œëŠ” ì²˜ë¦¬ë˜ì§€ ì•Šìœ¼ &nbsp; ì¶”ê°€
+	// [SMARTEDITORSUS-793] Chrome ¿¡¼­ µ¿ÀÏÇÑ ÀÌ½´ ¹ß»ı, Chrome Àº ºó P ÅÂ±×·Î´Â Ã³¸®µÇÁö ¾ÊÀ¸ &nbsp; Ãß°¡
 	_insertBlankLine : function(){
 		var oSelection = this.oApp.getSelection();
 		var elNode = oSelection.commonAncestorContainer;
@@ -9021,7 +9022,7 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 	// It can also happen when the cursor is located at bogus positions like 
 	// * below blockquote when the blockquote is the last element in the document
 	// 
-	// [IE] ì¸ìš©êµ¬ ì•ˆì—ì„œ ê¸€ë¨¸ë¦¬ ê¸°í˜¸ë¥¼ ì ìš©í–ˆì„ ë•Œ, ì¸ìš©êµ¬ ë°–ì— ì ìš©ëœ ë²ˆí˜¸ë§¤ê¸°ê¸°/ê¸€ë¨¸ë¦¬ ê¸°í˜¸ê°€ ì¸ìš©êµ¬ ì•ˆìœ¼ë¡œ ë¹¨ë ¤ ë“¤ì–´ê°€ëŠ” ë¬¸ì œ ì²˜ë¦¬
+	// [IE] ÀÎ¿ë±¸ ¾È¿¡¼­ ±Û¸Ó¸® ±âÈ£¸¦ Àû¿ëÇßÀ» ¶§, ÀÎ¿ë±¸ ¹Û¿¡ Àû¿ëµÈ ¹øÈ£¸Å±â±â/±Û¸Ó¸® ±âÈ£°¡ ÀÎ¿ë±¸ ¾ÈÀ¸·Î »¡·Á µé¾î°¡´Â ¹®Á¦ Ã³¸®
 	_fixCorruptedBlockQuote : function(sTagName){
 		var aNodes = this.oApp.getWYSIWYGDocument().getElementsByTagName(sTagName),
 			elCorruptedBlockQuote, elTmpParent, elNewNode, aLists,
@@ -9079,8 +9080,8 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 	}, 
 	
 	_extendBlock : function(){
-		// [SMARTEDITORSUS-663] [FF] blockë‹¨ìœ„ë¡œ í™•ì¥í•˜ì—¬ Rangeë¥¼ ìƒˆë¡œ ì§€ì •í•´ì£¼ëŠ”ê²ƒì´ ì›ë˜ ìŠ¤í™ì´ë¯€ë¡œ
-		// í•´ê²°ì„ ìœ„í•´ì„œëŠ” í˜„ì¬ ì„ íƒëœ ë¶€ë¶„ì„ Blockìœ¼ë¡œ extendí•˜ì—¬ execCommand APIê°€ ì²˜ë¦¬ë  ìˆ˜ ìˆë„ë¡ í•¨
+		// [SMARTEDITORSUS-663] [FF] block´ÜÀ§·Î È®ÀåÇÏ¿© Range¸¦ »õ·Î ÁöÁ¤ÇØÁÖ´Â°ÍÀÌ ¿ø·¡ ½ºÆåÀÌ¹Ç·Î
+		// ÇØ°áÀ» À§ÇØ¼­´Â ÇöÀç ¼±ÅÃµÈ ºÎºĞÀ» BlockÀ¸·Î extendÇÏ¿© execCommand API°¡ Ã³¸®µÉ ¼ö ÀÖµµ·Ï ÇÔ
 
 		var oSelection = this.oApp.getSelection(),
 			oStartContainer = oSelection.startContainer,
@@ -9089,8 +9090,8 @@ nhn.husky.SE2M_ExecCommand = jindo.$Class({
 			aSelectedImg = [],
 			oSelectionClone = oSelection.cloneRange();
 		
-		// <p><img><br/><img><br/><img></p> ì¼ ë•Œ ì´ë¯¸ì§€ê°€ ì¼ë¶€ë§Œ ì„ íƒë˜ë©´ ë°œìƒ
-		// - container ë…¸ë“œëŠ” P ì´ê³  container ë…¸ë“œì˜ ìì‹ë…¸ë“œ ì¤‘ ì´ë¯¸ì§€ê°€ ì—¬ëŸ¬ê°œì¸ë° ì„ íƒëœ ì´ë¯¸ì§€ê°€ ê·¸ ì¤‘ ì¼ë¶€ì¸ ê²½ìš°
+		// <p><img><br/><img><br/><img></p> ÀÏ ¶§ ÀÌ¹ÌÁö°¡ ÀÏºÎ¸¸ ¼±ÅÃµÇ¸é ¹ß»ı
+		// - container ³ëµå´Â P ÀÌ°í container ³ëµåÀÇ ÀÚ½Ä³ëµå Áß ÀÌ¹ÌÁö°¡ ¿©·¯°³ÀÎµ¥ ¼±ÅÃµÈ ÀÌ¹ÌÁö°¡ ±× Áß ÀÏºÎÀÎ °æ¿ì
 		
 		if(!(oStartContainer === oEndContainer && oStartContainer.nodeType === 1 && oStartContainer.tagName === "P")){
 			return;
@@ -9175,9 +9176,9 @@ nhn.husky.SE2M_FontColor = jindo.$Class({
 		
 		this.oApp.exec("SET_WYSIWYG_STYLE", [{"color":sFontColor}]);
 
-		// [SMARTEDITORSUS-907] ëª¨ë“  ë¸Œë¼ìš°ì €ì—ì„œ SET_WYSIWYG_STYLEë¡œ ìƒ‰ìƒì„ ì„¤ì •í•˜ë„ë¡ ë³€ê²½
+		// [SMARTEDITORSUS-907] ¸ğµç ºê¶ó¿ìÀú¿¡¼­ SET_WYSIWYG_STYLE·Î »ö»óÀ» ¼³Á¤ÇÏµµ·Ï º¯°æ
 		// var oAgent = jindo.$Agent().navigator();
-		// if( oAgent.ie || oAgent.firefox ){	// [SMARTEDITORSUS-658] Firefox ì¶”ê°€
+		// if( oAgent.ie || oAgent.firefox ){	// [SMARTEDITORSUS-658] Firefox Ãß°¡
 		//	this.oApp.exec("SET_WYSIWYG_STYLE", [{"color":sFontColor}]);
 		// } else {
 		// 	var bDontAddUndoHistory = false;
@@ -9221,7 +9222,7 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 	addAllFonts : function(){
 		var aDefaultFontList, aFontList, htMainFont, aFontInUse, i;
 		
-		// family name -> display name ë§¤í•‘ (ì›¹í°íŠ¸ëŠ” ë‘ê°œê°€ ë‹¤ë¦„)
+		// family name -> display name ¸ÅÇÎ (À¥ÆùÆ®´Â µÎ°³°¡ ´Ù¸§)
 		this.htFamilyName2DisplayName = {};
 		this.htAllFonts = {};
 		
@@ -9262,15 +9263,15 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 			}
 		}
 		
-		// [SMARTEDITORSUS-245] ì„œë¹„ìŠ¤ ì ìš© ì‹œ ê¸€ê¼´ì •ë³´ë¥¼ ë„˜ê¸°ì§€ ì•Šìœ¼ë©´ ê¸°ë³¸ ê¸€ê¼´ ëª©ë¡ì´ ë³´ì´ì§€ ì•ŠëŠ” ì˜¤ë¥˜
+		// [SMARTEDITORSUS-245] ¼­ºñ½º Àû¿ë ½Ã ±Û²ÃÁ¤º¸¸¦ ³Ñ±âÁö ¾ÊÀ¸¸é ±âº» ±Û²Ã ¸ñ·ÏÀÌ º¸ÀÌÁö ¾Ê´Â ¿À·ù
 		if(!this.htOptions || !this.htOptions.aDefaultFontList || this.htOptions.aDefaultFontList.length === 0){
-			this.addFont("ë‹ì›€,Dotum", "ë‹ì›€", 0, "", "", 1);
-			this.addFont("ë‹ì›€ì²´,DotumChe", "ë‹ì›€ì²´", 0, "", "", 1);
-			this.addFont("êµ´ë¦¼,Gulim", "êµ´ë¦¼", 0, "", "", 1);
-			this.addFont("êµ´ë¦¼ì²´,GulimChe", "êµ´ë¦¼ì²´", 0, "", "", 1);
-			this.addFont("ë°”íƒ•,Batang", "ë°”íƒ•", 0, "", "", 1);
-			this.addFont("ë°”íƒ•ì²´,BatangChe", "ë°”íƒ•ì²´", 0, "", "", 1);
-			this.addFont("ê¶ì„œ,Gungsuh", "ê¶ì„œ", 0, "", "", 1);
+			this.addFont("µ¸¿ò,Dotum", "µ¸¿ò", 0, "", "", 1);
+			this.addFont("µ¸¿òÃ¼,DotumChe", "µ¸¿òÃ¼", 0, "", "", 1);
+			this.addFont("±¼¸²,Gulim", "±¼¸²", 0, "", "", 1);
+			this.addFont("±¼¸²Ã¼,GulimChe", "±¼¸²Ã¼", 0, "", "", 1);
+			this.addFont("¹ÙÅÁ,Batang", "¹ÙÅÁ", 0, "", "", 1);
+			this.addFont("¹ÙÅÁÃ¼,BatangChe", "¹ÙÅÁÃ¼", 0, "", "", 1);
+			this.addFont("±Ã¼­,Gungsuh", "±Ã¼­", 0, "", "", 1);
 			this.addFont('Arial', 'Arial', 0, "", "", 1);
 			this.addFont('Tahoma', 'Tahoma', 0, "", "", 1, "abcd");
 			this.addFont('Times New Roman', 'Times New Roman', 0, "", "", 1, "abcd");
@@ -9283,9 +9284,9 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 
 		this.oApp.exec("ADD_APP_PROPERTY", ["addFont", jindo.$Fn(this.addFont, this).bind()]);
 		this.oApp.exec("ADD_APP_PROPERTY", ["addFontInUse", jindo.$Fn(this.addFontInUse, this).bind()]);
-		// ë¸”ë¡œê·¸ë“± íŒ©í† ë¦¬ í°íŠ¸ í¬í•¨ ìš©
+		// ºí·Î±×µî ÆÑÅä¸® ÆùÆ® Æ÷ÇÔ ¿ë
 		this.oApp.exec("ADD_APP_PROPERTY", ["setMainFont", jindo.$Fn(this.setMainFont, this).bind()]);
-		// ë©”ì¼ë“± ë‹¨ìˆœ í°íŠ¸ ì§€ì • ìš©
+		// ¸ŞÀÏµî ´Ü¼ø ÆùÆ® ÁöÁ¤ ¿ë
 		this.oApp.exec("ADD_APP_PROPERTY", ["setDefaultFont", jindo.$Fn(this.setDefaultFont, this).bind()]);
 		
 		this.oApp.exec("REGISTER_UI_EVENT", ["fontName", "click", "SE2M_TOGGLE_FONTNAME_LAYER"]);
@@ -9363,14 +9364,14 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 			return;
 		}
 		
-		if(this.htBrowser.nativeVersion < 9){		// [SMARTEDITORSUS-187] [< IE9] ìµœì´ˆ paste ì‹œì ì— ì›¹í°íŠ¸ íŒŒì¼ì„ ë¡œë“œ
+		if(this.htBrowser.nativeVersion < 9){		// [SMARTEDITORSUS-187] [< IE9] ÃÖÃÊ paste ½ÃÁ¡¿¡ À¥ÆùÆ® ÆÄÀÏÀ» ·Îµå
 			this._wfOnPasteWYSIWYGBody = jindo.$Fn(this._onPasteWYSIWYGBody, this);
 			this._wfOnPasteWYSIWYGBody.attach(this.oApp.getWYSIWYGDocument().body, "paste");
 			
 			return;
 		}
 		
-		if(document.documentMode < 9){	// [SMARTEDITORSUS-169] [>= IE9] ìµœì´ˆ í¬ì»¤ìŠ¤ ì‹œì ì— ì›¹í°íŠ¸ ë¡œë“œ
+		if(document.documentMode < 9){	// [SMARTEDITORSUS-169] [>= IE9] ÃÖÃÊ Æ÷Ä¿½º ½ÃÁ¡¿¡ À¥ÆùÆ® ·Îµå
 			this._wfOnFocusWYSIWYGBody = jindo.$Fn(this._onFocusWYSIWYGBody, this);
 			this._wfOnFocusWYSIWYGBody.attach(this.oApp.getWYSIWYGDocument().body, "focus");
 			
@@ -9405,7 +9406,7 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 			welBody = jindo.$Element(elBody),
 			oSelection = this.oApp.getEmptySelection();
 		
-		// [SMARTEDITORSUS-363] ê°•ì œë¡œ Selection ì„ ì£¼ë„ë¡ ì²˜ë¦¬í•¨
+		// [SMARTEDITORSUS-363] °­Á¦·Î Selection À» ÁÖµµ·Ï Ã³¸®ÇÔ
 		oSelection.selectNode(elBody);
 		oSelection.collapseToStart();
 		oSelection.select();
@@ -9453,7 +9454,7 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 			this.oDropdownLayer.style.overflowX = 'hidden';
 			this.oDropdownLayer.style.overflowY = 'auto';
 			this.oDropdownLayer.style.height = '400px';
-			this.oDropdownLayer.style.width = '204px';	// [SMARTEDITORSUS-155] ìŠ¤í¬ë¡¤ì„ í¬í•¨í•˜ì—¬ 206px ì´ ë˜ë„ë¡ ì²˜ë¦¬
+			this.oDropdownLayer.style.width = '204px';	// [SMARTEDITORSUS-155] ½ºÅ©·ÑÀ» Æ÷ÇÔÇÏ¿© 206px ÀÌ µÇµµ·Ï Ã³¸®
 		}
 	},
 
@@ -9476,7 +9477,7 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 		}
 		
 		var sFontFamily = this._getFontFamilyFromLI(elTmp);
-		// [SMARTEDITORSUS-169] ì›¹í°íŠ¸ì˜ ê²½ìš° fontFamily ì— ' ì„ ë¶™ì—¬ì£¼ëŠ” ì²˜ë¦¬ë¥¼ í•¨
+		// [SMARTEDITORSUS-169] À¥ÆùÆ®ÀÇ °æ¿ì fontFamily ¿¡ ' À» ºÙ¿©ÁÖ´Â Ã³¸®¸¦ ÇÔ
 		var htFontInfo = this.htAllFonts[sFontFamily.replace(/\"/g, nhn.husky.SE2M_FontNameWithLayerUI.CUSTOM_FONT_MARKS)];
 		var nDefaultFontSize;
 		if(htFontInfo){
@@ -9549,13 +9550,13 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 	$ON_SET_FONTFAMILY : function(sFontFamily, sDefaultSize){
 		if(!sFontFamily){return;}
 		
-		// [SMARTEDITORSUS-169] ì›¹í°íŠ¸ì˜ ê²½ìš° fontFamily ì— ' ì„ ë¶™ì—¬ì£¼ëŠ” ì²˜ë¦¬ë¥¼ í•¨
+		// [SMARTEDITORSUS-169] À¥ÆùÆ®ÀÇ °æ¿ì fontFamily ¿¡ ' À» ºÙ¿©ÁÖ´Â Ã³¸®¸¦ ÇÔ
 		var oFontInfo = this.htAllFonts[sFontFamily.replace(/\"/g, nhn.husky.SE2M_FontNameWithLayerUI.CUSTOM_FONT_MARKS)];
 		if(!!oFontInfo){
 			oFontInfo.loadCSS(this.oApp.getWYSIWYGDocument());
 		}
 		
-		// fontFamilyì™€ fontSize ë‘ê°œì˜ ì•¡ì…˜ì„ í•˜ë‚˜ë¡œ ë¬¶ì–´ì„œ undo history ì €ì¥
+		// fontFamily¿Í fontSize µÎ°³ÀÇ ¾×¼ÇÀ» ÇÏ³ª·Î ¹­¾î¼­ undo history ÀúÀå
 		this.oApp.exec("RECORD_UNDO_BEFORE_ACTION", ["SET FONTFAMILY", {bMustBlockElement:true}]);
 		this.bDoNotRecordUndo = true;
 		
@@ -9589,7 +9590,7 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 
 	_getFontFamilyFromLI : function(elLi){
 		//return elLi.childNodes[1].innerHTML.toLowerCase();
-		// <li><button type="button"><span>ë‹ìŒ</span>(</span><em style="font-family:'ë‹ìŒ',Dotum,'êµ´ë¦¼',Gulim,Helvetica,Sans-serif;">ë‹ìŒ</em><span>)</span></span></button></li>
+		// <li><button type="button"><span>µ¸À½</span>(</span><em style="font-family:'µ¸À½',Dotum,'±¼¸²',Gulim,Helvetica,Sans-serif;">µ¸À½</em><span>)</span></span></button></li>
 		return (elLi.getElementsByTagName("EM")[0]).style.fontFamily; 
 	},
 	
@@ -9645,23 +9646,23 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 
 		this._allFontList[this._allFontList.length] = newFont;
 */		
-		// [SMARTEDITORSUS-169] [IE9] ì›¹í°íŠ¸A ì„ íƒ>ì›¹í°íŠ¸B ì„ íƒ>ì›¹í°íŠ¸ Aë¥¼ ë‹¤ì‹œ ì„ íƒí•˜ë©´ ì›¹í°íŠ¸ Aê°€ ì ìš©ë˜ì§€ ì•ŠëŠ” ë¬¸ì œê°€ ë°œìƒ
+		// [SMARTEDITORSUS-169] [IE9] À¥ÆùÆ®A ¼±ÅÃ>À¥ÆùÆ®B ¼±ÅÃ>À¥ÆùÆ® A¸¦ ´Ù½Ã ¼±ÅÃÇÏ¸é À¥ÆùÆ® A°¡ Àû¿ëµÇÁö ¾Ê´Â ¹®Á¦°¡ ¹ß»ı
 		//
-		// [ì›ì¸]
-		// 		- IE9ì˜ ì›¹í°íŠ¸ ë¡œë“œ/ì–¸ë¡œë“œ ì‹œì 
-		// 			ì›¹í°íŠ¸ ë¡œë“œ ì‹œì : StyleSheet ì˜ @font-face êµ¬ë¬¸ì´ í•´ì„ëœ ì´í›„, DOM Tree ìƒì—ì„œ í•´ë‹¹ ì›¹í°íŠ¸ê°€ ìµœì´ˆë¡œ ì‚¬ìš©ëœ ì‹œì 
-		// 			ì›¹í°íŠ¸ ì–¸ë¡œë“œ ì‹œì : StyleSheet ì˜ @font-face êµ¬ë¬¸ì´ í•´ì„ëœ ì´í›„, DOM Tree ìƒì—ì„œ í•´ë‹¹ ì›¬í°íŠ¸ê°€ ë”ì´ìƒ ì‚¬ìš©ë˜ì§€ ì•ŠëŠ” ì‹œì 
-		// 		- ë©”ë‰´ ë¦¬ìŠ¤íŠ¸ì— ì ìš©ë˜ëŠ” ìŠ¤íƒ€ì¼ì€ @font-face ì´ì „ì— ì²˜ë¦¬ë˜ëŠ” ê²ƒì´ì–´ì„œ ì–¸ë¡œë“œì— ì˜í–¥ì„ ë¯¸ì¹˜ì§€ ì•ŠìŒ
+		// [¿øÀÎ]
+		// 		- IE9ÀÇ À¥ÆùÆ® ·Îµå/¾ğ·Îµå ½ÃÁ¡
+		// 			À¥ÆùÆ® ·Îµå ½ÃÁ¡: StyleSheet ÀÇ @font-face ±¸¹®ÀÌ ÇØ¼®µÈ ÀÌÈÄ, DOM Tree »ó¿¡¼­ ÇØ´ç À¥ÆùÆ®°¡ ÃÖÃÊ·Î »ç¿ëµÈ ½ÃÁ¡
+		// 			À¥ÆùÆ® ¾ğ·Îµå ½ÃÁ¡: StyleSheet ÀÇ @font-face ±¸¹®ÀÌ ÇØ¼®µÈ ÀÌÈÄ, DOM Tree »ó¿¡¼­ ÇØ´ç À¢ÆùÆ®°¡ ´õÀÌ»ó »ç¿ëµÇÁö ¾Ê´Â ½ÃÁ¡
+		// 		- ¸Ş´º ¸®½ºÆ®¿¡ Àû¿ëµÇ´Â ½ºÅ¸ÀÏÀº @font-face ÀÌÀü¿¡ Ã³¸®µÇ´Â °ÍÀÌ¾î¼­ ¾ğ·Îµå¿¡ ¿µÇâÀ» ¹ÌÄ¡Áö ¾ÊÀ½
 		//
-		// 		ìŠ¤ë§ˆíŠ¸ì—ë””í„°ì˜ ê²½ìš°, ì›¹í°íŠ¸ë¥¼ ì„ íƒí•  ë•Œë§ˆë‹¤ SPAN ì´ ìƒˆë¡œ ì¶”ê°€ë˜ëŠ” ê²ƒì´ ì•„ë‹Œ ì„ íƒëœ SPAN ì˜ fontFamily ë¥¼ ë³€ê²½í•˜ì—¬ ì²˜ë¦¬í•˜ë¯€ë¡œ
-		// 		fontFamily ë³€ê²½ í›„ DOM Tree ìƒì—ì„œ ë”ì´ìƒ ì‚¬ìš©ë˜ì§€ ì•ŠëŠ” ê²ƒìœ¼ë¡œ ë¸Œë¼ìš°ì € íŒë‹¨í•˜ì—¬ ì–¸ë¡œë“œ í•´ë²„ë¦¼.
-		// [í•´ê²°] 
-		//		ì–¸ë¡œë“œê°€ ë°œìƒí•˜ì§€ ì•Šë„ë¡ ë©”ë‰´ ë¦¬ìŠ¤íŠ¸ì— ìŠ¤íƒ€ì¼ì„ ì ìš©í•˜ëŠ” ê²ƒì„ @font-face ì´í›„ë¡œ í•˜ë„ë¡ ì²˜ë¦¬í•˜ì—¬ DOM Tree ìƒì— í•­ìƒ ì ìš©ë  ìˆ˜ ìˆë„ë¡ í•¨
+		// 		½º¸¶Æ®¿¡µğÅÍÀÇ °æ¿ì, À¥ÆùÆ®¸¦ ¼±ÅÃÇÒ ¶§¸¶´Ù SPAN ÀÌ »õ·Î Ãß°¡µÇ´Â °ÍÀÌ ¾Æ´Ñ ¼±ÅÃµÈ SPAN ÀÇ fontFamily ¸¦ º¯°æÇÏ¿© Ã³¸®ÇÏ¹Ç·Î
+		// 		fontFamily º¯°æ ÈÄ DOM Tree »ó¿¡¼­ ´õÀÌ»ó »ç¿ëµÇÁö ¾Ê´Â °ÍÀ¸·Î ºê¶ó¿ìÀú ÆÇ´ÜÇÏ¿© ¾ğ·Îµå ÇØ¹ö¸².
+		// [ÇØ°á] 
+		//		¾ğ·Îµå°¡ ¹ß»ıÇÏÁö ¾Êµµ·Ï ¸Ş´º ¸®½ºÆ®¿¡ ½ºÅ¸ÀÏÀ» Àû¿ëÇÏ´Â °ÍÀ» @font-face ÀÌÈÄ·Î ÇÏµµ·Ï Ã³¸®ÇÏ¿© DOM Tree »ó¿¡ Ç×»ó Àû¿ëµÉ ¼ö ÀÖµµ·Ï ÇÔ
 		//
-		// [SMARTEDITORSUS-969] [IE10] ì›¹í°íŠ¸ë¥¼ ì‚¬ìš©í•˜ì—¬ ê¸€ì„ ë“±ë¡í•˜ê³ , ìˆ˜ì •ëª¨ë“œë¡œ ë“¤ì–´ê°”ì„ ë•Œ ì›¹í°íŠ¸ê°€ ì ìš©ë˜ì§€ ì•ŠëŠ” ë¬¸ì œ
-		//		- IE10ì—ì„œë„ ì›¹í°íŠ¸ ì–¸ë¡œë“œê°€ ë°œìƒí•˜ì§€ ì•Šë„ë¡ ì¡°ê±´ì„ ìˆ˜ì •í•¨
-		//		     -> ê¸°ì¡´ : nativeVersion === 9 && documentMode === 9
-		//		     -> ìˆ˜ì • : nativeVersion >= 9 && documentMode >= 9
+		// [SMARTEDITORSUS-969] [IE10] À¥ÆùÆ®¸¦ »ç¿ëÇÏ¿© ±ÛÀ» µî·ÏÇÏ°í, ¼öÁ¤¸ğµå·Î µé¾î°¬À» ¶§ À¥ÆùÆ®°¡ Àû¿ëµÇÁö ¾Ê´Â ¹®Á¦
+		//		- IE10¿¡¼­µµ À¥ÆùÆ® ¾ğ·Îµå°¡ ¹ß»ıÇÏÁö ¾Êµµ·Ï Á¶°ÇÀ» ¼öÁ¤ÇÔ
+		//		     -> ±âÁ¸ : nativeVersion === 9 && documentMode === 9
+		//		     -> ¼öÁ¤ : nativeVersion >= 9 && documentMode >= 9
 		if(this.htBrowser.ie && this.htBrowser.nativeVersion >= 9 && document.documentMode >= 9) {
 			newFont.loadCSSToMenu();
 		}
@@ -9713,7 +9714,7 @@ nhn.husky.SE2M_FontNameWithLayerUI = jindo.$Class({
 	}
 });
 
-nhn.husky.SE2M_FontNameWithLayerUI.CUSTOM_FONT_MARKS = "'";	// [SMARTEDITORSUS-169] ì›¹í°íŠ¸ì˜ ê²½ìš° fontFamily ì— ' ì„ ë¶™ì—¬ì£¼ëŠ” ì²˜ë¦¬ë¥¼ í•¨	
+nhn.husky.SE2M_FontNameWithLayerUI.CUSTOM_FONT_MARKS = "'";	// [SMARTEDITORSUS-169] À¥ÆùÆ®ÀÇ °æ¿ì fontFamily ¿¡ ' À» ºÙ¿©ÁÖ´Â Ã³¸®¸¦ ÇÔ	
 
 // property function for all fonts - including the default fonts and the custom fonts
 // non-custom fonts will have the defaultSize of 0 and empty string for fontURL/fontCSSURL
@@ -9747,8 +9748,8 @@ function fontProperty(fontId, fontName, defaultSize, fontURL, fontCSSURL){
 		};
 		
 		// [SMARTEDITORSUS-169] [IE9] 
-		// addImport í›„ì— ì²˜ìŒ ì ìš©ëœ DOM-Tree ê°€ iframe ë‚´ë¶€ì¸ ê²½ìš° (setMainFont || addFontInUse ì—ì„œ í˜¸ì¶œëœ ê²½ìš°)
-		// í•´ë‹¹ í°íŠ¸ì— ëŒ€í•œ ì–¸ë¡œë“œ ë¬¸ì œê°€ ê³„ì† ë°œìƒí•˜ì—¬ IE9ì—ì„œ addFont ì—ì„œ í˜¸ì¶œí•˜ëŠ” loadCSS ì˜ ê²½ìš°ì—ëŠ” isLoadedë¥¼ true ë¡œ ë³€ê²½í•˜ì§€ ì•ŠìŒ.
+		// addImport ÈÄ¿¡ Ã³À½ Àû¿ëµÈ DOM-Tree °¡ iframe ³»ºÎÀÎ °æ¿ì (setMainFont || addFontInUse ¿¡¼­ È£ÃâµÈ °æ¿ì)
+		// ÇØ´ç ÆùÆ®¿¡ ´ëÇÑ ¾ğ·Îµå ¹®Á¦°¡ °è¼Ó ¹ß»ıÇÏ¿© IE9¿¡¼­ addFont ¿¡¼­ È£ÃâÇÏ´Â loadCSS ÀÇ °æ¿ì¿¡´Â isLoaded¸¦ true ·Î º¯°æÇÏÁö ¾ÊÀ½.
 		this.loadCSSToMenu = function(){
 			this._importCSS(document);
 		};
@@ -9985,7 +9986,7 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 			var sTarget = oAnchor.target;
 			//if(sTarget && sTarget == "_blank"){this.oCbNewWin.checked = true;}
 
-			// hrefì†ì„±ì— ë¬¸ì œê°€ ìˆì„ ê²½ìš°, ì˜ˆ: href="http://na&nbsp;&nbsp; ver.com", IEì—ì„œ oAnchor.href ì ‘ê·¼ ì‹œì— ì•Œìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ë¥¼ ë°œìƒì‹œí‚´
+			// href¼Ó¼º¿¡ ¹®Á¦°¡ ÀÖÀ» °æ¿ì, ¿¹: href="http://na&nbsp;&nbsp; ver.com", IE¿¡¼­ oAnchor.href Á¢±Ù ½Ã¿¡ ¾Ë¼ö ¾ø´Â ¿À·ù¸¦ ¹ß»ı½ÃÅ´
 			try{
 				var sHref = oAnchor.getAttribute("href");
 				this.oLinkInput.value = sHref && sHref.indexOf("#") == -1 ? sHref : "http://";
@@ -10041,23 +10042,23 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 				this.oSelection.pasteHTML(str);
 				sBM = this.oSelection.placeStringBookmark();
 			}else{
-				// ë¸Œë¼ìš°ì €ì—ì„œ ì œê³µí•˜ëŠ” execcommandì— createLinkë¡œëŠ” íƒ€ê²Ÿì„ ì§€ì •í•  ìˆ˜ê°€ ì—†ë‹¤.
-				// ê·¸ë ‡ê¸° ë•Œë¬¸ì—, ë”ë¯¸ URLì„ createLinkì— ë„˜ê²¨ì„œ ë§í¬ë¥¼ ë¨¼ì € ê±¸ê³ , ì´í›„ì— loopì„ ëŒë©´ì„œ ë”ë¯¸ URLì„ ê°€ì§„ Aíƒœê·¸ë¥¼ ì°¾ì•„ì„œ ì •ìƒ URL ë° íƒ€ê²Ÿì„ ì„¸íŒ… í•´ ì¤€ë‹¤.
+				// ºê¶ó¿ìÀú¿¡¼­ Á¦°øÇÏ´Â execcommand¿¡ createLink·Î´Â Å¸°ÙÀ» ÁöÁ¤ÇÒ ¼ö°¡ ¾ø´Ù.
+				// ±×·¸±â ¶§¹®¿¡, ´õ¹Ì URLÀ» createLink¿¡ ³Ñ°Ü¼­ ¸µÅ©¸¦ ¸ÕÀú °É°í, ÀÌÈÄ¿¡ loopÀ» µ¹¸é¼­ ´õ¹Ì URLÀ» °¡Áø AÅÂ±×¸¦ Ã£¾Æ¼­ Á¤»ó URL ¹× Å¸°ÙÀ» ¼¼ÆÃ ÇØ ÁØ´Ù.
 				sBM = this.oSelection.placeStringBookmark();
 				this.oSelection.select();
 				
-				// [SMARTEDITORSUS-61] TD ì•ˆì— ìˆëŠ” í…ìŠ¤íŠ¸ë¥¼ ì „ì²´ ì„ íƒí•˜ì—¬ URL ë³€ê²½í•˜ë©´ ìˆ˜ì •ë˜ì§€ ì•ŠìŒ (only IE8)
-				//		SE_EditingArea_WYSIWYG ì—ì„œëŠ” IEì¸ ê²½ìš°, beforedeactivate ì´ë²¤íŠ¸ê°€ ë°œìƒí•˜ë©´ í˜„ì¬ì˜ Rangeë¥¼ ì €ì¥í•˜ê³ , RESTORE_IE_SELECTION ë©”ì‹œì§€ê°€ ë°œìƒí•˜ë©´ ì €ì¥ëœ Rangeë¥¼ ì ìš©í•œë‹¤.
-				//		IE8 ë˜ëŠ” IE7 í˜¸í™˜ëª¨ë“œì´ê³  TD ì•ˆì˜ í…ìŠ¤íŠ¸ ì „ì²´ë¥¼ ì„ íƒí•œ ê²½ìš°  Bookmark ìƒì„± í›„ì˜ select()ë¥¼ ì²˜ë¦¬í•  ë•Œ
-				//		HuskyRange ì—ì„œ í˜¸ì¶œë˜ëŠ” this._oSelection.empty(); ì—ì„œ beforedeactivate ê°€ ë°œìƒí•˜ì—¬ empty ì²˜ë¦¬ëœ selection ì´ ì €ì¥ë˜ëŠ” ë¬¸ì œê°€ ìˆì–´ ë§í¬ê°€ ì ìš©ë˜ì§€ ì•ŠìŒ.
-				//		ì˜¬ë°”ë¥¸ selection ì´ ì €ì¥ë˜ì–´ EXECCOMMANDì—ì„œ ë§í¬ê°€ ì ìš©ë  ìˆ˜ ìˆë„ë¡ í•¨
-				if(oAgent.ie && (oAgent.version === 8 || oAgent.nativeVersion === 8)){	// nativeVersion ìœ¼ë¡œ IE7 í˜¸í™˜ëª¨ë“œì¸ ê²½ìš° í™•ì¸
+				// [SMARTEDITORSUS-61] TD ¾È¿¡ ÀÖ´Â ÅØ½ºÆ®¸¦ ÀüÃ¼ ¼±ÅÃÇÏ¿© URL º¯°æÇÏ¸é ¼öÁ¤µÇÁö ¾ÊÀ½ (only IE8)
+				//		SE_EditingArea_WYSIWYG ¿¡¼­´Â IEÀÎ °æ¿ì, beforedeactivate ÀÌº¥Æ®°¡ ¹ß»ıÇÏ¸é ÇöÀçÀÇ Range¸¦ ÀúÀåÇÏ°í, RESTORE_IE_SELECTION ¸Ş½ÃÁö°¡ ¹ß»ıÇÏ¸é ÀúÀåµÈ Range¸¦ Àû¿ëÇÑ´Ù.
+				//		IE8 ¶Ç´Â IE7 È£È¯¸ğµåÀÌ°í TD ¾ÈÀÇ ÅØ½ºÆ® ÀüÃ¼¸¦ ¼±ÅÃÇÑ °æ¿ì  Bookmark »ı¼º ÈÄÀÇ select()¸¦ Ã³¸®ÇÒ ¶§
+				//		HuskyRange ¿¡¼­ È£ÃâµÇ´Â this._oSelection.empty(); ¿¡¼­ beforedeactivate °¡ ¹ß»ıÇÏ¿© empty Ã³¸®µÈ selection ÀÌ ÀúÀåµÇ´Â ¹®Á¦°¡ ÀÖ¾î ¸µÅ©°¡ Àû¿ëµÇÁö ¾ÊÀ½.
+				//		¿Ã¹Ù¸¥ selection ÀÌ ÀúÀåµÇ¾î EXECCOMMAND¿¡¼­ ¸µÅ©°¡ Àû¿ëµÉ ¼ö ÀÖµµ·Ï ÇÔ
+				if(oAgent.ie && (oAgent.version === 8 || oAgent.nativeVersion === 8)){	// nativeVersion À¸·Î IE7 È£È¯¸ğµåÀÎ °æ¿ì È®ÀÎ
 					this.oApp.exec("IE_FOCUS", []);
 					this.oSelection.moveToBookmark(sBM);
 					this.oSelection.select();
 				}
 				
-				// createLink ì´í›„ì— ì´ë²ˆì— ìƒì„±ëœ A íƒœê·¸ë¥¼ ì°¾ì„ ìˆ˜ ìˆë„ë¡ nSessionì„ í¬í•¨í•˜ëŠ” ë”ë¯¸ ë§í¬ë¥¼ ë§Œë“ ë‹¤.
+				// createLink ÀÌÈÄ¿¡ ÀÌ¹ø¿¡ »ı¼ºµÈ A ÅÂ±×¸¦ Ã£À» ¼ö ÀÖµµ·Ï nSessionÀ» Æ÷ÇÔÇÏ´Â ´õ¹Ì ¸µÅ©¸¦ ¸¸µç´Ù.
 				var nSession = Math.ceil(Math.random()*10000);
 				
 				if(sURL == ""){	// unlink
@@ -10150,7 +10151,7 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 			return false;
 		}
 
-		// [SMARTEDITORSUS-612] ì´ë¯¸ì§€ ì„ íƒ í›„ ë§í¬ ì¶”ê°€í–ˆì„ ë•Œ ë§í¬ê°€ ê±¸ë¦¬ì§€ ì•ŠëŠ” ë¬¸ì œ
+		// [SMARTEDITORSUS-612] ÀÌ¹ÌÁö ¼±ÅÃ ÈÄ ¸µÅ© Ãß°¡ÇßÀ» ¶§ ¸µÅ©°¡ °É¸®Áö ¾Ê´Â ¹®Á¦
 		if(this.oApp.getWYSIWYGDocument().selection.type === "None"){
 			bImg = jindo.$A(this.oSelection.getNodes()).some(function(value, index, array){
 				if(value.nodeType === 1 && value.tagName === "IMG"){
@@ -10167,7 +10168,7 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 			return false;
 		}	
 		
-		// [SMARTEDITORSUS-579] IE8 ì´í•˜ì—ì„œ E-mail íŒ¨í„´ ë¬¸ìì—´ì— URL ë§í¬ ëª»ê±°ëŠ” ì´ìŠˆ
+		// [SMARTEDITORSUS-579] IE8 ÀÌÇÏ¿¡¼­ E-mail ÆĞÅÏ ¹®ÀÚ¿­¿¡ URL ¸µÅ© ¸ø°Å´Â ÀÌ½´
 		bEmail = jindo.$A(this.oSelection.getTextNodes()).some(function(value, index, array){
 			if(value.nodeValue.indexOf("@") >= 1){
 				return true;
@@ -10190,10 +10191,10 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 	},
 
 	irToDb : function(oTmpNode){
-		//ì €ì¥ ì‹œì ì— ìë™ ë§í¬ë¥¼ ìœ„í•œ í•¨ìˆ˜.
-		//[SMARTEDITORSUS-1207][IE][ë©”ì¼] object ì‚½ì… í›„ ê¸€ì„ ì €ì¥í•˜ë©´ IE ë¸Œë¼ìš°ì €ê°€ ì£½ì–´ë²„ë¦¬ëŠ” í˜„ìƒ   
-		//ì›ì¸ : í™•ì¸ ë¶ˆê°€. IE ì €ì‘ê¶Œ ê´€ë ¨ ì´ìŠˆë¡œ ì¶”ì •
-		//í•´ê²° : contentsë¥¼ ê°€ì§€ê³  ìˆëŠ” div íƒœê·¸ë¥¼ ì´ í•¨ìˆ˜ ë‚´ë¶€ì—ì„œ ë³µì‚¬í•˜ì—¬ ìˆ˜ì • í›„ call by referenceë¡œ ë„˜ì–´ì˜¨ ë³€ìˆ˜ì˜ innerHTMLì„ ë³€ê²½	
+		//ÀúÀå ½ÃÁ¡¿¡ ÀÚµ¿ ¸µÅ©¸¦ À§ÇÑ ÇÔ¼ö.
+		//[SMARTEDITORSUS-1207][IE][¸ŞÀÏ] object »ğÀÔ ÈÄ ±ÛÀ» ÀúÀåÇÏ¸é IE ºê¶ó¿ìÀú°¡ Á×¾î¹ö¸®´Â Çö»ó   
+		//¿øÀÎ : È®ÀÎ ºÒ°¡. IE ÀúÀÛ±Ç °ü·Ã ÀÌ½´·Î ÃßÁ¤
+		//ÇØ°á : contents¸¦ °¡Áö°í ÀÖ´Â div ÅÂ±×¸¦ ÀÌ ÇÔ¼ö ³»ºÎ¿¡¼­ º¹»çÇÏ¿© ¼öÁ¤ ÈÄ call by reference·Î ³Ñ¾î¿Â º¯¼öÀÇ innerHTMLÀ» º¯°æ	
 		var oCopyNode = oTmpNode.cloneNode(true);
 		var oTmpRange = this.oApp.getEmptySelection();
 		var elFirstNode = oTmpRange._getFirstRealChild(oCopyNode);
@@ -10203,8 +10204,8 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 		var a = aAllTextNodes;
 		
 		/*
-		// í…ìŠ¤íŠ¸ ê²€ìƒ‰ì´ ìš©ì´ í•˜ë„ë¡ ëŠì–´ì§„ í…ìŠ¤íŠ¸ ë…¸ë“œê°€ ìˆìœ¼ë©´ í•©ì³ì¤Œ. (í™”ë©´ìƒìœ¼ë¡œ ABCë¼ê³  ë³´ì´ë‚˜ ìƒí™©ì— ë”°ë¼ ì‹¤ì œ 2ê°œì˜ í…ìŠ¤íŠ¸ A, BCë¡œ ì´ë£¨ì–´ì ¸ ìˆì„ ìˆ˜ ìˆìŒ. ì´ë¥¼ ABC í•˜ë‚˜ì˜ ë…¸ë“œë¡œ ë§Œë“¤ì–´ ì¤Œ.)
-		// ë¬¸ì œ ë°œìƒ ê°€ëŠ¥ì„±ì— ë¹„í•´ì„œ í¼í¬ë¨¼ìŠ¤ë‚˜ ì‚¬ì´ë“œ ì´í™íŠ¸ ê°€ëŠ¥ì„± ë†’ì•„ ì¼ë‹¨ ì£¼ì„
+		// ÅØ½ºÆ® °Ë»öÀÌ ¿ëÀÌ ÇÏµµ·Ï ²÷¾îÁø ÅØ½ºÆ® ³ëµå°¡ ÀÖÀ¸¸é ÇÕÃÄÁÜ. (È­¸é»óÀ¸·Î ABC¶ó°í º¸ÀÌ³ª »óÈ²¿¡ µû¶ó ½ÇÁ¦ 2°³ÀÇ ÅØ½ºÆ® A, BC·Î ÀÌ·ç¾îÁ® ÀÖÀ» ¼ö ÀÖÀ½. ÀÌ¸¦ ABC ÇÏ³ªÀÇ ³ëµå·Î ¸¸µé¾î ÁÜ.)
+		// ¹®Á¦ ¹ß»ı °¡´É¼º¿¡ ºñÇØ¼­ ÆÛÆ÷¸Õ½º³ª »çÀÌµå ÀÌÆåÆ® °¡´É¼º ³ô¾Æ ÀÏ´Ü ÁÖ¼®
 		var aCleanTextNodes = [];
 		for(var i=0, nLen=aAllTextNodes.length; i<nLen; i++){
 			if(a[i].nextSibling && a[i].nextSibling.nodeType === 3){
@@ -10217,13 +10218,13 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 		*/
 		var aCleanTextNodes = aAllTextNodes;
 		
-		// IEì—ì„œ PREë¥¼ ì œì™¸í•œ ë‹¤ë¥¸ íƒœê·¸ í•˜ìœ„ì— ìˆëŠ” í…ìŠ¤íŠ¸ ë…¸ë“œëŠ” ì¤„ë°”ê¿ˆ ë“±ì˜ ê°’ì„ ë³€ì§ˆì‹œí‚´
+		// IE¿¡¼­ PRE¸¦ Á¦¿ÜÇÑ ´Ù¸¥ ÅÂ±× ÇÏÀ§¿¡ ÀÖ´Â ÅØ½ºÆ® ³ëµå´Â ÁÙ¹Ù²Ş µîÀÇ °ªÀ» º¯Áú½ÃÅ´
 		var elTmpDiv = this.oApp.getWYSIWYGDocument().createElement("DIV");
 		var elParent, bAnchorFound;
 		var sTmpStr = "@"+(new Date()).getTime()+"@";
 		var rxTmpStr = new RegExp(sTmpStr, "g");
 		for(var i=0, nLen=aAllTextNodes.length; i<nLen; i++){
-			// Anchorê°€ ì´ë¯¸ ê±¸ë ¤ ìˆëŠ” í…ìŠ¤íŠ¸ì´ë©´ ë§í¬ë¥¼ ë‹¤ì‹œ ê±¸ì§€ ì•ŠìŒ.
+			// Anchor°¡ ÀÌ¹Ì °É·Á ÀÖ´Â ÅØ½ºÆ®ÀÌ¸é ¸µÅ©¸¦ ´Ù½Ã °ÉÁö ¾ÊÀ½.
 			elParent = a[i].parentNode;
 			bAnchorFound = false;
 			while(elParent){
@@ -10236,15 +10237,15 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 			if(bAnchorFound){
 				continue;
 			}
-			// www.ë˜ëŠ” http://ìœ¼ë¡œ ì‹œì‘í•˜ëŠ” í…ìŠ¤íŠ¸ì— ë§í¬ ê±¸ì–´ ì¤Œ
-			// IEì—ì„œ í…ìŠ¤íŠ¸ ë…¸ë“œ ì•ìª½ì˜ ìŠ¤í˜ì´ìŠ¤ë‚˜ ì£¼ì„ë“±ì´ ì‚¬ë¼ì§€ëŠ” í˜„ìƒì´ ìˆì–´ sTmpStrì„ ì•ì— ë¶™ì—¬ì¤Œ.
+			// www.¶Ç´Â http://À¸·Î ½ÃÀÛÇÏ´Â ÅØ½ºÆ®¿¡ ¸µÅ© °É¾î ÁÜ
+			// IE¿¡¼­ ÅØ½ºÆ® ³ëµå ¾ÕÂÊÀÇ ½ºÆäÀÌ½º³ª ÁÖ¼®µîÀÌ »ç¶óÁö´Â Çö»óÀÌ ÀÖ¾î sTmpStrÀ» ¾Õ¿¡ ºÙ¿©ÁÜ.
 			elTmpDiv.innerHTML = "";
 			elTmpDiv.appendChild(a[i].cloneNode(true));
 
-			// IEì—ì„œ innerHTMLë¥¼ ì´ìš© í•´ ì§ì ‘ í…ìŠ¤íŠ¸ ë…¸ë“œ ê°’ì„ í• ë‹¹ í•  ê²½ìš° ì¤„ë°”ê¿ˆë“±ì´ ê¹¨ì§ˆ ìˆ˜ ìˆì–´, í…ìŠ¤íŠ¸ ë…¸ë“œë¡œ ë§Œë“¤ì–´ì„œ ì´ë¥¼ ë°”ë¡œ append ì‹œì¼œì¤Œ
+			// IE¿¡¼­ innerHTML¸¦ ÀÌ¿ë ÇØ Á÷Á¢ ÅØ½ºÆ® ³ëµå °ªÀ» ÇÒ´ç ÇÒ °æ¿ì ÁÙ¹Ù²ŞµîÀÌ ±úÁú ¼ö ÀÖ¾î, ÅØ½ºÆ® ³ëµå·Î ¸¸µé¾î¼­ ÀÌ¸¦ ¹Ù·Î append ½ÃÄÑÁÜ
 			elTmpDiv.innerHTML = (sTmpStr+elTmpDiv.innerHTML).replace(/(&nbsp|\s)?(((?!http:\/\/)www\.(?:(?!\&nbsp;|\s|"|').)+)|(http:\/\/(?:(?!&nbsp;|\s|"|').)+))/ig, this._generateAutoLink);
 
-			// innerHTML ë‚´ì— í…ìŠ¤íŠ¸ê°€ ìˆì„ ê²½ìš° insert ì‹œì— ì£¼ë³€ í…ìŠ¤íŠ¸ ë…¸ë“œì™€ í•©ì³ì§€ëŠ” í˜„ìƒì´ ìˆì–´ divë¡œ ìœ„ì¹˜ë¥¼ ë¨¼ì € ì¡ê³  í•˜ë‚˜ì”© ì‚½ì…
+			// innerHTML ³»¿¡ ÅØ½ºÆ®°¡ ÀÖÀ» °æ¿ì insert ½Ã¿¡ ÁÖº¯ ÅØ½ºÆ® ³ëµå¿Í ÇÕÃÄÁö´Â Çö»óÀÌ ÀÖ¾î div·Î À§Ä¡¸¦ ¸ÕÀú Àâ°í ÇÏ³ª¾¿ »ğÀÔ
 			a[i].parentNode.insertBefore(elTmpDiv, a[i]);
 			a[i].parentNode.removeChild(a[i]);
 			while(elTmpDiv.firstChild){
@@ -10273,7 +10274,7 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 	_validateURL : function(sURL){
 		if(!sURL){return false;}
 
-		// escape ë¶ˆê°€ëŠ¥í•œ %ê°€ ë“¤ì–´ìˆë‚˜ í™•ì¸
+		// escape ºÒ°¡´ÉÇÑ %°¡ µé¾îÀÖ³ª È®ÀÎ
 		try{
 			var aURLParts = sURL.split("?");
 			aURLParts[0] = aURLParts[0].replace(/%[a-z0-9]{2}/gi, "U");
@@ -10281,7 +10282,7 @@ nhn.husky.SE2M_Hyperlink = jindo.$Class({
 		}catch(e){
 			return false;
 		}
-		return /^(http|https|ftp|mailto):(\/\/)?(([-ê°€-í£]|\w)+(?:[\/\.:@]([-ê°€-í£]|\w)+)+)\/?(.*)?\s*$/i.test(sURL);
+		return /^(http|https|ftp|mailto):(\/\/)?(([-°¡-?]|\w)+(?:[\/\.:@]([-°¡-?]|\w)+)+)\/?(.*)?\s*$/i.test(sURL);
 	}
 });
 //}
@@ -10605,7 +10606,7 @@ nhn.husky.SE2M_LineStyler = jindo.$Class({
 	},
 	
 	/**
-	 * Block Style ì ìš©
+	 * Block Style Àû¿ë
 	 */
 	setLineBlockStyle : function(sStyleName, styleValue, htOptions) {
 		var htSelectedTDs = {};
@@ -10633,7 +10634,7 @@ nhn.husky.SE2M_LineStyler = jindo.$Class({
 
 	getTextNodes : function(bSplitTextEndNodes, oSelection){
 		var txtFilter = function(oNode){
-			// í¸ì§‘ ì¤‘ì— ìƒê²¨ë‚œ ë¹ˆ LI/Pì—ë„ ìŠ¤íƒ€ì¼ ë¨¹ì´ë„ë¡ í¬í•¨í•¨
+			// ÆíÁı Áß¿¡ »ı°Ü³­ ºó LI/P¿¡µµ ½ºÅ¸ÀÏ ¸ÔÀÌµµ·Ï Æ÷ÇÔÇÔ
 			if((oNode.nodeType == 3 && oNode.nodeValue != "\n" && oNode.nodeValue != "") || (oNode.tagName == "LI" && oNode.innerHTML == "") || (oNode.tagName == "P" && oNode.innerHTML == "")){
 				return true;
 			}else{
@@ -10649,7 +10650,7 @@ nhn.husky.SE2M_LineStyler = jindo.$Class({
 			this.oSelection = this.oApp.getSelection();
 		}
 
-		// í˜ì´ì§€ ìµœí•˜ë‹¨ì— ë¹ˆ LI ìˆì„ ê²½ìš° í•´ë‹¹ LI í¬í•¨í•˜ë„ë¡ expand
+		// ÆäÀÌÁö ÃÖÇÏ´Ü¿¡ ºó LI ÀÖÀ» °æ¿ì ÇØ´ç LI Æ÷ÇÔÇÏµµ·Ï expand
 		if(this.oSelection.endContainer.tagName == "LI" && this.oSelection.endOffset == 0 && this.oSelection.endContainer.innerHTML == ""){
 			this.oSelection.setEndAfter(this.oSelection.endContainer);
 		}
@@ -10981,7 +10982,7 @@ nhn.husky.SE_WYSIWYGStyleGetter = jindo.$Class({
 		if( oNode.nodeType == 3 ){
 			oNode = oNode.parentNode;
 		}else if( oNode.nodeType == 9 ){
-			//documentì—ëŠ” cssë¥¼ ì ìš©í•  ìˆ˜ ì—†ìŒ.
+			//document¿¡´Â css¸¦ Àû¿ëÇÒ ¼ö ¾øÀ½.
 			oNode = oNode.body;
 		}
 		
@@ -11035,7 +11036,7 @@ nhn.husky.SE_WYSIWYGStyleGetter = jindo.$Class({
 			break;
 		}
 		
-		// IEì—ì„œëŠ” ê¸°ë³¸ ì •ë ¬ì´ queryCommandStateë¡œ ë„˜ì–´ì˜¤ì§€ ì•Šì•„ì„œ ì •ë ¬ì´ ì—†ë‹¤ë©´, ì™¼ìª½ ì •ë ¬ë¡œ ê°€ì •í•¨
+		// IE¿¡¼­´Â ±âº» Á¤·ÄÀÌ queryCommandState·Î ³Ñ¾î¿ÀÁö ¾Ê¾Æ¼­ Á¤·ÄÀÌ ¾ø´Ù¸é, ¿ŞÂÊ Á¤·Ä·Î °¡Á¤ÇÔ
 		if(oStyle["justifyleft"]=="@-" && oStyle["justifycenter"]=="@-" && oStyle["justifyright"]=="@-" && oStyle["justifyfull"]=="@-"){oStyle["justifyleft"]="@^";}
 		
 		return oStyle;
@@ -11150,7 +11151,7 @@ nhn.husky.SE_WYSIWYGStyler = jindo.$Class({
 						bAppendable = false;
 					}
 					
-					if(bAppendable && elTmp.nodeType == 1 && elTmp.tagName == "BR"){// [SMARTEDITORSUS-311] [FF4] Cursor Holder ì¸ BR ì˜ í•˜ìœ„ë…¸ë“œë¡œ SPAN ì„ ì¶”ê°€í•˜ì—¬ ë°œìƒí•˜ëŠ” ë¬¸ì œ
+					if(bAppendable && elTmp.nodeType == 1 && elTmp.tagName == "BR"){// [SMARTEDITORSUS-311] [FF4] Cursor Holder ÀÎ BR ÀÇ ÇÏÀ§³ëµå·Î SPAN À» Ãß°¡ÇÏ¿© ¹ß»ıÇÏ´Â ¹®Á¦
 						oSelection.selectNode(oVeryFirstNode);
 						oSelection.collapseToStart();
 						oSelection.insertNode(oSpan);
@@ -11169,12 +11170,12 @@ nhn.husky.SE_WYSIWYGStyler = jindo.$Class({
 				oSelection = this.oApp.getEmptySelection();
 			}
 
-			// [SMARTEDITORSUS-229] ìƒˆë¡œ ìƒì„±ë˜ëŠ” SPAN ì—ë„ ì·¨ì†Œì„ /ë°‘ì¤„ ì²˜ë¦¬ ì¶”ê°€
+			// [SMARTEDITORSUS-229] »õ·Î »ı¼ºµÇ´Â SPAN ¿¡µµ Ãë¼Ò¼±/¹ØÁÙ Ã³¸® Ãß°¡
 			if(!!oStyles.color){
 				oSelection._checkTextDecoration(oSpan);
 			}
 			
-			this._addCursorHolder(oSelection, oSpan);	// [SMARTEDITORSUS-178] [IE9] ì»¤ì„œê°€ ìœ„ë¡œ ì˜¬ë¼ê°€ëŠ” ë¬¸ì œ
+			this._addCursorHolder(oSelection, oSpan);	// [SMARTEDITORSUS-178] [IE9] Ä¿¼­°¡ À§·Î ¿Ã¶ó°¡´Â ¹®Á¦
 			
 			oSelection.selectNodeContents(oSpan);
 			oSelection.collapseToEnd();
@@ -11182,7 +11183,7 @@ nhn.husky.SE_WYSIWYGStyler = jindo.$Class({
 			oSelection._window.document.body.focus();
 			oSelection.select();
 			
-			// ì˜ì—­ìœ¼ë¡œ ìŠ¤íƒ€ì¼ì´ ì¡í˜€ ìˆëŠ” ê²½ìš°(ì˜ˆ:í˜„ì¬ ì»¤ì„œê°€ Bë¸”ëŸ­ ì•ˆì— ì¡´ì¬) í•´ë‹¹ ì˜ì—­ì´ ì‚¬ë¼ì ¸ ë²„ë¦¬ëŠ” ì˜¤ë¥˜ ë°œìƒí•´ì„œ ì œê±°
+			// ¿µ¿ªÀ¸·Î ½ºÅ¸ÀÏÀÌ ÀâÇô ÀÖ´Â °æ¿ì(¿¹:ÇöÀç Ä¿¼­°¡ Bºí·° ¾È¿¡ Á¸Àç) ÇØ´ç ¿µ¿ªÀÌ »ç¶óÁ® ¹ö¸®´Â ¿À·ù ¹ß»ıÇØ¼­ Á¦°Å
 			// http://bts.nhncorp.com/nhnbts/browse/COM-912
 /*
 			var oCursorStyle = this.oApp.getCurrentStyle();
@@ -11202,7 +11203,7 @@ nhn.husky.SE_WYSIWYGStyler = jindo.$Class({
 			// FF3 will actually display %uFEFF when it is followed by a number AND certain font-family is used(like Gulim), so remove the character for FF3
 			//if(jindo.$Agent().navigator().firefox && jindo.$Agent().navigator().version == 3){
 			// FF4+ may have similar problems, so ignore the version number
-			// [SMARTEDITORSUS-416] ì»¤ì„œê°€ ì˜¬ë¼ê°€ì§€ ì•Šë„ë¡ BR ì„ ì‚´ë ¤ë‘ 
+			// [SMARTEDITORSUS-416] Ä¿¼­°¡ ¿Ã¶ó°¡Áö ¾Êµµ·Ï BR À» »ì·ÁµÒ
 			// if(jindo.$Agent().navigator().firefox){
 				// oSpan.innerHTML = "";
 			// }
@@ -11223,7 +11224,7 @@ nhn.husky.SE_WYSIWYGStyler = jindo.$Class({
 				oSelection.select();
 			}
 		} else {
-			var bCheckTextDecoration = !!oStyles.color;	// [SMARTEDITORSUS-26] ì·¨ì†Œì„ /ë°‘ì¤„ ìƒ‰ìƒ ì ìš© ì²˜ë¦¬
+			var bCheckTextDecoration = !!oStyles.color;	// [SMARTEDITORSUS-26] Ãë¼Ò¼±/¹ØÁÙ »ö»ó Àû¿ë Ã³¸®
 			var bIncludeLI = oStyles.fontSize || oStyles.fontFamily;
 			oSelection.styleRange(oStyles, null, null, bIncludeLI, bCheckTextDecoration);
 			
@@ -11350,7 +11351,7 @@ nhn.husky.SE2M_FindReplacePlugin = jindo.$Class({
 		this.oReplaceInput_Original.value = "";
 		this.oReplaceInput_Replacement.value = "";
 
-		//ë ˆì´ì–´ì˜ ì´ë™ ë²”ìœ„ ì„¤ì •.
+		//·¹ÀÌ¾îÀÇ ÀÌµ¿ ¹üÀ§ ¼³Á¤.
 		var elIframe = this.oApp.getWYSIWYGWindow().frameElement;
 		this.htOffsetPos = jindo.$Element(elIframe).offset();
 		this.nEditorWidth = elIframe.offsetWidth;
@@ -11362,7 +11363,7 @@ nhn.husky.SE2M_FindReplacePlugin = jindo.$Class({
 		this.welDropdownLayer.offset(this.htOffsetPos.top, this.htOffsetPos.left);
 		this.htTopLeftCorner = {x:parseInt(this.elDropdownLayer.style.left, 10), y:parseInt(this.elDropdownLayer.style.top, 10)};
 		
-		// offset widthê°€ IEì—ì„œ css lazy loading ë•Œë¬¸ì— ì œëŒ€ë¡œ ì¡íˆì§€ ì•Šì•„ ìƒìˆ˜ë¡œ ì„¤ì •
+		// offset width°¡ IE¿¡¼­ css lazy loading ¶§¹®¿¡ Á¦´ë·Î ÀâÈ÷Áö ¾Ê¾Æ »ó¼ö·Î ¼³Á¤
 		//this.nLayerWidth = this.elDropdownLayer.offsetWidth;
 		this.nLayerWidth = 258;
 		this.nLayerHeight = 160;
@@ -11371,7 +11372,7 @@ nhn.husky.SE2M_FindReplacePlugin = jindo.$Class({
 		this.elDropdownLayer.style.display = "none";
 	},
 	
-	// [SMARTEDITORSUS-728] ì°¾ê¸°/ë°”ê¾¸ê¸° ë ˆì´ì–´ ì˜¤í”ˆ íˆ´ë°” ë²„íŠ¼ active/inactive ì²˜ë¦¬ ì¶”ê°€
+	// [SMARTEDITORSUS-728] Ã£±â/¹Ù²Ù±â ·¹ÀÌ¾î ¿ÀÇÂ Åø¹Ù ¹öÆ° active/inactive Ã³¸® Ãß°¡
 	$ON_TOGGLE_FIND_REPLACE_LAYER : function(){
 		if(!this.bLayerShown) {
 			this.oApp.exec("SHOW_FIND_REPLACE_LAYER");
@@ -11606,7 +11607,7 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 			"08" : "5"
 		};
 		// convert SE1's quotes to SE2's
-		// -> ë¸”ë¡œê·¸ ê°œë°œ ìª½ì—ì„œ ì²˜ë¦¬ í•˜ê¸°ë¡œ í•¨.
+		// -> ºí·Î±× °³¹ß ÂÊ¿¡¼­ Ã³¸® ÇÏ±â·Î ÇÔ.
 		/*
 		this.oApp.exec("ADD_CONVERTER", ["DB_TO_IR", jindo.$Fn(function(sContents){
 			return sContents.replace(/<blockquote[^>]* class="?vview_quote([0-9]+)"?[^>]*>((?:\s|.)*?)<\/blockquote>/ig, jindo.$Fn(function(m0,sQuoteType,sQuoteContents){
@@ -11661,8 +11662,8 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 	},
 
 	/**
-	 * ì¸ìš©êµ¬ì˜ ì¤‘ì²© ê°€ëŠ¥í•œ ìµœëŒ€ ê°œìˆ˜ë¥¼ ë„˜ì—ˆëŠ”ì§€ í™•ì¸í•¨
-	 * ì¸ìš©êµ¬ ë‚´ë¶€ì—ì„œ ì¸ìš©êµ¬ë¥¼ ì ìš©í•˜ë©´ ì¤‘ì²©ë˜ì§€ ì•Šìœ¼ë¯€ë¡œ ìì‹ë…¸ë“œì— ëŒ€í•´ì„œë§Œ í™•ì¸í•¨
+	 * ÀÎ¿ë±¸ÀÇ ÁßÃ¸ °¡´ÉÇÑ ÃÖ´ë °³¼ö¸¦ ³Ñ¾ú´ÂÁö È®ÀÎÇÔ
+	 * ÀÎ¿ë±¸ ³»ºÎ¿¡¼­ ÀÎ¿ë±¸¸¦ Àû¿ëÇÏ¸é ÁßÃ¸µÇÁö ¾ÊÀ¸¹Ç·Î ÀÚ½Ä³ëµå¿¡ ´ëÇØ¼­¸¸ È®ÀÎÇÔ
 	 */
 	_isExceedMaxDepth : function(elNode){
 		var countChildQuote = function(elNode){
@@ -11741,8 +11742,8 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 		oSelection = this.oApp.getSelection();
 //		var sBookmarkID = oSelection.placeStringBookmark();
 
-		// [SMARTEDITORSUS-430] ë¬¸ìë¥¼ ì…ë ¥í•˜ê³  Enter í›„ ì¸ìš©êµ¬ë¥¼ ì ìš©í•  ë•Œ ìœ„ì˜ ë¬¸ìë“¤ì´ ì¸ìš©êµ¬ ì•ˆì— ë“¤ì–´ê°€ëŠ” ë¬¸ì œ
-		// [SMARTEDITORSUS-1323] ì‚¬ì§„ ì²¨ë¶€ í›„ ì¸ìš©êµ¬ ì ìš© ì‹œ ì²¨ë¶€í•œ ì‚¬ì§„ì´ ì‚­ì œë˜ëŠ” í˜„ìƒ
+		// [SMARTEDITORSUS-430] ¹®ÀÚ¸¦ ÀÔ·ÂÇÏ°í Enter ÈÄ ÀÎ¿ë±¸¸¦ Àû¿ëÇÒ ¶§ À§ÀÇ ¹®ÀÚµéÀÌ ÀÎ¿ë±¸ ¾È¿¡ µé¾î°¡´Â ¹®Á¦
+		// [SMARTEDITORSUS-1323] »çÁø Ã·ºÎ ÈÄ ÀÎ¿ë±¸ Àû¿ë ½Ã Ã·ºÎÇÑ »çÁøÀÌ »èÁ¦µÇ´Â Çö»ó
 		if(oSelection.startContainer === oSelection.endContainer && 
 			oSelection.startContainer.nodeType === 1 &&
 			oSelection.startContainer.tagName === "P"){
@@ -11786,11 +11787,11 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 		}
 
 		oNode = oStartNode;
-		// IEì—ì„œëŠ” commonAncestorContainer ìì²´ëŠ” select ê°€ëŠ¥í•˜ì§€ ì•Šê³ , í•˜ìœ„ì— commonAncestorContainerë¥¼ ëŒ€ì²´ í•˜ë”ë¼ë„ ë˜‘ê°™ì€ ì˜ì—­ì´ ì…€ë ‰íŠ¸ ë˜ì–´ ë³´ì´ëŠ” 
-		// ë…¸ë“œê°€ ìˆì„ ê²½ìš° í•˜ìœ„ ë…¸ë“œê°€ commonAncestorContainerë¡œ ë°˜í™˜ë¨.
-		// ê·¸ë˜ì„œ, ìŠ¤í¬ë¦½íŠ¸ë¡œ commonAncestorContainer ê³„ì‚° í•˜ë„ë¡ í•¨.
-		// ì˜ˆ)
-		// <P><SPAN>TEST</SPAN></p>ë¥¼ ì„ íƒ í•  ê²½ìš°, <SPAN>TEST</SPAN>ê°€ commonAncestorContainerë¡œ ì¡í˜
+		// IE¿¡¼­´Â commonAncestorContainer ÀÚÃ¼´Â select °¡´ÉÇÏÁö ¾Ê°í, ÇÏÀ§¿¡ commonAncestorContainer¸¦ ´ëÃ¼ ÇÏ´õ¶óµµ ¶È°°Àº ¿µ¿ªÀÌ ¼¿·ºÆ® µÇ¾î º¸ÀÌ´Â 
+		// ³ëµå°¡ ÀÖÀ» °æ¿ì ÇÏÀ§ ³ëµå°¡ commonAncestorContainer·Î ¹İÈ¯µÊ.
+		// ±×·¡¼­, ½ºÅ©¸³Æ®·Î commonAncestorContainer °è»ê ÇÏµµ·Ï ÇÔ.
+		// ¿¹)
+		// <P><SPAN>TEST</SPAN></p>¸¦ ¼±ÅÃ ÇÒ °æ¿ì, <SPAN>TEST</SPAN>°¡ commonAncestorContainer·Î ÀâÈû
 		oSelection.fixCommonAncestorContainer();
 		elCommonAncestor = oSelection.commonAncestorContainer;
 
@@ -11878,7 +11879,7 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 			// oFormattingNode.insertBefore(oP, null);
 			// oSelection = this.oApp.getEmptySelection();
 			// oSelection.selectNode(oP);
-			// [SMARTEDITORSUS-645] í¸ì§‘ì˜ì—­ í¬ì»¤ìŠ¤ ì—†ì´ ì¸ìš©êµ¬ ì¶”ê°€í–ˆì„ ë•Œ IE7ì—ì„œ ë°•ìŠ¤ê°€ ëŠ˜ì–´ë‚˜ëŠ” ë¬¸ì œ
+			// [SMARTEDITORSUS-645] ÆíÁı¿µ¿ª Æ÷Ä¿½º ¾øÀÌ ÀÎ¿ë±¸ Ãß°¡ÇßÀ» ¶§ IE7¿¡¼­ ¹Ú½º°¡ ´Ã¾î³ª´Â ¹®Á¦
 			oFormattingNode.innerHTML = "&nbsp;";
 			oSelection.selectNodeContents(oFormattingNode);
 			oSelection.collapseToStart();
@@ -11893,7 +11894,7 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 			oSelection.select();
 			oSelection.removeStringBookmark(sBookmarkID);
 			
-			this.oApp.exec("FOCUS");	// [SMARTEDITORSUS-469] [SMARTEDITORSUS-434] ì—ë””í„° ë¡œë“œ í›„ ìµœì´ˆ ì‚½ì…í•œ ì¸ìš©êµ¬ ì•ˆì— í¬ì»¤ìŠ¤ê°€ ê°€ì§€ ì•ŠëŠ” ë¬¸ì œ
+			this.oApp.exec("FOCUS");	// [SMARTEDITORSUS-469] [SMARTEDITORSUS-434] ¿¡µğÅÍ ·Îµå ÈÄ ÃÖÃÊ »ğÀÔÇÑ ÀÎ¿ë±¸ ¾È¿¡ Æ÷Ä¿½º°¡ °¡Áö ¾Ê´Â ¹®Á¦
 		},this).bind(oSelection), 0);
 
 		this.oApp.exec("RECORD_UNDO_AFTER_ACTION", ["BLOCK QUOTE", {sSaveTarget:"BODY"}]);
@@ -11931,7 +11932,7 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 	},
 	//@lazyload_js]
 
-	// [SMARTEDITORSUS-209] ì¸ìš©êµ¬ ë‚´ì— ë‚´ìš©ì´ ì—†ì„ ë•Œ Backspace ë¡œ ì¸ìš©êµ¬ê°€ ì‚­ì œë˜ë„ë¡ ì²˜ë¦¬
+	// [SMARTEDITORSUS-209] ÀÎ¿ë±¸ ³»¿¡ ³»¿ëÀÌ ¾øÀ» ¶§ Backspace ·Î ÀÎ¿ë±¸°¡ »èÁ¦µÇµµ·Ï Ã³¸®
 	$ON_EVENT_EDITING_AREA_KEYDOWN : function(weEvent) {
 		var oSelection,
 			elParentQuote;
@@ -11964,7 +11965,7 @@ nhn.husky.SE2M_Quote = jindo.$Class({
 		}
 	},
 	
-	// [SMARTEDITORSUS-215] Delete ë¡œ ì¸ìš©êµ¬ ë’¤ì˜ P ê°€ ì œê±°ë˜ì§€ ì•Šë„ë¡ ì²˜ë¦¬
+	// [SMARTEDITORSUS-215] Delete ·Î ÀÎ¿ë±¸ µÚÀÇ P °¡ Á¦°ÅµÇÁö ¾Êµµ·Ï Ã³¸®
 	$ON_EVENT_EDITING_AREA_KEYUP : function(weEvent) {
 		var oSelection,
 			elParentQuote,
@@ -12286,7 +12287,7 @@ nhn.husky.SE2M_TableBlockStyler = jindo.$Class({
 	},
 	
 	/**
-	 * selected Areaê°€ td blockì¸ì§€ ì²´í¬í•˜ëŠ” í•¨ìˆ˜.
+	 * selected Area°¡ td blockÀÎÁö Ã¼Å©ÇÏ´Â ÇÔ¼ö.
 	 */
 	$ON_IS_SELECTED_TD_BLOCK : function(sAttr,oReturn) {
 		if( this.nSelectedTD > 0){
@@ -12307,7 +12308,7 @@ nhn.husky.SE2M_TableBlockStyler = jindo.$Class({
 	},
 	
 	setTdBlock : function() {
-		this.oApp.exec("GET_SELECTED_CELLS",['aTdCells',this.htSelectedTD]); //tableEditorë¡œ ë¶€í„° ì–»ì–´ì˜¨ë‹¤.
+		this.oApp.exec("GET_SELECTED_CELLS",['aTdCells',this.htSelectedTD]); //tableEditor·Î ºÎÅÍ ¾ò¾î¿Â´Ù.
 		var aNodes = this.htSelectedTD.aTdCells;
 		if(aNodes){
 			this.nSelectedTD = aNodes.length;
@@ -12368,8 +12369,8 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 	rxLastDigits : null,
 	sReEditGuideMsg_table : null,
 	
-	// í…Œë‘ë¦¬ ìŠ¤íƒ€ì¼ ëª©ë¡
-	// í‘œ ìŠ¤íƒ€ì¼ ìŠ¤íƒ€ì¼ ëª©ë¡
+	// Å×µÎ¸® ½ºÅ¸ÀÏ ¸ñ·Ï
+	// Ç¥ ½ºÅ¸ÀÏ ½ºÅ¸ÀÏ ¸ñ·Ï
 	oSelection : null,
 	
 	$ON_MSG_APP_READY : function(){
@@ -12377,8 +12378,8 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 		this.oApp.exec("REGISTER_UI_EVENT", ["table", "click", "TOGGLE_TABLE_LAYER"]);
 	},
 	
-	// [SMARTEDITORSUS-365] í…Œì´ë¸”í€µì—ë””í„° > ì†ì„± ì§ì ‘ì…ë ¥ > í…Œë‘ë¦¬ ìŠ¤íƒ€ì¼
-	//		- í…Œë‘ë¦¬ ì—†ìŒì„ ì„ íƒí•˜ëŠ” ê²½ìš° ë³¸ë¬¸ì— ì‚½ì…í•˜ëŠ” í‘œì— ê°€ì´ë“œ ë¼ì¸ì„ í‘œì‹œí•´ ì¤ë‹ˆë‹¤. ë³´ê¸° ì‹œì—ëŠ” í…Œë‘ë¦¬ê°€ ë³´ì´ì§€ ì•ŠìŠµë‹ˆë‹¤.
+	// [SMARTEDITORSUS-365] Å×ÀÌºíÄü¿¡µğÅÍ > ¼Ó¼º Á÷Á¢ÀÔ·Â > Å×µÎ¸® ½ºÅ¸ÀÏ
+	//		- Å×µÎ¸® ¾øÀ½À» ¼±ÅÃÇÏ´Â °æ¿ì º»¹®¿¡ »ğÀÔÇÏ´Â Ç¥¿¡ °¡ÀÌµå ¶óÀÎÀ» Ç¥½ÃÇØ Áİ´Ï´Ù. º¸±â ½Ã¿¡´Â Å×µÎ¸®°¡ º¸ÀÌÁö ¾Ê½À´Ï´Ù.
 	$ON_REGISTER_CONVERTERS : function(){
 		this.oApp.exec("ADD_CONVERTER_DOM", ["IR_TO_DB", jindo.$Fn(this.irToDbDOM, this).bind()]);
 		this.oApp.exec("ADD_CONVERTER_DOM", ["DB_TO_IR", jindo.$Fn(this.dbToIrDOM, this).bind()]);
@@ -12386,7 +12387,7 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 	
 	irToDbDOM : function(oTmpNode){
 		/**
-		 *	ì €ì¥ì„ ìœ„í•œ Table Tag ëŠ” ì•„ë˜ì™€ ê°™ì´ ë³€ê²½ë©ë‹ˆë‹¤.
+		 *	ÀúÀåÀ» À§ÇÑ Table Tag ´Â ¾Æ·¡¿Í °°ÀÌ º¯°æµË´Ï´Ù.
 		 *	(1) <TABLE>
 		 *			<table border="1" cellpadding="0" cellspacing="0" style="border:1px dashed #c7c7c7; border-left:0; border-bottom:0;" attr_no_border_tbl="1" class="__se_tbl">
 		 *		-->	<table border="0" cellpadding="1" cellspacing="0" attr_no_border_tbl="1" class="__se_tbl">
@@ -12397,7 +12398,7 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 		var aNoBorderTable = [];
 		var aTables = jindo.$$('table[class=__se_tbl]', oTmpNode, {oneTimeOffCache:true});
 		
-		// í…Œë‘ë¦¬ê°€ ì—†ìŒ ì†ì„±ì˜ table (ì„ì˜ë¡œ ì¶”ê°€í•œ attr_no_border_tbl ì†ì„±ì´ ìˆëŠ” table ì„ ì°¾ìŒ)
+		// Å×µÎ¸®°¡ ¾øÀ½ ¼Ó¼ºÀÇ table (ÀÓÀÇ·Î Ãß°¡ÇÑ attr_no_border_tbl ¼Ó¼ºÀÌ ÀÖ´Â table À» Ã£À½)
 		jindo.$A(aTables).forEach(function(oValue, nIdx, oArray) {
 			if(jindo.$Element(oValue).attr("attr_no_border_tbl")){
 				aNoBorderTable.push(oValue);
@@ -12408,17 +12409,17 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 			return;
 		}
 		
-		// [SMARTEDITORSUS-410] ê¸€ ì €ì¥ ì‹œ, í…Œë‘ë¦¬ ì—†ìŒ ì†ì„±ì„ ì„ íƒí•  ë•Œ ì„ì˜ë¡œ í‘œì‹œí•œ ê°€ì´ë“œ ë¼ì¸ property ë§Œ style ì—ì„œ ì œê±°í•´ ì¤€ë‹¤.
-		// <TABLE> ê³¼ <TD> ì˜ ì†ì„±ê°’ì„ ë³€ê²½ ë° ì œê±°
+		// [SMARTEDITORSUS-410] ±Û ÀúÀå ½Ã, Å×µÎ¸® ¾øÀ½ ¼Ó¼ºÀ» ¼±ÅÃÇÒ ¶§ ÀÓÀÇ·Î Ç¥½ÃÇÑ °¡ÀÌµå ¶óÀÎ property ¸¸ style ¿¡¼­ Á¦°ÅÇØ ÁØ´Ù.
+		// <TABLE> °ú <TD> ÀÇ ¼Ó¼º°ªÀ» º¯°æ ¹× Á¦°Å
 		var aTDs = [], oTable;
 		for(var i = 0, nCount = aNoBorderTable.length; i < nCount; i++){
 			oTable = aNoBorderTable[i];
 			
-			// <TABLE> ì—ì„œ border, cellpadding ì†ì„±ê°’ ë³€ê²½, style property ì œê±°
+			// <TABLE> ¿¡¼­ border, cellpadding ¼Ó¼º°ª º¯°æ, style property Á¦°Å
 			jindo.$Element(oTable).css({"border": "", "borderLeft": "", "borderBottom": ""});
 			jindo.$Element(oTable).attr({"border": 0, "cellpadding": 1});
 			
-			// <TD> ì—ì„œëŠ” background-color ë¥¼ ì œì™¸í•œ style ì„ ëª¨ë‘ ì œê±°
+			// <TD> ¿¡¼­´Â background-color ¸¦ Á¦¿ÜÇÑ style À» ¸ğµÎ Á¦°Å
 			aTDs = jindo.$$('tbody>tr>td', oTable);
 			jindo.$A(aTDs).forEach(function(oTD, nIdx, oTDArray) {
 				jindo.$Element(oTD).css({"border": "", "borderTop": "", "borderRight": ""});
@@ -12428,7 +12429,7 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 	
 	dbToIrDOM : function(oTmpNode){
 		/**
-		 *	ìˆ˜ì •ì„ ìœ„í•œ Table Tag ëŠ” ì•„ë˜ì™€ ê°™ì´ ë³€ê²½ë©ë‹ˆë‹¤.
+		 *	¼öÁ¤À» À§ÇÑ Table Tag ´Â ¾Æ·¡¿Í °°ÀÌ º¯°æµË´Ï´Ù.
 		 *	(1) <TABLE>
 		 *			<table border="0" cellpadding="1" cellspacing="0" attr_no_border_tbl="1" class="__se_tbl">
 		 *		--> <table border="1" cellpadding="0" cellspacing="0" style="border:1px dashed #c7c7c7; border-left:0; border-bottom:0;" attr_no_border_tbl="1" class="__se_tbl">
@@ -12439,7 +12440,7 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 		var aNoBorderTable = [];
 		var aTables = jindo.$$('table[class=__se_tbl]', oTmpNode, {oneTimeOffCache:true});
 		
-		// í…Œë‘ë¦¬ê°€ ì—†ìŒ ì†ì„±ì˜ table (ì„ì˜ë¡œ ì¶”ê°€í•œ attr_no_border_tbl ì†ì„±ì´ ìˆëŠ” table ì„ ì°¾ìŒ)
+		// Å×µÎ¸®°¡ ¾øÀ½ ¼Ó¼ºÀÇ table (ÀÓÀÇ·Î Ãß°¡ÇÑ attr_no_border_tbl ¼Ó¼ºÀÌ ÀÖ´Â table À» Ã£À½)
 		jindo.$A(aTables).forEach(function(oValue, nIdx, oArray) {
 			if(jindo.$Element(oValue).attr("attr_no_border_tbl")){
 				aNoBorderTable.push(oValue);
@@ -12450,16 +12451,16 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 			return;
 		}
 		
-		// <TABLE> ê³¼ <TD> ì˜ ì†ì„±ê°’ì„ ë³€ê²½/ì¶”ê°€
+		// <TABLE> °ú <TD> ÀÇ ¼Ó¼º°ªÀ» º¯°æ/Ãß°¡
 		var aTDs = [], oTable;
 		for(var i = 0, nCount = aNoBorderTable.length; i < nCount; i++){
 			oTable = aNoBorderTable[i];
 			
-			// <TABLE> ì—ì„œ border, cellpadding ì†ì„±ê°’ ë³€ê²½/ style ì†ì„± ì¶”ê°€
+			// <TABLE> ¿¡¼­ border, cellpadding ¼Ó¼º°ª º¯°æ/ style ¼Ó¼º Ãß°¡
 			jindo.$Element(oTable).css({"border": "1px dashed #c7c7c7", "borderLeft": 0, "borderBottom": 0});
 			jindo.$Element(oTable).attr({"border": 1, "cellpadding": 0});
 			
-			// <TD> ì—ì„œ style ì†ì„±ê°’ ì¶”ê°€
+			// <TD> ¿¡¼­ style ¼Ó¼º°ª Ãß°¡
 			aTDs = jindo.$$('tbody>tr>td', oTable);
 			jindo.$A(aTDs).forEach(function(oTD, nIdx, oTDArray) {
 				jindo.$Element(oTD).css({"border": "1px dashed #c7c7c7", "borderTop": 0, "borderRight": 0});
@@ -12581,8 +12582,8 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 
 		// add #BorderSize+x# if needed
 		//---
-		// [SMARTEDITORSUS-365] í…Œì´ë¸”í€µì—ë””í„° > ì†ì„± ì§ì ‘ì…ë ¥ > í…Œë‘ë¦¬ ìŠ¤íƒ€ì¼
-		//		- í…Œë‘ë¦¬ ì—†ìŒì„ ì„ íƒí•˜ëŠ” ê²½ìš° ë³¸ë¬¸ì— ì‚½ì…í•˜ëŠ” í‘œì— ê°€ì´ë“œ ë¼ì¸ì„ í‘œì‹œí•´ ì¤ë‹ˆë‹¤. ë³´ê¸° ì‹œì—ëŠ” í…Œë‘ë¦¬ê°€ ë³´ì´ì§€ ì•ŠìŠµë‹ˆë‹¤.
+		// [SMARTEDITORSUS-365] Å×ÀÌºíÄü¿¡µğÅÍ > ¼Ó¼º Á÷Á¢ÀÔ·Â > Å×µÎ¸® ½ºÅ¸ÀÏ
+		//		- Å×µÎ¸® ¾øÀ½À» ¼±ÅÃÇÏ´Â °æ¿ì º»¹®¿¡ »ğÀÔÇÏ´Â Ç¥¿¡ °¡ÀÌµå ¶óÀÎÀ» Ç¥½ÃÇØ Áİ´Ï´Ù. º¸±â ½Ã¿¡´Â Å×µÎ¸®°¡ º¸ÀÌÁö ¾Ê½À´Ï´Ù.
 		this.aTableStyleByBorder = [
 			'',
 			'border="1" cellpadding="0" cellspacing="0" style="border:1px dashed #c7c7c7; border-left:0; border-bottom:0;"',
@@ -12693,10 +12694,10 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 	},
 	
 	$ON_TABLE_INSERT : function(){
-		this.oApp.exec("IE_FOCUS", []);	// [SMARTEDITORSUS-500] IEì¸ ê²½ìš° ëª…ì‹œì ì¸ focus ì¶”ê°€
+		this.oApp.exec("IE_FOCUS", []);	// [SMARTEDITORSUS-500] IEÀÎ °æ¿ì ¸í½ÃÀûÀÎ focus Ãß°¡
 		
-		//[SMARTEDITORSUS-596]ì´ë²¤íŠ¸ ë°œìƒì´ ì•ˆë˜ëŠ” ê²½ìš°, 
-		//max ì œí•œì´ ì ìš©ì´ ì•ˆë˜ê¸° ë•Œë¬¸ì— í…Œì´ë¸” ì‚¬ì… ì‹œì ì— ë‹¤ì‹œí•œë²ˆ Max ê°’ì„ ê²€ì‚¬í•œë‹¤.
+		//[SMARTEDITORSUS-596]ÀÌº¥Æ® ¹ß»ıÀÌ ¾ÈµÇ´Â °æ¿ì, 
+		//max Á¦ÇÑÀÌ Àû¿ëÀÌ ¾ÈµÇ±â ¶§¹®¿¡ Å×ÀÌºí »çÀÔ ½ÃÁ¡¿¡ ´Ù½ÃÇÑ¹ø Max °ªÀ» °Ë»çÇÑ´Ù.
 		this.oApp.exec("TABLE_SET_COLUMN_NUM");
 		this.oApp.exec("TABLE_SET_ROW_NUM");
 		
@@ -12733,22 +12734,22 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 				
 		// If the table were inserted within a styled(strikethough & etc) paragraph, the table may inherit the style in IE.
 		elTableHolder = this.oApp.getWYSIWYGDocument().createElement("DIV");
-		// ì˜ì—­ì„ ì¡ì•˜ì„ ê²½ìš°, ì˜ì—­ ì§€ìš°ê³  í…Œì´ë¸” ì‚½ì…
+		// ¿µ¿ªÀ» Àâ¾ÒÀ» °æ¿ì, ¿µ¿ª Áö¿ì°í Å×ÀÌºí »ğÀÔ
 		oSelection.deleteContents();
 		oSelection.insertNode(elTableHolder);
 		oSelection.selectNode(elTableHolder);
 		this.oApp.exec("REMOVE_STYLE", [oSelection]);
 
 		if(htBrowser.ie && this.oApp.getWYSIWYGDocument().body.childNodes.length === 1 && this.oApp.getWYSIWYGDocument().body.firstChild === elTableHolder){
-			// IEì—ì„œ tableì´ bodyì— ë°”ë¡œ ë¶™ì–´ ìˆì„ ê²½ìš°, ì •ë ¬ë“±ì—ì„œ ë¬¸ì œê°€ ë°œìƒ í•¨ìœ¼ë¡œ elTableHolder(DIV)ë¥¼ ë‚¨ê²¨ë‘ 
+			// IE¿¡¼­ tableÀÌ body¿¡ ¹Ù·Î ºÙ¾î ÀÖÀ» °æ¿ì, Á¤·Äµî¿¡¼­ ¹®Á¦°¡ ¹ß»ı ÇÔÀ¸·Î elTableHolder(DIV)¸¦ ³²°ÜµÒ
 			elTableHolder.insertBefore(elTable, null);
 		}else{
 			elTableHolder.parentNode.insertBefore(elTable, elTableHolder);
 			elTableHolder.parentNode.removeChild(elTableHolder);
 		}
 
-		// FF : í…Œì´ë¸” í•˜ë‹¨ì— BRì´ ì—†ì„ ê²½ìš°, ì»¤ì„œê°€ í…Œì´ë¸” ë°‘ìœ¼ë¡œ ì´ë™í•  ìˆ˜ ì—†ì–´ BRì„ ì‚½ì… í•´ ì¤Œ.
-		//[SMARTEDITORSUS-181][IE9] í‘œë‚˜ ìš”ì•½ê¸€ ë“±ì˜ í…Œì´ë¸”ì—ì„œ > í…Œì´ë¸” ì™¸ë¶€ë¡œ ì»¤ì„œ ì´ë™ ë¶ˆê°€
+		// FF : Å×ÀÌºí ÇÏ´Ü¿¡ BRÀÌ ¾øÀ» °æ¿ì, Ä¿¼­°¡ Å×ÀÌºí ¹ØÀ¸·Î ÀÌµ¿ÇÒ ¼ö ¾ø¾î BRÀ» »ğÀÔ ÇØ ÁÜ.
+		//[SMARTEDITORSUS-181][IE9] Ç¥³ª ¿ä¾à±Û µîÀÇ Å×ÀÌºí¿¡¼­ > Å×ÀÌºí ¿ÜºÎ·Î Ä¿¼­ ÀÌµ¿ ºÒ°¡
 		if(htBrowser.firefox){
 			elLinebreak = this.oApp.getWYSIWYGDocument().createElement("BR");
 			elTable.parentNode.insertBefore(elLinebreak, elTable.nextSibling);
@@ -12774,11 +12775,11 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 	},
 	
 	/**
-	 * P ì•ˆì— Table ì´ ì¶”ê°€ë˜ì§€ ì•Šë„ë¡ P íƒœê·¸ë¥¼ ë¶„ë¦¬í•¨
+	 * P ¾È¿¡ Table ÀÌ Ãß°¡µÇÁö ¾Êµµ·Ï P ÅÂ±×¸¦ ºĞ¸®ÇÔ
 	 * 
 	 * [SMARTEDITORSUS-306]
-	 *		P ì— Table ì„ ì¶”ê°€í•œ ê²½ìš°, DOM ì—ì„œ ë¹„ì •ìƒì ì¸ P ë¥¼ ìƒì„±í•˜ì—¬ ê¹¨ì§€ëŠ” ê²½ìš°ê°€ ë°œìƒí•¨
-	 *		í…Œì´ë¸”ì´ ì¶”ê°€ë˜ëŠ” ë¶€ë¶„ì— P ê°€ ìˆëŠ” ê²½ìš°, P ë¥¼ ë¶„ë¦¬ì‹œì¼œì£¼ëŠ” ì²˜ë¦¬
+	 *		P ¿¡ Table À» Ãß°¡ÇÑ °æ¿ì, DOM ¿¡¼­ ºñÁ¤»óÀûÀÎ P ¸¦ »ı¼ºÇÏ¿© ±úÁö´Â °æ¿ì°¡ ¹ß»ıÇÔ
+	 *		Å×ÀÌºíÀÌ Ãß°¡µÇ´Â ºÎºĞ¿¡ P °¡ ÀÖ´Â °æ¿ì, P ¸¦ ºĞ¸®½ÃÄÑÁÖ´Â Ã³¸®
 	 */
 	_divideParagraph : function(oSelection){
 		var oParentP,
@@ -12786,7 +12787,7 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 			sNodeVaule,
 			sBM, oSWrapper, oEWrapper;
 			
-		oSelection.fixCommonAncestorContainer();	// [SMARTEDITORSUS-423] ì—”í„°ì— ì˜í•´ ìƒì„±ëœ P ê°€ ì•„ë‹Œ ì´ì „ P ê°€ ì„ íƒë˜ì§€ ì•Šë„ë¡ fix í•˜ë„ë¡ ì²˜ë¦¬
+		oSelection.fixCommonAncestorContainer();	// [SMARTEDITORSUS-423] ¿£ÅÍ¿¡ ÀÇÇØ »ı¼ºµÈ P °¡ ¾Æ´Ñ ÀÌÀü P °¡ ¼±ÅÃµÇÁö ¾Êµµ·Ï fix ÇÏµµ·Ï Ã³¸®
 		oParentP = oSelection.findAncestorByTagName("P");
 
 		if(!oParentP){
@@ -12794,7 +12795,7 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 		}
 
 		if(!oParentP.firstChild || nhn.husky.SE2M_Utils.isBlankNode(oParentP)){
-			oSelection.selectNode(oParentP);	// [SMARTEDITORSUS-423] ë¶ˆí•„ìš”í•œ ê°œí–‰ì´ ì¼ì–´ë‚˜ì§€ ì•Šë„ë¡ ë¹ˆ P ë¥¼ ì„ íƒí•˜ì—¬ TABLE ë¡œ ëŒ€ì²´í•˜ë„ë¡ ì²˜ë¦¬
+			oSelection.selectNode(oParentP);	// [SMARTEDITORSUS-423] ºÒÇÊ¿äÇÑ °³ÇàÀÌ ÀÏ¾î³ªÁö ¾Êµµ·Ï ºó P ¸¦ ¼±ÅÃÇÏ¿© TABLE ·Î ´ëÃ¼ÇÏµµ·Ï Ã³¸®
 			oSelection.select();
 			
 			return oSelection;
@@ -13083,9 +13084,9 @@ nhn.husky.SE2M_TableCreator = jindo.$Class({
 			sTableStyle += "class=se2_pre_table";
 		}
 
-		// [SMARTEDITORSUS-365] í…Œì´ë¸”í€µì—ë””í„° > ì†ì„± ì§ì ‘ì…ë ¥ > í…Œë‘ë¦¬ ìŠ¤íƒ€ì¼
-		//		- í…Œë‘ë¦¬ ì—†ìŒì„ ì„ íƒí•˜ëŠ” ê²½ìš° ë³¸ë¬¸ì— ì‚½ì…í•˜ëŠ” í‘œì— ê°€ì´ë“œ ë¼ì¸ì„ í‘œì‹œí•´ ì¤ë‹ˆë‹¤. ë³´ê¸° ì‹œì—ëŠ” í…Œë‘ë¦¬ê°€ ë³´ì´ì§€ ì•ŠìŠµë‹ˆë‹¤.
-		//		- ê¸€ ì €ì¥ ì‹œì—ëŠ” ê¸€ ì‘ì„± ì‹œì— ì ìš©í•˜ì˜€ë˜ style ì„ ì œê±°í•©ë‹ˆë‹¤. ì´ë¥¼ ìœ„í•´ì„œ ì„ì˜ì˜ ì†ì„±(attr_no_border_tbl)ì„ ì¶”ê°€í•˜ì˜€ë‹¤ê°€ ì €ì¥ ì‹œì ì—ì„œ ì œê±°í•´ ì£¼ë„ë¡ í•©ë‹ˆë‹¤.
+		// [SMARTEDITORSUS-365] Å×ÀÌºíÄü¿¡µğÅÍ > ¼Ó¼º Á÷Á¢ÀÔ·Â > Å×µÎ¸® ½ºÅ¸ÀÏ
+		//		- Å×µÎ¸® ¾øÀ½À» ¼±ÅÃÇÏ´Â °æ¿ì º»¹®¿¡ »ğÀÔÇÏ´Â Ç¥¿¡ °¡ÀÌµå ¶óÀÎÀ» Ç¥½ÃÇØ Áİ´Ï´Ù. º¸±â ½Ã¿¡´Â Å×µÎ¸®°¡ º¸ÀÌÁö ¾Ê½À´Ï´Ù.
+		//		- ±Û ÀúÀå ½Ã¿¡´Â ±Û ÀÛ¼º ½Ã¿¡ Àû¿ëÇÏ¿´´ø style À» Á¦°ÅÇÕ´Ï´Ù. ÀÌ¸¦ À§ÇØ¼­ ÀÓÀÇÀÇ ¼Ó¼º(attr_no_border_tbl)À» Ãß°¡ÇÏ¿´´Ù°¡ ÀúÀå ½ÃÁ¡¿¡¼­ Á¦°ÅÇØ ÁÖµµ·Ï ÇÕ´Ï´Ù.
 		var sTempNoBorderClass = (nBorderStyleIdx == 1) ? 'attr_no_border_tbl="1"' : '';
 		
 		var sTable = "<table "+sTableStyle+" "+sTempNoBorderClass+">";
@@ -13248,7 +13249,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		this.welPanelTableTemplateArea = jindo.$Element(this.elPanelTableTemplateArea);
 		this.welPanelReviewBGArea = jindo.$Element(this.elPanelReviewBGArea);
 		
-		//		this.elPanelReviewBtnArea = jindo.$$.getSingle("DIV.se2_btn_area", this.elQELayer); 	//Myë¦¬ë·° ë²„íŠ¼ ë ˆì´ì–´
+		//		this.elPanelReviewBtnArea = jindo.$$.getSingle("DIV.se2_btn_area", this.elQELayer); 	//My¸®ºä ¹öÆ° ·¹ÀÌ¾î
 		this.elPanelDim1 = jindo.$$.getSingle("DIV.husky_se2m_tbl_qe_dim1", this.elQELayer);
 		this.elPanelDim2 = jindo.$$.getSingle("DIV.husky_se2m_tbl_qe_dim2", this.elQELayer);
 		this.elPanelDimDelCol = jindo.$$.getSingle("DIV.husky_se2m_tbl_qe_dim_del_col", this.elQELayer);
@@ -13350,7 +13351,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		this.oApp.registerBrowserEvent(this.elInputRadioBGImg, "click", "DRAW_QE_RADIO_OPTION", [3]);
 		this.oApp.registerBrowserEvent(this.elInputRadioTemplate, "click", "DRAW_QE_RADIO_OPTION", [4]);
 		this.oApp.registerBrowserEvent(this.elBtnBGPalette, "click", "TABLE_QE_TOGGLE_BGC_PALETTE");
-//		this.oApp.registerBrowserEvent(this.elPanelReviewBtnArea, "click", "SAVE_QE_MY_REVIEW_ITEM"); //Myë¦¬ë·° ë²„íŠ¼ ë ˆì´ì–´
+//		this.oApp.registerBrowserEvent(this.elPanelReviewBtnArea, "click", "SAVE_QE_MY_REVIEW_ITEM"); //My¸®ºä ¹öÆ° ·¹ÀÌ¾î
 		this.oApp.registerBrowserEvent(this.elBtnBGIMGPalette, "click", "TABLE_QE_TOGGLE_IMG_PALETTE");
 		this.oApp.registerBrowserEvent(this.elPanelBGIMGPaletteHolder, "click", "TABLE_QE_SET_IMG_FROM_PALETTE");
 		//this.elPanelQETemplate
@@ -13399,7 +13400,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		}
 	},
 	
-	// [Undo/Redo] Table Selection ì²˜ë¦¬ì™€ ê´€ë ¨ëœ ë¶€ë¶„ ì£¼ì„ ì²˜ë¦¬
+	// [Undo/Redo] Table Selection Ã³¸®¿Í °ü·ÃµÈ ºÎºĞ ÁÖ¼® Ã³¸®
 	// $AFTER_DO_RECORD_UNDO_HISTORY : function(){
 		// if(this.nStatus != this.STATUS.CELL_SELECTED){
 			// return;
@@ -13462,7 +13463,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 	// },
 	
 	/**
-	 * í…Œì´ë¸” ì…€ ë°°ê²½ìƒ‰ ì…‹íŒ…
+	 * Å×ÀÌºí ¼¿ ¹è°æ»ö ¼ÂÆÃ
 	 */
 	$ON_TABLE_QE_TOGGLE_BGC_PALETTE : function(){
 		if(this.elPanelBGPaletteHolder.parentNode.style.display == "block"){
@@ -13500,7 +13501,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 	},
 	
 	/**
-	 * í…Œì´ë¸” ë¦¬ë·° í…Œì´ë¸” ë°°ê²½ ì´ë¯¸ì§€ ì…‹íŒ… 
+	 * Å×ÀÌºí ¸®ºä Å×ÀÌºí ¹è°æ ÀÌ¹ÌÁö ¼ÂÆÃ 
 	 */
 	$ON_TABLE_QE_TOGGLE_IMG_PALETTE : function(){
 		if(this.elPanelBGIMGPaletteHolder.parentNode.style.display == "block"){
@@ -13547,7 +13548,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 				this.aSelectedCells[i].removeAttribute(this.TMP_BGIMG_ATTR);
 			}
 		}else{
-			if(n == 19 || n == 20 || n == 21 || n == 22 || n == 25 || n == 26){ //íŒŒì¼ ì‚¬ì´ì¦ˆë•Œë¬¸ì— jpg
+			if(n == 19 || n == 20 || n == 21 || n == 22 || n == 25 || n == 26){ //ÆÄÀÏ »çÀÌÁî¶§¹®¿¡ jpg
 				sImageName = sImageName + n + ".jpg";
 			}else{
 				sImageName = sImageName + n + ".gif";
@@ -13568,7 +13569,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 	},
 	
 	/**
-	 * í…Œì´ë¸” í€µ ì—ë””í„° Show 
+	 * Å×ÀÌºí Äü ¿¡µğÅÍ Show 
 	 */
 	$ON_SHOW_COMMON_QE : function(){
 		if(jindo.$Element(this.elSelectionStartTable).hasClass(this._sSETblClass)){
@@ -13617,7 +13618,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		
 		this.oApp.exec("TABLE_QE_DIM", [this.QE_DIM_MERGE_BTN, bEnableMerge]);
 
-		//nullì¸ê²½ìš°ë¥¼ ëŒ€ë¹„í•´ì„œ defaultê°’ì„ ì§€ì •í•´ì¤€ë‹¤.
+		//nullÀÎ°æ¿ì¸¦ ´ëºñÇØ¼­ default°ªÀ» ÁöÁ¤ÇØÁØ´Ù.
 		var sBackgroundColor = this.aSelectedCells[0].getAttribute(this.TMP_BGC_ATTR) || "rgb(255,255,255)";
 
 		var bAllMatched = true;
@@ -13670,9 +13671,9 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 			
 //			this.elSelectBoxTemplate.style.position = "";
 			
-			//this.elPanelReviewBtnArea.style.display = "none"; //Myë¦¬ë·° ë²„íŠ¼ ë ˆì´ì–´
+			//this.elPanelReviewBtnArea.style.display = "none"; //My¸®ºä ¹öÆ° ·¹ÀÌ¾î
 			
-			// ë°°ê²½Areaì—ì„œ cssë¥¼ ì œê±°í•´ì•¼í•¨
+			// ¹è°æArea¿¡¼­ css¸¦ Á¦°ÅÇØ¾ßÇÔ
 			jindo.$Element(this.elPanelTableBGArea).className("se2_qe2");
 			
 			var nTpl = this.parseIntOr0(this.elSelectionStartTable.getAttribute(this.ATTR_TBL_TEMPLATE));
@@ -13693,14 +13694,14 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 			
 //			this.elSelectBoxTemplate.style.position = "static";
 
-			//	this.elPanelReviewBtnArea.style.display = "block"; //Myë¦¬ë·° ë²„íŠ¼ ë ˆì´ì–´
+			//	this.elPanelReviewBtnArea.style.display = "block"; //My¸®ºä ¹öÆ° ·¹ÀÌ¾î
 			var nTpl = this.parseIntOr0(this.elSelectionStartTable.getAttribute(this.ATTR_REVIEW_TEMPLATE));
 			
 			this.elPanelBGImg.style.position = "relative";
 		}else{
 			this.elPanelTableTemplateArea.style.display = "none";
 			this.elPanelReviewBGArea.style.display = "none";
-		//	this.elPanelReviewBtnArea.style.display = "none";	//Myë¦¬ë·° ë²„íŠ¼ ë ˆì´ì–´
+		//	this.elPanelReviewBtnArea.style.display = "none";	//My¸®ºä ¹öÆ° ·¹ÀÌ¾î
 		}
 		
 		this.oApp.exec("DRAW_QE_RADIO_OPTION", [0]);
@@ -14218,7 +14219,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		}
 	},
 
-	// ì…€ ì„ íƒ ìƒíƒœì—ì„œ ë¬¸ì„œì˜ì—­ì„ ìƒ/í•˜ë¡œ ë²—ì–´ë‚  ê²½ìš°, ë²—ì–´ë‚œ ë°©í–¥ìœ¼ë¡œ ì„ íƒ ì…€ì„ ëŠ˜ë ¤ê°€ë©° ë¬¸ì„œì˜ ìŠ¤í¬ë¡¤ì„ í•´ì¤Œ
+	// ¼¿ ¼±ÅÃ »óÅÂ¿¡¼­ ¹®¼­¿µ¿ªÀ» »ó/ÇÏ·Î ¹ş¾î³¯ °æ¿ì, ¹ş¾î³­ ¹æÇâÀ¸·Î ¼±ÅÃ ¼¿À» ´Ã·Á°¡¸ç ¹®¼­ÀÇ ½ºÅ©·ÑÀ» ÇØÁÜ
 	$ON_EVENT_OUTER_DOC_MOUSEMOVE : function(wevE){
 		switch(this.nStatus){
 			case this.STATUS.CELL_SELECTING:
@@ -14306,7 +14307,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 	},
 
 	/**
-	 * Tableì˜ blockìœ¼ë¡œ ì¡íŒ ì˜ì—­ì„ ë„˜ê²¨ì¤€ë‹¤.
+	 * TableÀÇ blockÀ¸·Î ÀâÈù ¿µ¿ªÀ» ³Ñ°ÜÁØ´Ù.
 	 * @see hp_SE2M_TableBlockStyler.js
 	 */
 	$ON_GET_SELECTED_CELLS : function(sAttr,oReturn){
@@ -14506,7 +14507,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 	
 				this._deselectCells();
 				
-				// íˆìŠ¤í† ë¦¬ ì €ì¥ (ì„ íƒ ìœ„ì¹˜ëŠ” ì €ì¥í•˜ì§€ ì•ŠìŒ)
+				// È÷½ºÅä¸® ÀúÀå (¼±ÅÃ À§Ä¡´Â ÀúÀåÇÏÁö ¾ÊÀ½)
 				if(!!this.sQEAction){
 					this.oApp.exec("RECORD_UNDO_ACTION", [this.sQEAction, {elSaveTarget:this.elSelectionStartTable, bDontSaveSelection:true}]); 
 					this.sQEAction = "";
@@ -14622,7 +14623,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 			this._setResizerSize((this.htResizing.nBorderSize + this.nDraggableCellEdge) * 2, this.parseIntOr0(jindo.$Element(this.elIFrame).css("height")));
 			jindo.$Element(this.elResizeGrid).offset(this.htFrameOffset.top, this.htFrameOffset.left + this.htResizing.htEPos.clientX - this.parseIntOr0(this.elResizeGrid.style.width)/2 - this.htResizing.htEPos.offsetX + this.htResizing.nBorderLeftPos);
 		}else{
-			//ê°€ë³€í­ì„ ì§€ì›í•˜ê¸° ë•Œë¬¸ì— ë§¤ë²ˆ í˜„ì¬ Containerì˜ í¬ê¸°ë¥¼ êµ¬í•´ì™€ì„œ Gripì„ ìƒì„±í•´ì•¼ í•œë‹¤.
+			//°¡º¯ÆøÀ» Áö¿øÇÏ±â ¶§¹®¿¡ ¸Å¹ø ÇöÀç ContainerÀÇ Å©±â¸¦ ±¸ÇØ¿Í¼­ GripÀ» »ı¼ºÇØ¾ß ÇÑ´Ù.
 			var elIFrameWidth = this.oApp.elEditingAreaContainer.offsetWidth + "px";
 			this._setResizerSize(this.parseIntOr0(elIFrameWidth), (this.htResizing.nBorderSize + this.nDraggableCellEdge) * 2);
 			jindo.$Element(this.elResizeGrid).offset(this.htFrameOffset.top + this.htResizing.htEPos.clientY - this.parseIntOr0(this.elResizeGrid.style.height)/2 - this.htResizing.htEPos.offsetY + this.htResizing.nBorderTopPos, this.htFrameOffset.left);
@@ -14636,9 +14637,9 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		var iTblX = oTbl.length;
 		var iTblY = oTbl[0].length;
 
-		// ì„ íƒ í…Œë‘ë¦¬ì˜ ì•ìª½ ì…€
+		// ¼±ÅÃ Å×µÎ¸®ÀÇ ¾ÕÂÊ ¼¿
 		var aCellsBefore = [];
-		// ì„ íƒ í…Œë‘ë¦¬ì˜ ë’¤ìª½ ì…€
+		// ¼±ÅÃ Å×µÎ¸®ÀÇ µÚÂÊ ¼¿
 		var aCellsAfter = [];
 		
 		var htResult;
@@ -14677,7 +14678,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 					nMinBefore = oTbl[x][basis_y].style.height;
 				}
 			}
-			// ë†’ì´ ë¦¬ì‚¬ì´ì§• ì‹œì—ëŠ” ì„ íƒ í…Œë‘ë¦¬ ì•ìª½ ì…€ë§Œ ì¡°ì ˆ í•¨ìœ¼ë¡œ ì•„ë˜ìª½ ì…€ì€ ìƒì„± í•  í•„ìš” ì—†ìŒ
+			// ³ôÀÌ ¸®»çÀÌÂ¡ ½Ã¿¡´Â ¼±ÅÃ Å×µÎ¸® ¾ÕÂÊ ¼¿¸¸ Á¶Àı ÇÔÀ¸·Î ¾Æ·¡ÂÊ ¼¿Àº »ı¼º ÇÒ ÇÊ¿ä ¾øÀ½
 			
 			htResult = {aCellsBefore: aCellsBefore, aCellsAfter: aCellsAfter, nMinBefore: nMinBefore, nMinAfter: nMinAfter};
 		}
@@ -14885,7 +14886,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 				//elCell.setAttribute(sTmpAttr_Inserted, "o");
 				elCellClone = this._shallowCloneTD(elCell);
 				
-				// elCellCloneì˜ outerHTMLì— ì •ìƒì ì¸ rowSpanì´ ìˆë”ë¼ë„ IEì—ì„œëŠ” ì´ ìœ„ì¹˜ì—ì„œ í•­ìƒ 1ì„ ë°˜í™˜. (elCellClone.rowSpan & elCellClone.getAttribute("rowSpan")).
+				// elCellCloneÀÇ outerHTML¿¡ Á¤»óÀûÀÎ rowSpanÀÌ ÀÖ´õ¶óµµ IE¿¡¼­´Â ÀÌ À§Ä¡¿¡¼­ Ç×»ó 1À» ¹İÈ¯. (elCellClone.rowSpan & elCellClone.getAttribute("rowSpan")).
 				//var nSpan = parseInt(elCellClone.getAttribute("rowSpan"));
 				var nSpan = parseInt(elCell.getAttribute("rowSpan"));
 
@@ -14900,7 +14901,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 					elCellClone.style.width = "";
 				}
 				
-				// í˜„ì¬ ì¤„(TR)ì— ì†í•œ ì…€(TD)ì„ ì°¾ì•„ì„œ ê·¸ ì•ì— append í•œë‹¤.
+				// ÇöÀç ÁÙ(TR)¿¡ ¼ÓÇÑ ¼¿(TD)À» Ã£¾Æ¼­ ±× ¾Õ¿¡ append ÇÑ´Ù.
 				elInsertionPt = null;
 				for(var xx = this.htSelectionEPos.x; xx >= this.htSelectionSPos.x; xx--){
 					if(this.htMap[xx][y].parentNode == elCurTR){
@@ -15094,7 +15095,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		}
 		
 		// remove empty TR's
-		// (ìƒë‹¨ TDì˜ rowspanë§Œìœ¼ë¡œ ì§€íƒ±ë˜ëŠ”) ë¹ˆ TRì´ ìˆì„ ê²½ìš° IE7 ì´í•˜ì—ì„œ ëœë”ë§ ì˜¤ë¥˜ê°€ ë°œìƒ í•  ìˆ˜ ìˆì–´ ë¹ˆ TRì„ ì§€ì›Œ ì¤Œ
+		// (»ó´Ü TDÀÇ rowspan¸¸À¸·Î ÁöÅÊµÇ´Â) ºó TRÀÌ ÀÖÀ» °æ¿ì IE7 ÀÌÇÏ¿¡¼­ ·£´õ¸µ ¿À·ù°¡ ¹ß»ı ÇÒ ¼ö ÀÖ¾î ºó TRÀ» Áö¿ö ÁÜ
 		var bRowRemoved = false;
 		var elLastCell = null;
 		for(var y = 0, nRealY = 0, nYLen = aCellMapping[0].length; y < nYLen; y++, nRealY++){
@@ -15167,12 +15168,12 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 			elCell = this.aSelectedCells[i];
 			welCell = jindo.$Element(elCell);
 			welCell.removeClass(this.CELL_SELECTION_CLASS);
-			//ë°°ê²½ìƒ‰
+			//¹è°æ»ö
 			if(elCell.getAttribute(this.TMP_BGC_ATTR)){
 				elCell.style.backgroundColor = elCell.getAttribute(this.TMP_BGC_ATTR);
 				elCell.removeAttribute(this.TMP_BGC_ATTR);
 			}
-			//ë°°ê²½ì´ë¯¸ì§€ 
+			//¹è°æÀÌ¹ÌÁö 
 			if(elCell.getAttribute(this.TMP_BGIMG_ATTR)) {
 				welCell.css("backgroundImage",elCell.getAttribute(this.TMP_BGIMG_ATTR));
 				elCell.removeAttribute(this.TMP_BGIMG_ATTR);
@@ -15307,7 +15308,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 			return;
 		}
 
-		// ì‚¬ìš©ìê°€ ì§€ì •í•œ ìŠ¤íƒ€ì¼ ë¬´ì‹œí•˜ê³  ìƒˆ í…œí”Œë¦¿ ì ìš©
+		// »ç¿ëÀÚ°¡ ÁöÁ¤ÇÑ ½ºÅ¸ÀÏ ¹«½ÃÇÏ°í »õ ÅÛÇÃ¸´ Àû¿ë
 		// http://bts.nhncorp.com/nhnbts/browse/COM-871
 		this._clearAllTableStyles(elTable);
 		
@@ -15534,7 +15535,7 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		return elResult;
 	},
 	
-	// elTblì´ ê½‰ ì°¬ ì§ì‚¬ê°í˜• í˜•íƒœì˜ í…Œì´ë¸”ì¸ì§€ í™•ì¸
+	// elTblÀÌ ²Ë Âù Á÷»ç°¢Çü ÇüÅÂÀÇ Å×ÀÌºíÀÎÁö È®ÀÎ
 	_isValidTable : function(elTbl){
 		if(!elTbl || !elTbl.tagName || elTbl.tagName != "TABLE"){
 			return false;
@@ -15548,12 +15549,12 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
 		if(nYSize < 1){return false;}
 
 		for(var i = 1; i < nXSize; i++){
-			// ì²«ë²ˆì§¸ ì—´ê³¼ ê¸¸ì´ê°€ ë‹¤ë¥¸ ì—´ì´ í•˜ë‚˜ë¼ë„ ìˆë‹¤ë©´ ì§ì‚¬ê°í˜•ì´ ì•„ë‹˜
+			// Ã¹¹øÂ° ¿­°ú ±æÀÌ°¡ ´Ù¸¥ ¿­ÀÌ ÇÏ³ª¶óµµ ÀÖ´Ù¸é Á÷»ç°¢ÇüÀÌ ¾Æ´Ô
 			if(this.htMap[i].length != nYSize || !this.htMap[i][nYSize - 1]){
 				return false;
 			}
 			
-			// ë¹ˆì¹¸ì´ í•˜ë‚˜ë¼ë„ ìˆë‹¤ë©´ ê½‰ ì°¬ ì§ì‚¬ê°í˜•ì´ ì•„ë‹˜
+			// ºóÄ­ÀÌ ÇÏ³ª¶óµµ ÀÖ´Ù¸é ²Ë Âù Á÷»ç°¢ÇüÀÌ ¾Æ´Ô
 			for(var j = 0; j < nYSize; j++){
 				if(!this.htMap[i] || !this.htMap[i][j]){
 					return false;
@@ -15591,40 +15592,40 @@ nhn.husky.SE2M_TableEditor = jindo.$Class({
  * */
 nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 	/**
-	 * class ì´ë¦„
+	 * class ÀÌ¸§
 	 * @type {String}
 	 */
 	name : "SE2M_QuickEditor_Common",
 	/**
-	 * í™˜ê²½ ì •ë³´.
+	 * È¯°æ Á¤º¸.
 	 * @type {Object}
 	 */
 	_environmentData : "",
 	/**
-	 * í˜„ì¬ íƒ€ì… (table|img)
+	 * ÇöÀç Å¸ÀÔ (table|img)
 	 * @type {String}
 	 */
 	_currentType :"",
 	/**
-	 * ì´ë²¤íŠ¸ê°€ ë ˆì´ì–´ ì•ˆì—ì„œ í˜¸ì¶œë˜ì—ˆëŠ”ì§€ ì•Œê¸° ìœ„í•œ ë³€ìˆ˜
+	 * ÀÌº¥Æ®°¡ ·¹ÀÌ¾î ¾È¿¡¼­ È£ÃâµÇ¾ú´ÂÁö ¾Ë±â À§ÇÑ º¯¼ö
 	 * @type {Boolean}
 	 */
 	_in_event : false,
 	/**
-	 * Ajaxì²˜ë¦¬ë¥¼ í•˜ì§€ ì•ŠìŒ
+	 * AjaxÃ³¸®¸¦ ÇÏÁö ¾ÊÀ½
 	 * @type {Boolean}
 	 */
 	_bUseConfig : true,
 	
 	/**
-	 * ê³µí†µ ì„œë²„ì—ì„œ ê°œì¸ ì„¤ì • ë°›ì•„ì˜¤ëŠ” AjaxUrl 
+	 * °øÅë ¼­¹ö¿¡¼­ °³ÀÎ ¼³Á¤ ¹Ş¾Æ¿À´Â AjaxUrl 
 	 * @See SE2M_Configuration.js
 	 */
 	_sBaseAjaxUrl : "",
 	_sAddTextAjaxUrl : "",
 	
 	/**
-	 * ì´ˆê¸° ì¸ìŠ¤í„´ìŠ¤ ìƒì„± ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜.
+	 * ÃÊ±â ÀÎ½ºÅÏ½º »ı¼º ½ÇÇàµÇ´Â ÇÔ¼ö.
 	 */
 	$init : function() {
 		this.waHotkeys = new jindo.$A([]);
@@ -15648,7 +15649,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		}
 	},
 	
-	//ì‚­ì œ ì‹œì— qe layer close
+	//»èÁ¦ ½Ã¿¡ qe layer close
 	$ON_EVENT_EDITING_AREA_KEYDOWN : function(oEvent){
 		var oKeyInfo = oEvent.key();
 		//Backspace : 8, Delete :46
@@ -15717,8 +15718,8 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 	},
 	
 	/**
-	 * ìœ„ì§€ìœ… ì˜ì—­ì— ë‹¨ì¶•í‚¤ê°€ ë“±ë¡ë  ë•Œ, 
-	 * tab ê³¼ shift+tab (ë“¤ì—¬ì“°ê¸° / ë‚´ì–´ì“°ê¸° ) ë¥¼ ì œì™¸í•œ ë‹¨ì¶•í‚¤ ë¦¬ìŠ¤íŠ¸ë¥¼ ì €ì¥í•œë‹¤.
+	 * À§ÁöÀ¨ ¿µ¿ª¿¡ ´ÜÃàÅ°°¡ µî·ÏµÉ ¶§, 
+	 * tab °ú shift+tab (µé¿©¾²±â / ³»¾î¾²±â ) ¸¦ Á¦¿ÜÇÑ ´ÜÃàÅ° ¸®½ºÆ®¸¦ ÀúÀåÇÑ´Ù.
 	 */
 	$ON_REGISTER_HOTKEY : function(sHotkey, sCMD, aArgs){
 		if(sHotkey != "tab" && sHotkey != "shift+tab"){
@@ -15741,7 +15742,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		});
 	},
 	/**
-	 * openTypeì„ ì €ì¥í•˜ëŠ” í•¨ìˆ˜.
+	 * openTypeÀ» ÀúÀåÇÏ´Â ÇÔ¼ö.
 	 * @param {String} sType
 	 * @param {Boolean} bBol
 	 */
@@ -15749,10 +15750,10 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		this._environmentData[sType].isOpen = bBol;
 	},
 	/**
-	 * ë ˆì´ì–´ê°€ ì˜¤í”ˆ í•  ë•Œ ì‹¤í–‰ë˜ëŠ” ì´ë²¤íŠ¸.
-	 * ë ˆì´ì–´ê°€ ì²˜ìŒ ëœ° ë•Œ,
-	 * 		ì €ì¥ëœ ë‹¨ì¶•í‚¤ ë¦¬ìŠ¤íŠ¸ë¥¼ ë ˆì´ì–´ì— ë“±ë¡í•˜ê³  (ë ˆì´ì–´ê°€ ë–  ìˆì„ë•Œë„ ë‹¨ì¶•í‚¤ê°€ ë¨¹ë„ë¡ í•˜ê¸° ìœ„í•´)
-	 * 		ë ˆì´ì–´ì— ëŒ€í•œ í‚¤ë³´ë“œ/ë§ˆìš°ìŠ¤ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡í•œë‹¤.
+	 * ·¹ÀÌ¾î°¡ ¿ÀÇÂ ÇÒ ¶§ ½ÇÇàµÇ´Â ÀÌº¥Æ®.
+	 * ·¹ÀÌ¾î°¡ Ã³À½ ¶ã ¶§,
+	 * 		ÀúÀåµÈ ´ÜÃàÅ° ¸®½ºÆ®¸¦ ·¹ÀÌ¾î¿¡ µî·ÏÇÏ°í (·¹ÀÌ¾î°¡ ¶° ÀÖÀ»¶§µµ ´ÜÃàÅ°°¡ ¸Ôµµ·Ï ÇÏ±â À§ÇØ)
+	 * 		·¹ÀÌ¾î¿¡ ´ëÇÑ Å°º¸µå/¸¶¿ì½º ÀÌº¥Æ®¸¦ µî·ÏÇÑ´Ù.
 	 * @param {Element} oEle
 	 * @param {Element} oLayer
 	 * @param {String} sType(img|table|review)
@@ -15776,7 +15777,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		}
 	},
 	/**
-	 * ë ˆì´ì–´ê°€ ë‹«í˜”ì„ë•Œ ì‹¤í–‰ë˜ëŠ” ì´ë²¤íŠ¸.
+	 * ·¹ÀÌ¾î°¡ ´İÇûÀ»¶§ ½ÇÇàµÇ´Â ÀÌº¥Æ®.
 	 * @param {jindo.$Event} weEvent
 	 */
 	$ON_CLOSE_QE_LAYER : function(weEvent){
@@ -15789,7 +15790,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 	},
 		
 	/**
-	 * ì–´í”Œë¦¬ì¼€ì´ì…˜ì´ ì¤€ë¹„ë‹¨ê³„ì¼ë•Œ ì‹¤í–‰ë˜ëŠ” ì´ë²¤íŠ¸
+	 * ¾îÇÃ¸®ÄÉÀÌ¼ÇÀÌ ÁØºñ´Ü°èÀÏ¶§ ½ÇÇàµÇ´Â ÀÌº¥Æ®
 	 */
 	$LOCAL_BEFORE_FIRST : function(sMsg) {
 		if (!sMsg.match(/OPEN_QE_LAYER/)) { // (sMsg == "$ON_CLOSE_QE_LAYER" && !this.currentEle)
@@ -15824,7 +15825,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 			dragEnd : function(oCustomEvent){
 				that.changeFixedMode();
 				that._in_event = false;
-				//if(that._currentType=="review"||that._currentType=="table"){	// [SMARTEDITORSUS-153] ì´ë¯¸ì§€ í€µ ì—ë””í„°ë„ ê°™ì€ ë¡œì§ìœ¼ë¡œ ì²˜ë¦¬í•˜ë„ë¡ ìˆ˜ì •
+				//if(that._currentType=="review"||that._currentType=="table"){	// [SMARTEDITORSUS-153] ÀÌ¹ÌÁö Äü ¿¡µğÅÍµµ °°Àº ·ÎÁ÷À¸·Î Ã³¸®ÇÏµµ·Ï ¼öÁ¤
 					var richEle = jindo.$Element(oCustomEvent.elDrag);
 					that._environmentData[that._currentType].position = [richEle.css("top"),richEle.css("left")];
 				//}
@@ -15842,7 +15843,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		jindo.$Fn(tableFn,this).attach(jindo.$$.getSingle(".q_open_table_full", this.oApp.htOptions.elAppContainer),"click");  
 	},
 	/**
-	 * ë ˆì´ì–´ì˜ ìµœëŒ€í™”/ìµœì†Œí™”ë¥¼ í† ê¸€ë§ í•˜ëŠ” í•¨ìˆ˜.
+	 * ·¹ÀÌ¾îÀÇ ÃÖ´ëÈ­/ÃÖ¼ÒÈ­¸¦ Åä±Û¸µ ÇÏ´Â ÇÔ¼ö.
 	 * @param {String} sType(table|img)
 	 * @param {jindo.$Event} weEvent
 	 */
@@ -15867,7 +15868,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		weEvent.stop(jindo.$Event.CANCEL_DEFAULT);
 	},
 	/**
-	 * í† ê¸€ë§ì‹œ ì „ì— ì—˜ë¦¬ë¨¼íŠ¸ì— ìœ„ì¹˜ë¥¼ ì¹´í”¼í•˜ëŠ” í•¨ìˆ˜.
+	 * Åä±Û¸µ½Ã Àü¿¡ ¿¤¸®¸ÕÆ®¿¡ À§Ä¡¸¦ Ä«ÇÇÇÏ´Â ÇÔ¼ö.
 	 * @param {Number} beforeX
 	 * @param {Number} beforeY
 	 * @param {Element} sAfterEle
@@ -15879,13 +15880,13 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		});
 	},
 	/**
-	 * ë ˆì´ì–´ë¥¼ ê³ ì •ìœ¼ë¡œ í• ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜.
+	 * ·¹ÀÌ¾î¸¦ °íÁ¤À¸·Î ÇÒ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö.
 	 */
 	changeFixedMode : function(){
 		this._environmentData[this._currentType].isFixed = true;
 	},
 	/**
-	 * ì—ë””íŒ… ì˜ì—­ì—ì„œ keyupí• ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜.
+	 * ¿¡µğÆÃ ¿µ¿ª¿¡¼­ keyupÇÒ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö.
 	 * @param {jindo.$Event} weEvent
 	 */
 /*
@@ -15901,7 +15902,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 	},
 
 	/**
-	 * ì—ë””íŒ… ì˜ì—­ì—ì„œ mousedowní• ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜.
+	 * ¿¡µğÆÃ ¿µ¿ª¿¡¼­ mousedownÇÒ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö.
 	 * @param {jindo.$Event} weEvent
 	 */
 	$ON_EVENT_EDITING_AREA_MOUSEDOWN:function(weEvent){
@@ -15911,7 +15912,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		this._in_event = false;
 	},
 	/**
-	 * ì—ë””íŒ… ì˜ì—­ì—ì„œ mousewheelí• ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜.
+	 * ¿¡µğÆÃ ¿µ¿ª¿¡¼­ mousewheelÇÒ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö.
 	 * @param {jindo.$Event} weEvent
 	 */
 	$ON_EVENT_EDITING_AREA_MOUSEWHEEL:function(weEvent){
@@ -15921,7 +15922,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		this._in_event = false;
 	},
 	/**
-	 * ë ˆì´ì–´ë¥¼ ë„ìš°ëŠ”ë° ë ˆì´ì–´ê°€ table(í…œí”Œë¦¿),imgì¸ì§€ë¥¼ í™•ì¸í•˜ì—¬ idë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+	 * ·¹ÀÌ¾î¸¦ ¶ç¿ì´Âµ¥ ·¹ÀÌ¾î°¡ table(ÅÛÇÃ¸´),imgÀÎÁö¸¦ È®ÀÎÇÏ¿© id¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
 	 * @param {Element} oEle
 	 * @return {String} layer id
 	 */
@@ -15935,25 +15936,25 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		}
 	},
 	/**
-	 * í€µì—ë””í„°ì—ì„œ keyupì‹œ ì‹¤í–‰ë˜ëŠ” ì´ë²¤íŠ¸
+	 * Äü¿¡µğÅÍ¿¡¼­ keyup½Ã ½ÇÇàµÇ´Â ÀÌº¥Æ®
 	 */
 	$ON_QE_IN_KEYUP : function(){
 		this._in_event = true;
 	},
 	/**
-	 * í€µì—ë””í„°ì—ì„œ mousedownì‹œ ì‹¤í–‰ë˜ëŠ” ì´ë²¤íŠ¸
+	 * Äü¿¡µğÅÍ¿¡¼­ mousedown½Ã ½ÇÇàµÇ´Â ÀÌº¥Æ®
 	 */
 	$ON_QE_IN_MOUSEDOWN : function(){
 		this._in_event = true;
 	},
 	/**
-	 * í€µì—ë””í„°ì—ì„œ mousewheelì‹œ ì‹¤í–‰ë˜ëŠ” ì´ë²¤íŠ¸
+	 * Äü¿¡µğÅÍ¿¡¼­ mousewheel½Ã ½ÇÇàµÇ´Â ÀÌº¥Æ®
 	 */
 	$ON_QE_IN_MOUSEWHEEL : function(){
 		this._in_event = true;
 	},
 	/**
-	 * ë ˆì´ì–´ë¥¼ ìˆ¨ê¸°ëŠ” í•¨ìˆ˜.
+	 * ·¹ÀÌ¾î¸¦ ¼û±â´Â ÇÔ¼ö.
 	 * @param {jindo.$Event} weEvent
 	 */
 	layer_hide : function(weEvent){
@@ -15962,8 +15963,8 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		jindo.$Element(jindo.$$.getSingle("._"+this._environmentData[this._currentType].type,this.currentEle)).hide();
 	},
 	/**
-	 * ëŠ¦ê²Œ ì´ë²¤íŠ¸ ë°”ì¸ë”© í•˜ëŠ” í•¨ìˆ˜.
-	 * ë ˆì´ì–´ê°€ ì²˜ìŒ ëœ° ë•Œ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡í•œë‹¤.
+	 * ´Ê°Ô ÀÌº¥Æ® ¹ÙÀÎµù ÇÏ´Â ÇÔ¼ö.
+	 * ·¹ÀÌ¾î°¡ Ã³À½ ¶ã ¶§ ÀÌº¥Æ®¸¦ µî·ÏÇÑ´Ù.
 	 */
 	lazy_common : function(){
 		this.oApp.registerBrowserEvent(jindo.$(this._qe_wrap), "keyup", "QE_IN_KEYUP");
@@ -15972,7 +15973,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		this.lazy_common = function(){};
 	},
 	/**
-	 * ë ˆì´ì–´ë¥¼ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜.
+	 * ·¹ÀÌ¾î¸¦ º¸¿©ÁÖ´Â ÇÔ¼ö.
 	 * @param {String} sType
 	 * @param {Element} oEle
 	 */
@@ -15988,9 +15989,9 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		this.lazy_common();
 	},
 	/**
-	 * ë ˆì´ì–´ì˜ ìœ„ì¹˜ë¥¼ ë°˜í™˜ í•˜ëŠ” í•¨ìˆ˜
-	 *		ê³ ì • ìƒíƒœê°€ ì•„ë‹ˆê±°ë‚˜ ìµœì†Œí™” ìƒíƒœì´ë©´ ì—˜ë¦¬ë¨¼íŠ¸ ìœ„ì¹˜ì— í€µì—ë””í„°ë¥¼ ë„ìš°ê³ 
-	 *		ê³ ì • ìƒíƒœì´ê³  ìµœëŒ€í™” ìƒíƒœì´ë©´ í‘œë‚˜ ê¸€ ì–‘ì‹ì€ ì €ì¥ëœ ìœ„ì¹˜ì— ë„ì›Œì£¼ê³ , ì´ë¯¸ì§€ëŠ”...?
+	 * ·¹ÀÌ¾îÀÇ À§Ä¡¸¦ ¹İÈ¯ ÇÏ´Â ÇÔ¼ö
+	 *		°íÁ¤ »óÅÂ°¡ ¾Æ´Ï°Å³ª ÃÖ¼ÒÈ­ »óÅÂÀÌ¸é ¿¤¸®¸ÕÆ® À§Ä¡¿¡ Äü¿¡µğÅÍ¸¦ ¶ç¿ì°í
+	 *		°íÁ¤ »óÅÂÀÌ°í ÃÖ´ëÈ­ »óÅÂÀÌ¸é Ç¥³ª ±Û ¾ç½ÄÀº ÀúÀåµÈ À§Ä¡¿¡ ¶ç¿öÁÖ°í, ÀÌ¹ÌÁö´Â...?
 	 * @param {Element} oEle
 	 * @param {Element} oLayer
 	 */
@@ -15999,13 +16000,13 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 			return this.calculateLayer(oEle , oLayer);
 		}
 		
-		//if(this._currentType == "review" || this._currentType == "table"){	// [SMARTEDITORSUS-153] ì´ë¯¸ì§€ í€µ ì—ë””í„°ë„ ê°™ì€ ë¡œì§ìœ¼ë¡œ ì²˜ë¦¬í•˜ë„ë¡ ìˆ˜ì •
+		//if(this._currentType == "review" || this._currentType == "table"){	// [SMARTEDITORSUS-153] ÀÌ¹ÌÁö Äü ¿¡µğÅÍµµ °°Àº ·ÎÁ÷À¸·Î Ã³¸®ÇÏµµ·Ï ¼öÁ¤
 			var position = this._environmentData[this._currentType].position;
 			var nTop = parseInt(position[0], 10);
 			var nAppHeight = this.getAppPosition().h;
 			var nLayerHeight = jindo.$Element(oLayer).height();
 		
-			// [SMARTEDITORSUS-129] í¸ì§‘ ì˜ì—­ ë†’ì´ë¥¼ ì¤„ì˜€ì„ ë•Œ í€µì—ë””í„°ê°€ ì˜ì—­ì„ ë²—ì–´ë‚˜ì§€ ì•Šë„ë¡ ì²˜ë¦¬
+			// [SMARTEDITORSUS-129] ÆíÁı ¿µ¿ª ³ôÀÌ¸¦ ÁÙ¿´À» ¶§ Äü¿¡µğÅÍ°¡ ¿µ¿ªÀ» ¹ş¾î³ªÁö ¾Êµµ·Ï Ã³¸®
 			if((nTop + nLayerHeight + this.nYGap) > nAppHeight){
 				nTop = nAppHeight - nLayerHeight;
 				this._environmentData[this._currentType].position[0] = nTop;
@@ -16019,24 +16020,24 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		//return this.calculateLayer(null , oLayer);
 	},
 	/**
-	 * í˜„ì¬ ë ˆì´ì–´ê°€ ê³ ì •í˜•íƒœì¸ì§€ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+	 * ÇöÀç ·¹ÀÌ¾î°¡ °íÁ¤ÇüÅÂÀÎÁö ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
 	 */
 	isCurrentFixed : function(){
 		return this._environmentData[this._currentType].isFixed;
 	},
 	/**
-	 * ë ˆì´ì–´ë¥¼ ë„ìš¸ ìœ„ì¹˜ë¥¼ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜.
+	 * ·¹ÀÌ¾î¸¦ ¶ç¿ï À§Ä¡¸¦ °è»êÇÏ´Â ÇÔ¼ö.
 	 * @param {Element} oEle
 	 * @param {Element} oLayer
 	 */
 	calculateLayer : function(oEle, oLayer){
 		/*
-		 * ê¸°ì¤€ì„ í•œêµ°ë°ë¡œ ë§Œë“¤ì–´ì•¼ í•¨.
-		 * 1. ì—ë””í„°ëŠ” í˜ì´ì§€
-		 * 2. ì—˜ë¦¬ë¨¼íŠ¸ëŠ” ì•ˆì— ì—ë””íŒ… ì˜ì—­
-		 * 3. ë ˆì´ì–´ëŠ” ì—ë””íŒ… ì˜ì—­
+		 * ±âÁØÀ» ÇÑ±ºµ¥·Î ¸¸µé¾î¾ß ÇÔ.
+		 * 1. ¿¡µğÅÍ´Â ÆäÀÌÁö
+		 * 2. ¿¤¸®¸ÕÆ®´Â ¾È¿¡ ¿¡µğÆÃ ¿µ¿ª
+		 * 3. ·¹ÀÌ¾î´Â ¿¡µğÆÃ ¿µ¿ª
 		 * 
-		 * ê¸°ì¤€ì€ í˜ì´ì§€ë¡œ í•¨.
+		 * ±âÁØÀº ÆäÀÌÁö·Î ÇÔ.
 		 */
 		var positionInfo = this.getPositionInfo(oEle, oLayer);
 		
@@ -16046,7 +16047,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		};
 	},
 	/**
-	 * ìœ„ì¹˜ë¥¼ ë°˜í™˜ í•˜ëŠ” í•¨ìˆ˜.
+	 * À§Ä¡¸¦ ¹İÈ¯ ÇÏ´Â ÇÔ¼ö.
 	 * @param {Element} oEle
 	 * @param {Element} oLayer
 	 */
@@ -16081,8 +16082,8 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		};
 	},
 	/**
-	 * ê¸°ì¤€ ì—˜ë¦¬ë¨¼íŠ¸ì˜ ìœ„ì¹˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
-	 *		ì—˜ë¦¬ë¨¼íŠ¸ê°€ ìˆëŠ” ê²½ìš°
+	 * ±âÁØ ¿¤¸®¸ÕÆ®ÀÇ À§Ä¡¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 *		¿¤¸®¸ÕÆ®°¡ ÀÖ´Â °æ¿ì
 	 * @param {Element} eEle
 	 */
 	getElementPosition : function(eEle, oLayer){
@@ -16119,7 +16120,7 @@ nhn.husky.SE2M_QuickEditor_Common = jindo.$Class({
 		};
 	},
 	/**
-	 * ì—ë””í„°ì˜ í¬ê¸° ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜.
+	 * ¿¡µğÅÍÀÇ Å©±â °è»êÇÏ´Â ÇÔ¼ö.
 	 */
 	getAppPosition : function(){
 		return {
@@ -16170,7 +16171,7 @@ function Shortcut(sKey,sId){
 		store.set(fakeId,sKey,sId);
 		return action.init(store.get(fakeId),sKey);
 	}
-	alert(sId+"ëŠ” ë°˜ë“œì‹œ stringì´ê±°ë‚˜  ì—†ì–´ì•¼ ë©ë‹ˆë‹¤.");
+	alert(sId+"´Â ¹İµå½Ã stringÀÌ°Å³ª  ¾ø¾î¾ß µË´Ï´Ù.");
 };
 
 
@@ -16644,35 +16645,35 @@ nhn.DraggableLayer = jindo.$Class({
 /*[
  * TOGGLE_ACTIVE_LAYER
  *
- * ì•¡í‹°ë¸Œ ë ˆì´ì–´ê°€ í™”ë©´ì— ë³´ì´ëŠ” ì—¬ë¶€ë¥¼ í† ê¸€ í•œë‹¤.
+ * ¾×Æ¼ºê ·¹ÀÌ¾î°¡ È­¸é¿¡ º¸ÀÌ´Â ¿©ºÎ¸¦ Åä±Û ÇÑ´Ù.
  *
- * oLayer HTMLElement ë ˆì´ì–´ë¡œ ì‚¬ìš©í•  HTML Element
- * sOnOpenCmd string í™”ë©´ì— ë³´ì´ëŠ” ê²½ìš° ë°œìƒ í•  ë©”ì‹œì§€(ì˜µì…˜)
- * aOnOpenParam array sOnOpenCmdì™€ í•¨ê»˜ ë„˜ê²¨ì¤„ íŒŒë¼ë¯¸í„°(ì˜µì…˜)
- * sOnCloseCmd string í•´ë‹¹ ë ˆì´ì–´ê°€ í™”ë©´ì—ì„œ ìˆ¨ê²¨ì§ˆ ë•Œ ë°œìƒ í•  ë©”ì‹œì§€(ì˜µì…˜)
- * aOnCloseParam array sOnCloseCmdì™€ í•¨ê»˜ ë„˜ê²¨ì¤„ íŒŒë¼ë¯¸í„°(ì˜µì…˜)
+ * oLayer HTMLElement ·¹ÀÌ¾î·Î »ç¿ëÇÒ HTML Element
+ * sOnOpenCmd string È­¸é¿¡ º¸ÀÌ´Â °æ¿ì ¹ß»ı ÇÒ ¸Ş½ÃÁö(¿É¼Ç)
+ * aOnOpenParam array sOnOpenCmd¿Í ÇÔ²² ³Ñ°ÜÁÙ ÆÄ¶ó¹ÌÅÍ(¿É¼Ç)
+ * sOnCloseCmd string ÇØ´ç ·¹ÀÌ¾î°¡ È­¸é¿¡¼­ ¼û°ÜÁú ¶§ ¹ß»ı ÇÒ ¸Ş½ÃÁö(¿É¼Ç)
+ * aOnCloseParam array sOnCloseCmd¿Í ÇÔ²² ³Ñ°ÜÁÙ ÆÄ¶ó¹ÌÅÍ(¿É¼Ç)
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * SHOW_ACTIVE_LAYER
  *
- * ì•¡í‹°ë¸Œ ë ˆì´ì–´ê°€ í™”ë©´ì— ë³´ì´ëŠ” ì—¬ë¶€ë¥¼ í† ê¸€ í•œë‹¤.
+ * ¾×Æ¼ºê ·¹ÀÌ¾î°¡ È­¸é¿¡ º¸ÀÌ´Â ¿©ºÎ¸¦ Åä±Û ÇÑ´Ù.
  *
- * oLayer HTMLElement ë ˆì´ì–´ë¡œ ì‚¬ìš©í•  HTML Element
- * sOnCloseCmd string í•´ë‹¹ ë ˆì´ì–´ê°€ í™”ë©´ì—ì„œ ìˆ¨ê²¨ì§ˆ ë•Œ ë°œìƒ í•  ë©”ì‹œì§€(ì˜µì…˜)
- * aOnCloseParam array sOnCloseCmdì™€ í•¨ê»˜ ë„˜ê²¨ì¤„ íŒŒë¼ë¯¸í„°(ì˜µì…˜)
+ * oLayer HTMLElement ·¹ÀÌ¾î·Î »ç¿ëÇÒ HTML Element
+ * sOnCloseCmd string ÇØ´ç ·¹ÀÌ¾î°¡ È­¸é¿¡¼­ ¼û°ÜÁú ¶§ ¹ß»ı ÇÒ ¸Ş½ÃÁö(¿É¼Ç)
+ * aOnCloseParam array sOnCloseCmd¿Í ÇÔ²² ³Ñ°ÜÁÙ ÆÄ¶ó¹ÌÅÍ(¿É¼Ç)
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * 	HIDE_ACTIVE_LAYER
  *
- * í˜„ì¬ í™”ë©´ì— ë³´ì´ëŠ” ì•¡í‹°ë¸Œ ë ˆì´ì–´ë¥¼ í™”ë©´ì—ì„œ ìˆ¨ê¸´ë‹¤.
+ * ÇöÀç È­¸é¿¡ º¸ÀÌ´Â ¾×Æ¼ºê ·¹ÀÌ¾î¸¦ È­¸é¿¡¼­ ¼û±ä´Ù.
  *
  * none
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc í•œë²ˆì— í•œê°œë§Œ í™”ë©´ì— ë³´ì—¬ì•¼ í•˜ëŠ” ë ˆì´ì–´ë¥¼ ê´€ë¦¬í•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc ÇÑ¹ø¿¡ ÇÑ°³¸¸ È­¸é¿¡ º¸¿©¾ß ÇÏ´Â ·¹ÀÌ¾î¸¦ °ü¸®ÇÏ´Â ÇÃ·¯±×ÀÎ
  */
 nhn.husky.ActiveLayerManager = jindo.$Class({
 	name : "ActiveLayerManager",
@@ -16741,23 +16742,23 @@ nhn.husky.ActiveLayerManager = jindo.$Class({
 /*[
  * SHOW_DIALOG_LAYER
  *
- * ë‹¤ì´ì–¼ë¡œê·¸ ë ˆì´ì–´ë¥¼ í™”ë©´ì— ë³´ì—¬ì¤€ë‹¤.
+ * ´ÙÀÌ¾ó·Î±× ·¹ÀÌ¾î¸¦ È­¸é¿¡ º¸¿©ÁØ´Ù.
  *
- * oLayer HTMLElement ë‹¤ì´ì–¼ë¡œê·¸ ë ˆì´ì–´ë¡œ ì‚¬ìš© í•  HTML ì—˜ë¦¬ë¨¼íŠ¸
+ * oLayer HTMLElement ´ÙÀÌ¾ó·Î±× ·¹ÀÌ¾î·Î »ç¿ë ÇÒ HTML ¿¤¸®¸ÕÆ®
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * HIDE_DIALOG_LAYER
  *
- * ë‹¤ì´ì–¼ë¡œê·¸ ë ˆì´ì–´ë¥¼ í™”ë©´ì— ìˆ¨ê¸´ë‹¤.
+ * ´ÙÀÌ¾ó·Î±× ·¹ÀÌ¾î¸¦ È­¸é¿¡ ¼û±ä´Ù.
  *
- * oLayer HTMLElement ìˆ¨ê¸¸ ë‹¤ì´ì–¼ë¡œê·¸ ë ˆì´ì–´ì— í•´ë‹¹ í•˜ëŠ” HTML ì—˜ë¦¬ë¨¼íŠ¸
+ * oLayer HTMLElement ¼û±æ ´ÙÀÌ¾ó·Î±× ·¹ÀÌ¾î¿¡ ÇØ´ç ÇÏ´Â HTML ¿¤¸®¸ÕÆ®
  *
 ---------------------------------------------------------------------------]*/
 /*[
  * HIDE_LAST_DIALOG_LAYER
  *
- * ë§ˆì§€ë§‰ìœ¼ë¡œ í™”ë©´ì— í‘œì‹œí•œ ë‹¤ì´ì–¼ë¡œê·¸ ë ˆì´ì–´ë¥¼ ìˆ¨ê¸´ë‹¤.
+ * ¸¶Áö¸·À¸·Î È­¸é¿¡ Ç¥½ÃÇÑ ´ÙÀÌ¾ó·Î±× ·¹ÀÌ¾î¸¦ ¼û±ä´Ù.
  *
  * none
  *
@@ -16765,13 +16766,13 @@ nhn.husky.ActiveLayerManager = jindo.$Class({
 /*[
  * HIDE_ALL_DIALOG_LAYER
  *
- * í‘œì‹œ ì¤‘ì¸ ëª¨ë“  ë‹¤ì´ì–¼ë¡œê·¸ ë ˆì´ì–´ë¥¼ ìˆ¨ê¸´ë‹¤.
+ * Ç¥½Ã ÁßÀÎ ¸ğµç ´ÙÀÌ¾ó·Î±× ·¹ÀÌ¾î¸¦ ¼û±ä´Ù.
  *
  * none
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc ë“œë˜ê·¸ê°€ ê°€ëŠ¥í•œ ë ˆì´ì–´ë¥¼ ì»¨íŠ¸ë¡¤ í•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc µå·¡±×°¡ °¡´ÉÇÑ ·¹ÀÌ¾î¸¦ ÄÁÆ®·Ñ ÇÏ´Â ÇÃ·¯±×ÀÎ
  */
 nhn.husky.DialogLayerManager = jindo.$Class({
 	name : "DialogLayerManager",
@@ -17019,7 +17020,7 @@ nhn.husky.MessageManager = jindo.$Class({
 /**
  * @name nhn.husky.PopUpManager
  * @namespace
- * @description íŒì—… ë§¤ë‹ˆì € í´ë˜ìŠ¤.
+ * @description ÆË¾÷ ¸Å´ÏÀú Å¬·¡½º.
  * <dt><strong>Spec Code</strong></dt>
  * <dd><a href="http://ajaxui.nhndesign.com/svnview/SmartEditor2_Official/tags/SE2M_popupManager/0.1/test/spec/hp_popupManager_spec.html" target="_new">Spec</a></dd>
  * <dt><strong>wiki</strong></dt>
@@ -17036,24 +17037,24 @@ nhn.husky.PopUpManager._instance = null;
 nhn.husky.PopUpManager._pluginKeyCnt = 0;
 
 /**
- * @description íŒì—… ë§¤ë‹ˆì € ì¸ìŠ¤í„´ìŠ¤ í˜¸ì¶œ ë©”ì†Œë“œ, nhn.husky js framework ê¸°ë°˜ ì½”ë“œ
+ * @description ÆË¾÷ ¸Å´ÏÀú ÀÎ½ºÅÏ½º È£Ãâ ¸Ş¼Òµå, nhn.husky js framework ±â¹İ ÄÚµå
  * @public
- * @param {Object} oApp í—ˆìŠ¤í‚¤ ì½”ì–´ ê°ì²´ë¥¼ ë„˜ê²¨ì¤€ë‹¤.(this.oApp)
+ * @param {Object} oApp Çã½ºÅ° ÄÚ¾î °´Ã¼¸¦ ³Ñ°ÜÁØ´Ù.(this.oApp)
  * @return {Object} nhn.husky.PopUpManager Instance
- * @example íŒì—…ê´€ë ¨ í”ŒëŸ¬ê·¸ì¸ ì œì‘ ì˜ˆì œ
+ * @example ÆË¾÷°ü·Ã ÇÃ·¯±×ÀÎ Á¦ÀÛ ¿¹Á¦
  * nhn.husky.NewPlugin = function(){
  * 	this.$ON_APP_READY = function(){
- * 		// íŒì—… ë§¤ë‹ˆì € getInstance ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•œë‹¤.
- * 		// í—ˆìŠ¤í‚¤ ì½”ì–´ì˜ ì°¸ì¡°ê°’ì„ ë„˜ê²¨ì¤€ë‹¤(this.oApp)
+ * 		// ÆË¾÷ ¸Å´ÏÀú getInstance ¸Ş¼Òµå¸¦ È£ÃâÇÑ´Ù.
+ * 		// Çã½ºÅ° ÄÚ¾îÀÇ ÂüÁ¶°ªÀ» ³Ñ°ÜÁØ´Ù(this.oApp)
  * 		this.oPopupMgr = nhn.husky.PopUpMaganer.getInstance(this.oApp);
  * 	};
  * 
- * 	// íŒì—…ì„ ìš”ì²­í•˜ëŠ” ë©”ì‹œì§€ ë©”ì†Œë“œëŠ” ì•„ë˜ì™€ ê°™ìŒ
+ * 	// ÆË¾÷À» ¿äÃ»ÇÏ´Â ¸Ş½ÃÁö ¸Ş¼Òµå´Â ¾Æ·¡¿Í °°À½
  * 	this.$ON_NEWPLUGIN_OPEN_WINDOW = function(){
  * 		var oWinOp = {
- * 			oApp : this.oApp,	// oApp this.oApp í—ˆìŠ¤í‚¤ ì°¸ì¡°ê°’
- * 			sUrl : "", // sUrl : í˜ì´ì§€ URL
- * 			sName : "", // sName : í˜ì´ì§€ name
+ * 			oApp : this.oApp,	// oApp this.oApp Çã½ºÅ° ÂüÁ¶°ª
+ * 			sUrl : "", // sUrl : ÆäÀÌÁö URL
+ * 			sName : "", // sName : ÆäÀÌÁö name
  * 			nWidth : 400,
  * 			nHeight : 400,
  * 			bScroll : true
@@ -17061,16 +17062,16 @@ nhn.husky.PopUpManager._pluginKeyCnt = 0;
  * 		this.oPopUpMgr.openWindow(oWinOp);
  * 	};
  * 
- * 	// íŒì—…í˜ì´ì§€ ì‘ë‹µë°ì´íƒ€ ë°˜í™˜ ë©”ì‹œì§€ ë©”ì†Œë“œë¥¼ ì •ì˜í•¨.
- * 	// ê° í”ŒëŸ¬ê·¸ì¸ íŒì—…í˜ì´ì§€ì—ì„œ í•´ë‹¹ ë©”ì‹œì§€ì™€ ë°ì´íƒ€ë¥¼ ë„˜ê¸°ê²Œ ë¨.
+ * 	// ÆË¾÷ÆäÀÌÁö ÀÀ´äµ¥ÀÌÅ¸ ¹İÈ¯ ¸Ş½ÃÁö ¸Ş¼Òµå¸¦ Á¤ÀÇÇÔ.
+ * 	// °¢ ÇÃ·¯±×ÀÎ ÆË¾÷ÆäÀÌÁö¿¡¼­ ÇØ´ç ¸Ş½ÃÁö¿Í µ¥ÀÌÅ¸¸¦ ³Ñ±â°Ô µÊ.
  * 	this.@ON_NEWPLUGIN_WINDOW_CALLBACK = function(){
- * 		// íŒì—…í˜ì´ì§€ë³„ë¡œ ì •ì˜ëœ í˜•íƒœì˜ ì•„ê·œë¨¼íŠ¸ ë°ì´íƒ€ê°€ ë„˜ì–´ì˜¤ë©´ ì²˜ë¦¬í•œë‹¤.
+ * 		// ÆË¾÷ÆäÀÌÁöº°·Î Á¤ÀÇµÈ ÇüÅÂÀÇ ¾Æ±Ô¸ÕÆ® µ¥ÀÌÅ¸°¡ ³Ñ¾î¿À¸é Ã³¸®ÇÑ´Ù.
  * 	}
  * }
- * @example íŒì—… í˜ì´ì§€ì™€ opener í˜¸ì¶œ ì¸í„°í˜ì´ìŠ¤ ì˜ˆì œ
- * onclickì‹œ
+ * @example ÆË¾÷ ÆäÀÌÁö¿Í opener È£Ãâ ÀÎÅÍÆäÀÌ½º ¿¹Á¦
+ * onclick½Ã
  * "nhn.husky.PopUpManager.setCallback(window, "NEWPLUGIN_WINDOW_CALLBACK", oData);"
- * í˜•íƒœë¡œ í˜¸ì¶œí•¨.
+ * ÇüÅÂ·Î È£ÃâÇÔ.
  * 
  * 
  */
@@ -17107,7 +17108,7 @@ nhn.husky.PopUpManager.getInstance = function(oApp) {
 				for(var i in oWinOpt) op[i] = oWinOpt[i];
 
 				if(op.oApp == null) {
-					alert("íŒì—… ìš”ì²­ì‹œ ì˜µì…˜ìœ¼ë¡œ oApp(í—ˆìŠ¤í‚¤ reference) ê°’ì„ ì„¤ì •í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+					alert("ÆË¾÷ ¿äÃ»½Ã ¿É¼ÇÀ¸·Î oApp(Çã½ºÅ° reference) °ªÀ» ¼³Á¤ÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
 				}
 				
 				var left = op.sLeft || (screen.availWidth-op.nWidth)/2;
@@ -17152,11 +17153,11 @@ nhn.husky.PopUpManager.getInstance = function(oApp) {
 };
 
 /**
-* @description opener ì—°ë™ interface
+* @description opener ¿¬µ¿ interface
  * @public
- * @param {Object} oOpenWin íŒì—… í˜ì´ì§€ì˜ window ê°ì²´
- * @param {Object} sMsg	í”ŒëŸ¬ê·¸ì¸ ë©”ì‹œì§€ëª…
- * @param {Object} oData	ì‘ë‹µ ë°ì´íƒ€
+ * @param {Object} oOpenWin ÆË¾÷ ÆäÀÌÁöÀÇ window °´Ã¼
+ * @param {Object} sMsg	ÇÃ·¯±×ÀÎ ¸Ş½ÃÁö¸í
+ * @param {Object} oData	ÀÀ´ä µ¥ÀÌÅ¸
  */
 nhn.husky.PopUpManager.setCallback = function(oOpenWin, sMsg, oData) {
 	if (this._instance.getPluginWin().hasValue(oOpenWin)) {
@@ -17168,7 +17169,7 @@ nhn.husky.PopUpManager.setCallback = function(oOpenWin, sMsg, oData) {
 };
 
 /**
- * @description openerì— í—ˆìŠ¤í‚¤ í•¨ìˆ˜ë¥¼ ì‹¤í–‰ì‹œí‚¤ê³  ë°ì´í„° ê°’ì„ ë¦¬í„´ ë°›ìŒ.
+ * @description opener¿¡ Çã½ºÅ° ÇÔ¼ö¸¦ ½ÇÇà½ÃÅ°°í µ¥ÀÌÅÍ °ªÀ» ¸®ÅÏ ¹ŞÀ½.
  * @param 
  */
 nhn.husky.PopUpManager.getFunc = function(oOpenWin, sFunc) {
@@ -17240,7 +17241,7 @@ nhn.husky.SE2M_ImgSizeRatioKeeper = jindo.$Class({
 		if(this.elCheckImgAutoAdjust.checked){
 			nWidthDiff = nAfterWidth -  this.nWidth;
 			
-			//ë¯¸ì„¸í•œ ì°¨ì´ì— í¬ê¸° ë³€í™”ëŠ” ë¬´ì‹œ. 
+			//¹Ì¼¼ÇÑ Â÷ÀÌ¿¡ Å©±â º¯È­´Â ¹«½Ã. 
 			if( -1 <= nWidthDiff && nWidthDiff <= 1){
 				nRatio = this.nWidth/this.nHeight;
 				nAfterWidth = nRatio * nAfterheight;
@@ -17255,13 +17256,13 @@ nhn.husky.SE2M_ImgSizeRatioKeeper = jindo.$Class({
 		this.elImg.setAttribute("width", nAfterWidth );
 		this.elImg.setAttribute("height", nAfterheight);
 		
-		// [SMARTEDITORSUS-299] ë§ˆìš°ìŠ¤ Dragë¡œ ì´ë¯¸ì§€ í¬ê¸° ë¦¬ì‚¬ì´ì¦ˆ ì‹œ, ì‚½ì…í•  ë•Œì˜ ì €ì¥ ì‚¬ì´ì¦ˆ(rwidth/rheight)ë„ ë³€ê²½í•´ ì¤Œ
+		// [SMARTEDITORSUS-299] ¸¶¿ì½º Drag·Î ÀÌ¹ÌÁö Å©±â ¸®»çÀÌÁî ½Ã, »ğÀÔÇÒ ¶§ÀÇ ÀúÀå »çÀÌÁî(rwidth/rheight)µµ º¯°æÇØ ÁÜ
 		this.elImg.style.rwidth = this.elImg.style.width;
 		this.elImg.style.rheight = this.elImg.style.height;
 		this.elImg.setAttribute("rwidth", this.elImg.getAttribute("width"));
 		this.elImg.setAttribute("rheight", this.elImg.getAttribute("height"));
 		
-		// ì•„ë˜ì˜ ë¶€ë¶„ì€ ì¶”í›„ hp_SE2M_ImgSizeAdjustUtil.js ë¥¼ ìƒì„±í•˜ì—¬ ë¶„ë¦¬í•œë‹¤.
+		// ¾Æ·¡ÀÇ ºÎºĞÀº ÃßÈÄ hp_SE2M_ImgSizeAdjustUtil.js ¸¦ »ı¼ºÇÏ¿© ºĞ¸®ÇÑ´Ù.
 		var bAdjustpossible = this._isAdjustPossible(this.elImg.offsetWidth);
 		if(!bAdjustpossible){
 			this.elImg.style.width = this.nWidth;
@@ -17282,7 +17283,7 @@ nhn.husky.SE2M_ImgSizeRatioKeeper = jindo.$Class({
 	_isAdjustPossible : function(width){
 		var bPossible = true;
 		
-		// ê°€ë¡œí­ ì ìš©í•˜ëŠ” ê²½ìš°ì—ë§Œ ì—ë””í„° ë³¸ë¬¸ ì•ˆì— ë³´ì´ëŠ” ì´ë¯¸ì§€ ì‚¬ì´ì¦ˆë¥¼ ì¡°ì ˆí•¨
+		// °¡·ÎÆø Àû¿ëÇÏ´Â °æ¿ì¿¡¸¸ ¿¡µğÅÍ º»¹® ¾È¿¡ º¸ÀÌ´Â ÀÌ¹ÌÁö »çÀÌÁî¸¦ Á¶ÀıÇÔ
 		var bRulerUse = (this.oApp.htOptions['SE2M_EditingAreaRuler']) ? this.oApp.htOptions['SE2M_EditingAreaRuler'].bUse : false;
 		if(bRulerUse){
 			var welWysiwygBody = jindo.$Element(this.oApp.getWYSIWYGDocument().body);
@@ -17352,10 +17353,10 @@ nhn.husky.SE2M_Utils = {
 	sURLPattern : '(http|https|ftp|mailto):(?:\\/\\/)?((:?\\w|-)+(:?\\.(:?\\w|-)+)+)([^ <>]+)?',
 	
 	/**
-	 * ì‚¬ìš©ì í´ë˜ìŠ¤ ì •ë³´ë¥¼ ì¶”ì¶œí•œë‹¤.
-	 * @param {String} sStr	ì¶”ì¶œ String
-	 * @param {rx} rxValue	rx type í˜•ì‹ì˜ ê°’
-	 * @param {String} sDivision	valueì˜ split í˜•ì‹
+	 * »ç¿ëÀÚ Å¬·¡½º Á¤º¸¸¦ ÃßÃâÇÑ´Ù.
+	 * @param {String} sStr	ÃßÃâ String
+	 * @param {rx} rxValue	rx type Çü½ÄÀÇ °ª
+	 * @param {String} sDivision	valueÀÇ split Çü½Ä
 	 * @return {Array}
 	 */
 	getCustomCSS : function(sStr, rxValue, sDivision) {
@@ -17376,7 +17377,7 @@ nhn.husky.SE2M_Utils = {
 		return ret;
 	},
 	/**
-	 * HashTableë¡œ êµ¬ì„±ëœ Arrayì˜ ê°™ì€ í”„ë¡œí¼í‹°ë¥¼ sSeperator ë¡œ êµ¬ë¶„ëœ String ê°’ìœ¼ë¡œ ë³€í™˜
+	 * HashTable·Î ±¸¼ºµÈ ArrayÀÇ °°Àº ÇÁ·ÎÆÛÆ¼¸¦ sSeperator ·Î ±¸ºĞµÈ String °ªÀ¸·Î º¯È¯
 	 * @param {Object} v
 	 * @param {Object} sKey
 	 * @author senxation
@@ -17405,7 +17406,7 @@ toStringSamePropertiesOfArray(a, "b", ", ");
 	},
 	
 	/**
-	 * ë‹¨ì¼ ê°ì²´ë¥¼ ë°°ì—´ë¡œ ë§Œë“¤ì–´ì¤Œ
+	 * ´ÜÀÏ °´Ã¼¸¦ ¹è¿­·Î ¸¸µé¾îÁÜ
 	 * @param {Object} v
 	 * @return {Array}
 	 * @author senxation
@@ -17425,17 +17426,17 @@ makeArray("test"); ==> ["test"]
 	},
 	
 	/**
-	 * ë§ì¤„ì„ì„ í• ë•Œ ì¤„ì¼ ë‚´ìš©ê³¼ ì»¨í…Œì´ë„ˆê°€ ë‹¤ë¥¼ ê²½ìš° ì²˜ë¦¬
-	 * ì»¨í…Œì´ë„ˆì˜ css white-spaceê°’ì´ "normal"ì´ì–´ì•¼í•œë‹¤. (ì»¨í…Œì´ë„ˆë³´ë‹¤ í…ìŠ¤íŠ¸ê°€ ê¸¸ë©´ ì—¬ëŸ¬í–‰ìœ¼ë¡œ í‘œí˜„ë˜ëŠ” ìƒíƒœ)
-	 * @param {HTMLElement} elText ë§ì¤„ì„í•  ì—˜ë¦¬ë¨¼íŠ¸
-	 * @param {HTMLElement} elContainer ë§ì¤„ì„í•  ì—˜ë¦¬ë¨¼íŠ¸ë¥¼ ê°ì‹¸ëŠ” ì»¨í…Œì´ë„ˆ
-	 * @param {String} sStringTail ë§ì¤„ì„ì„ í‘œí˜„í•  ë¬¸ìì—´ (ë¯¸ì§€ì •ì‹œ ...)
-	 * @param {Number} nLine ìµœëŒ€ ë¼ì¸ìˆ˜ (ë¯¸ì§€ì •ì‹œ 1)
+	 * ¸»ÁÙÀÓÀ» ÇÒ¶§ ÁÙÀÏ ³»¿ë°ú ÄÁÅ×ÀÌ³Ê°¡ ´Ù¸¦ °æ¿ì Ã³¸®
+	 * ÄÁÅ×ÀÌ³ÊÀÇ css white-space°ªÀÌ "normal"ÀÌ¾î¾ßÇÑ´Ù. (ÄÁÅ×ÀÌ³Êº¸´Ù ÅØ½ºÆ®°¡ ±æ¸é ¿©·¯ÇàÀ¸·Î Ç¥ÇöµÇ´Â »óÅÂ)
+	 * @param {HTMLElement} elText ¸»ÁÙÀÓÇÒ ¿¤¸®¸ÕÆ®
+	 * @param {HTMLElement} elContainer ¸»ÁÙÀÓÇÒ ¿¤¸®¸ÕÆ®¸¦ °¨½Î´Â ÄÁÅ×ÀÌ³Ê
+	 * @param {String} sStringTail ¸»ÁÙÀÓÀ» Ç¥ÇöÇÒ ¹®ÀÚ¿­ (¹ÌÁöÁ¤½Ã ...)
+	 * @param {Number} nLine ÃÖ´ë ¶óÀÎ¼ö (¹ÌÁöÁ¤½Ã 1)
 	 * @author senxation
 	 * @example
-//divê°€ 2ì¤„ ì´í•˜ê°€ ë˜ë„ë¡ strong ë‚´ë¶€ì˜ ë‚´ìš©ì„ ì¤„ì„ 
+//div°¡ 2ÁÙ ÀÌÇÏ°¡ µÇµµ·Ï strong ³»ºÎÀÇ ³»¿ëÀ» ÁÙÀÓ 
 <div>
-	<strong id="a">ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©</strong><span>ìƒì„¸ë³´ê¸°</span>
+	<strong id="a">¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë</strong><span>»ó¼¼º¸±â</span>
 <div>
 ellipsis(jindo.$("a"), jindo.$("a").parentNode, "...", 2);
 	 */
@@ -17459,7 +17460,7 @@ ellipsis(jindo.$("a"), jindo.$("a").parentNode, "...", 2);
 		}
 	
 		/**
-		 * ì§€ì •ëœ ë¼ì¸ë³´ë‹¤ ì»¤ì§ˆë•Œê¹Œì§€ ì „ì²´ ë‚¨ì€ ë¬¸ìì—´ì˜ ì ˆë°˜ì„ ë”í•´ë‚˜ê°
+		 * ÁöÁ¤µÈ ¶óÀÎº¸´Ù Ä¿Áú¶§±îÁö ÀüÃ¼ ³²Àº ¹®ÀÚ¿­ÀÇ Àı¹İÀ» ´õÇØ³ª°¨
 		 */
 		nCurrentHeight = nHeight;
 		while(nCurrentHeight < nHeight * (nLine + 0.5)) {
@@ -17469,7 +17470,7 @@ ellipsis(jindo.$("a"), jindo.$("a").parentNode, "...", 2);
 		}
 	
 		/**
-		 * ì§€ì •ëœ ë¼ì¸ì´ ë ë•Œê¹Œì§€ í•œê¸€ìì”© ì˜ë¼ëƒ„
+		 * ÁöÁ¤µÈ ¶óÀÎÀÌ µÉ¶§±îÁö ÇÑ±ÛÀÚ¾¿ Àß¶ó³¿
 		 */
 		while(nCurrentHeight > nHeight * (nLine + 0.5)) {
 			nIndex--;
@@ -17479,15 +17480,15 @@ ellipsis(jindo.$("a"), jindo.$("a").parentNode, "...", 2);
 	},
 	
 	/**
-	 * ìµœëŒ€ ê°€ë¡œì‚¬ì´ì¦ˆë¥¼ ì§€ì •í•˜ì—¬ ë§ì¤„ì„í•œë‹¤.
-	 * elTextì˜ css white-spaceê°’ì´ "nowrap"ì´ì–´ì•¼í•œë‹¤. (ì»¨í…Œì´ë„ˆë³´ë‹¤ í…ìŠ¤íŠ¸ê°€ ê¸¸ë©´ í–‰ë³€í™˜ë˜ì§€ì•Šê³  ê°€ë¡œë¡œ ê¸¸ê²Œ í‘œí˜„ë˜ëŠ” ìƒíƒœ)
-	 * @param {HTMLElement} elText ë§ì¤„ì„í•  ì—˜ë¦¬ë¨¼íŠ¸
-	 * @param {String} sStringTail ë§ì¤„ì„ì„ í‘œí˜„í•  ë¬¸ìì—´ (ë¯¸ì§€ì •ì‹œ ...)
-	 * @param {Function} fCondition ì¡°ê±´ í•¨ìˆ˜. ë‚´ë¶€ì—ì„œ trueë¥¼ ë¦¬í„´í•˜ëŠ” ë™ì•ˆì—ë§Œ ë§ì¤„ì„ì„ ì§„í–‰í•œë‹¤.
+	 * ÃÖ´ë °¡·Î»çÀÌÁî¸¦ ÁöÁ¤ÇÏ¿© ¸»ÁÙÀÓÇÑ´Ù.
+	 * elTextÀÇ css white-space°ªÀÌ "nowrap"ÀÌ¾î¾ßÇÑ´Ù. (ÄÁÅ×ÀÌ³Êº¸´Ù ÅØ½ºÆ®°¡ ±æ¸é Çàº¯È¯µÇÁö¾Ê°í °¡·Î·Î ±æ°Ô Ç¥ÇöµÇ´Â »óÅÂ)
+	 * @param {HTMLElement} elText ¸»ÁÙÀÓÇÒ ¿¤¸®¸ÕÆ®
+	 * @param {String} sStringTail ¸»ÁÙÀÓÀ» Ç¥ÇöÇÒ ¹®ÀÚ¿­ (¹ÌÁöÁ¤½Ã ...)
+	 * @param {Function} fCondition Á¶°Ç ÇÔ¼ö. ³»ºÎ¿¡¼­ true¸¦ ¸®ÅÏÇÏ´Â µ¿¾È¿¡¸¸ ¸»ÁÙÀÓÀ» ÁøÇàÇÑ´Ù.
 	 * @author senxation
 	 * @example
-//150í”½ì…€ ì´í•˜ê°€ ë˜ë„ë¡ strong ë‚´ë¶€ì˜ ë‚´ìš©ì„ ì¤„ì„ 
-<strong id="a">ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©</strong>>
+//150ÇÈ¼¿ ÀÌÇÏ°¡ µÇµµ·Ï strong ³»ºÎÀÇ ³»¿ëÀ» ÁÙÀÓ 
+<strong id="a">¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë</strong>>
 ellipsisByPixel(jindo.$("a"), "...", 150);
 	 */
 	ellipsisByPixel : function(elText, sStringTail, nPixel, fCondition) {
@@ -17530,19 +17531,19 @@ ellipsisByPixel(jindo.$("a"), "...", 150);
 	},
 	
 	/**
-	 * ì—¬ëŸ¬ê°œì˜ ì—˜ë¦¬ë¨¼íŠ¸ë¥¼ ê°ê°ì˜ ì§€ì •ëœ ìµœëŒ€ë„ˆë¹„ë¡œ ë§ì¤„ì„í•œë‹¤.
-	 * ë§ì¤„ì„í•  ì—˜ë¦¬ë¨¼íŠ¸ì˜ css white-spaceê°’ì´ "nowrap"ì´ì–´ì•¼í•œë‹¤. (ì»¨í…Œì´ë„ˆë³´ë‹¤ í…ìŠ¤íŠ¸ê°€ ê¸¸ë©´ í–‰ë³€í™˜ë˜ì§€ì•Šê³  ê°€ë¡œë¡œ ê¸¸ê²Œ í‘œí˜„ë˜ëŠ” ìƒíƒœ)
-	 * @param {Array} aElement ë§ì¤„ì„í•  ì—˜ë¦¬ë¨¼íŠ¸ì˜ ë°°ì—´. ì§€ì •ëœ ìˆœì„œëŒ€ë¡œ ë§ì¤„ì„í•œë‹¤.
-	 * @param {String} sStringTail ë§ì¤„ì„ì„ í‘œí˜„í•  ë¬¸ìì—´ (ë¯¸ì§€ì •ì‹œ ...)
-	 * @param {Array} aMinWidth ë§ì¤„ì„í•  ë„ˆë¹„ì˜ ë°°ì—´.
-	 * @param {Function} fCondition ì¡°ê±´ í•¨ìˆ˜. ë‚´ë¶€ì—ì„œ trueë¥¼ ë¦¬í„´í•˜ëŠ” ë™ì•ˆì—ë§Œ ë§ì¤„ì„ì„ ì§„í–‰í•œë‹¤.
+	 * ¿©·¯°³ÀÇ ¿¤¸®¸ÕÆ®¸¦ °¢°¢ÀÇ ÁöÁ¤µÈ ÃÖ´ë³Êºñ·Î ¸»ÁÙÀÓÇÑ´Ù.
+	 * ¸»ÁÙÀÓÇÒ ¿¤¸®¸ÕÆ®ÀÇ css white-space°ªÀÌ "nowrap"ÀÌ¾î¾ßÇÑ´Ù. (ÄÁÅ×ÀÌ³Êº¸´Ù ÅØ½ºÆ®°¡ ±æ¸é Çàº¯È¯µÇÁö¾Ê°í °¡·Î·Î ±æ°Ô Ç¥ÇöµÇ´Â »óÅÂ)
+	 * @param {Array} aElement ¸»ÁÙÀÓÇÒ ¿¤¸®¸ÕÆ®ÀÇ ¹è¿­. ÁöÁ¤µÈ ¼ø¼­´ë·Î ¸»ÁÙÀÓÇÑ´Ù.
+	 * @param {String} sStringTail ¸»ÁÙÀÓÀ» Ç¥ÇöÇÒ ¹®ÀÚ¿­ (¹ÌÁöÁ¤½Ã ...)
+	 * @param {Array} aMinWidth ¸»ÁÙÀÓÇÒ ³ÊºñÀÇ ¹è¿­.
+	 * @param {Function} fCondition Á¶°Ç ÇÔ¼ö. ³»ºÎ¿¡¼­ true¸¦ ¸®ÅÏÇÏ´Â µ¿¾È¿¡¸¸ ¸»ÁÙÀÓÀ» ÁøÇàÇÑ´Ù.
 	 * @example
-//#a #b #cì˜ ë„ˆë¹„ë¥¼ ê°ê° 100, 50, 50í”½ì…€ë¡œ ì¤„ì„ (div#parent ê°€ 200í”½ì…€ ì´í•˜ì´ë©´ ì¤‘ë‹¨)
-//#cì˜ ë„ˆë¹„ë¥¼ ì¤„ì´ëŠ” ë™ì•ˆ fConditionì—ì„œ falseë¥¼ ë¦¬í„´í•˜ë©´ b, aëŠ” ë§ì¤„ì„ ë˜ì§€ ì•ŠëŠ”ë‹¤.  
+//#a #b #cÀÇ ³Êºñ¸¦ °¢°¢ 100, 50, 50ÇÈ¼¿·Î ÁÙÀÓ (div#parent °¡ 200ÇÈ¼¿ ÀÌÇÏÀÌ¸é Áß´Ü)
+//#cÀÇ ³Êºñ¸¦ ÁÙÀÌ´Â µ¿¾È fCondition¿¡¼­ false¸¦ ¸®ÅÏÇÏ¸é b, a´Â ¸»ÁÙÀÓ µÇÁö ¾Ê´Â´Ù.  
 <div id="parent">
-	<strong id="a">ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©</strong>
-	<strong id="b">ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©</strong>
-	<strong id="c">ë§ì¤„ì„ì„ì ìš©í• ë‚´ìš©</strong>
+	<strong id="a">¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë</strong>
+	<strong id="b">¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë</strong>
+	<strong id="c">¸»ÁÙÀÓÀ»Àû¿ëÇÒ³»¿ë</strong>
 <div>
 ellipsisElementsToDesinatedWidth([jindo.$("c"), jindo.$("b"), jindo.$("a")], "...", [100, 50, 50], function(){
 	if (jindo.$Element("parent").width() > 200) {
@@ -17561,7 +17562,7 @@ ellipsisElementsToDesinatedWidth([jindo.$("c"), jindo.$("b"), jindo.$("a")], "..
 	},
 	
 	/**
-	 * ìˆ«ìë¥¼ ì…ë ¥ë°›ì•„ ì •í•´ì§„ ê¸¸ì´ë§Œí¼ ì•ì— "0"ì´ ì¶”ê°€ëœ ë¬¸ìì—´ì„ êµ¬í•œë‹¤.
+	 * ¼ıÀÚ¸¦ ÀÔ·Â¹Ş¾Æ Á¤ÇØÁø ±æÀÌ¸¸Å­ ¾Õ¿¡ "0"ÀÌ Ãß°¡µÈ ¹®ÀÚ¿­À» ±¸ÇÑ´Ù.
 	 * @param {Number} nNumber
 	 * @param {Number} nLength
 	 * @return {String}
@@ -17577,12 +17578,12 @@ paddingZero(10, 5); ==> "00010" (String)
 	},
 	
 	/**
-	 * stringì„ byte ë‹¨ìœ„ë¡œ ì§¤ë¼ì„œ tailë¥¼ ë¶™íŒë‹¤.
+	 * stringÀ» byte ´ÜÀ§·Î Â©¶ó¼­ tail¸¦ ºÙÈù´Ù.
 	 * @param {String} sString
 	 * @param {Number} nByte
 	 * @param {String} sTail
 	 * @example
-	 cutStringToByte('ì¼ì´ì‚¼ì‚¬ì˜¤ìœ¡', 6, '...') ==> 'ì¼ì´ì‚¼...' (string)	 
+	 cutStringToByte('ÀÏÀÌ»ï»ç¿ÀÀ°', 6, '...') ==> 'ÀÏÀÌ»ï...' (string)	 
 	 */
 	cutStringToByte : function(sString, nByte, sTail){
 		if(sString === null || sString.length === 0) {
@@ -17613,7 +17614,7 @@ paddingZero(10, 5); ==> "00010" (String)
 	},
 	
 	/**
-	 * ì…ë ¥ë°›ì€ ë¬¸ìì˜ byte êµ¬í•œë‹¤.
+	 * ÀÔ·Â¹ŞÀº ¹®ÀÚÀÇ byte ±¸ÇÑ´Ù.
 	 * @param {String} ch
 	 * 
 	 */
@@ -17636,7 +17637,7 @@ paddingZero(10, 5); ==> "00010" (String)
 	},
 	
 	/**
-	 * Hash Tableì—ì„œ ì›í•˜ëŠ” í‚¤ê°’ë§Œì„ ê°€ì§€ëŠ” í•„í„°ëœ ìƒˆë¡œìš´ Hash Tableì„ êµ¬í•œë‹¤. 
+	 * Hash Table¿¡¼­ ¿øÇÏ´Â Å°°ª¸¸À» °¡Áö´Â ÇÊÅÍµÈ »õ·Î¿î Hash TableÀ» ±¸ÇÑ´Ù. 
 	 * @param {HashTable} htUnfiltered
 	 * @param {Array} aKey
 	 * @return {HashTable}
@@ -17759,10 +17760,10 @@ getFilteredHashTable({
 	},
 	
 	/**
-	 * elNodeì˜ ìƒìœ„ ë…¸ë“œ ì¤‘ íƒœê·¸ëª…ì´ sTagNameê³¼ ì¼ì¹˜í•˜ëŠ” ê²ƒì´ ìˆë‹¤ë©´ ë°˜í™˜.
-	 * @param {String} sTagName ê²€ìƒ‰ í•  íƒœê·¸ëª…
-	 * @param {HTMLElement} elNode ê²€ìƒ‰ ì‹œì‘ì ìœ¼ë¡œ ì‚¬ìš© í•  ë…¸ë“œ
-	 * @return {HTMLElement} ë¶€ëª¨ ë…¸ë“œ ì¤‘ íƒœê·¸ëª…ì´ sTagNameê³¼ ì¼ì¹˜í•˜ëŠ” ë…¸ë“œ. ì—†ì„ ê²½ìš° null ë°˜í™˜ 
+	 * elNodeÀÇ »óÀ§ ³ëµå Áß ÅÂ±×¸íÀÌ sTagName°ú ÀÏÄ¡ÇÏ´Â °ÍÀÌ ÀÖ´Ù¸é ¹İÈ¯.
+	 * @param {String} sTagName °Ë»ö ÇÒ ÅÂ±×¸í
+	 * @param {HTMLElement} elNode °Ë»ö ½ÃÀÛÁ¡À¸·Î »ç¿ë ÇÒ ³ëµå
+	 * @return {HTMLElement} ºÎ¸ğ ³ëµå Áß ÅÂ±×¸íÀÌ sTagName°ú ÀÏÄ¡ÇÏ´Â ³ëµå. ¾øÀ» °æ¿ì null ¹İÈ¯ 
 	 */
 	findAncestorByTagName : function(sTagName, elNode){
 		while(elNode && elNode.tagName != sTagName) {
@@ -17785,9 +17786,9 @@ getFilteredHashTable({
 					return;
 				}
 				
-				// [SMARTEDITORSUS-308] [IE9] ì‘ë‹µì´ 304ì¸ ê²½ìš°
-				//	onreadystatechage í•¸ë“¤ëŸ¬ì—ì„œ readyState ê°€ complete ì¸ ê²½ìš°ê°€ ë‘ ë²ˆ ë°œìƒ
-				//	LINK ì—˜ë¦¬ë¨¼íŠ¸ì˜ ì†ì„±ìœ¼ë¡œ ì½œë°± ì‹¤í–‰ ì—¬ë¶€ë¥¼ í”Œë˜ê·¸ë¡œ ë‚¨ê²¨ë†“ì•„ ì²˜ë¦¬í•¨
+				// [SMARTEDITORSUS-308] [IE9] ÀÀ´äÀÌ 304ÀÎ °æ¿ì
+				//	onreadystatechage ÇÚµé·¯¿¡¼­ readyState °¡ complete ÀÎ °æ¿ì°¡ µÎ ¹ø ¹ß»ı
+				//	LINK ¿¤¸®¸ÕÆ®ÀÇ ¼Ó¼ºÀ¸·Î Äİ¹é ½ÇÇà ¿©ºÎ¸¦ ÇÃ·¡±×·Î ³²°Ü³õ¾Æ Ã³¸®ÇÔ
 				if(elStyle.getAttribute("_complete")){
 					return;
 				}
@@ -17805,7 +17806,7 @@ getFilteredHashTable({
 	},
 	
 	/**
-	 * @param {Object} oSrc value copyí•  object
+	 * @param {Object} oSrc value copyÇÒ object
 	 * @return {Object}
 	 * @example
 	 *  var oSource = [1, 3, 4, { a:1, b:2, c: { a:1 }}];
@@ -17852,30 +17853,30 @@ getFilteredHashTable({
 	
 	
 	/**
-	 * iframe ì˜ì—­ì˜ aling ì •ë³´ë¥¼ ë‹¤ì‹œ ì„¸íŒ…í•˜ëŠ” ë¶€ë¶„.
-	 * iframe í˜•íƒœì˜ ì‚°ì¶œë¬¼ì„ ì—ë””í„°ì— ì‚½ì… ì´í›„ì— ì—ë””í„° ì •ë ¬ê¸°ëŠ¥ì„ ì¶”ê°€ í•˜ì˜€ì„ë•Œ ir_to_db ì´ì „ ì‹œì ì—ì„œ divíƒœê·¸ì— ì •ë ¬ì„ ë„£ì–´ì£¼ëŠ” ë¡œì§ì„.
-	 * ë¸Œë¼ìš°ì € í˜•íƒœì— ë”°ë¼ ì •ë ¬ íƒœê·¸ê°€ iframeì„ ê°ì‹¸ëŠ” div í˜¹ì€ p íƒœê·¸ì— ì •ë ¬ì´ ì¶”ê°€ëœë‹¤.
-	 * @param {HTMLElement} el iframeì˜ parentNode
+	 * iframe ¿µ¿ªÀÇ aling Á¤º¸¸¦ ´Ù½Ã ¼¼ÆÃÇÏ´Â ºÎºĞ.
+	 * iframe ÇüÅÂÀÇ »êÃâ¹°À» ¿¡µğÅÍ¿¡ »ğÀÔ ÀÌÈÄ¿¡ ¿¡µğÅÍ Á¤·Ä±â´ÉÀ» Ãß°¡ ÇÏ¿´À»¶§ ir_to_db ÀÌÀü ½ÃÁ¡¿¡¼­ divÅÂ±×¿¡ Á¤·ÄÀ» ³Ö¾îÁÖ´Â ·ÎÁ÷ÀÓ.
+	 * ºê¶ó¿ìÀú ÇüÅÂ¿¡ µû¶ó Á¤·Ä ÅÂ±×°¡ iframeÀ» °¨½Î´Â div È¤Àº p ÅÂ±×¿¡ Á¤·ÄÀÌ Ãß°¡µÈ´Ù.
+	 * @param {HTMLElement} el iframeÀÇ parentNode
 	 * @param {Document} oDoc  document
 	 */
-	// [COM-1151] SE2M_PreStringConverter ì—ì„œ ìˆ˜ì •í•˜ë„ë¡ ë³€ê²½
+	// [COM-1151] SE2M_PreStringConverter ¿¡¼­ ¼öÁ¤ÇÏµµ·Ï º¯°æ
 	iframeAlignConverter : function(el, oDoc){
 		var sTagName = el.tagName.toUpperCase();
 		
 		if(sTagName == "DIV" || sTagName == 'P'){
-			//irToDbDOM ì—ì„œ ìµœìƒìœ„ ë…¸ë“œê°€ div ì—˜ë¦¬ë¨¼íŠ¸ ì´ë¯€ë¡œ parentNodeê°€ ì—†ìœ¼ë©´ ìµœìƒì˜ div ë…¸ë“œ ì´ë¯€ë¡œ ë¦¬í„´í•œë‹¤.
+			//irToDbDOM ¿¡¼­ ÃÖ»óÀ§ ³ëµå°¡ div ¿¤¸®¸ÕÆ® ÀÌ¹Ç·Î parentNode°¡ ¾øÀ¸¸é ÃÖ»óÀÇ div ³ëµå ÀÌ¹Ç·Î ¸®ÅÏÇÑ´Ù.
 			if(el.parentNode === null ){ 
 				return;
 			}
 			var elWYSIWYGDoc = oDoc;
 			var wel = jindo.$Element(el);
 			var sHtml = wel.html();
-			//í˜„ì¬ alignì„ ì–»ì–´ì˜¤ê¸°.
+			//ÇöÀç alignÀ» ¾ò¾î¿À±â.
 			var sAlign = jindo.$Element(el).attr('align') || jindo.$Element(el).css('text-align');
-			//if(!sAlign){ //  P > DIVì˜ ê²½ìš° ë¬¸ì œ ë°œìƒ, ìˆ˜ì • í™”ë©´ì— ë“¤ì–´ ì™”ì„ ë•Œ íƒœê·¸ ê¹¨ì§
+			//if(!sAlign){ //  P > DIVÀÇ °æ¿ì ¹®Á¦ ¹ß»ı, ¼öÁ¤ È­¸é¿¡ µé¾î ¿ÔÀ» ¶§ ÅÂ±× ±úÁü
 			//	return;
 			//}
-			//ìƒˆë¡œìš´ div ë…¸ë“œ ìƒì„±í•œë‹¤.
+			//»õ·Î¿î div ³ëµå »ı¼ºÇÑ´Ù.
 			var welAfter = jindo.$Element(jindo.$('<div></div>', elWYSIWYGDoc));
 			welAfter.html(sHtml).attr('align', sAlign);			
 			wel.replace(welAfter);		
@@ -17883,10 +17884,10 @@ getFilteredHashTable({
 	},	
 	
 	/**
-	 * jindo.$JSON.fromXMLì„ ë³€í™˜í•œ ë©”ì„œë“œ.
-	 * ì†Œìˆ«ì ì´ ìˆëŠ” ê²½ìš°ì˜ ì²˜ë¦¬ ì‹œì— ìˆ«ìë¡œ ë³€í™˜í•˜ì§€ ì•Šë„ë¡ í•¨(parseFloat ì‚¬ìš© ì•ˆí•˜ë„ë¡ ìˆ˜ì •)
-	 * ê´€ë ¨ BTS : [COM-1093]
-	 * @param {String} sXML  XML í˜•íƒœì˜ ë¬¸ìì—´
+	 * jindo.$JSON.fromXMLÀ» º¯È¯ÇÑ ¸Ş¼­µå.
+	 * ¼Ò¼ıÁ¡ÀÌ ÀÖ´Â °æ¿ìÀÇ Ã³¸® ½Ã¿¡ ¼ıÀÚ·Î º¯È¯ÇÏÁö ¾Êµµ·Ï ÇÔ(parseFloat »ç¿ë ¾ÈÇÏµµ·Ï ¼öÁ¤)
+	 * °ü·Ã BTS : [COM-1093]
+	 * @param {String} sXML  XML ÇüÅÂÀÇ ¹®ÀÚ¿­
 	 * @return {jindo.$JSON}
 	 */
 	getJsonDatafromXML : function(sXML) {
@@ -17919,12 +17920,12 @@ getFilteredHashTable({
 			return true;
 		};
 		
-		// $0 : ì „ì²´ 
-		// $1 : íƒœê·¸ëª…
-		// $2 : ì†ì„±ë¬¸ìì—´
-		// $3 : ë‹«ëŠ”íƒœê·¸
-		// $4 : CDATAë°”ë””ê°’
-		// $5 : ê·¸ëƒ¥ ë°”ë””ê°’ 
+		// $0 : ÀüÃ¼ 
+		// $1 : ÅÂ±×¸í
+		// $2 : ¼Ó¼º¹®ÀÚ¿­
+		// $3 : ´İ´ÂÅÂ±×
+		// $4 : CDATA¹Ùµğ°ª
+		// $5 : ±×³É ¹Ùµğ°ª 
 		var cb = function($0,$1,$2,$3,$4,$5) {
 			var cur, cdata = "";
 			var idx = fg.stack.length - 1;
@@ -18011,7 +18012,7 @@ getFilteredHashTable({
 
 /**
  * nhn.husky.AutoResizer
- * 	HTMLëª¨ë“œì™€ TEXT ëª¨ë“œì˜ í¸ì§‘ ì˜ì—­ì¸ TEXTAREAì— ëŒ€í•œ ìë™í™•ì¥ ì²˜ë¦¬
+ * 	HTML¸ğµå¿Í TEXT ¸ğµåÀÇ ÆíÁı ¿µ¿ªÀÎ TEXTAREA¿¡ ´ëÇÑ ÀÚµ¿È®Àå Ã³¸®
  */
 nhn.husky.AutoResizer = jindo.$Class({
 	welHiddenDiv : null,
@@ -18038,7 +18039,7 @@ nhn.husky.AutoResizer = jindo.$Class({
 		this.wfnCallback = htOption.wfnCallback;
 		
 		this.elContainer = el.parentNode;
-		this.welTextArea = jindo.$Element(el);	// autoresizeë¥¼ ì ìš©í•  TextArea
+		this.welTextArea = jindo.$Element(el);	// autoresize¸¦ Àû¿ëÇÒ TextArea
 		this.welHiddenDiv = jindo.$Element('<div>');
 
 		this.wfnResize = jindo.$Fn(this._resize, this);
@@ -18080,7 +18081,7 @@ nhn.husky.AutoResizer = jindo.$Class({
 		}
 		
 		this.sContents = sContents.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g, '&nbsp;').replace(/\n/g, '<br>');
-		this.sContents += "<br>";	// ë§ˆì§€ë§‰ ê°œí–‰ ë’¤ì— <br>ì„ ë” ë¶™ì—¬ì£¼ì–´ì•¼ ëŠ˜ì–´ë‚˜ëŠ” ë†’ì´ê°€ ë™ì¼í•¨
+		this.sContents += "<br>";	// ¸¶Áö¸· °³Çà µÚ¿¡ <br>À» ´õ ºÙ¿©ÁÖ¾î¾ß ´Ã¾î³ª´Â ³ôÀÌ°¡ µ¿ÀÏÇÔ
 		
 		this.welCloneDiv.html(this.sContents);
 		nHeight = this.welCloneDiv.height();
@@ -18101,7 +18102,7 @@ nhn.husky.AutoResizer = jindo.$Class({
 });
 
 /**
- * ë¬¸ìë¥¼ ì—°ê²°í•˜ëŠ” '+' ëŒ€ì‹ ì— javaì™€ ìœ ì‚¬í•˜ê²Œ ì²˜ë¦¬í•˜ë„ë¡ ë¬¸ìì—´ ì²˜ë¦¬í•˜ë„ë¡ ë§Œë“œëŠ” object
+ * ¹®ÀÚ¸¦ ¿¬°áÇÏ´Â '+' ´ë½Å¿¡ java¿Í À¯»çÇÏ°Ô Ã³¸®ÇÏµµ·Ï ¹®ÀÚ¿­ Ã³¸®ÇÏµµ·Ï ¸¸µå´Â object
  * @author nox
  * @example
  var sTmp1 = new StringBuffer();
@@ -18204,7 +18205,7 @@ nhn.husky.StringConverterManager = jindo.$Class({
 	},
 	
 	applyConverter : function(sRuleName, sContents, oDocument){
-		//stringì„ ë„£ëŠ” ì´ìœ :IEì˜ ê²½ìš°,ë³¸ë¬¸ ì•ì— ìˆëŠ” html ì£¼ì„ì´ ì‚­ì œë˜ëŠ” ê²½ìš°ê°€ ìˆê¸°ë•Œë¬¸ì— ì„ì‹œ stringì„ ì¶”ê°€í•´ì¤€ê²ƒì„.
+		//stringÀ» ³Ö´Â ÀÌÀ¯:IEÀÇ °æ¿ì,º»¹® ¾Õ¿¡ ÀÖ´Â html ÁÖ¼®ÀÌ »èÁ¦µÇ´Â °æ¿ì°¡ ÀÖ±â¶§¹®¿¡ ÀÓ½Ã stringÀ» Ãß°¡ÇØÁØ°ÍÀÓ.
 		var sTmpStr =  "@"+(new Date()).getTime()+"@";
 		var rxTmpStr = new RegExp(sTmpStr, "g");
 		
@@ -18226,7 +18227,7 @@ nhn.husky.StringConverterManager = jindo.$Class({
 				aConverters[i](elContentsHolder);
 			}
 			sContents = elContentsHolder.innerHTML; 
-			// ë‚´ìš©ë¬¼ì— EMBEDë“±ì´ ìˆì„ ê²½ìš° IEì—ì„œ í˜ì´ì§€ ë‚˜ê°ˆ ë•Œ ê¶Œí•œ ì˜¤ë¥˜ ë°œìƒ í•  ìˆ˜ ìˆì–´ ëª…ì‹œì ìœ¼ë¡œ ë…¸ë“œ ì‚­ì œ.
+			// ³»¿ë¹°¿¡ EMBEDµîÀÌ ÀÖÀ» °æ¿ì IE¿¡¼­ ÆäÀÌÁö ³ª°¥ ¶§ ±ÇÇÑ ¿À·ù ¹ß»ı ÇÒ ¼ö ÀÖ¾î ¸í½ÃÀûÀ¸·Î ³ëµå »èÁ¦.
 			
 			if(!!elContentsHolder.parentNode){
 				elContentsHolder.parentNode.removeChild(elContentsHolder);
@@ -18234,9 +18235,9 @@ nhn.husky.StringConverterManager = jindo.$Class({
 			elContentsHolder = null;
 			
 			
-			//IEì˜ ê²½ìš°, sContentsë¥¼ innerHTMLë¡œ ë„£ëŠ” ê²½ìš° stringê³¼ <p>tag ì‚¬ì´ì— '\n\'ê°œí–‰ë¬¸ìë¥¼ ë„£ì–´ì¤€ë‹¤. 
+			//IEÀÇ °æ¿ì, sContents¸¦ innerHTML·Î ³Ö´Â °æ¿ì string°ú <p>tag »çÀÌ¿¡ '\n\'°³Çà¹®ÀÚ¸¦ ³Ö¾îÁØ´Ù. 
 			if( jindo.$Agent().navigator().ie ){
-				sTmpStr = sTmpStr +'(\r\n)?'; //ie+winì—ì„œëŠ” ê°œí–‰ì´ \r\në¡œ ë“¤ì–´ê°.
+				sTmpStr = sTmpStr +'(\r\n)?'; //ie+win¿¡¼­´Â °³ÇàÀÌ \r\n·Î µé¾î°¨.
 				rxTmpStr = new RegExp(sTmpStr , "g");
 			}
 		}
@@ -18292,14 +18293,14 @@ nhn.husky.StringConverterManager = jindo.$Class({
 /*[
  * ATTACH_HOVER_EVENTS
  *
- * ì£¼ì–´ì§„ HTMLì—˜ë¦¬ë¨¼íŠ¸ì— Hover ì´ë²¤íŠ¸ ë°œìƒì‹œ íŠ¹ì • í´ë˜ìŠ¤ê°€ í• ë‹¹ ë˜ë„ë¡ ì„¤ì •
+ * ÁÖ¾îÁø HTML¿¤¸®¸ÕÆ®¿¡ Hover ÀÌº¥Æ® ¹ß»ı½Ã Æ¯Á¤ Å¬·¡½º°¡ ÇÒ´ç µÇµµ·Ï ¼³Á¤
  *
- * aElms array Hover ì´ë²¤íŠ¸ë¥¼ ê±¸ HTML Element ëª©ë¡
- * sHoverClass string Hover ì‹œì— í• ë‹¹ í•  í´ë˜ìŠ¤
+ * aElms array Hover ÀÌº¥Æ®¸¦ °É HTML Element ¸ñ·Ï
+ * sHoverClass string Hover ½Ã¿¡ ÇÒ´ç ÇÒ Å¬·¡½º
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc Husky Frameworkì—ì„œ ìì£¼ ì‚¬ìš©ë˜ëŠ” ìœ í‹¸ì„± ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc Husky Framework¿¡¼­ ÀÚÁÖ »ç¿ëµÇ´Â À¯Æ¿¼º ¸Ş½ÃÁö¸¦ Ã³¸®ÇÏ´Â ÇÃ·¯±×ÀÎ
  */
  nhn.husky.Utils = jindo.$Class({
 	name : "Utils",
@@ -18349,13 +18350,13 @@ nhn.husky.StringConverterManager = jindo.$Class({
 /*[
  * SE_FIT_IFRAME
  *
- * ìŠ¤ë§ˆíŠ¸ì—ë””í„° ì‚¬ì´ì¦ˆì— ë§ê²Œ iframeì‚¬ì´ì¦ˆë¥¼ ì¡°ì ˆí•œë‹¤.
+ * ½º¸¶Æ®¿¡µğÅÍ »çÀÌÁî¿¡ ¸Â°Ô iframe»çÀÌÁî¸¦ Á¶ÀıÇÑ´Ù.
  *
  * none
  *
 ---------------------------------------------------------------------------]*/
 /**
- * @pluginDesc ì—ë””í„°ë¥¼ ì‹¸ê³  ìˆëŠ” iframe ì‚¬ì´ì¦ˆ ì¡°ì ˆì„ ë‹´ë‹¹í•˜ëŠ” í”ŒëŸ¬ê·¸ì¸
+ * @pluginDesc ¿¡µğÅÍ¸¦ ½Î°í ÀÖ´Â iframe »çÀÌÁî Á¶ÀıÀ» ´ã´çÇÏ´Â ÇÃ·¯±×ÀÎ
  */
 nhn.husky.SE_OuterIFrameControl = $Class({
 	name : "SE_OuterIFrameControl",
@@ -18367,13 +18368,13 @@ nhn.husky.SE_OuterIFrameControl = $Class({
 	
 		this._assignHTMLObjects(oAppContainer);
 
-		//í‚¤ë³´ë“œ ì´ë²¤íŠ¸
+		//Å°º¸µå ÀÌº¥Æ®
 		this.$FnKeyDown = $Fn(this._keydown, this);
 		if(this.oResizeGrip){
 			this.$FnKeyDown.attach(this.oResizeGrip, "keydown");
 		}
 		
-		//ë§ˆìš°ìŠ¤ ì´ë²¤íŠ¸ 
+		//¸¶¿ì½º ÀÌº¥Æ® 
 		if(!!jindo.$Agent().navigator().ie){
 			this.$FnMouseDown = $Fn(this._mousedown, this);
 			this.$FnMouseMove = $Fn(this._mousemove, this);
@@ -18471,7 +18472,7 @@ nhn.husky.SE_ToolbarToggler = $Class({
 	
 		this.toolbarArea = cssquery.getSingle(".se2_tool", oAppContainer);
 		
-		//ì„¤ì •ì´ ì—†ê±°ë‚˜, ì‚¬ìš©í•˜ê² ë‹¤ê³  í‘œì‹œí•œ ê²½ìš° block ì²˜ë¦¬
+		//¼³Á¤ÀÌ ¾ø°Å³ª, »ç¿ëÇÏ°Ú´Ù°í Ç¥½ÃÇÑ °æ¿ì block Ã³¸®
 		if( typeof(bUseToolbar) == 'undefined' || bUseToolbar === true){
 			this.toolbarArea.style.display = "block";
 		}else{
@@ -18582,7 +18583,7 @@ nhn.husky.SE2B_CSSLoader = jindo.$Class({
 //}
 /**
  * @name nhn.husky.SE2B_Customize_ToolBar
- * @description ë©”ì¼ ì „ìš© ì»¤ìŠ¤í„°ë§ˆì´ì¦ˆ íˆ´ë°”ë¡œ ë”ë³´ê¸° ë ˆì´ì–´ ê´€ë¦¬ë§Œì„ ë‹´ë‹¹í•˜ê³  ìˆìŒ.
+ * @description ¸ŞÀÏ Àü¿ë Ä¿½ºÅÍ¸¶ÀÌÁî Åø¹Ù·Î ´õº¸±â ·¹ÀÌ¾î °ü¸®¸¸À» ´ã´çÇÏ°í ÀÖÀ½.
  * @class
  * @author HyeKyoung,NHN AjaxUI Lab, CMD Division
  * @version 0.1.0
@@ -18593,7 +18594,7 @@ nhn.husky.SE2B_Customize_ToolBar = jindo.$Class(/** @lends nhn.husky.SE2B_Custom
 	name : "SE2B_Customize_ToolBar",
 	/**
 	 * @constructs
-	 * @param {Object} oAppContainer ì—ë””í„°ë¥¼ êµ¬ì„±í•˜ëŠ” ì»¨í…Œì´ë„ˆ
+	 * @param {Object} oAppContainer ¿¡µğÅÍ¸¦ ±¸¼ºÇÏ´Â ÄÁÅ×ÀÌ³Ê
 	 */
 	$init : function(oAppContainer) {
 		this._assignHTMLElements(oAppContainer);
@@ -18604,8 +18605,8 @@ nhn.husky.SE2B_Customize_ToolBar = jindo.$Class(/** @lends nhn.husky.SE2B_Custom
 	
 	/**
 	 * @private
-	 * @description DOMì—˜ë¦¬ë¨¼íŠ¸ë¥¼ ìˆ˜ì§‘í•˜ëŠ” ë©”ì†Œë“œ
-	 * @param {Object} oAppContainer íˆ´ë°” í¬í•¨ ì—ë””í„°ë¥¼ ê°ì‹¸ê³  ìˆëŠ” div ì—˜ë¦¬ë¨¼íŠ¸
+	 * @description DOM¿¤¸®¸ÕÆ®¸¦ ¼öÁıÇÏ´Â ¸Ş¼Òµå
+	 * @param {Object} oAppContainer Åø¹Ù Æ÷ÇÔ ¿¡µğÅÍ¸¦ °¨½Î°í ÀÖ´Â div ¿¤¸®¸ÕÆ®
 	 */
 	_assignHTMLElements : function(oAppContainer) {
 		this.oAppContainer = oAppContainer;
@@ -18663,24 +18664,24 @@ nhn.husky.SE2B_Customize_ToolBar = jindo.$Class(/** @lends nhn.husky.SE2B_Custom
 	},
 	
 	/**
-	 * CHANGE_EDITING_MODEëª¨ë“œ ì´í›„ì— í˜¸ì¶œë˜ì–´ì•¼ í•¨. 
-	 * WYSIWYG ëª¨ë“œê°€ í™œì„±í™”ë˜ê¸° ì „ì— í˜¸ì¶œì´ ë˜ë©´ APPLY_FONTCOLORì—ì„œ ì—ëŸ¬ ë°œìƒ.
+	 * CHANGE_EDITING_MODE¸ğµå ÀÌÈÄ¿¡ È£ÃâµÇ¾î¾ß ÇÔ. 
+	 * WYSIWYG ¸ğµå°¡ È°¼ºÈ­µÇ±â Àü¿¡ È£ÃâÀÌ µÇ¸é APPLY_FONTCOLOR¿¡¼­ ¿¡·¯ ¹ß»ı.
 	 */
 	$ON_RESET_TOOLBAR : function(){
 		if(this.oApp.getEditingMode() !== "WYSIWYG"){			
 			return;
 		}
-		//ìŠ¤í ì²´í¬ ë‹«ê¸° 
+		//½ºÆçÃ¼Å© ´İ±â 
 		this.oApp.exec("END_SPELLCHECK");		
-		//ì—´ë¦° íŒì—…ì„ ë‹«ê¸° ìœ„í•´ì„œ
+		//¿­¸° ÆË¾÷À» ´İ±â À§ÇØ¼­
 		this.oApp.exec("DISABLE_ALL_UI");
 		this.oApp.exec("ENABLE_ALL_UI");
-		//ê¸€ììƒ‰ê³¼ ê¸€ì ë°°ê²½ìƒ‰ì„ ì œì™¸í•œ ì„¸íŒ…
+		//±ÛÀÚ»ö°ú ±ÛÀÚ ¹è°æ»öÀ» Á¦¿ÜÇÑ ¼¼ÆÃ
 		this.oApp.exec("RESET_STYLE_STATUS");
 		this.oApp.exec("CHECK_STYLE_CHANGE");
-		//ìµœê·¼ ì‚¬ìš©í•œ ê¸€ììƒ‰ ì…‹íŒ….
+		//ÃÖ±Ù »ç¿ëÇÑ ±ÛÀÚ»ö ¼ÂÆÃ.
 		this.oApp.exec("APPLY_FONTCOLOR", ["#000000"]);
-		//ë”ë³´ê¸° ì˜ì—­ ë‹«ê¸°.
+		//´õº¸±â ¿µ¿ª ´İ±â.
 		this.oApp.exec("HIDE_EXPAND_VIEW");
 	}
 });
@@ -18691,18 +18692,18 @@ if(typeof window.nhn=='undefined'){window.nhn = {};}
  * @ unescape
  */
 var oMessageMap = {
-	'SE_EditingAreaManager.onExit' : 'ë‚´ìš©ì´ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.',
-	'SE_Color.invalidColorCode' : 'ìƒ‰ìƒ ì½”ë“œë¥¼ ì˜¬ë°”ë¥´ê²Œ ì…ë ¥í•´ ì£¼ì„¸ìš”. \n\n ì˜ˆ) #000000, #FF0000, #FFFFFF, #ffffff, ffffff',
-	'SE_Hyperlink.invalidURL' : 'ì…ë ¥í•˜ì‹  URLì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.',
-	'SE_FindReplace.keywordMissing' : 'ì°¾ìœ¼ì‹¤ ë‹¨ì–´ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.',
-	'SE_FindReplace.keywordNotFound' : 'ì°¾ìœ¼ì‹¤ ë‹¨ì–´ê°€ ì—†ìŠµë‹ˆë‹¤.',
-	'SE_FindReplace.replaceAllResultP1' : 'ì¼ì¹˜í•˜ëŠ” ë‚´ìš©ì´ ì´ ',
-	'SE_FindReplace.replaceAllResultP2' : 'ê±´ ë°”ë€Œì—ˆìŠµë‹ˆë‹¤.',
-	'SE_FindReplace.notSupportedBrowser' : 'í˜„ì¬ ì‚¬ìš©í•˜ê³  ê³„ì‹  ë¸Œë¼ìš°ì €ì—ì„œëŠ” ì‚¬ìš©í•˜ì‹¤ìˆ˜ ì—†ëŠ” ê¸°ëŠ¥ì…ë‹ˆë‹¤.\n\nì´ìš©ì— ë¶ˆí¸ì„ ë“œë ¤ ì£„ì†¡í•©ë‹ˆë‹¤.',
-	'SE_FindReplace.replaceKeywordNotFound' : 'ë°”ë€” ë‹¨ì–´ê°€ ì—†ìŠµë‹ˆë‹¤',
-	'SE_LineHeight.invalidLineHeight' : 'ì˜ëª»ëœ ê°’ì…ë‹ˆë‹¤.',
-	'SE_Footnote.defaultText' : 'ê°ì£¼ë‚´ìš©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”',
-	'SE.failedToLoadFlash' : 'í”Œë˜ì‹œê°€ ì°¨ë‹¨ë˜ì–´ ìˆì–´ í•´ë‹¹ ê¸°ëŠ¥ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.',
-	'SE2M_EditingModeChanger.confirmTextMode' : 'í…ìŠ¤íŠ¸ ëª¨ë“œë¡œ ì „í™˜í•˜ë©´ ì‘ì„±ëœ ë‚´ìš©ì€ ìœ ì§€ë˜ë‚˜, \n\nê¸€ê¼´ ë“±ì˜ í¸ì§‘íš¨ê³¼ì™€ ì´ë¯¸ì§€ ë“±ì˜ ì²¨ë¶€ë‚´ìš©ì´ ëª¨ë‘ ì‚¬ë¼ì§€ê²Œ ë©ë‹ˆë‹¤.\n\nì „í™˜í•˜ì‹œê² ìŠµë‹ˆê¹Œ?',
-	'SE2M_FontNameWithLayerUI.sSampleText' : 'ê°€ë‚˜ë‹¤ë¼'
+	'SE_EditingAreaManager.onExit' : '³»¿ëÀÌ º¯°æµÇ¾ú½À´Ï´Ù.',
+	'SE_Color.invalidColorCode' : '»ö»ó ÄÚµå¸¦ ¿Ã¹Ù¸£°Ô ÀÔ·ÂÇØ ÁÖ¼¼¿ä. \n\n ¿¹) #000000, #FF0000, #FFFFFF, #ffffff, ffffff',
+	'SE_Hyperlink.invalidURL' : 'ÀÔ·ÂÇÏ½Å URLÀÌ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.',
+	'SE_FindReplace.keywordMissing' : 'Ã£À¸½Ç ´Ü¾î¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.',
+	'SE_FindReplace.keywordNotFound' : 'Ã£À¸½Ç ´Ü¾î°¡ ¾ø½À´Ï´Ù.',
+	'SE_FindReplace.replaceAllResultP1' : 'ÀÏÄ¡ÇÏ´Â ³»¿ëÀÌ ÃÑ ',
+	'SE_FindReplace.replaceAllResultP2' : '°Ç ¹Ù²î¾ú½À´Ï´Ù.',
+	'SE_FindReplace.notSupportedBrowser' : 'ÇöÀç »ç¿ëÇÏ°í °è½Å ºê¶ó¿ìÀú¿¡¼­´Â »ç¿ëÇÏ½Ç¼ö ¾ø´Â ±â´ÉÀÔ´Ï´Ù.\n\nÀÌ¿ë¿¡ ºÒÆíÀ» µå·Á ÁË¼ÛÇÕ´Ï´Ù.',
+	'SE_FindReplace.replaceKeywordNotFound' : '¹Ù²ğ ´Ü¾î°¡ ¾ø½À´Ï´Ù',
+	'SE_LineHeight.invalidLineHeight' : 'Àß¸øµÈ °ªÀÔ´Ï´Ù.',
+	'SE_Footnote.defaultText' : '°¢ÁÖ³»¿ëÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä',
+	'SE.failedToLoadFlash' : 'ÇÃ·¡½Ã°¡ Â÷´ÜµÇ¾î ÀÖ¾î ÇØ´ç ±â´ÉÀ» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.',
+	'SE2M_EditingModeChanger.confirmTextMode' : 'ÅØ½ºÆ® ¸ğµå·Î ÀüÈ¯ÇÏ¸é ÀÛ¼ºµÈ ³»¿ëÀº À¯ÁöµÇ³ª, \n\n±Û²Ã µîÀÇ ÆíÁıÈ¿°ú¿Í ÀÌ¹ÌÁö µîÀÇ Ã·ºÎ³»¿ëÀÌ ¸ğµÎ »ç¶óÁö°Ô µË´Ï´Ù.\n\nÀüÈ¯ÇÏ½Ã°Ú½À´Ï±î?',
+	'SE2M_FontNameWithLayerUI.sSampleText' : '°¡³ª´Ù¶ó'
 };

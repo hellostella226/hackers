@@ -34,10 +34,10 @@ nhn.husky.SE2M_Configuration.SE2M_ReEditAction = {
 	bUsed : true,
 	nSecDisplayDulationReEditMsg : 3,
 	aReEditGuideMsg : [
-	    'ì´ë¯¸ì§€ íŒŒì¼ì€ 1íšŒ í´ë¦­ ì‹œ í¬ê¸° ì¡°ì ˆ, ë”ë¸”í´ë¦­ ì‹œ ìž¬íŽ¸ì§‘ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.',
-	    'ì²¨ë¶€í•œ íŒŒì¼ì„ ë”ë¸”í´ë¦­ ì‹œ ìž¬íŽ¸ì§‘ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.',
-	    'ì²¨ë¶€í•œ ê¸€ì–‘ì‹ í…Œì´ë¸”ì„ ë“œëž˜ê·¸ì‹œ í…Œì´ë¸” ìž¬íŽ¸ì§‘ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.',
-	    'ì²¨ë¶€í•œ í‘œë¥¼ ë“œëž˜ê·¸ ì‹œ í‘œ ìž¬íŽ¸ì§‘ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.'
+	    'ÀÌ¹ÌÁö ÆÄÀÏÀº 1È¸ Å¬¸¯ ½Ã Å©±â Á¶Àý, ´õºíÅ¬¸¯ ½Ã ÀçÆíÁýÀÌ °¡´ÉÇÕ´Ï´Ù.',
+	    'Ã·ºÎÇÑ ÆÄÀÏÀ» ´õºíÅ¬¸¯ ½Ã ÀçÆíÁýÀÌ °¡´ÉÇÕ´Ï´Ù.',
+	    'Ã·ºÎÇÑ ±Û¾ç½Ä Å×ÀÌºíÀ» µå·¡±×½Ã Å×ÀÌºí ÀçÆíÁýÀÌ °¡´ÉÇÕ´Ï´Ù.',
+	    'Ã·ºÎÇÑ Ç¥¸¦ µå·¡±× ½Ã Ç¥ ÀçÆíÁýÀÌ °¡´ÉÇÕ´Ï´Ù.'
 	]
 };
 

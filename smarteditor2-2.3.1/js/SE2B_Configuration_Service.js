@@ -6,7 +6,7 @@ nhn.husky = nhn.husky || {};
 nhn.husky.SE2M_Configuration = nhn.husky.SE2M_Configuration || {};
 
 /**
- * ìŠ¤ë§ˆíŠ¸ì—ë””í„°2ì—ì„œ ì ‘ê·¼í•˜ëŠ” JS, IMG ë””ë ‰í† ë¦¬
+ * ½º¸¶Æ®¿¡µğÅÍ2¿¡¼­ Á¢±ÙÇÏ´Â JS, IMG µğ·ºÅä¸®
  */
 nhn.husky.SE2M_Configuration.Editor = {
 	sJsBaseURL : './js_src',
@@ -14,31 +14,31 @@ nhn.husky.SE2M_Configuration.Editor = {
 };
 
 /**
- * JS LazyLoadë¥¼ ìœ„í•œ ê²½ë¡œ
+ * JS LazyLoad¸¦ À§ÇÑ °æ·Î
  */
 nhn.husky.SE2M_Configuration.LazyLoad = {
 	sJsBaseURI : "js_lazyload"
 };
 
 /**
- * CSS LazyLoadë¥¼ ìœ„í•œ ê²½ë¡œ
+ * CSS LazyLoad¸¦ À§ÇÑ °æ·Î
  */
 nhn.husky.SE2M_Configuration.SE2B_CSSLoader = {
 	sCSSBaseURI : "css"
 };
 
 /**
- * í¸ì§‘ì˜ì—­ ì„¤ì •
+ * ÆíÁı¿µ¿ª ¼³Á¤
  */
 nhn.husky.SE2M_Configuration.SE_EditingAreaManager = {
 	sCSSBaseURI : "css",
 	sBlankPageURL : "smart_editor2_inputarea.html",
 	sBlankPageURL_EmulateIE7 : "smart_editor2_inputarea_ie8.html",
-	aAddtionalEmulateIE7 : [] // IE8 default ì‚¬ìš©, IE9 ~ ì„ íƒì  ì‚¬ìš©
+	aAddtionalEmulateIE7 : [] // IE8 default »ç¿ë, IE9 ~ ¼±ÅÃÀû »ç¿ë
 };
 
 /**
- * ìŠ¤ë§ˆíŠ¸ì—ë””í„°2ì—ì„œ ì‚¬ìš©í•˜ëŠ” ë„ë©”ì¸ ì •ë³´
+ * ½º¸¶Æ®¿¡µğÅÍ2¿¡¼­ »ç¿ëÇÏ´Â µµ¸ŞÀÎ Á¤º¸
  * http://wiki.nhncorp.com/pages/viewpage.action?pageId=74253685
  */
 nhn.husky.SE2M_Configuration.LinkageDomain = {
@@ -49,13 +49,13 @@ nhn.husky.SE2M_Configuration.LinkageDomain = {
 
 
 /**
- * [ì›¹ì ‘ê·¼ì„±]
- * ë‹¨ì¶•í‚¤ ALT+,  ALT+. ì„ ì´ìš©í•˜ì—¬ ìŠ¤ë§ˆíŠ¸ì—ë””í„° ì˜ì—­ì˜ ì´ì „/ì´í›„ ìš”ì†Œë¡œ ì´ë™í•  ìˆ˜ ìˆë‹¤.
- * 		sBeforeElementId : ìŠ¤ë§ˆíŠ¸ì—ë””í„° ì˜ì—­ ì´ì „ ìš”ì†Œì˜ id
- * 		sNextElementId : ìŠ¤ë§ˆíŠ¸ì—ë””í„° ì˜ì—­ ì´í›„ ìš”ì†Œì˜ id 
+ * [À¥Á¢±Ù¼º]
+ * ´ÜÃàÅ° ALT+,  ALT+. À» ÀÌ¿ëÇÏ¿© ½º¸¶Æ®¿¡µğÅÍ ¿µ¿ªÀÇ ÀÌÀü/ÀÌÈÄ ¿ä¼Ò·Î ÀÌµ¿ÇÒ ¼ö ÀÖ´Ù.
+ * 		sBeforeElementId : ½º¸¶Æ®¿¡µğÅÍ ¿µ¿ª ÀÌÀü ¿ä¼ÒÀÇ id
+ * 		sNextElementId : ½º¸¶Æ®¿¡µğÅÍ ¿µ¿ª ÀÌÈÄ ¿ä¼ÒÀÇ id 
  * 
- * ìŠ¤ë§ˆíŠ¸ì—ë””í„° ì˜ì—­ ì´ì™¸ì˜ ì œëª© ì˜ì—­ (ì˜ˆ:ìŠ¤ë§ˆíŠ¸ì—ë””í„°ê°€ ì ìš©ëœ ë¸”ë¡œê·¸ ì“°ê¸° í˜ì´ì§€ì—ì„œì˜ ì œëª© ì˜ì—­) ì— í•´ë‹¹í•˜ëŠ” ì—˜ë¦¬ë¨¼íŠ¸ì—ì„œ Tabí‚¤ë¥¼ ëˆ„ë¥´ë©´ ì—ë””íŒ… ì˜ì—­ìœ¼ë¡œ í¬ì»¤ìŠ¤ë¥¼ ì´ë™ì‹œí‚¬ ìˆ˜ ìˆë‹¤.
- * 		sTitleElementId : ì œëª©ì— í•´ë‹¹í•˜ëŠ” input ìš”ì†Œì˜ id. 
+ * ½º¸¶Æ®¿¡µğÅÍ ¿µ¿ª ÀÌ¿ÜÀÇ Á¦¸ñ ¿µ¿ª (¿¹:½º¸¶Æ®¿¡µğÅÍ°¡ Àû¿ëµÈ ºí·Î±× ¾²±â ÆäÀÌÁö¿¡¼­ÀÇ Á¦¸ñ ¿µ¿ª) ¿¡ ÇØ´çÇÏ´Â ¿¤¸®¸ÕÆ®¿¡¼­ TabÅ°¸¦ ´©¸£¸é ¿¡µğÆÃ ¿µ¿ªÀ¸·Î Æ÷Ä¿½º¸¦ ÀÌµ¿½ÃÅ³ ¼ö ÀÖ´Ù.
+ * 		sTitleElementId : Á¦¸ñ¿¡ ÇØ´çÇÏ´Â input ¿ä¼ÒÀÇ id. 
  */
 nhn.husky.SE2M_Configuration.SE2M_Accessibility = {
     sBeforeElementId : '',

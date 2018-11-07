@@ -1,4 +1,4 @@
-﻿if(typeof window.nhn=='undefined') window.nhn = {};
+if(typeof window.nhn=='undefined') window.nhn = {};
 if (!nhn.husky) nhn.husky = {};
 
 /**

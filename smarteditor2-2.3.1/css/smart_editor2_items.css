@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "EUC-KR";
 /* NHN Web Standardization Team (http://html.nhndesign.com/) HHJ 090226 */
 /* TEXT_TOOLBAR : FONTNAME */
 #smart_editor2 .se2_tool .se2_l_font_fam { width: 202px; margin: 0; padding: 0; }
@@ -564,7 +564,7 @@
 
 #smart_editor2 .se2_qeditor .se2_qe2_3 { padding: 7px 0 6px 0; }
 
-/* Myê¸€ì–‘ì‹ ì—†ì„ë•Œ */
+/* My±Û¾ç½Ä ¾øÀ»¶§ */
 #smart_editor2 .se2_qeditor .se2_qe2_2 { position: relative; _position: absolute; }
 
 #smart_editor2 .se2_qeditor .se2_qe2_2 dt { float: left; width: 50px; padding: 3px 0 0 13px; }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_General.js" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_Service.js" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2BasicCreator.js" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo.min.js" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo_component.js" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/smarteditor2.js" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/smarteditor2-2.3.1/src_include.txt" charset="EUC-KR" />
     <file url="PROJECT" charset="EUC-KR" />
   </component>

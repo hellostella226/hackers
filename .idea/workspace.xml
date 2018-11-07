@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5a7c0b-552c-4b51-9dce-aae0a6722a78" name="Default Changelist" comment="" />
+    <list default="true" id="9e5a7c0b-552c-4b51-9dce-aae0a6722a78" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2Skin.html" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2Skin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2.css" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_in.css" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_in.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_items.css" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_items.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_out.css" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_out.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_General.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_General.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_Service.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_Service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2BasicCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2BasicCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo_component.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo_component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/js/smarteditor2.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/js/smarteditor2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/attach_photo.js" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/attach_photo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/callback.html" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/callback.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/photo_uploader.html" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/photo_uploader.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/release_notes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/sample.php" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/sample.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea.html" beforeDir="false" afterPath="$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarteditor2-2.3.1/src_include.txt" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,35 +43,41 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="7" />
+          <entry key="css" value="4" />
+          <entry key="html" value="14" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="1" />
-          <entry key="php" value="8" />
-          <entry key="txt" value="1" />
+          <entry key="js" value="12" />
+          <entry key="php" value="11" />
+          <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="7" />
+          <entry key="CSS" value="4" />
+          <entry key="HTML" value="14" />
           <entry key="Image" value="2" />
-          <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="8" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="JavaScript" value="12" />
+          <entry key="PHP" value="11" />
+          <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="12" />
-          <entry key="php" value="464" />
-          <entry key="txt" value="41" />
+          <entry key="css" value="3" />
+          <entry key="html" value="21" />
+          <entry key="js" value="28" />
+          <entry key="php" value="465" />
+          <entry key="txt" value="43" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="12" />
-          <entry key="PHP" value="464" />
-          <entry key="PLAIN_TEXT" value="41" />
+          <entry key="CSS" value="3" />
+          <entry key="HTML" value="21" />
+          <entry key="JavaScript" value="28" />
+          <entry key="PHP" value="465" />
+          <entry key="PLAIN_TEXT" value="43" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -64,83 +95,106 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/review/review_list.php">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/callback.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="115" column="77" selection-start-line="115" selection-start-column="77" selection-end-line="115" selection-end-column="77" />
+            <state relative-caret-position="185">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/attach_photo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="185">
+              <caret line="626" column="28" selection-start-line="626" selection-start-column="28" selection-end-line="626" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2Skin.html">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea_ie8.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/config.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-709">
-              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+            <state relative-caret-position="-1501">
               <folding>
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#br#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/upload/Hydrangeas.jpg">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/src_include.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/review/reviewDetail.php">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/smarteditor2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="102" column="17" selection-start-line="102" selection-start-column="17" selection-end-line="102" selection-end-column="17" />
+            <state relative-caret-position="95">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+              <folding>
+                <element signature="e#7#13#1" expanded="true" />
+                <element signature="e#8#14#1" expanded="true" />
+                <element signature="e#3#9#1" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/common/review_leftNav.php">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2BasicCreator.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_Service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_General.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo_component.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo.min.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>utf-8</find>
+      <find>utf</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -190,9 +244,21 @@
         <option value="$PROJECT_DIR$/model/selectDetails.php" />
         <option value="$PROJECT_DIR$/view/review/reviewDetail.php" />
         <option value="$PROJECT_DIR$/view/review/review_list.php" />
-        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2Skin.html" />
         <option value="$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea_ie8.html" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2.css" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_in.css" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_items.css" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_out.css" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/src_include.txt" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2Skin.html" />
         <option value="$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea.html" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/sample.php" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/photo_uploader.html" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/file_uploader.php" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/callback.html" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/attach_photo.js" />
+        <option value="$PROJECT_DIR$/smarteditor2-2.3.1/js/smarteditor2.js" />
       </list>
     </option>
   </component>
@@ -202,13 +268,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="819" />
     <option name="y" value="44" />
     <option name="width" value="1052" />
     <option name="height" value="993" />
   </component>
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
@@ -226,7 +292,7 @@
             <path>
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -240,7 +306,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -329,24 +395,26 @@
       <option name="project" value="LOCAL" />
       <updated>1541571819751</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="commit">
+      <created>1541572755363</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1541572755363</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6629000" />
+    <option name="totallyTimeSpent" value="8070000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="125" y="44" width="1746" height="993" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24080664" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21641791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" sideWeight="0.49940687" visible="true" weight="0.32945284" />
-      <window_info anchor="bottom" id="Messages" weight="0.32945284" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.5005931" side_tool="true" weight="0.32945284" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -354,10 +422,16 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" visible="true" weight="0.30694142" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.30694142" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32945284" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,6 +467,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="confirm" />
     <MESSAGE value="test commit" />
     <MESSAGE value="test commit2" />
@@ -416,13 +492,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/upload/Chrysanthemum.jpg">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/selectDetails.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -448,23 +517,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js">
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/upload/Hydrangeas.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/config.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        <state relative-caret-position="-703">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/upload/Hydrangeas.jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_in.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_items.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/src_include.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/css/smart_editor2_out.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2Skin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        <state relative-caret-position="-1824">
+          <caret line="3" column="66" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-722">
+          <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -475,18 +578,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/config.php">
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/smart_editor2_inputarea.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="66" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/sample.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="66" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/photo_uploader.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1311">
+          <caret line="5" column="57" lean-forward="true" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/jindo.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1311" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/file_uploader_html5.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html">
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/file_uploader.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-709">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        <state relative-caret-position="114">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/jindo.fileuploader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/callback.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/popup/attach_photo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="626" column="28" selection-start-line="626" selection-start-column="28" selection-end-line="626" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1501">
           <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#br#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/smarteditor2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <element signature="e#7#13#1" expanded="true" />
+            <element signature="e#8#14#1" expanded="true" />
+            <element signature="e#3#9#1" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2BasicCreator.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_Service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/SE2B_Configuration_General.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo_component.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/jindo.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/js/HuskyEZCreator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
