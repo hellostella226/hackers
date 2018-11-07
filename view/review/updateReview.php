@@ -112,7 +112,7 @@ include_once '../../model/selectDetails.php';
 
 
         <!--스마트에디터 소스-->
-        <script type="text/javascript" src="/nse_files/js/HuskyEZCreator.js" charset="EUC-KR"></script>
+        <script type="text/javascript" src="/smarteditor2-2.3.1/js/HuskyEZCreator.js" charset="EUC-KR"></script>
         <style>
             .nse_content{width:660px;height:500px}
         </style>
@@ -138,7 +138,7 @@ include_once '../../model/selectDetails.php';
     nhn.husky.EZCreator.createInIFrame ({
         oAppRef: oEditors,
         elPlaceHolder: "ir1",
-        sSkinURI: "/nse_files/SmartEditor2Skin.html",
+        sSkinURI: "/smarteditor2-2.3.1/SmartEditor2Skin.html",
         fCreator: "createSEditor2"
     });
 
