@@ -3,6 +3,63 @@ session_start();
 include '../common/header.php';
 include '../common/review_leftNav.php';
 include_once '../../model/selectDetails.php';
+
+
+if($_GET['p']) {
+    $p = $_GET['p'];
+} else {
+    $p = 1;
+}
+
+if($_GET['cateS'] && $_GET['searchLW'] && $_GET['lacOrUser']) {
+    $where .= " AND c.cateNo = '".$_GET['cateS']."' AND ".$_GET['searchLW']." LIKE '%".$_GET['lacOrUser']."%' ";
+}
+
+if($_GET['cateNo']) {
+    $where .= "AND c.cateNo = '".$_GET['cateNo']."'";
+}
+
+
+
+$sql= "SELECT r.userName, r.reviewNo, c.cateName, r.title, l.lecName, r.starChk, r.lecCnt
+        FROM review r, lecture l, category c
+         WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo ".$where."
+          ORDER BY r.reviewNo DESC";
+
+
+
+
+$result = mysql_query($sql);
+$total_cnt = mysql_num_rows($result);
+
+$list_cnt = 5;
+$start = ($list_cnt * $p) - $list_cnt;
+$page_cnt = ceil($total_cnt/$list_cnt);
+
+$page_num_cnt = 5;
+if($page_cnt > $page_num_cnt) {
+    $block = (ceil($p / $page_num_cnt) * $page_num_cnt);
+    $num_cnt_s = $block - $page_num_cnt + 1;
+    if($page_cnt < $block) {
+        $num_cnt = $page_cnt;
+    } else {
+        $num_cnt = $block;
+    }
+
+} else {
+    $num_cnt = $page_cnt;
+    $num_cnt_s = 1;
+}
+
+
+$sql2 = "SELECT r.userName, r.reviewNo, c.cateName, r.title, l.lecName, r.starChk, r.lecCnt
+        FROM review r, lecture l, category c
+         WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo ".$where."
+          ORDER BY r.reviewNo DESC limit $start, $list_cnt";
+
+$result2 = mysql_query($sql2);
+
+
 ?>
 
 	<div id="content" class="content">
@@ -24,7 +81,7 @@ include_once '../../model/selectDetails.php';
 			<tbody>
 				 <tr>
 					<th scope="col">제목 : <?=$row['title']?></th>
-					<th scope="col" class="user-id">작성자 | <?=$row['userName']?></th>
+					<th scope="col" class="user-id">작성자 | <?=$row['userName']?> <span id="count"></span></th>
 				 </tr>
 				<tr>
 					<td colspan="2">
@@ -42,7 +99,8 @@ include_once '../../model/selectDetails.php';
 		
 		
 		<p class="mb15"><strong class="tc-brand fs16"><?=$row['userId']?>님의 수강하신 강의 정보</strong></p>
-		
+		<input type="hidden" id="userId" value="<?=$row['userId']?>">
+        <input type="hidden" id="sessionUser" value="<?=$row['userId']?>">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-lecture-list">
 			<caption class="hidden">강의정보</caption>
 			<colgroup>
@@ -72,43 +130,68 @@ include_once '../../model/selectDetails.php';
 			<a href="#" class="btn-m ml5" onclick="userFrm();">수정</a>
 			<a href="#" class="btn-m-dark" onclick="deleteFrm();">삭제</a>
 		</div>
+        <br>
+
+        <?php
+
+        include_once '../common/listTable.php';
+
+        ?>
 
 </div>
+
 
 <script>
 
     //본인확인
    function userFrm() {
 
-        <?php
+       if($('#sessionUser').val() != $('#userId').val()) {
 
-       if(($_SESSION['userId'])!= $row['userId']) {
+           alert("본인만 삭제가 가능해요");
 
-            echo "alert('본인만 수정이 가능해요.');";
+       } else {
 
-       }else {?>
+           location.href='./updateReview.php?reviewNo=<?=$row['reviewNo']?>';
 
-            location.href='./updateReview.php?reviewNo=<?=$row['reviewNo']?>';
+       }
 
-       <?} ?>
 
    }
 
    //본인확인
     function deleteFrm() {
 
-        <?php
+        if($('#sessionUser').val() != $('#userId').val()) {
 
-        if(($_SESSION['userId'])!= $row['userId']) {
+            alert("본인만 삭제가 가능해요");
 
-            echo "alert('본인만 삭제가 가능해요.');";
-
-        }else {?>
+        } else {
 
             location.href='/model/deleteReview.php?reviewNo=<?=$row['reviewNo']?>';
 
-        <?} ?>
+        }
 
     }
 
+</script>
+<script>
+
+    $('document').ready(function() {
+
+        var rNo = "<?=$row['reviewNo']?>";
+
+      $.ajax({
+
+          url:'/model/insertCnt.php',
+          method: "GET",
+          data: {rNo: rNo},
+          success: function(data) {
+
+              $('#count').empty().append(" 조회수 | "+data);
+
+          }
+      })
+
+    })
 </script>

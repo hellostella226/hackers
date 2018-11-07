@@ -1,0 +1,46 @@
+<table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
+    <caption class="hidden">수강후기</caption>
+    <colgroup>
+        <col style="width:8%"/>
+        <col style="width:8%"/>
+        <col style="*"/>
+        <col style="width:15%"/>
+        <col style="width:12%"/>
+        <col style="width:12%"/>
+    </colgroup>
+
+    <thead>
+    <tr>
+        <th scope="col">번호</th>
+        <th scope="col">분류</th>
+        <th scope="col">제목</th>
+        <th scope="col">강좌만족도</th>
+        <th scope="col">조회수</th>
+        <th scope="col">작성자</th>
+    </tr>
+    </thead>
+
+    <tbody id="reviewList">
+    <? while($row = mysql_fetch_array($result2)) { ?>
+        <tr class='bbs-sbj'>
+            <td><?=$row['reviewNo']?></td>
+            <td><?=$row['cateName']?></td>
+            <td>
+                <!--카운트-->
+                <a href="./reviewDetail.php?reviewNo=<?=$row['reviewNo']?>">
+                    <span class="tc-gray ellipsis_line"><?=$row['lecName']?></span>
+                    <strong class="ellipsis_line"><?=$row['title']?></strong>
+                </a>
+            </td>
+            <td>
+                            <span class="star-rating">
+                               <span class="star-inner" style="width:<?=$row['starChk']?>%"></span>
+                            </span>
+            </td>
+            <td><?=$row['lecCnt']?></td>
+            <td class="last"><?=$row['userName']?></td>
+        </tr>
+    <? } ?>
+    </tbody>
+
+</table>
