@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5a7c0b-552c-4b51-9dce-aae0a6722a78" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9e5a7c0b-552c-4b51-9dce-aae0a6722a78" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +56,7 @@
           <entry key="git.branch.create.new" value="1" />
           <entry key="git.branch.merge" value="2" />
           <entry key="git.branch.rebase" value="1" />
+          <entry key="git.branch.rename" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -108,8 +107,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="44" lean-forward="true" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+            <state relative-caret-position="-709">
+              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
               </folding>
@@ -154,6 +153,13 @@
     <favorite-branches>
       <branch-storage>
         <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="test" />
+              </list>
+            </value>
+          </entry>
           <entry type="REMOTE">
             <value>
               <list>
@@ -164,6 +170,19 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -184,9 +203,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="125" />
+    <option name="x" value="819" />
     <option name="y" value="44" />
-    <option name="width" value="1746" />
+    <option name="width" value="1052" />
     <option name="height" value="993" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -218,6 +237,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
@@ -244,7 +264,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1541565531010</updated>
-      <workItem from="1541565532110" duration="6118000" />
+      <workItem from="1541565532110" duration="6629000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1541569231214</created>
@@ -302,15 +322,21 @@
       <option name="project" value="LOCAL" />
       <updated>1541571184835</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="commit">
+      <created>1541571819751</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1541571819751</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6118000" />
+    <option name="totallyTimeSpent" value="6629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="125" y="44" width="1746" height="993" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24080664" />
@@ -454,8 +480,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smarteditor2-2.3.1/SmartEditor2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="44" lean-forward="true" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+        <state relative-caret-position="-709">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding>
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
           </folding>
