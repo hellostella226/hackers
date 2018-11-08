@@ -1,12 +1,7 @@
 <?php
 session_start();
 include '../common/header.php';
-?>
-<?php
 include '../common/admin_leftNav.php';
-?>
-<?php
-//강의 분류 불러오기
 include '../../model/updateLecture.php';
 include '../../model/selectLecture.php';
 

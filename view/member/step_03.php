@@ -138,15 +138,26 @@ include '../common//header.php';
 <script>
 $('.box-btn').on('click',function(){
 
-    if($('#userPw').val() == "" || $('#userPw2').val() == "" || $('#userId').val() == "" || $('#p1').val() == "" || $('#p2').val() == "" || $('#p3').val() == "" || $('#address1').val() == "" || $('#address2').val() == ""
-        || $('#address3').val() == "") {
+    if($('#userPw').val() == "" ||
+        $('#userPw2').val() == "" ||
+        $('#userId').val() == "" ||
+        $('#p1').val() == "" ||
+        $('#p2').val() == "" ||
+        $('#p3').val() == "" ||
+        $('#address1').val() == ""||
+        $('#address2').val() == "" ||
+        $('#address3').val() == "") {
+
         alert('필수항목을 모두 입력해주세요.');
+
         return false;
     }
 
     if($("#userPw").val() != $("#userPw2").val()) {
+
         alert("비밀번호가 일치하지 않습니다.");
         return false;
+
     }
 
     // 이메일 검증 스크립트 작성
@@ -191,12 +202,7 @@ $('input[type="text"]').keydown(function() {
     }
 });
 </script>
-<!--<script>
-    라디오버튼 값 확인
-    $("#radio2").on("click",function(){
-        alert($(this).val());
-    })
-</script>-->
+
 <!--유효성검사 시작-->
 <script>
 var idFlag=0;

@@ -15,7 +15,7 @@ $sql1 =" UPDATE review SET lecCnt = lecCnt + 1 WHERE
 
 $sql = "SELECT r.reviewNo, r.userNo, r.userName, r.wDate, r.title, r.content, r.lecNo, r.lecCnt, r.starChk,
                 l.lecName, l.`thumbnail`, l.`teacher`, l.`lecLevel`, l.`lecTime`, l.`lecNum`, l.`detail`, m.`userId`, c.cateName, c.cateNo
-        FROM review r, lecture l, memberController.php m, category c
+        FROM review r, lecture l, member m, category c
         WHERE
              l.lecNo = r.`lecNo` AND 
              r.`userNo` = m.`userNo` AND 

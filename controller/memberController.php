@@ -4,18 +4,21 @@ include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 
 <?php
 
+    //로그인
     if($mode == logIn) {
 
         echo "<meta http-equiv='refresh' content='0; url=/view/member/logIn.html' >";
 
     }
 
+    //로그아웃
     if($mode == logOut) {
 
         echo "<meta http-equiv='refresh' content='0; url=/model/logOut.php' >";
 
     }
 
+    //로그인체크
     if($_POST['mode'] == 'logInChk') {
 
 
