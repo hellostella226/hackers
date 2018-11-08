@@ -7,7 +7,8 @@ include 'DBconfig.php';
 
 $reviewNo = $_GET['rNo'];
 
-$sql =" UPDATE review SET lecCnt = lecCnt + 1 WHERE reviewNo = '".$reviewNo."' ";
+$sql =" UPDATE review SET lecCnt = lecCnt + 1 WHERE
+        reviewNo = '".$reviewNo."' ";
 
 $resultCnt = mysql_query($sql);
 
@@ -15,7 +16,8 @@ $resultCnt = mysql_query($sql);
 
 // 해당 번호의 게시물을 불러온다.
 
-$sql2 = "SELECT * FROM review WHERE reviewNo = '".$reviewNo."' ";
+$sql2 = "SELECT * FROM review WHERE
+          reviewNo = '".$reviewNo."' ";
 
 $resultRv = mysql_query($sql2);
 

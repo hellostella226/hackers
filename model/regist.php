@@ -12,11 +12,23 @@ $userPw = strtoupper($password_hash);
 
 
 
-/*    $sql= "SELECT userId FROM member WHERE userId= '".$_POST['userId']."'";*/
-    $sql= "INSERT INTO member (userName,userId,userPw,email,phone,tel,address1,address2,address3,sendSms,sendMail) values ('".$_POST['userName']."','".$_POST['userId']."','".$userPw."','".$_POST['email']."','".$_POST['phone']."','".$_POST['tel']."','".$_POST['address1']."','".$_POST['address2']."','".$_POST['address3']."','".$_POST['sendSms']."','".$_POST['sendMail']."')";
+/*    $sql= "SELECT userId FROM memberController.php WHERE userId= '".$_POST['userId']."'";*/
+    $sql= "INSERT INTO member (userName,userId,userPw,email,phone,tel,address1,address2,address3,sendSms,sendMail) values
+ ('".$_POST['userName']."',
+ '".$_POST['userId']."',
+ '".$userPw."','".$_POST['email']."',
+ '".$_POST['phone']."',
+ '".$_POST['tel']."',
+ '".$_POST['address1']."',
+ '".$_POST['address2']."',
+ '".$_POST['address3']."',
+ '".$_POST['sendSms']."',
+ '".$_POST['sendMail']."')";
+
+
     $result = mysql_query($sql);
 
-    Header("Location:/view/member/complete.php");
+    Header("Location:/view/memberController.php/complete.php");
 
 /*    echo $data['userId'];*/
     exit;

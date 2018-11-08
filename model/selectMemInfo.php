@@ -14,7 +14,10 @@ include_once 'DBconfig.php';
 <?php
 /*print_r($_SESSION['token']);*/
 
-$sql= "SELECT * FROM member WHERE token= '".$_SESSION['token']."'";
+$sql= "SELECT * FROM member WHERE
+token= '".$_SESSION['token']."'";
+
+
 $result = mysql_query($sql);
 $data = mysql_fetch_array($result);
 
@@ -59,7 +62,7 @@ if($data[4] != "") {
 </form>
 <script>
     $(document).ready(function(){
-        $('#sendMod').attr('action','/view/member/modyfy.php');
+        $('#sendMod').attr('action','/view/memberController.php/modyfy.php');
         $('#sendMod').submit();
     })
 </script>

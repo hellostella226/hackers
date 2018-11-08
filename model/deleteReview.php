@@ -4,7 +4,8 @@ include 'DBconfig.php';
 <?php
 $reviewNo = $_GET['reviewNo'];
 
-$sql = " DELETE FROM review WHERE reviewNo = '".$reviewNo."' ";
+$sql = " DELETE FROM review WHERE
+          reviewNo = '".$reviewNo."' ";
 
 $resultD = mysql_query($sql);
 

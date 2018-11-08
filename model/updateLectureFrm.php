@@ -26,10 +26,18 @@ $real_thumbnail = $relative_dir . $_FILES["thumbnail"]["name"];
     }
 
 
-$sql = "UPDATE lecture SET `lecName` = '".$lecName."',`cateNo` = '".$cateNo."', `teacher` = '".$teacher."',
-        `lecLevel` = '".$lecLevel."', `lecTime` = '".$lecTime."', `lecNum` = '".$lecNum."',`thumbnail` ='".$real_thumbnail."' ,
-        `detail` = '".$detail."' 
-        WHERE lecNo = '".$lecNo."' ";
+$sql = "UPDATE lecture SET
+
+`lecName` = '".$lecName."',
+`cateNo` = '".$cateNo."', 
+`teacher` = '".$teacher."',
+`lecLevel` = '".$lecLevel."', 
+`lecTime` = '".$lecTime."', 
+`lecNum` = '".$lecNum."',
+`thumbnail` ='".$real_thumbnail."' ,
+`detail` = '".$detail."' 
+
+WHERE lecNo = '".$lecNo."' ";
 
 $result = mysql_query($sql);
 

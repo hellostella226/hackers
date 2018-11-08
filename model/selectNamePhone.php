@@ -12,7 +12,10 @@ $phone = $_POST['phone'];
 
 <?php
 //입력받은 이름과 메일로 값을 가져옴
-$getPhone= "SELECT userId, userName, phone FROM member WHERE userName = '$name' and phone = '$phone' ";
+$getPhone= "SELECT userId, userName, phone FROM memberController.php WHERE
+userName = '$name' and
+phone = '$phone' ";
+
 $getPhone = mysql_query($getPhone);
 $getPhone = mysql_fetch_array($getPhone);
 

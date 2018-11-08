@@ -14,7 +14,7 @@ $userId = $_POST['userId']
 
 <?php
 //입력받은 이름과 메일로 값을 가져옴
-$getMail= "SELECT userId, userName, email FROM member WHERE userName = '$name' and email = '$email' and userId = '$userId'";
+$getMail= "SELECT userId, userName, email FROM memberController.php WHERE userName = '$name' and email = '$email' and userId = '$userId'";
 $getMail = mysql_query($getMail);
 $getMail = mysql_fetch_array($getMail);
 

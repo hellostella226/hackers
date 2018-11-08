@@ -210,48 +210,75 @@ var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?
 /*var nameRules= /^[가-?]{2,4}$/;*/
 
 $(function() {
+
     $("#idEnrollChk").on('click', function () {
+
         $.ajax({
-            /*?php 방식?*/
+
             url: "/model/config.php",
             type: "post",
             data: {"userId": $("#userId").val().trim()},
             success: function (data) {
-                /*alert(data);*/
+
                 console.log(data);
+
                 if (idRules.test($("#userId").val())) {
+
                     if (data == $("#userId").val()) {
+
                         alert($('#userId').val() + "는 이미 존재하는 ID입니다. 아이디를 변경해주세요");
                         $('#userId').val("");
                         $('#userId').focus();
+
                     } else {
+
                         alert($('#userId').val() + "는 사용 가능한 ID입니다");
                         $('#userPw').focus();
+
                     }
+
                 } else {
+
                     alert("ID는 영문대소문자+숫자 4~12글자로 구성하여야 합니다.");
+
                 }
+
             }
+
         });
     });
+
     $("#userPw").keyup(function () {
+
         if (passwordRules.test($("#userPw").val())) {
+
             $("#pwd1Result").html(" 는 사용가능한 비밀번호입니다").css("color", "green");
             pw1Flag = 1;
+
         } else {
+
             $("#pwd1Result").html(" 사용 불가능한 비밀번호입니다. 다시 입력해 주세요").css("color", "red");
             pw1Flag = 0;
+
         }
+
     });
+
     $("#userPw2").keyup(function () {
+
         if ($("#userPw").val() != $("#userPw2").val()) {
+
             $("#pwd2Result").html(" 비밀번호가 일치하지 않습니다. 다시 입력해 주세요").css("color", "red");
             pw2Flag = 0;
+
         } else {
+
             $("#pwd2Result").html(" 비밀번호 일치").css("color", "green");
             pw2Flag = 1;
             $("#mail_1").focus();
+
         }
+
     });
 
     /*주소 select시 value 삽입*/
@@ -259,42 +286,68 @@ $(function() {
 
         $("input:text[id=mail_2]").val($(this).val());
         $("#telNum").focus();
+
     });
+
 });
 
 </script>
 <!--주소 api 가능하다는 전제-->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-function address() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-            var fullAddr = ''; // 주소 변수
-            var extraAddr = '';
-            if (data.userSelectedType === 'R') { // 도로명
-                fullAddr = data.roadAddress;
-            } else { // 지번
-                fullAddr = data.jibunAddress;
-            }
-            if(data.userSelectedType === 'R'){
-                //법정동명
-                if(data.bname !== ''){
-                    extraAddr += data.bname;
+
+    function address() {
+
+        new daum.Postcode({
+
+            oncomplete: function(data) {
+
+                var fullAddr = ''; // 주소 변수
+
+                var extraAddr = '';
+
+                if (data.userSelectedType === 'R') { // 도로명
+
+                    fullAddr = data.roadAddress;
+
+                } else { // 지번
+
+                    fullAddr = data.jibunAddress;
+
                 }
+
+                if(data.userSelectedType === 'R'){
+
+                    //법정동명
+                if(data.bname !== ''){
+
+                    extraAddr += data.bname;
+
+                }
+
                 // 건물명
                 if(data.buildingName !== ''){
+
                     extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+
                 }
+
                 fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-            }
-            document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
-            document.getElementById('address2').value = fullAddr;
-            document.getElementById('address3').focus();
+
+                }
+
+                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
+
+                document.getElementById('address2').value = fullAddr;
+
+                document.getElementById('address3').focus();
 
         }
+
     }).open();
 }
 </script>
+
 <?php
 include '../common//footer.php';
 ?>

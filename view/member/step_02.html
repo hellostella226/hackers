@@ -1,9 +1,6 @@
 <?php
-session_start();
-$_SESSION['num'] = '123456';
-?>
-<?php
     include '../common//header.php';
+	$_SESSION['num'] = '123456';
 ?>
 
 		<div class="top-section">
@@ -73,34 +70,49 @@ $_SESSION['num'] = '123456';
 
 
 <script>
-    $("#pChk").click(function(event) {
+
+$("#pChk").click(function(event) {
+
     var a = $("input:text[name='p1']").val();
     var b = $("input:text[name='p2']").val();
     var c = $("input:text[name='p3']").val();
     var pEnroll = a+"-"+b+"-"+c;
     /*alert(pEnroll);*/
 
-var phoneNumberRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
-if(!phoneNumberRegex.test(pEnroll)) {
-    alert("유효하지 않은 형식입니다. 다시 작성해 주세요.");
-    return false;
-} else {
-    alert("인증번호는 <?=$_SESSION['num']?> 입니다.");
-    return true;
-}
+    var phoneNumberRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+
+        if(!phoneNumberRegex.test(pEnroll)) {
+
+            alert("유효하지 않은 형식입니다. 다시 작성해 주세요.");
+            return false;
+
+        } else {
+
+            alert("인증번호는 <?=$_SESSION['num']?> 입니다.");
+            return true;
+
+        }
 });
+
 </script>
 <script>
-$("#pChkVal").on("click", function(){
-    if($("input:text[id='pChk_Cp']").val() === '<?=$_SESSION['num']?>'){
+
+$("#pChkVal").on("click", function() {
+
+    if($("input:text[id='pChk_Cp']").val() === '<?=$_SESSION['num']?>') {
+
         alert("인증되었습니다.");
        /* step_03.php에 phon number value 가지고 이동*/
        $("#pNumber").attr("action","../member/step_03.php");
        $("#pNumber").submit();
-    }else{
+
+    } else {
+
         alert("인증번호가 일치하지 않습니다. 다시 시도해 주세요.");
     }
+
 });
+
 </script>
 
 <?php

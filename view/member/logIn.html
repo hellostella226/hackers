@@ -1,14 +1,9 @@
-<?php
-session_start();
-include '../model/logInCheck.php';
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
     <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
     <!--[if (IE 8)]><html class="no-js ie8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR" />
         <meta http-equiv="X-UA-Compatible" id="X-UA-Compatible" content="IE=EmulateIE8" />
         <title>해커스 HRD</title>
         <meta name="description" content="해커스 HRD" />
@@ -43,12 +38,13 @@ include '../model/logInCheck.php';
             <div class="box-login">
 
                 <div class="login-input">
-                    <form id="signIn" method="post">
+                    <form id="signIn" method="post" action="/controller/memberController.php">
                         <div class="input-text-box">
                             <input type="text" class="input-text mb5" id="userId" name="userId" placeholder="아이디" style="width:190px"/>
                             <input type="password" class="input-text" id="userPw" name="userPw" placeholder="비밀번호" style="width:190px"/>
                         </div>
-                        <button type="submit" class="btn-login">로그인</button>
+                        <input type="hidden" name="mode" value="logInChk">
+                        <button type="submit" class="btnLogin">로그인</button>
                     </form>
                 </div>
 
@@ -96,11 +92,3 @@ include '../model/logInCheck.php';
     </body>
     </html>
 
-    <script>
-        $('.btn-login').on('click',function() {
-            /*alert($('#userId').val()+$('#userPw').val());*/
-            $('#signIn').attr('action','/model/logInCheck.php');
-            $('#signIn').submit();
-
-        });
-    </script>

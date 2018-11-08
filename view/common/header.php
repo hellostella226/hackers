@@ -1,7 +1,5 @@
 <?php
-include './logInCheck.php';
 session_start();
-/*print_r($_SESSION);*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -123,12 +121,13 @@ session_start();
         <div class="top-section">
             <div class="inner">
                     <? if(!isset($_SESSION['token'])!=null) { ?>
-                         <div class='link-box'><a href="/view/member/login.php" id="logIn">로그인</a>
-                             <a href="/view/member/step_01.php">회원가입</a>
+                         <div class='link-box'>
+                             <a href="/controller/memberController.php?mode=logIn">로그인</a>
+                             <a href="/controller/memberController.php?mode=step_01">회원가입</a>
                              <a href="#">상담/고객센터</a>
                          </div>
                     <? } else { ?>
-                        <div class='link-box'><a href='/model/logOut.php'id="logIn">로그아웃</a>
+                        <div class='link-box'><a href="/controller/memberController.php?mode=logOut">로그아웃</a>
                             <a href="/model/selectMemInfo.php" ' >내정보</a>
                             <a href="#">상담/고객센터</a>
                             <? if($_SESSION['userId'] == "admin") { ?>

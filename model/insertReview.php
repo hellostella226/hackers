@@ -11,7 +11,15 @@ $lecNo = $_POST['lecNo'];
 $starChk = $_POST['starChk'];
 
 $sql = "INSERT INTO review (`userNo`,`userName`,`title`,`content`,`lecNo`,`starChk`)
-        VALUES ('".$userNo."','".$userName."','".$title."','".$content."','".$lecNo."','".$starChk."')";
+        VALUES (
+        '".$userNo."',
+        '".$userName."',
+        '".$title."',
+        '".$content."',
+        '".$lecNo."',
+        '".$starChk."'
+        )";
+
 $result = mysql_query($sql);
 
 

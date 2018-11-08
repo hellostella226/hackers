@@ -8,7 +8,8 @@ include_once 'DBconfig.php';
 $lecNo = $_GET['lecNo'];
 echo $lecNo;
 
-$sql= "DELETE FROM lecture WHERE lecNo = '".$lecNo."' ";
+$sql= "DELETE FROM lecture WHERE
+        lecNo = '".$lecNo."' ";
 
 $result = mysql_query($sql);
 

@@ -14,11 +14,15 @@ $lacOrUser = iconv("UTF-8", "EUC-KR", rawurldecode(($_POST['lacOrUser'])));
 
 $sql = "SELECT r.reviewNo, c.cateName, l.lecName, r.title, r.userName, r.starChk
         FROM lecture l, category c, review r
-        WHERE c.`cateNo` = l.`cateNo` AND l.lecNo = r.lecNo AND c.`cateName` = '".$cateName."' AND $searchLW LIKE '".'%'.$lacOrUser.'%'."' ";
+        WHERE c.`cateNo` = l.`cateNo` AND
+               l.lecNo = r.lecNo AND
+               c.`cateName` = '".$cateName."' AND
+               $searchLW LIKE '".'%'.$lacOrUser.'%'."' ";
 
 $result = mysql_query($sql);
 
 while($rowDy = mysql_fetch_array($result)) {
+
    echo("<tr class='bbs-sbj'>
                         <td>".$rowDy['reviewNo']."</td>
                         <td>".$rowDy['cateName']."</td>
@@ -35,9 +39,7 @@ while($rowDy = mysql_fetch_array($result)) {
                         </td>
                         <td class=\"last\">".$rowDy['userName']."</td>
                         </tr>");
+
 }
-/*
-while($lec = mysql_fetch_array($data)) {
-    print_r("<option id='lecNos' name='lecNos' value='".$lec['lecNo']."'>".$lec['lecName']."</option>");
-}*/
+
 ?>

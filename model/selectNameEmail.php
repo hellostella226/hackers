@@ -12,7 +12,11 @@ $email = $_POST['email'];
 
 <?php
 //입력받은 이름과 메일로 값을 가져옴
-$getMail= "SELECT userId, userName, email FROM member WHERE userName = '$name' and email = '$email' ";
+$getMail= "SELECT userId, userName, email FROM member
+WHERE userName = '$name' and
+email = '$email' ";
+
+
 $getMail = mysql_query($getMail);
 $getMail = mysql_fetch_array($getMail);
 

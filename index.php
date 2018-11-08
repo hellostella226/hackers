@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'view/common/header.php';
 ?>
 

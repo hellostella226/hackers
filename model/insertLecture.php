@@ -27,7 +27,16 @@ $real_thumbnail = $relative_dir . $_FILES["thumbnail"]["name"];
 
 
 $sql = "INSERT INTO lecture (`lecName`,`cateNo`,`teacher`,`lecLevel`,`lecTime`,`lecNum`,`thumbnail`,`detail`)
-        VALUES ('".$lecName."','".$cateNo."','".$teacher."','".$lecLevel."','".$lecTime."','".$lecNum."','".$real_thumbnail."','".$detail."')";
+        VALUES (
+        '".$lecName."',
+        '".$cateNo."',
+        '".$teacher."',
+        '".$lecLevel."',
+        '".$lecTime."',
+        '".$lecNum."',
+        '".$real_thumbnail."',
+        '".$detail."')";
+
 $result = mysql_query($sql);
 /*$row = mysql_fetch_array($result);*/
 

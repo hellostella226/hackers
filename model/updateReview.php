@@ -13,9 +13,16 @@ $content = $_POST['ir1'];
 $lecNo = $_POST['lecNo'];
 $starChk = $_POST['starChk'];
 
-$sql = "UPDATE review SET `userNo` = '".$userNo."',`userName` = '".$userName."', `title` = '".$title."',
-        `content` = '".$content."', `lecNo` = '".$lecNo."', starChk ='".$starChk."'
-        WHERE reviewNo = '".$reviewNo."' ";
+$sql = "UPDATE review SET
+
+`userNo` = '".$userNo."',
+`userName` = '".$userName."', 
+`title` = '".$title."',
+`content` = '".$content."',
+`lecNo` = '".$lecNo."',
+starChk ='".$starChk."'
+
+WHERE reviewNo = '".$reviewNo."' ";
 
 $result = mysql_query($sql);
 
@@ -26,7 +33,9 @@ if(isset($result)) {
     echo "<script> alert('강의가 수정되었습니다.'); location.href='/view/review/review_list.php'</script>";
 
 } else {
+
     echo "<script> alert('오류.'); location.href='/view/review/review_list.php'</script>";
+
 }
 
 ?>

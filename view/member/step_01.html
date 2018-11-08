@@ -494,42 +494,37 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DRM - NETSYNC DRM
 
 <script>
 function func_phone() {
+
     if($("input:checkbox").length === $("input:checkbox:checked").length) {
-        location.href="step_02.php";
+
+        location.href="/controller/memberController.php?mode=step_02";
+
     } else {
+
         alert("필수항목을 모두 체크해 주세요.");
+
     }
 }
 </script>
-<!--<script>
-$(document).ready(function() {
-    $('#checkAll').click(function (){
-            if($('.chk').prop("checked",true)){
-                $('.chk').prop("checked","checked");
-            }else {
-                $(this).prop("checked",false);
-            }
-    });
-});
-</script>-->
 <script>
     $(document).ready(function() {
+
         $('#checkAll').click(function (){
+
             if($('#allCheck').is(':checked')){
+
                 $('.chk').prop("checked","checked");
+
             }else {
+
                 $('.chk').prop("checked",false);
+
             }
+
         });
+
     });
 </script>
-<!--<script>
-    $(".all-agree-box").on("click", function() {
-        $("input:checkbox").attr("checked","checked");
-        $(this).prev().prop("checked","checked");
-/*        $("#checkAll").prop("checked","checked");*/
-    });
-</script>-->
 
 <?php
     include '../common/footer.php';
