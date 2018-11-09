@@ -142,17 +142,17 @@ header("Pragma:no-cache");
 
 
         case "signUp" :
-            $idFlag=0;
-            $nameFlag=0;
-            $pw2Flag=0;
-            $pw1Flag=0;
 
-            $resultSet = array('success'=> false, 'msg'=>'이미 존재하는 아이디입니다.');
+            include_once $_SERVER['DOCUMENT_ROOT'].'/model/config.php';
+            $resultId = array('success'=> false, 'msg'=>'이미 존재하는 아이디입니다.');
+            if($userId != $data['userId']) {
 
-            if($userId == )
+                $resultId['success']=true;
+                $resultId['msg']='사용 가능한 아이디입니다.';
 
-
-
+            }
+            $resultId['msg'] = iconv("EUC-KR","UTF-8",$resultId['msg']);
+            echo json_encode($resultId);
             break;
 
 

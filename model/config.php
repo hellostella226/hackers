@@ -8,8 +8,4 @@ include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
     $data = mysql_fetch_array($result);
 
 
-    echo $data['userId'];
-    exit;
-
-
 ?>
