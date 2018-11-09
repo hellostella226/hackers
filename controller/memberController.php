@@ -143,9 +143,18 @@ header("Pragma:no-cache");
 
         case "signUp" :
 
-            include_once $_SERVER['DOCUMENT_ROOT'].'/model/config.php';
+            include_once $_SERVER['DOCUMENT_ROOT'].'/model/idCompare.php';
+
             $resultId = array('success'=> false, 'msg'=>'이미 존재하는 아이디입니다.');
+
             if($userId != $data['userId']) {
+
+                if (!preg_match("/^[a-zA-Z0-9]{4,12}$/", $userId)) {
+
+                    $resultId['msg']='유효하지 않은 형식입니다.';
+                    return;
+
+                }
 
                 $resultId['success']=true;
                 $resultId['msg']='사용 가능한 아이디입니다.';
