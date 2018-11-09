@@ -162,24 +162,14 @@ $('#idCheckBtn').click(function() {
 
     $.post('/controller/memberController.php', $("#signUpValidation").serialize(), function(data) {
 
+        console.log(data);
+
         alert(data.msg);
 
     }, 'json');
 
 });
 
-$('#signUpBtn').click(function() {
-
-	$.post('/controller/memberController.php', $("#signUpValidation").serialize(),function(data) {
-
-		alert(data.msg);
-
-		if(data.success == true) location.href="/controller/memberController.php?mode=regist";
-		else $('#certificationNumber').focus();
-
-	}, 'json');
-
-});
 
 </script>
 <!--<script>
