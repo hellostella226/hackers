@@ -146,13 +146,18 @@ header("Pragma:no-cache");
             include_once $_SERVER['DOCUMENT_ROOT'].'/model/idCompare.php';
 
             $resultId = array('success'=> false, 'msg'=>'이미 존재하는 아이디입니다.');
+            $resultIdRule =  array('success'=> false, 'msg' => '유효하지 않은 아이디 형식입니다.');
 
             if($userId != $data['userId']) {
 
                 if (!preg_match("/^[a-zA-Z0-9]{4,12}$/", $userId)) {
 
-                    $resultId['msg']='유효하지 않은 형식입니다.';
-                    return;
+                    $resultRule['success'] = false;
+                    $resultIdRule['msg'] = '유효하지 않은 형식입니다. 다시 입력해주세요';
+                    $resultIdRule['msg'] = iconv("EUC-KR","UTF-8",$resultIdRule['msg']);
+                    echo json_encode($resultIdRule);
+                    return false;
+                    break;
 
                 }
 
@@ -163,6 +168,8 @@ header("Pragma:no-cache");
             $resultId['msg'] = iconv("EUC-KR","UTF-8",$resultId['msg']);
             echo json_encode($resultId);
             break;
+
+
 
 
     }
