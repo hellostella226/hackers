@@ -1,9 +1,7 @@
 
 <?php
 session_start();
-?>
-<?php
-include_once 'DBconfig.php';
+include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 ?>
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/jquery.bxslider.min.js"></script>

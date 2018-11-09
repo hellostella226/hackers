@@ -1,8 +1,6 @@
 <?php
 session_start();
-?>
-<?php
-include_once 'DBconfig.php';
+include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 /*pagination test*/
 include_once  'dbcontroller.php';
 include_once("pagination.class.php");

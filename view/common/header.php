@@ -128,7 +128,7 @@ session_start();
                          </div>
                     <? } else { ?>
                         <div class='link-box'><a href="/controller/memberController.php?mode=logOut">로그아웃</a>
-                            <a href="/model/selectMemInfo.php" ' >내정보</a>
+                            <a href="/model/selectMemInfo.php">내정보</a>
                             <a href="#">상담/고객센터</a>
                             <? if($_SESSION['userId'] == "admin") { ?>
                                 <a href="/view/admin/index.php">강의Admin</a></div>

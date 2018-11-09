@@ -1,9 +1,6 @@
 <?php
 session_start();
-?>
-
-<?php
-include './DBconfig.php';
+include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 ?>
 
 <?php

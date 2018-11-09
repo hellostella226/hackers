@@ -1,6 +1,6 @@
 <?php
 
-    include_once 'DBconfig.php';
+include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 
     $password = $_POST['userPw'];
     $password_hash = hash("sha256", $password);

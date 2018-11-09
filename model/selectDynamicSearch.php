@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once './DBconfig.php';
+include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 header("Content-Type: text/html; charset=KS_C_5601-1987");
 header("Cache-Control:no-cache");
 header("Pragma:no-cache");
