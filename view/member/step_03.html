@@ -41,7 +41,7 @@ include '../common//header.php';
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호</th>
-							<td><input type="password" class="input-text" id="userPw" name="userPw" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합" required/><span id="pwd1Result" class="float-right"></span></td>
+							<td><input type="password" class="input-text" id="userPw" name="userPw" mode="pwpw" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합" required/><span id="pwd1Result" class="float-right"></span></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호 확인</th>
@@ -151,12 +151,12 @@ $('input[type="text"]').keydown(function() {
 
 $('#idCheckBtn').click(function() {
 
-    $.post('/controller/memberController.php', $("#signUpValidation").serialize(), function(data) {
+    $.post('/controller/memberController.php', { mode: 'idChk', userId : $('#userId').val() }, function(data) {
 
         console.log(data);
         alert(data.msg);
         if(data.success == false) {
-            
+
             $("#userId").val('');
             $("#userId").focus();
 
@@ -165,6 +165,18 @@ $('#idCheckBtn').click(function() {
     }, 'json');
 
 });
+
+$('#userPw').keyup(function() {
+
+    $.post('/controller/memberController.php', $("#signUpValidation").serialize(), function(data) {
+
+        console.log(data);
+        $('#pwd1Result').empty();
+        $('#pwd1Result').append(data.msg);
+
+
+    }, 'json');
+})
 
 
 </script>
