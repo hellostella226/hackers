@@ -149,22 +149,18 @@ $('input[type="text"]').keydown(function() {
 
 });
 
-/*var idFlag=0;
-var nameFlag=0;
-var pw2Flag=0;
-var pw1Flag=0;
-var idRules=/^[a-zA-Z0-9]{4,12}$/;
-var passwordRules = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
-var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;*/
-
-
 $('#idCheckBtn').click(function() {
 
     $.post('/controller/memberController.php', $("#signUpValidation").serialize(), function(data) {
 
         console.log(data);
-
         alert(data.msg);
+        if(data.success == false) {
+            
+            $("#userId").val('');
+            $("#userId").focus();
+
+        }
 
     }, 'json');
 
