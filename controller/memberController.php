@@ -141,11 +141,11 @@ header("Pragma:no-cache");
             break;
 
 
-        case "signUp" :
+        case "idChk" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/model/idCompare.php';
 
-            $resultId = array('success'=> false, 'msg'=>'이미 존재하는 아이디입니다.');
+            $resultId = array('success'=> false, 'msg'=>'이미 존재하는 아이디입니다. 다른 아이디를 입력해 주세요.');
             $resultIdRule =  array('success'=> false, 'msg' => '유효하지 않은 아이디 형식입니다.');
 
             if($userId != $data['userId']) {
@@ -157,7 +157,7 @@ header("Pragma:no-cache");
                     $resultIdRule['msg'] = iconv("EUC-KR","UTF-8",$resultIdRule['msg']);
                     echo json_encode($resultIdRule);
                     return false;
-                    break;
+                    //break;
 
                 }
 
@@ -170,7 +170,48 @@ header("Pragma:no-cache");
             break;
 
 
+        case "pwChk" :
 
+            //비밀번호 유효성 검사
+            $resultPwRule = array('success'=>false, 'msg'=>'비밀번호는 영문,숫자 조합으로 10글자 이상 작성해야 합니다.');
+
+            if (!preg_match("/^[a-zA-Z0-9]{10,20}$/", $userPw)) {
+
+                $resultPwRule['success'] = false;
+                $resultPwRule['msg'] = iconv("EUC-KR","UTF-8",$resultPwRule['msg']);
+                echo json_encode($resultPwRule);
+                return false;
+
+            } else {
+
+                $resultPwRule['success']=true;
+                $resultPwRule['msg']='사용 가능한 비밀번호 입니다.';
+                $resultPwRule['msg'] = iconv("EUC-KR","UTF-8",$resultPwRule['msg']);
+                echo json_encode($resultPwRule);
+
+            }  break;
+
+
+        case "pwValidatiaon" :
+
+            //비밀번호 검증
+            $resultPw = array('success'=>false, 'msg'=> '비밀번호가 일치하지 않습니다.');
+
+            if($userPw != $userPw2) {
+
+                $resultPw['success'] = false;
+                $resultPw['msg'] = iconv("EUC-KR","UTF-8",$resultPw['msg']);
+                echo json_encode($resultPw);
+                return false;
+
+            } else {
+
+                $resultPw['success']=true;
+                $resultPw['msg']= '비밀번호 일치.';
+                $resultPw['msg'] = iconv("EUC-KR","UTF-8",$resultPw['msg']);
+                echo json_encode($resultPw);
+
+            }  break;
 
     }
 
