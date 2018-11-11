@@ -137,7 +137,9 @@ include '../common//header.php';
 </div>
 
 
-
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js">
+	//다음 주소 api
+</script>
 <script>
 //엔터키 차단
 
@@ -153,8 +155,8 @@ $('#idCheckBtn').click(function() {
 
     $.post('/controller/memberController.php', { mode: 'idChk', userId : $('#userId').val() }, function(data) {
 
-        console.log(data);
         alert(data.msg);
+
         if(data.success == false) {
 
             $("#userId").val('');
@@ -168,17 +170,96 @@ $('#idCheckBtn').click(function() {
 
 $('#userPw').keyup(function() {
 
-    $.post('/controller/memberController.php', $("#signUpValidation").serialize(), function(data) {
+    $.post('/controller/memberController.php', { mode: 'pwChk', userPw : $('#userPw').val() }, function(data) {
 
-        console.log(data);
-        $('#pwd1Result').empty();
-        $('#pwd1Result').append(data.msg);
+        if(data == false) {
 
+            $('#pwd1Result').empty();
+            $('#pwd1Result').append(data.msg).css("color","red");
+
+        } else {
+
+            $('#pwd1Result').empty();
+            $('#pwd1Result').append(data.msg).css("color","green");
+
+		}
 
     }, 'json');
-})
+});
+
+$('#userPw2').keyup(function() {
+
+    $.post('/controller/memberController.php', {mode: 'pwValidatiaon',  userPw : $('#userPw').val(), userPw2 : $('#userPw2').val()}, function(data) {
+
+        if(data == false) {
+
+            $('#pwd2Result').empty();
+            $('#pwd2Result').append(data.msg).css("color","red");
+
+        } else {
+
+            $('#pwd2Result').empty();
+            $('#pwd2Result').append(data.msg).css("color", "green");
+
+        }
+
+	}, 'json');
+
+});
 
 
+</script>
+<script>
+
+    function address() {
+
+        new daum.Postcode({
+
+            oncomplete: function(data) {
+
+                var fullAddr = ''; // 주소 변수
+                var extraAddr = '';
+                if (data.userSelectedType === 'R') { // 도로명
+
+                    fullAddr = data.roadAddress;
+
+                } else { // 지번
+
+                    fullAddr = data.jibunAddress;
+
+                }
+
+                if(data.userSelectedType === 'R'){
+
+                    //법정동명
+                    if(data.bname !== ''){
+
+                        extraAddr += data.bname;
+
+                    }
+
+                    // 건물명
+                    if(data.buildingName !== ''){
+
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+
+                    }
+
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+
+                }
+
+                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('address2').value = fullAddr;
+                document.getElementById('address3').focus();
+
+            }
+
+        }).open();
+    }
+</script>
+<script>
+	
 </script>
 <!--<script>
 $('.box-btn').on('click',function(){
