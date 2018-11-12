@@ -213,6 +213,121 @@ header("Pragma:no-cache");
 
             }  break;
 
+
+        case "signUp" :
+
+            $email = $mail[0].'@'.$mail[1];
+            $tel = $tel[0].'-'.$tel[1].'-'.$tel[2];
+            $phone = $phone[0].'-'.$phone[1].'-'.$phone[2];
+
+            $result = array('success'=> true, 'msg'=>'msg');
+
+            if(empty($userName)) {
+
+                $result['success'] = false;
+                $result['msg'] = '이름을 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($userId)) {
+
+                $result['success'] = false;
+                $result['msg'] = '아이디를 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($idChkFrm)) {
+
+                $result['success'] = false;
+                $result['msg'] = '아이디 중복확인을 진행해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($userPw)) {
+
+                $result['success'] = false;
+                $result['msg'] = '비밀번호를 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($mail[0])) {
+
+                $result['success'] = false;
+                $result['msg'] = '메일 아이디를 정확히 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($mail[1])) {
+
+                $result['success'] = false;
+                $result['msg'] = '메일주소를 정확히 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+
+            if(empty($phone)) {
+
+                $result['success'] = false;
+                $result['msg'] = '휴대폰 번호를 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($address1)) {
+
+                $result['success'] = false;
+                $result['msg'] = '우편번호를 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($address2)) {
+
+                $result['success'] = false;
+                $result['msg'] = '기본주소를 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(empty($address3)) {
+
+                $result['success'] = false;
+                $result['msg'] = '상세주소를 입력해주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+
+            else {
+
+                include_once $_SERVER['DOCUMENT_ROOT'].'/model/regist.php';
+                $result['success'] = true;
+                $result['msg'] = '회원가입 되었습니다. 로그인 해 주세요';
+                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
+                echo json_encode($result);
+                return true;
+
+            } break;
+
+
+
+
     }
 
 
