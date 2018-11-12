@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../common/header.php';
-include '../common/admin_leftNav.php';
+include '../common/adminLeftNav.php';
 include '../../model/updateLecture.php';
 include '../../model/selectLecture.php';
 
@@ -15,7 +15,7 @@ include '../../model/selectLecture.php';
 
 <div id="content" class="content">
     <div class="tit-box-h3">
-        <h3 class="tit-h3">강의 등록</h3>
+        <h3 class="tit-h3">강의 수정</h3>
         <div class="sub-depth">
             <span><i class="icon-home"><span>홈</span></i></span>
             <span>직무교육 안내</span>
@@ -24,7 +24,7 @@ include '../../model/selectLecture.php';
     </div>
 
     <div class="user-notice">
-        <strong class="fs16">강의 등록하기</strong>
+        <strong class="fs16">강의 수정하기</strong>
         <ul class="list-guide mt15">
             <li class="tc-brand">썸네일 파일 첨부시 웹 관련 파일 업로드를 할 수 업습니다.(ex: php/html/.c 등)</li>
             <li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>

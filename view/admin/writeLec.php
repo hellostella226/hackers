@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../common/header.php';
-include '../common/admin_leftNav.php';
+include '../common/adminLeftNav.php';
 include '../../model/selectLecture.php';
 ?>
     <!--스마트에디터 소스-->

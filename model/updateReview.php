@@ -30,11 +30,11 @@ $result = mysql_query($sql);
 
 if(isset($result)) {
 
-    echo "<script> alert('강의가 수정되었습니다.'); location.href='/view/review/review_list.php'</script>";
+    echo "<script> alert('강의가 수정되었습니다.'); location.href='/view/review/reviewList.html'</script>";
 
 } else {
 
-    echo "<script> alert('오류.'); location.href='/view/review/review_list.php'</script>";
+    echo "<script> alert('오류.'); location.href='/view/review/reviewList.html'</script>";
 
 }
 

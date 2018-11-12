@@ -1,7 +1,6 @@
 <?php
-session_start();
 include '../common/header.php';
-include '../common/review_leftNav.php';
+include '../common/reviewLeftNav.php';
 include_once '../../model/selectDetails.php';
 
 
@@ -126,7 +125,7 @@ $result2 = mysql_query($sql2);
 		</table>
 
 		<div class="box-btn t-r">
-			<a href="./review_list.php" class="btn-m-gray">목록</a>
+			<a href="/controller/reviewController.php?mode=list" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5" onclick="userFrm();">수정</a>
 			<a href="#" class="btn-m-dark" onclick="deleteFrm();">삭제</a>
 		</div>
@@ -148,11 +147,13 @@ $result2 = mysql_query($sql2);
 
        if($('#sessionUser').val() != $('#userId').val()) {
 
-           alert("본인만 삭제가 가능해요");
+           alert("본인만 수정이 가능해요");
 
        } else {
 
-           location.href='./updateReview.php?reviewNo=<?=$row['reviewNo']?>';
+           alert(<?=$row['reviewNo']?>);
+
+           location.href="/controller/reviewController.php?mode=delete&&reviewNo=<?=$row['reviewNo']?>";
 
        }
 
@@ -167,8 +168,9 @@ $result2 = mysql_query($sql2);
             alert("본인만 삭제가 가능해요");
 
         } else {
+            alert(<?=$row['reviewNo']?>)
 
-            location.href='/model/deleteReview.php?reviewNo=<?=$row['reviewNo']?>';
+            location.href='/controller/reviewController.php?mode=delete&&reviewNo=<?=$row['reviewNo']?>';
 
         }
 

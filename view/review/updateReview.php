@@ -1,7 +1,7 @@
 <?
 session_start();
 include '../common/header.php';
-include '../common/review_leftNav.php';
+include '../common/reviewLeftNav.php';
 include_once '../../model/selectLecture.php';
 include_once '../../model/selectDetails.php';
 ?>

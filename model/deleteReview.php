@@ -14,6 +14,6 @@ $resultD = mysql_query($sql);
 <script>
 
     alert('수강후기가 삭제되었습니다.');
-    location.href ="/view/review/review_list.php";
+    location.href ="/view/review/reviewList.html";
 
 </script>

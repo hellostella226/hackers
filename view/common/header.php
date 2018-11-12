@@ -96,7 +96,7 @@ session_start();
                                 <li><a href="#">사업주훈련</a></li>
                                 <li><a href="#">근로자카드</a></li>
                                 <li><a href="#">학습안내</a></li>
-                                <li><a href="/view/review/review_list.php">수강후기</a></li>
+                                <li><a href="/controller/reviewController.php?mode=list">수강후기</a></li>
                             </ul>
                         </li>
                         <li class="mnu6">
@@ -131,7 +131,7 @@ session_start();
                             <a href="/model/selectMemInfo.php">내정보</a>
                             <a href="#">상담/고객센터</a>
                             <? if($_SESSION['userId'] == "admin") { ?>
-                                <a href="/view/admin/index.php">강의Admin</a></div>
+                                <a href="/controller/adminController.php?mode=list">강의Admin</a></div>
                             <? } ?>
                         </div>
                     <? } ?>

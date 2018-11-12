@@ -184,10 +184,8 @@ header("Pragma:no-cache");
 
             } else {
 
-                $resultPwRule['success']=true;
-                $resultPwRule['msg']='사용 가능한 비밀번호 입니다.';
-                $resultPwRule['msg'] = iconv("EUC-KR","UTF-8",$resultPwRule['msg']);
-                echo json_encode($resultPwRule);
+
+
 
             }  break;
 

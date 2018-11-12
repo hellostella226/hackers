@@ -1,7 +1,6 @@
 <?php
-session_start();
 include '../common/header.php';
-include '../common/admin_leftNav.php';
+include '../common/adminLeftNav.php';
 include '../../model/selectLectureList.php';
 ?>
 
@@ -54,7 +53,7 @@ include '../../model/selectLectureList.php';
                             <em class="tit mt10"><?=$row['lecName']?></em>
                             <p class="tc-gray mt20">강사: <?=$row['teacher']?> | 학습난이도 : <?=$row['lecLevel']?> | 교육시간: <?=$row['lecTime']?>시간 (<?=$row['lecNum']?>강)</p>
                         </td>
-                        <td class="t-r"><a href="/view/admin/updateLec.php?lecNo=<?=$row['lecNo']?>" class="btn-square-line";>강의<br />수정</a></td>
+                        <td class="t-r"><a href="/controller/adminController.php?mode=updateLecture&lecNo=<?=$row['lecNo']?>" class="btn-square-line";>강의<br />수정</a></td>
                     </tr>
                 <? } ?>
                 </tbody>

@@ -1,12 +1,6 @@
 <?php
-session_start();
 include '../common/header.php';
-?>
-<?php
-include '../common/review_leftNav.php';
-?>
-<?php
-//강의 분류 불러오기
+include '../common/reviewLeftNav.php';
 include '../../model/selectLecture.php';
 ?>
 
@@ -119,9 +113,10 @@ include '../../model/selectLecture.php';
                 <textarea name="ir1" id="ir1" class="nse_content" ></textarea>
 		</div>
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m-gray">목록</a>
+			<a href="/controller/reviewController.php?mode=list" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5" id="sendContents">저장</a>
 		</div>
+        <input type="hidden" name="mode" value="write">
         </form>
 	</div>
 </div>
@@ -145,8 +140,22 @@ include '../../model/selectLecture.php';
 
 
         //수강후기 폼 값 전송
-        $('#reviewFrm').attr('action','/model/insertReview.php');
-        $('#reviewFrm').submit();
+        $.post('/controller/reviewController.php', $('#reviewFrm').serialize(), function(data) {
+
+            if(data.success == false) {
+
+                alert(data.msg);
+                return false;
+
+            }
+            if(data.success == true) {
+
+                alert(data.msg);
+                location.href = "/controller/memberController.php?mode=writeFrm";
+                return true;
+            }
+
+        }, 'json')
 
     });
 </script>
