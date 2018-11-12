@@ -21,7 +21,7 @@ include '../common//header.php';
 				</ul>
 			</div>
 
-			<form class="section-content" id="signUpValidation">
+			<form class="section-content" id="signUp">
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">강의정보</caption>
 					<colgroup>
@@ -38,7 +38,8 @@ include '../common//header.php';
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
 							<td><input type="text" class="input-text" id="userId" name= "userId" style="width:302px" placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자" required/><a href="#" class="btn-s-tin ml10" id="idCheckBtn">중복확인</a></td>
-						</tr>
+						    <input type = "hidden" name="idChkFrm" value="">
+                        </tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호</th>
 							<td><input type="password" class="input-text" id="userPw" name="userPw" mode="pwpw" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합" required/><span id="pwd1Result" class="float-right"></span></td>
@@ -50,7 +51,7 @@ include '../common//header.php';
 						<tr>
 							<th scope="col"><span class="icons">*</span>이메일주소</th>
 							<td>
-								<input type="text" class="input-text" id="mail_1" name="mail_1" style="width:138px" required/> @ <input type="text" id="mail_2" name="mail_2" class="input-text" style="width:138px" placeholder="직접입력" required/>
+								<input type="text" class="input-text" id="mail[0]" name="mail[0]" style="width:138px" required/> @ <input type="text" id="mail[1]" name="mail[1]" class="input-text" style="width:138px" placeholder="직접입력" required/>
 								<select class="input-sel" id="selmail" name="selmail" style="width:160px">
                                     <option id="navesr" value="naver.com">---분류---</option>
 									<option id="naver" value="naver.com">naver.com</option>
@@ -71,7 +72,7 @@ include '../common//header.php';
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons"></span>일반전화 번호</th>
-							<td><input type="text" class="input-text" id="t1" name="t1" maxlength="3" style="width:88px" value=""/> - <input type="text" maxlength="4" class="input-text" id="t2" name="t2"style="width:88px"/> - <input type="text" maxlength="4" class="input-text" id="t3" name="t3" style="width:88px"/></td>
+							<td><input type="text" class="input-text" id="tel[0]" name="tel[0]" maxlength="3" style="width:88px" value=""/> - <input type="text" maxlength="3" class="input-text" id="tel[1]" name="tel[1]"style="width:88px"/> - <input type="text" maxlength="4" class="input-text" id="tel[2]" name="tel[2]" style="width:88px"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>주소</th>
@@ -121,15 +122,11 @@ include '../common//header.php';
 						</tr>
 					</tbody>
 				</table>
-                <input type="hidden" id="email" name="email"/>
-                <input type="hidden" id="phone" name="phone"/>
-                <input type="hidden" id="tel" name="tel"/>
-
-				<input type="hidden" name="mode" value="signUp"/>
 
 				<div class="box-btn">
 					<input type="button" id="signUpBtn" class="btn-l" value="회원가입">
 				</div>
+                <input type="hidden" name="mode" value="signUp">
 			</form>
             </div>
 		</div>
@@ -139,6 +136,28 @@ include '../common//header.php';
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js">
 	//다음 주소 api
+</script>
+<script>
+$('#signUpBtn').click(function() {
+
+    $.post('/controller/memberController.php', $('#signUp').serialize(), function(data) {
+
+        if(data.success == false) {
+
+            alert(data.msg);
+            return false;
+
+        }
+        if(data.success == true) {
+
+            alert(data.msg);
+            location.href = "/controller/memberController.php?mode=logIn";
+            return true;
+        }
+
+    }, 'json')
+
+});
 </script>
 <script>
 //엔터키 차단
@@ -159,8 +178,15 @@ $('#idCheckBtn').click(function() {
 
         if(data.success == false) {
 
+            $('input:hidden[name=idChkFrm]').val('');
             $("#userId").val('');
             $("#userId").focus();
+
+        }
+        if(data.success == true) {
+
+            $('input:hidden[name=idChkFrm]').val('check');
+            $("#userPw").focus();
 
         }
 
@@ -262,29 +288,6 @@ $('#userPw2').keyup(function() {
 
 </script>
 <!--<script>
-$('.box-btn').on('click',function(){
-
-    if($('#userPw').val() == "" ||
-        $('#userPw2').val() == "" ||
-        $('#userId').val() == "" ||
-        $('#p1').val() == "" ||
-        $('#p2').val() == "" ||
-        $('#p3').val() == "" ||
-        $('#address1').val() == ""||
-        $('#address2').val() == "" ||
-        $('#address3').val() == "") {
-
-        alert('필수항목을 모두 입력해주세요.');
-
-        return false;
-    }
-
-    if($("#userPw").val() != $("#userPw2").val()) {
-
-        alert("비밀번호가 일치하지 않습니다.");
-        return false;
-
-    }
 
     // 이메일 검증 스크립트 작성
     var emailVal = $("#mail_1").val()+"@"+$("#mail_2").val();
@@ -320,152 +323,6 @@ $('.box-btn').on('click',function(){
     $("#SignUp").submit();
 })
 </script>
-
-
-&lt;!&ndash;유효성검사 시작&ndash;&gt;
-<script>
-
-
-/*var nameRules= /^[가-?]{2,4}$/;*/
-
-$(function() {
-
-    $("#idEnrollChk").on('click', function () {
-
-        $.ajax({
-
-            url: "/model/idCompare.php",
-            type: "post",
-            data: {"userId": $("#userId").val().trim()},
-            success: function (data) {
-
-                console.log(data);
-
-                if (idRules.test($("#userId").val())) {
-
-                    if (data == $("#userId").val()) {
-
-                        alert($('#userId').val() + "는 이미 존재하는 ID입니다. 아이디를 변경해주세요");
-                        $('#userId').val("");
-                        $('#userId').focus();
-
-                    } else {
-
-                        alert($('#userId').val() + "는 사용 가능한 ID입니다");
-                        $('#userPw').focus();
-
-                    }
-
-                } else {
-
-                    alert("ID는 영문대소문자+숫자 4~12글자로 구성하여야 합니다.");
-
-                }
-
-            }
-
-        });
-    });
-
-    $("#userPw").keyup(function () {
-
-        if (passwordRules.test($("#userPw").val())) {
-
-            $("#pwd1Result").html(" 는 사용가능한 비밀번호입니다").css("color", "green");
-            pw1Flag = 1;
-
-        } else {
-
-            $("#pwd1Result").html(" 사용 불가능한 비밀번호입니다. 다시 입력해 주세요").css("color", "red");
-            pw1Flag = 0;
-
-        }
-
-    });
-
-    $("#userPw2").keyup(function () {
-
-        if ($("#userPw").val() != $("#userPw2").val()) {
-
-            $("#pwd2Result").html(" 비밀번호가 일치하지 않습니다. 다시 입력해 주세요").css("color", "red");
-            pw2Flag = 0;
-
-        } else {
-
-            $("#pwd2Result").html(" 비밀번호 일치").css("color", "green");
-            pw2Flag = 1;
-            $("#mail_1").focus();
-
-        }
-
-    });
-
-    /*주소 select시 value 삽입*/
-    $("#selmail").change(function () {
-
-        $("input:text[id=mail_2]").val($(this).val());
-        $("#telNum").focus();
-
-    });
-
-});
-
-</script>
-&lt;!&ndash;주소 api 가능하다는 전제&ndash;&gt;
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-
-    function address() {
-
-        new daum.Postcode({
-
-            oncomplete: function(data) {
-
-                var fullAddr = ''; // 주소 변수
-
-                var extraAddr = '';
-
-                if (data.userSelectedType === 'R') { // 도로명
-
-                    fullAddr = data.roadAddress;
-
-                } else { // 지번
-
-                    fullAddr = data.jibunAddress;
-
-                }
-
-                if(data.userSelectedType === 'R'){
-
-                    //법정동명
-                if(data.bname !== ''){
-
-                    extraAddr += data.bname;
-
-                }
-
-                // 건물명
-                if(data.buildingName !== ''){
-
-                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-
-                }
-
-                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-
-                }
-
-                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
-
-                document.getElementById('address2').value = fullAddr;
-
-                document.getElementById('address3').focus();
-
-        }
-
-    }).open();
-}
-</script>-->
 
 <?php
 include '../common//footer.php';
