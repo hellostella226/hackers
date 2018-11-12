@@ -177,8 +177,23 @@ include '../../model/selectLecture.php';
             cache: false,
             processData:false,
             success: function(data) {
-                console.log(data);
+
+                   if(data.success == false) {
+
+                       alert(data.msg);
+                       return false;
+
+                   }
+                   if(data.success == true) {
+
+                       alert(data.msg);
+                       return true;
+
+                   }
+
             }
+
+
         });
 
         //수강후기 폼 값 전송

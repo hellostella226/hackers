@@ -64,3 +64,5 @@ $sql = "INSERT INTO lecture (`lecName`,`cateNo`,`teacher`,`lecLevel`,`lecTime`,`
 $result = mysql_query($sql);
 
 
+
+

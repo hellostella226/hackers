@@ -20,10 +20,6 @@ header("Pragma:no-cache");
 
         case "lectureFrm" :
 
-/*            print_r ($_POST);
-            print_r($_FILES['myfile']);
-            exit;*/
-
             $result = array('success'=> false, 'msg'=>'msg');
 
             if($cateName == '분류' || $cateName == "") {
@@ -80,13 +76,16 @@ header("Pragma:no-cache");
                 return false;
 
             } else {
+                $results = array('success'=> false, 'msg'=>'msg');
 
                 include_once $_SERVER['DOCUMENT_ROOT'].'/model/insertLecture.php';
-                $result['success'] = true;
-                $result['msg'] = '글이 등록되었습니다.';
-                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
-                echo json_encode($result);
+
+                $results['success'] = true;
+                $results['msg'] = '글이 등록되었습니다.';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
                 return true;
+
             } break;
 
         case "updateLecture" :
