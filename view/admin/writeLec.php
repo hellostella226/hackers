@@ -91,8 +91,9 @@ include '../../model/selectLecture.php';
                 <tr>
                     <th scope="col">썸네일</th>
                     <td>
-                        <input type="hidden" id = "MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="10485760" />
-                        <input type="file" id="thumbnail" name="thumbnail" style="height:25px" accept=".jpg, .gif, .jpeg, .png" required/>
+                        <!--<input type="hidden" id = "MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="10485760" />-->
+<!--                        <input type="file" id="thumbnail" name="thumbnail" style="height:25px" accept=".jpg, .gif, .jpeg, .png" required/>-->
+                        <input type="file" name="myfile" id="myfile">
                     </td>
                 </tr>
 			</tbody>
@@ -100,9 +101,10 @@ include '../../model/selectLecture.php';
 
 		<div class="box-btn t-r">
 			<a href="#" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5" id="sendContents">강의등록</a>
 		</div>
         <input type="hidden" id="cateNo" name="cateNo" value="">
+        <input type="hidden" name="mode" value="lectureFrm">
+        <input type="button" class="btn-m ml5" id="sendContents" value="강의등록">
         </form>
 	</div>
 </div>
@@ -128,8 +130,7 @@ include '../../model/selectLecture.php';
         oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 
 
-
-        var fileObj = document.getElementById('thumbnail').files[0];
+       /* var fileObj = document.getElementById('thumbnail').files[0];
 
         var fileObjValue = document.getElementById('thumbnail').value;
 
@@ -162,11 +163,35 @@ include '../../model/selectLecture.php';
             $('#thumbnail').focus();
             return false;
 
-        }
+        }*/
+
+        var form = $('#adminFrm')[0];
+        var formData = new FormData(form);
+        formData.append("myfile", $("#myfile")[0].files[0]);
+
+        $.ajax({
+            url: "/controller/adminController.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data) {
+                console.log(data);
+            }
+        });
 
         //수강후기 폼 값 전송
-        $('#adminFrm').attr('action','/model/insertLecture.php');
-        $('#adminFrm').submit();
+        // $.post('/controller/adminController.php', $('#adminFrm').serialize(), function(data) {
+        //
+        //     if(data.success == false) {
+        //
+        //         alert(data.msg);
+        //         return false;
+        //
+        //     }
+        //
+        // }, 'json')
 
     });
 </script>

@@ -1,29 +1,53 @@
 <?php
-session_start();
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 ?>
 <?php
-$lecName = $_POST['lecName'];
-$cateNo = $_POST['cateNo'];
-$teacher = $_POST['teacher'];
-$lecLevel = $_POST['lecLevel'];
-$lecNum = $_POST['lecNum'];
-$lecTime = $_POST['lecTime'];
-$detail = $_POST['ir1'];
 
-//업로드한 파일을 저장할 디렉토리
-$save_dir = "../uploadFiles/";
-$relative_dir = "/uploadFiles/";
-$real_thumbnail = $relative_dir . $_FILES["thumbnail"]["name"];
+$detail = $ir1;
+$myfile = $_FILES['myfile'];
 
-    //파일을 저장할 디렉토리 및 파일명
-    $thumbnail = $save_dir . $_FILES["thumbnail"]["name"];
 
-    //파일을 지정한 디렉토리에 저장
-    if(!move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $thumbnail))
-    {
-        die("파일을 지정한 디렉토리에 저장하는데 실패했습니다.");
+
+/*설정*/
+$uploads_dir = $_SERVER['DOCUMENT_ROOT']."/uploadFiles";
+$allowed_ext = array('jpg','jpeg','png','gif');
+/*변수 정리*/
+$error = $_FILES['myfile']['error'];
+$name = $_FILES['myfile']['name'];
+
+$ext = array_pop(explode('.',$name));
+
+/*오류 확인*/
+
+if($error !=UPLOAD_ERR_OK) {
+
+    switch ($error) {
+
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+            echo "파일이 너무 큽니다. ($error)";
+            break;
+        case UPLOAD_ERR_NO_FILE:
+            echo "파일이 첨부되지 않았습니다. ($error)";
+            break;
+        default:
+            echo "파일이 제대로 업로드되지 않았습니다. ($error)";
     }
+    exit;
+}
+
+// 확장자 확인
+if( !in_array($ext, $allowed_ext) ) {
+    echo "허용되지 않는 확장자입니다.";
+
+} else {
+
+    // 파일 이동
+    $thumbnail = move_uploaded_file( $_SERVER['DOCUMENT_ROOT'].$_FILES['myfile']['tmp_name'], "$uploads_dir/$name");
+    $real_thumbnail = "/uploadFiles/".$name;
+
+}
+
 
 
 $sql = "INSERT INTO lecture (`lecName`,`cateNo`,`teacher`,`lecLevel`,`lecTime`,`lecNum`,`thumbnail`,`detail`)
@@ -38,14 +62,5 @@ $sql = "INSERT INTO lecture (`lecName`,`cateNo`,`teacher`,`lecLevel`,`lecTime`,`
         '".$detail."')";
 
 $result = mysql_query($sql);
-/*$row = mysql_fetch_array($result);*/
 
-if(isset($result)) {
-
-    echo "<script> alert('강의가 입력되었습니다.'); location.href='/view/admin/index.php'</script>";
-
-} else {
-    echo "<script> alert('오류.'); location.href='/view/admin/index.php'</script>";
-}
-?>
 

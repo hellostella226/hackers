@@ -56,8 +56,13 @@ header("Pragma:no-cache");
 
         case "delete" :
 
-            print_r($reviewNo);
             echo "<meta http-equiv='refresh' content='0; url=/model/deleteReview.php?reviewNo=$reviewNo'>";
             break;
+
+        case "update" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/model/updateReview.php?reviewNo=$reviewNo'>";
+            break;
+
 
     }

@@ -23,6 +23,7 @@
     <tbody id="reviewList">
     <? while($row = mysql_fetch_array($result2)) { ?>
         <tr class='bbs-sbj'>
+            <input type="hidden" name="reviewNo" value="<?=$row['reviewNo']?>">
             <td><?=$row['reviewNo']?></td>
             <td><?=$row['cateName']?></td>
             <td>

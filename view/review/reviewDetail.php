@@ -98,8 +98,9 @@ $result2 = mysql_query($sql2);
 		
 		
 		<p class="mb15"><strong class="tc-brand fs16"><?=$row['userId']?>님의 수강하신 강의 정보</strong></p>
+        <input type="hidden" id="countNo" value="<?=$row['reviewNo']?>">
 		<input type="hidden" id="userId" value="<?=$row['userId']?>">
-        <input type="hidden" id="sessionUser" value="<?=$row['userId']?>">
+        <input type="hidden" id="sessionUser" value="<?=$_SESSION['userId']?>">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-lecture-list">
 			<caption class="hidden">강의정보</caption>
 			<colgroup>
@@ -148,12 +149,12 @@ $result2 = mysql_query($sql2);
        if($('#sessionUser').val() != $('#userId').val()) {
 
            alert("본인만 수정이 가능해요");
+           return false;
 
        } else {
 
-           alert(<?=$row['reviewNo']?>);
 
-           location.href="/controller/reviewController.php?mode=delete&&reviewNo=<?=$row['reviewNo']?>";
+           location.href='/controller/reviewController.php?mode=update&&reviewNo='+$("input:hidden[name=reviewNo]").val();
 
        }
 
@@ -166,11 +167,11 @@ $result2 = mysql_query($sql2);
         if($('#sessionUser').val() != $('#userId').val()) {
 
             alert("본인만 삭제가 가능해요");
+            return false;
 
         } else {
-            alert(<?=$row['reviewNo']?>)
 
-            location.href='/controller/reviewController.php?mode=delete&&reviewNo=<?=$row['reviewNo']?>';
+            location.href='/controller/reviewController.php?mode=delete&&reviewNo='+$("input:hidden[name=reviewNo]").val();
 
         }
 
@@ -181,7 +182,7 @@ $result2 = mysql_query($sql2);
 
     $('document').ready(function() {
 
-        var rNo = "<?=$row['reviewNo']?>";
+        var rNo = $("input:hidden[name=countNo]").val();
 
       $.ajax({
 
