@@ -122,11 +122,10 @@ include '../common//header.php';
 						</tr>
 					</tbody>
 				</table>
-
+				<input type="hidden" name="mode" value="signUp">
 				<div class="box-btn">
 					<input type="button" id="signUpBtn" class="btn-l" value="회원가입">
 				</div>
-                <input type="hidden" name="mode" value="signUp">
 			</form>
             </div>
 		</div>
@@ -140,8 +139,23 @@ include '../common//header.php';
 <script>
 $('#signUpBtn').click(function() {
 
+    $.post('/controller/memberController.php', $('#signUp').serialize(), function(data) {
 
+        if(data.success == false) {
 
+            alert(data.msg);
+            return false;
+
+        }
+		if(data.success == true) {
+
+			alert(data.msg);
+			location.href='/controller/memberController.php?mode=logIn';
+			return true;
+
+		}
+
+	},'json');
 
 });
 </script>
