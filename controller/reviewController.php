@@ -6,12 +6,14 @@ header("Pragma:no-cache");
 
     switch ($mode) {
 
+        /*강의 후기 리스트*/
         case "list" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/review/reviewList.html'>";
             break;
 
 
+        /*강의 후기 쓰기*/
         case "write" :
 
             $result = array('success'=> false, 'msg'=>'msg');
@@ -54,16 +56,19 @@ header("Pragma:no-cache");
             } break;
 
 
+        /*강의 삭제*/
         case "delete" :
 
             echo "<meta http-equiv='refresh' content='0; url=/model/deleteReview.php?reviewNo=$reviewNo'>";
             break;
 
+        /*강의 수정*/
         case "update" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/review/updateReview.php?reviewNo=$reviewNo'>";
             break;
 
+        /*강의 수정 확인*/
         case "updateFrm" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/model/updateReview.php';

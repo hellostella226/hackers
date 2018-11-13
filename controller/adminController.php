@@ -8,16 +8,19 @@ header("Pragma:no-cache");
 
     switch ($mode) {
 
+        /*강의 리스트*/
         case "list" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/admin/index.php' >";
             break;
 
+        /*강의 등록*/
         case "write" :
 
             echo"<meta http-equiv='refresh' content='0; url=/view/admin/writeLec.php'>";
             break;
 
+        /*강의 등록 확인*/
         case "lectureFrm" :
 
             $result = array('success'=> false, 'msg'=>'msg');
@@ -88,6 +91,7 @@ header("Pragma:no-cache");
 
             } break;
 
+        /*강의 수정*/
         case "updateLecture" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/admin/updateLec.php?lecNo=".$_GET['lecNo']."'>";

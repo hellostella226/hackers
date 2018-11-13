@@ -12,16 +12,25 @@ header("Pragma:no-cache");
     switch($mode) {
 
 
+        /*로그인*/
         case "logIn" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/logIn.html' >";
             break;
 
+        /*로그아웃*/
         case "logOut" :
 
             echo "<meta http-equiv='refresh' content='0; url=/model/logOut.php' >";
             break;
 
+        /*회원가입 완료*/
+        case "complete" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/model/complete.html'>";
+            break;
+
+        /*로그인 확인*/
         case "logInChk" :
 
             //아이디와 비밀번호의 값을 POST방식으로 받는 것
@@ -82,21 +91,26 @@ header("Pragma:no-cache");
             }
             break;
 
+
+        /*회원가입 1단계*/
         case "step_01" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/step_01.html' >";
             break;
 
+        /*회원가입 2단계*/
         case "step_02" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/step_02.html'>";
             break;
 
+        /*회원가입 3단계*/
         case "step_03" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/step_03.html'>";
             break;
 
+        /*회원가입 유효성 검사 후 등록*/
         case "regist" :
 
             echo "<meta http-equiv='refresh' content='0; url=/model/regist.php'>";
@@ -141,6 +155,7 @@ header("Pragma:no-cache");
             break;
 
 
+        /*회원가입 3단계 중 id체크*/
         case "idChk" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/model/idCompare.php';
@@ -170,6 +185,7 @@ header("Pragma:no-cache");
             break;
 
 
+        /*회원가입 3단계 - 비밀번호 체크*/
         case "pwChk" :
 
             //비밀번호 유효성 검사
@@ -193,6 +209,7 @@ header("Pragma:no-cache");
             }  break;
 
 
+        /*회원가입 3단계- 비밀번호 검증*/
         case "pwValidatiaon" :
 
             //비밀번호 검증
@@ -215,6 +232,7 @@ header("Pragma:no-cache");
             }  break;
 
 
+        /*회원 등록*/
         case "signUp" :
 
             $email = $mail[0].'@'.$mail[1];
@@ -328,11 +346,13 @@ header("Pragma:no-cache");
             } break;
 
 
+        /*아이디 찾기*/
         case "findId" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/findId.html' >";
             break;
 
+        /*아이디찾기 - 휴대폰번호로 찾기*/
         case "phoneCheck" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectNamePhone.php';
@@ -355,27 +375,31 @@ header("Pragma:no-cache");
 
             } break;
 
+        /*아이디찾기 2*/
         case "findId2" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/findId2.html' >";
             break;
 
+        /*비밀번호 찾기*/
         case "findPw" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/findPassword.html'>";
             break;
 
+        /*비밀번호 찾기 2*/
         case "findPw2" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/findPassword2.html' >";
             break;
 
+        /*회원정보 수정*/
         case "modify" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/view/member/modify.html';
             break;
 
-
+        /*회원정보 업데이트*/
         case "updateMember" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/model/updateMem.php';
@@ -399,6 +423,7 @@ header("Pragma:no-cache");
 
             } break;
 
+        /*인덱스페이지*/
         case "index" :
 
             echo "<meta http-equiv='refresh' content='0; url=/index.php'>";

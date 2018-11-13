@@ -35,7 +35,7 @@ include '../../model/selectLecture.php';
 				<col style="*"/>
 			</colgroup>
 
-            <form id="adminFrm" method="post" enctype="multipart/form-data">
+            <form id="adminFrm" method="post" enctype="multipart/form-data" accept-charset="euc-kr" onsubmit="return validate(this) && emulAcceptCharset(this">
 			<tbody>
 				<tr>
 					<th scope="col">°­ÀÇ</th>
@@ -111,6 +111,15 @@ include '../../model/selectLecture.php';
 
 
 <script type="text/javascript">
+
+
+    function emulAcceptCharset(form) {
+        if(form.canHaveHTML) {
+
+            document.charset = form.acceptCharset;
+        }
+        return true;
+    }
 
     var oEditors = [];
 

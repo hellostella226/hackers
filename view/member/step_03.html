@@ -150,7 +150,7 @@ $('#signUpBtn').click(function() {
 		if(data.success == true) {
 
 			alert(data.msg);
-			location.href='/controller/memberController.php?mode=logIn';
+			location.href='/controller/memberController.php?mode=complete';
 			return true;
 
 		}
@@ -291,9 +291,6 @@ $('#userPw2').keyup(function() {
         }).open();
     }
 </script>
-<script>
-
-</script>
 <!--<script>
 
     // 이메일 검증 스크립트 작성
@@ -329,7 +326,7 @@ $('#userPw2').keyup(function() {
     $("#SignUp").attr("action","/controller/memberController.php?mode=regist");
     $("#SignUp").submit();
 })
-</script>
+</script>-->
 
 <?php
 include '../common//footer.php';
