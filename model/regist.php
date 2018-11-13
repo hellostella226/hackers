@@ -22,6 +22,6 @@ $userPw = strtoupper($password_hash);
 
    $result = mysql_query($sql);
 
-   echo "<meta http-equiv='refresh' content='0; url=/controller/memberController.php?mode=logIn'>";
+
 
 ?>

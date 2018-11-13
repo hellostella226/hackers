@@ -10,8 +10,6 @@ $lecNum = $_POST['lecNum'];
 $lecTime = $_POST['lecTime'];
 $detail = $_POST['ir1'];
 
-echo $thumbnail;
-exit;
 
 
 //업로드한 파일을 저장할 디렉토리

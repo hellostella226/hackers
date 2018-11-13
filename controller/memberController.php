@@ -184,8 +184,11 @@ header("Pragma:no-cache");
 
             } else {
 
-
-
+                $resultPwRule['success'] = true;
+                $resultPwRule['msg'] = "비밀번호가 일치합니다.";
+                $resultPwRule['msg'] = iconv("EUC-KR","UTF-8",$resultPwRule['msg']);
+                echo json_encode($resultPwRule);
+                return true;
 
             }  break;
 
@@ -315,10 +318,11 @@ header("Pragma:no-cache");
             else {
 
                 include_once $_SERVER['DOCUMENT_ROOT'].'/model/regist.php';
-                $result['success'] = true;
-                $result['msg'] = '회원가입 되었습니다. 로그인 해 주세요';
-                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
-                echo json_encode($result);
+
+                $resultData['success'] = true;
+                $resultData['msg'] = '회원가입 되었습니다. 로그인 해 주세요';
+                $resultData['msg'] = iconv("EUC-KR","UTF-8",$resultData['msg']);
+                echo json_encode($resultData);
                 return true;
 
             } break;
