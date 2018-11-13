@@ -1,10 +1,9 @@
 <?php
-session_start();
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 ?>
 <?php
 
-$reviewNo = $_GET['reviewNo'];
+$reviewNo = $_POST['reviewNo'];
 $userNo = $_SESSION['userNo'];
 $userName = $_SESSION['userName'];
 $title = $_POST['title'];

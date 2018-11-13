@@ -129,42 +129,6 @@ include '../../model/selectLecture.php';
         // 에디터 내용 textarea에 적용
         oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 
-
-       /* var fileObj = document.getElementById('thumbnail').files[0];
-
-        var fileObjValue = document.getElementById('thumbnail').value;
-
-
-        var img_all_names = fileObj['name'].split('.');
-
-        var name = img_all_names[0];//이미지 이름
-
-        var ext = img_all_names[1].toLowerCase();//확장자
-
-        var size = fileObj['size'];//파일사이즈
-
-
-
-        //이미지 확장자 검사
-        if(ext != 'jpg' && ext != 'jpeg' && ext != 'png' && ext != 'gif') {
-
-
-            alert('이미지 파일 업로드만 가능합니다.');
-            $('#thumbnail').focus();
-            return false;
-
-        }
-
-
-        //이미지 파일 사이즈
-        if(size >= parseInt(10485760)) {
-
-            alert('10MB 이하의 파일만 업로드가 가능합니다.');
-            $('#thumbnail').focus();
-            return false;
-
-        }*/
-
         var form = $('#adminFrm')[0];
         var formData = new FormData(form);
         formData.append("myfile", $("#myfile")[0].files[0]);
@@ -173,6 +137,7 @@ include '../../model/selectLecture.php';
             url: "/controller/adminController.php",
             type: "POST",
             data: formData,
+            dataType: "json",
             contentType: false,
             cache: false,
             processData:false,

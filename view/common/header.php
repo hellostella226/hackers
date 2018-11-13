@@ -6,7 +6,7 @@ session_start();
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
 <!--[if (IE 8)]><html class="no-js ie8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR" />
+    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
     <meta http-equiv="X-UA-Compatible" id="X-UA-Compatible" content="IE=EmulateIE8" />
     <title>해커스 HRD</title>
     <meta name="description" content="해커스 HRD" />

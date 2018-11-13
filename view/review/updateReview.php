@@ -32,7 +32,7 @@ include_once '../../model/selectDetails.php';
 			</colgroup>
 
 
-            <form id="reviewFrm" method="post">
+            <form id="reviewFrm">
 			<tbody>
 				<tr>
 					<th scope="col">강의</th>
@@ -119,6 +119,8 @@ include_once '../../model/selectDetails.php';
         <div class="editor-wrap">
             <textarea name="ir1" id="ir1" class="nse_content" ><?=$row['content']?></textarea>
         </div>
+        <input type="hidden" name="mode" value="updateFrm">
+        <input type="hidden" name="reviewNo" value="<?=$_GET['reviewNo']?>">
 
         </form>
 
@@ -149,7 +151,7 @@ include_once '../../model/selectDetails.php';
 
 
         //수강후기 폼 값 전송
-        $('#reviewFrm').attr('action','/model/updateReview.php?reviewNo=<?=$_GET['reviewNo']?>');
+        $('#reviewFrm').attr('action','/controller/reviewController.php');
         $('#reviewFrm').submit();
 
     });

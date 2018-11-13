@@ -153,7 +153,6 @@ $result2 = mysql_query($sql2);
 
        } else {
 
-
            location.href='/controller/reviewController.php?mode=update&&reviewNo='+$("input:hidden[name=reviewNo]").val();
 
        }

@@ -61,8 +61,15 @@ header("Pragma:no-cache");
 
         case "update" :
 
-            echo "<meta http-equiv='refresh' content='0; url=/model/updateReview.php?reviewNo=$reviewNo'>";
+            echo "<meta http-equiv='refresh' content='0; url=/view/review/updateReview.php?reviewNo=$reviewNo'>";
             break;
+
+        case "updateFrm" :
+
+            include_once $_SERVER['DOCUMENT_ROOT'].'/model/updateReview.php';
+            break;
+
+
 
 
     }
