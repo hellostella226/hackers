@@ -51,7 +51,7 @@ include '../common//header.php';
 						<tr>
 							<th scope="col"><span class="icons">*</span>이메일주소</th>
 							<td>
-								<input type="text" class="input-text" id="mail[0]" name="mail[0]" style="width:138px" required/> @ <input type="text" id="mail[1]" name="mail[1]" class="input-text" style="width:138px" placeholder="직접입력" required/>
+								<input type="text" class="input-text" id="mail[0]" name="mail[0]" style="width:138px" required/> @ <input type="text" id="mail1" name="mail[1]" class="input-text" style="width:138px" placeholder="직접입력" required/>
 								<select class="input-sel" id="selmail" name="selmail" style="width:160px">
                                     <option id="navesr" value="naver.com">---분류---</option>
 									<option id="naver" value="naver.com">naver.com</option>
@@ -234,6 +234,13 @@ $('#userPw2').keyup(function() {
 });
 
 
+</script>
+<script>
+    /*메일주소 select시 선택된 값 텍스트박스에 삽입*/
+    $("#selmail").change(function() {
+        /*       alert($(this).val());*/
+        $("input:text[id=mail1]").val($(this).val());
+    });
 </script>
 <script>
 

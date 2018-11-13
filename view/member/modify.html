@@ -1,0 +1,289 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectMem.php';
+?>
+<div id="container" class="container-full">
+	<div id="content" class="content">
+		<div class="inner">
+			<div class="tit-box-h3">
+				<h3 class="tit-h3">내정보수정</h3>
+				<div class="sub-depth">
+					<span><i class="icon-home"><span>홈</span></i></span>
+					<strong>내정보수정</strong>
+				</div>
+			</div>
+
+			<div class="section-content">
+				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
+					<caption class="hidden">강의정보</caption>
+					<colgroup>
+						<col style="width:15%"/>
+						<col style="*"/>
+					</colgroup>
+
+					<tbody>
+                    <form id="signUp" method="post">
+						<tr>
+							<th scope="col"><span class="icons">*</span>이름</th>
+							<td id='testtest'><?php echo $data["userName"];?></td>
+						</tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>아이디</th>
+                            <td><input type="text" class="input-text" id="userId" name= "userId" value="<?php echo $data["userId"];?>" style="width:302px" value="<?echo $data['userId']?>" readonly/></td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>비밀번호</th>
+                            <td><input type="password" class="input-text" id="userPw" name="userPw" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합" required/><span id="pwd1Result" class="float-right"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>비밀번호 확인</th>
+                            <td><input type="password" class="input-text" id="userPw2" name="userPw2" style="width:302px" required/><span id="pwd2Result" class="float-right" ></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>이메일주소</th>
+                            <td>
+                               <!-- <?
+                                $str = $data['email'];
+                                print_r(explode('@', $str, $str[1]));?>-->
+                                <input type="text" class="input-text" id="mail_1" name="mail_1" value="<?php echo $data['email'];?>" style="width:138px" required/> @ <input type="text" id="mail_2" name="mail_2" value="<?php echo $data['email2'];?>"class="input-text" style="width:138px" placeholder="직접입력" required/>
+                                <select class="input-sel" id="selmail" name="selmail" style="width:160px">
+                                    <option id="naver" value="naver.com">naver.com</option>
+                                    <option id="gmail" value="gmail.com">gmail.com</option>
+                                    <option id="daum" value="daum.net">daum.net</option>
+                                    <option id="stella" value="stella.com">stella.com</option>
+                                    <option id="hackers" value="hackers.com">hackers.com</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>휴대폰 번호</th>
+                            <td>
+                                <input type="text" class="input-text" maxlength="3" id="phone1" name="phone1" style="width:50px" value="<?php echo $data['phone'][0].$data['phone'][1].$data['phone'][2];?>"  required /> -
+                                <input type="text" class="input-text" maxlength="4" id="phone2" name="phone2" style="width:50px" value="<?php echo $data['phone'][4].$data['phone'][5].$data['phone'][6].$data['phone'][7];?>"  required /> -
+                                <input type="text" class="input-text" maxlength="4" id="phone3" name="phone3" style="width:50px" value="<?php echo $data['phone'][9].$data['phone'][10].$data['phone'][11].$data['phone'][12];?>"  required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons"></span>일반전화 번호</th>
+                            <td><input type="text" class="input-text" id="t1" name="t1" maxlength="3" value="<?php echo $data['t1'];?>" style="width:88px"/> - <input type="text" maxlength="4" class="input-text" id="t2" name="t2" value="<?php echo $data['t2'];?>"style="width:88px"/> - <input type="text" maxlength="4" class="input-text" id="t3" name="t3" value="<?php echo $data['t3'];?>" style="width:88px"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>주소</th>
+                            <td>
+                                <p >
+                                    <label>우편번호 <input type="text" class="input-text ml5" id="address1" name="address1" value="<?php echo $data['address1'];?>"style="width:242px" required/></label><a href="#" class="btn-s-tin ml10" onclick="address()">주소찾기</a>
+                                </p>
+                                <p class="mt10">
+                                    <label>기본주소 <input type="text" class="input-text ml5" id="address2" name="address2" value="<?php echo $data['address2'];?>" style="width:719px" required/></label>
+                                </p>
+                                <p class="mt10">
+                                    <label>상세주소 <input type="text" class="input-text ml5" id="address3" name="address3" value="<?php echo $data['address3'];?>" style="width:719px" required/></label>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>SMS수신</th>
+                            <td>
+                                <div class="box-input">
+                                    <label class="input-sp">
+                                        <input type="radio" name="sendSms" id="sendSms1" value="y" checked="checked"/>
+                                        <span class="input-txt">수신함</span>
+                                    </label>
+                                    <label class="input-sp">
+                                        <input type="radio" name="sendSms" id="sendSms2" value="n" />
+                                        <span class="input-txt">미수신</span>
+                                    </label>
+                                </div>
+                                <p>SMS수신 시, 해커스의 혜택 및 이벤트 정보를 받아보실 수 있습니다.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col"><span class="icons">*</span>메일수신</th>
+                            <td>
+                                <div class="box-input">
+                                    <label class="input-sp">
+                                        <input type="radio" name="sendMail" value="y" id="radio1" checked="checked"/>
+                                        <span class="input-txt">수신함</span>
+                                    </label>
+                                    <label class="input-sp">
+                                        <input type="radio" name="sendMail" id="radio2" value="n"/>
+                                        <span class="input-txt">미수신</span>
+                                    </label>
+                                </div>
+                                <p>메일수신 시, 해커스의 혜택 및 이벤트 정보를 받아보실 수 있습니다.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="box-btn">
+                    <input type="button" id="signUpBtn" class="btn-l" value="정보수정">
+                </div>
+                <input type="hidden" name="mode" value="updateMember">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js">
+    //다음 주소 api
+</script>
+<script>
+    $('#signUpBtn').click(function() {
+
+        $.post('/controller/memberController.php', $('#signUp').serialize(), function(data) {
+
+            if(data.success == false) {
+
+                alert(data.msg);
+                return false;
+
+            }
+            if(data.success == true) {
+
+                alert(data.msg);
+                location.href='/controller/memberController.php?mode=index';
+                return true;
+
+            }
+
+        },'json');
+
+    });
+</script>
+<script>
+    //엔터키 차단
+
+    $('input[type="text"]').keydown(function() {
+
+        if (event.keyCode === 13) {
+            event.preventDefault();
+        }
+
+    });
+
+    $('#idCheckBtn').click(function() {
+
+        $.post('/controller/memberController.php', { mode: 'idChk', userId : $('#userId').val() }, function(data) {
+
+            alert(data.msg);
+
+            if(data.success == false) {
+
+                $('input:hidden[name=idChkFrm]').val('');
+                $("#userId").val('');
+                $("#userId").focus();
+
+            }
+            if(data.success == true) {
+
+                $('input:hidden[name=idChkFrm]').val('check');
+                $("#userPw").focus();
+
+            }
+
+        }, 'json');
+
+    });
+
+    $('#userPw').keyup(function() {
+
+        $.post('/controller/memberController.php', { mode: 'pwChk', userPw : $('#userPw').val() }, function(data) {
+
+            if(data == false) {
+
+                $('#pwd1Result').empty();
+                $('#pwd1Result').append(data.msg).css("color","red");
+
+            } else {
+
+                $('#pwd1Result').empty();
+                $('#pwd1Result').append(data.msg).css("color","green");
+
+            }
+
+        }, 'json');
+    });
+
+    $('#userPw2').keyup(function() {
+
+        $.post('/controller/memberController.php', {mode: 'pwValidatiaon',  userPw : $('#userPw').val(), userPw2 : $('#userPw2').val()}, function(data) {
+
+            if(data == false) {
+
+                $('#pwd2Result').empty();
+                $('#pwd2Result').append(data.msg).css("color","red");
+
+            } else {
+
+                $('#pwd2Result').empty();
+                $('#pwd2Result').append(data.msg).css("color", "green");
+
+            }
+
+        }, 'json');
+
+    });
+
+
+</script>
+<script>
+    /*메일주소 select시 선택된 값 텍스트박스에 삽입*/
+    $("#selmail").change(function() {
+        /*       alert($(this).val());*/
+        $("input:text[id=mail1]").val($(this).val());
+    });
+</script>
+<script>
+
+    function address() {
+
+        new daum.Postcode({
+
+            oncomplete: function(data) {
+
+                var fullAddr = ''; // 주소 변수
+                var extraAddr = '';
+                if (data.userSelectedType === 'R') { // 도로명
+
+                    fullAddr = data.roadAddress;
+
+                } else { // 지번
+
+                    fullAddr = data.jibunAddress;
+
+                }
+
+                if(data.userSelectedType === 'R'){
+
+                    //법정동명
+                    if(data.bname !== ''){
+
+                        extraAddr += data.bname;
+
+                    }
+
+                    // 건물명
+                    if(data.buildingName !== ''){
+
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+
+                    }
+
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+
+                }
+
+                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('address2').value = fullAddr;
+                document.getElementById('address3').focus();
+
+            }
+
+        }).open();
+    }
+</script>
+
+<?php
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.php';
+?>

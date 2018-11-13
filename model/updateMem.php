@@ -31,8 +31,3 @@ include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
     $result = mysql_query($sql);
 
 ?>
-
-<script>
-    alert('수정되었습니다.');
-    location.href="/";
-</script>

@@ -328,9 +328,86 @@ header("Pragma:no-cache");
             } break;
 
 
+        case "findId" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/findId.html' >";
+            break;
+
+        case "phoneCheck" :
+
+            include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectNamePhone.php';
+
+            if(($getPhone['userName']) == "") {
+
+                $resultFindId['success'] = false;
+                $resultFindId['msg'] = '입력하신 휴대폰 번호와 일치하는 회원이 없습니다.';
+                $resultFindId['msg']= iconv("EUC-KR","UTF-8",$resultFindId['msg']);
+                echo json_encode($resultFindId);
+                return false;
+            }
+            if(($getPhone['userName']) != "") {
+
+                $resultFindId['success'] = true;
+                $resultFindId['msg'] = '회원이 있습니다..';
+                $resultFindId['msg']= iconv("EUC-KR","UTF-8",$resultFindId['msg']);
+                echo json_encode($resultFindId);
+                return true;
+
+            } break;
+
+        case "findId2" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/findId2.html' >";
+            break;
+
+        case "findPw" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/findPassword.html'>";
+            break;
+
+        case "findPw2" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/findPassword2.html' >";
+            break;
+
+        case "modify" :
+
+            include_once $_SERVER['DOCUMENT_ROOT'].'/view/member/modify.html';
+            break;
+
+
+        case "updateMember" :
+
+            include_once $_SERVER['DOCUMENT_ROOT'].'/model/updateMem.php';
+
+            if(!isset($result)) {
+
+                $resultUpdate['success'] = true;
+                $resultUpdate['msg'] = '회원정보가 수정되었습니다.';
+                $resultUpdate['msg']= iconv("EUC-KR","UTF-8",$resultUpdate['msg']);
+                echo json_encode($resultUpdate);
+                return true;
+
+            }
+            if(isset($result)) {
+
+                $resultUpdate['success'] = true;
+                $resultUpdate['msg'] = '회원정보가 수정되지 않았습니다. 다시 확인해 주세요.';
+                $resultUpdate['msg']= iconv("EUC-KR","UTF-8",$resultUpdate['msg']);
+                echo json_encode($resultUpdate);
+                return true;
+
+            } break;
+
+        case "index" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/index.php'>";
+            break;
+
+
 
 
     }
 
 
-
+?>

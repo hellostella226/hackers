@@ -1,8 +1,4 @@
 <?php
-session_start();
-$_SESSION['num'] = '123456';
-?>
-<?php
 include '../common/header.php';
 ?>
 
@@ -109,10 +105,10 @@ include '../common/header.php';
                             <label>
                                <th scope="col" id="fPhoneTh">휴대폰번호</th>
                                <td id="fPhone" name="fPhone">
-                                    <input type="text" maxlength = "3" class="input-text" style="width:50px" id="p1" name="p1"/> -
-                                    <input type="text" maxlength = "4" class="input-text" style="width:50px" id="p2" name="p2"/> -
-                                    <input type="text" maxlength = "4" class="input-text" style="width:50px" id="p3" name="p3"/>
-                                   <a href="#" class="btn-s-tin ml10" id="pChk">인증번호 받기</a>
+                                    <input type="text" maxlength = "3" class="input-text" style="width:50px" id="phone1" name="phone1"/> -
+                                    <input type="text" maxlength = "4" class="input-text" style="width:50px" id="phone2" name="phone2"/> -
+                                    <input type="text" maxlength = "4" class="input-text" style="width:50px" id="phone3" name="phone3"/>
+                                   <a href="#" class="btn-s-tin ml10" id="phoneCheck">인증번호 받기</a>
                                </td>
                             </label>
                         </tr>
@@ -131,13 +127,28 @@ include '../common/header.php';
 
 <script>
 $('#findId').on('click',function(){
-    location.href='./find_id.php';
+    location.href='/controller/memberController.php?mode=findId';
 });
 $('#findPw').on('click',function(){
     location.href='./find_pass.php';
 });
 </script>
+<script>
 
+    //휴대폰 유효성 검사
+    $("#pNumber").submit(function(event) {
+
+        event.preventDefault();
+
+        $.post('/controller/memberController.php', $("#pNumber").serialize()).done(function(data) {
+
+            alert(data);
+
+        });
+
+    });
+
+</script>
 <script>
 $(document).ready(function() {
     //default값이 휴대폰 인증이므로 메일 입력박스 숨김
@@ -171,7 +182,27 @@ $(document).ready(function() {
     });
 </script>
 <script>
-//휴대폰번호 유효성체크 정규식
+    $('#phoneCheck').click(function() {
+
+        $.post('/controller/memberController.php', {mode: 'phoneCheck', name: $('#userName').val(),  phone1 : $('#phone1').val(), phone2 : $('#phone2').val(), phone3 : $('#phone3').val()},
+            function(data) {
+
+                if(data.success == false) {
+
+                    alert(data.msg);
+                    return false;
+
+                }
+                if(data.success == true) {
+
+                    alert(data.msg);
+                    return true;
+                }
+
+        }, 'json');
+
+    });
+    //휴대폰번호 유효성체크 정규식
 var phoneNumberRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
 
 $("#pChk").click(function(event) {
@@ -193,7 +224,7 @@ $("#pChk").click(function(event) {
                     console.log(data);
                     //전송받은 data와 입력한 userName이 같을 경우
                     if (data.trim() != "") {
-
+                        <?$_SESSION['num'] = '123456';?>
                         alert("인증번호는 <?=$_SESSION['num']?> 입니다.");
                         var a = $('input:hidden[name=userId]').val(data);
 
@@ -259,7 +290,7 @@ var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?
         if($("input:text[id='pChk_Cp']").val() === '<?=$_SESSION['num']?>'){
             alert("인증되었습니다.");
 
-            $('#sendFrm').attr("action","./fine_id_2.php");
+            $('#sendFrm').attr("action","/controller/memberController.php?mode=findId2");
             $('#sendFrm').submit();
 
         }else{
