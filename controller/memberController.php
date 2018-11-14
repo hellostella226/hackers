@@ -27,7 +27,7 @@ header("Pragma:no-cache");
         /*회원가입 완료*/
         case "complete" :
 
-            echo "<meta http-equiv='refresh' content='0; url=/model/complete.html'>";
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/complete.html'>";
             break;
 
         /*로그인 확인*/
@@ -231,6 +231,25 @@ header("Pragma:no-cache");
 
             }  break;
 
+        case "emailValidation" :
+
+            $email = $mail[0] . '@' . $mail[1];
+            $mail_validate = var_dump(filter_var($email, FILTER_VALIDATE_EMAIL));
+
+                if($mail_validate == false) {
+
+                    $resultMail['success'] = false;
+                    $resultMail['msg'] = '올바른 메일 형식이 아닙니다. 다시 입력 해 주세요';
+                    $resultMail['msg'] = iconv("EUC-KR", "UTF-8", $resultMail['msg']);
+                    echo json_encode($resultMail);
+
+                    return false;
+
+                }
+
+           break;
+
+
 
         /*회원 등록*/
         case "signUp" :
@@ -292,6 +311,19 @@ header("Pragma:no-cache");
                 $result['msg'] = '메일주소를 정확히 입력해주세요';
                 $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
                 echo json_encode($result);
+                return false;
+
+            }
+            $email = $mail[0] . '@' . $mail[1];
+            $mail_validate = var_dump(filter_var($email, FILTER_VALIDATE_EMAIL));
+
+            if($mail_validate == false) {
+
+                $result['success'] = false;
+                $result['msg'] = '올바른 메일 형식이 아닙니다. 다시 입력 해 주세요';
+                $result['msg'] = iconv("EUC-KR", "UTF-8", $result['msg']);
+                echo json_encode($result);
+
                 return false;
 
             }

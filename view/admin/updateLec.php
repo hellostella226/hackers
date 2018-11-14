@@ -186,4 +186,4 @@ include '../../model/selectLecture.php';
 
 <?php
 include '../common/footer.php';
-?>?>
+?>

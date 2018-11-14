@@ -35,7 +35,7 @@ include '../../model/selectLecture.php';
 				<col style="*"/>
 			</colgroup>
 
-            <form id="adminFrm" method="post" enctype="multipart/form-data" accept-charset="euc-kr" onsubmit="return validate(this) && emulAcceptCharset(this">
+            <form id="adminFrm" method="post" enctype="multipart/form-data">
 			<tbody>
 				<tr>
 					<th scope="col">°­ÀÇ</th>
@@ -112,15 +112,6 @@ include '../../model/selectLecture.php';
 
 <script type="text/javascript">
 
-
-    function emulAcceptCharset(form) {
-        if(form.canHaveHTML) {
-
-            document.charset = form.acceptCharset;
-        }
-        return true;
-    }
-
     var oEditors = [];
 
     nhn.husky.EZCreator.createInIFrame ({
@@ -161,6 +152,7 @@ include '../../model/selectLecture.php';
                    if(data.success == true) {
 
                        alert(data.msg);
+                       location.href='/controller/adminController.php?mode=list';
                        return true;
 
                    }

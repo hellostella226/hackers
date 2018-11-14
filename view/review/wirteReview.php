@@ -105,7 +105,7 @@ include '../../model/selectLecture.php';
 		</table>
 
        <!--스마트에디터 소스-->
-        <script type="text/javascript" src="/smarteditor2-2.3.1/js/HuskyEZCreator.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/smarteditor2-2.3.1/js/HuskyEZCreator.js"></script>
         <style>
             .nse_content{width:660px;height:500px}
         </style>
