@@ -1,7 +1,7 @@
 <?php
-include '../common/header.html';
-include '../common/adminLeftNav.html';
-include '../../model/selectLectureList.php';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/adminLeftNav.html';
+include $_SERVER['DOCUMENT_ROOT'].'/model/selectLectureList.php';
 ?>
 
 	<div id="content" class="content">
@@ -63,5 +63,5 @@ include '../../model/selectLectureList.php';
 </div>
 
 <?php
-include '../common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>

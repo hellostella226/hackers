@@ -1,5 +1,5 @@
 <?php
-include 'view/common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
 ?>
 
     <!--body-->
@@ -354,5 +354,5 @@ include 'view/common/header.html';
     <!--body-->
 
 <?php
-include 'view/common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>

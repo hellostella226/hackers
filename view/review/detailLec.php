@@ -1,6 +1,6 @@
 <?
-include '../common/header.html';
-include '../common/reviewLeftNav.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';
 ?>
 
 <table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs-view">
@@ -137,5 +137,5 @@ include '../common/reviewLeftNav.html';
 
 
 <?
-include '../common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>

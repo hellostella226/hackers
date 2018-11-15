@@ -1,8 +1,7 @@
 <?php
-include '../common/header.html';
-include $_SERVER['DOCUMENT_ROOT'].'/common/reviewLeftNav.html';
-include_once '../../model/selectDetails.php';
-
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';
+include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
 
 if($_GET['p']) {
     $p = $_GET['p'];
@@ -134,7 +133,7 @@ $result2 = mysql_query($sql2);
 
         <?php
 
-        include_once '../common/listTable.php';
+        include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/listTable.php';
 
         ?>
 
@@ -198,5 +197,5 @@ $result2 = mysql_query($sql2);
     })
 </script>
 <?php
-include '../common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>

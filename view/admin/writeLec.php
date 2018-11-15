@@ -1,8 +1,7 @@
 <?php
-session_start();
-include '../common/header.html';
-include '../common/adminLeftNav.html';
-include '../../model/selectLecture.php';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/adminLeftNav.html';
+include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 ?>
     <!--스마트에디터 소스-->
     <script type="text/javascript" src="/smarteditor2-2.3.1/js/HuskyEZCreator.js" charset="EUC-KR"></script>
@@ -179,5 +178,5 @@ include '../../model/selectLecture.php';
 
 
 <?php
-include '../common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>

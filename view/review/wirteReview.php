@@ -1,7 +1,7 @@
 <?php
-include '../common/header.html';
-include '../common/reviewLeftNav.php';
-include '../../model/selectLecture.php';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';
+include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 ?>
 
 	<div id="content" class="content">
@@ -185,5 +185,5 @@ include '../../model/selectLecture.php';
         });
 </script>
 <?php
-include '../common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>

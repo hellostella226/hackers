@@ -1,9 +1,8 @@
 <?
-session_start();
-include '../common/header.html';
-include '../common/reviewLeftNav.php';
-include_once '../../model/selectLecture.php';
-include_once '../../model/selectDetails.php';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';
+include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
 ?>
 
 	<div id="content" class="content">
@@ -181,5 +180,5 @@ include_once '../../model/selectDetails.php';
     });
 </script>
 <?
-include '../common/footer.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
 ?>
