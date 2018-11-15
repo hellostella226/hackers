@@ -6,14 +6,9 @@ $_SESSION['num'] = '123456';
 		<div class="top-section">
 			<div class="inner">
 				<div class="link-box">
-					<!-- 로그인전 -->
 					<a href="#">로그인</a>
 					<a href="#">회원가입</a>
 					<a href="#">상담/고객센터</a>
-					<!-- 로그인후 -->
-					<!-- <a href="#">로그아웃</a>
-					<a href="#">내정보</a>
-					<a href="#">상담/고객센터</a> -->
 				</div>
 			</div>
 		</div>
@@ -77,9 +72,20 @@ $("#pNumber").submit(function(event) {
 
     $.post('/controller/memberController.php', $("#pNumber").serialize()).done(function(data) {
 
-        alert(data);
+       if(data.success == false) {
 
-	});
+           alert(data.msg);
+           return false;
+
+	   }
+	   if(data.success == true) {
+
+	       alert(data.msg);
+	       alert(data.phone);
+	       return true;
+	   }
+
+	},'json');
 
 });
 

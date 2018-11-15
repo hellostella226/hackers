@@ -65,23 +65,30 @@ header("Pragma:no-cache");*/
         /*휴대폰 인증값 체크 후 세션번호 출력*/
         case "phoneValidation" :
 
-            $_SESSION['phone1'] = $phone[0];
+            /*$_SESSION['phone1'] = $phone[0];
             $_SESSION['phone2'] = $phone[1];
-            $_SESSION['phone3'] = $phone[2];
+            $_SESSION['phone3'] = $phone[2];*/
 
             $phone = $phone[0] . '-' . $phone[1] . '-' . $phone[2];
             $phone = preg_replace("/[^0-9]/", "", $phone);
 
             if (!preg_match("/^01[0-9]{8,9}$/", $phone)) {
 
-                print_r('유효하지 않은 형식입니다. 다시 입력해주세요.');
+                $resultSets['success'] = false;
+                $resultSets['msg'] = '유효하지 않은 형식입니다. 다시 입력해주세요.';
+                $resultSets['msg'] = iconv("EUC-KR","UTF-8",$resultSets['msg']);
+                echo json_encode($resultSets);
                 return false;
 
             }
 
             if (preg_match("/^01[0-9]{8,9}$/", $phone)) {
 
-                print_r('인증번호는 '.$_SESSION['num'].' 입니다.');
+                $resultSets['success'] = true;
+                $resultSets['phone'] = $phone;
+                $resultSets['msg'] = '인증번호는 '.$_SESSION['num'].'입니다.';
+                $resultSets['msg'] = iconv("EUC-KR","UTF-8",$resultSets['msg']);
+                echo json_encode($resultSets);
                 return true;
 
             } break;
@@ -358,16 +365,16 @@ header("Pragma:no-cache");*/
             break;
 
         /*비밀번호 찾기*/
-        case "findPw" :
+     /*   case "findPw" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/findPassword.html'>";
-            break;
+            break;*/
 
         /*비밀번호 찾기 2*/
-        case "findPw2" :
+       /* case "findPw2" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/findPassword2.html' >";
-            break;
+            break;*/
 
         /*회원정보 수정*/
         case "modify" :
