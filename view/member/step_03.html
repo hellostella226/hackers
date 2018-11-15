@@ -1,5 +1,5 @@
 <?php
-include '../common//header.php';
+include '../common//header.html';
 ?>
 
 <div id="container" class="container-full">
@@ -138,6 +138,7 @@ include '../common//header.php';
 </script>
 <script>
 $('#signUpBtn').click(function() {
+    /*회원가입 버튼 클릭시*/
 
     $.post('/controller/memberController.php', $('#signUp').serialize(), function(data) {
 
@@ -233,7 +234,6 @@ $('#userPw2').keyup(function() {
 
 });
 
-
 </script>
 <script>
     /*메일주소 select시 선택된 값 텍스트박스에 삽입*/
@@ -291,43 +291,7 @@ $('#userPw2').keyup(function() {
         }).open();
     }
 </script>
-<!--<script>
-
-    // 이메일 검증 스크립트 작성
-    var emailVal = $("#mail_1").val()+"@"+$("#mail_2").val();
-    if (emailVal.match(regExp) != null) {
-        var a = $('input:hidden[name=email]').val(emailVal);
-
-        var p1 = $('#p1').val();
-        var p2 = $('#p2').val();
-        var p3 = $('#p3').val();
-        var pAll = p1+"-"+p2+"-"+p3;
-        var b = $('input:hidden[name=phone]').val(pAll);
-
-        if($('#t1').val() != "") {
-            alert("hi");
-
-            var t1 = $('#t1').val();
-            var t2 = $('#t2').val();
-            var t3 = $('#t3').val();
-            var tAll = t1+"-"+t2+"-"+t3;
-            var c = $('input:hidden[name=tel]').val(tAll);
-        }
-        /* alert("send mail address is "+$('input:hidden[name=email]').val());
-         alert("send phone is "+$('input:hidden[name=phone]').val());
-         alert("send tel is "+$('input:hidden[name=tel]').val());*/
-    }
-    else {
-        alert('올바르지 않은 형식의 이메일입니다. 다시 입력해 주세요');
-        return false;
-
-    }
-
-    $("#SignUp").attr("action","/controller/memberController.php?mode=regist");
-    $("#SignUp").submit();
-})
-</script>-->
 
 <?php
-include '../common//footer.php';
+include '../common//footer.html';
 ?>

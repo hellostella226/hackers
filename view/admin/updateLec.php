@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../common/header.php';
-include '../common/adminLeftNav.php';
+include '../common/header.html';
+include '../common/adminLeftNav.html';
 include '../../model/updateLecture.php';
 include '../../model/selectLecture.php';
 
@@ -185,5 +185,5 @@ include '../../model/selectLecture.php';
 
 
 <?php
-include '../common/footer.php';
+include '../common/footer.html';
 ?>

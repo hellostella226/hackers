@@ -1,6 +1,6 @@
 <?
-include '../common/header.php';
-include '../common/reviewLeftNav.php';
+include '../common/header.html';
+include '../common/reviewLeftNav.html';
 ?>
 
 <table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs-view">
@@ -137,5 +137,5 @@ include '../common/reviewLeftNav.php';
 
 
 <?
-include '../common/footer.php';
+include '../common/footer.html';
 ?>

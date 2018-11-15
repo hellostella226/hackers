@@ -1,6 +1,6 @@
 <?php
-include '../common/header.php';
-include '../common/reviewLeftNav.php';
+include '../common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/common/reviewLeftNav.html';
 include_once '../../model/selectDetails.php';
 
 
@@ -197,3 +197,6 @@ $result2 = mysql_query($sql2);
 
     })
 </script>
+<?php
+include '../common/footer.html';
+?>

@@ -48,7 +48,10 @@ if( !in_array($ext, $allowed_ext) ) {
 
 }
 
-
+$lecName = iconv("utf-8", "euc-kr", $lecName);
+$teacher = iconv("utf-8", "euc-kr", $teacher);
+$lecLevel = iconv("utf-8", "euc-kr", $lecLevel);
+$detail = iconv("utf-8", "euc-kr", $detail);
 
 $sql = "INSERT INTO lecture (`lecName`,`cateNo`,`teacher`,`lecLevel`,`lecTime`,`lecNum`,`thumbnail`,`detail`)
         VALUES (

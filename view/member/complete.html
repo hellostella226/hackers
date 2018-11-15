@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include '../common//header.php';
+include '../common//header.html';
 ?>
 
 <div id="container" class="container-full">
@@ -22,7 +22,7 @@ include '../common//header.php';
 			</div>
 
 			<div class="box-btn mt30">
-				<a href="./login.php" class="btn-l" id="logIn">로그인</a>
+				<a href="/controller/memberController.php?mode=logIn" class="btn-l" id="logIn">로그인</a>
 				<a href="#" class="btn-l-line ml5">수강신청</a>
 			</div>
 
@@ -32,5 +32,5 @@ include '../common//header.php';
 >
 
 <?php
-include '../common//footer.php';
+include '../common//footer.html';
 ?>

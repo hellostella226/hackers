@@ -3,7 +3,6 @@ session_start();
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 
 
-
 //아이디와 비밀번호의 값을 POST방식으로 받는 것
 $id = $_POST['userId'];
 $pw = $_POST['userPw'];
@@ -51,15 +50,12 @@ if($row['userId']) {
     $_SESSION['userName'] = $row['userName'];
     $_SESSION['userId'] = $row['userId'];
 
-    Header("Location:/index.php");
+            echo "<meta http-equiv='refresh' content='0; url=/index.php'>";
 
     }
 
     else {
-            echo $userPw;
-            echo "<br>";
-            echo $getPw;
-            exit;
+
             echo "<script>alert('아이디나 비밀번호가 일치하지 않습니다. 다시 로그인 해 주세요.'); 
                            location.href='/view/member/logIn.html';
                    </script>";
@@ -68,9 +64,8 @@ if($row['userId']) {
 }
 
 else {
-    echo "ID DOESN'T EXIST";
+             echo "<script>alert('아이디가 존재하지 않습니다. 다시 로그인 해 주세요.'); 
+                           location.href='/view/member/logIn.html';
+                   </script>";
     return 1;
 }
-
-exit;
-?>

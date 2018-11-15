@@ -1,5 +1,5 @@
 <?php
-include '../common/header.php';
+include '../common/header.html';
 include '../common/reviewLeftNav.php';
 include '../../model/selectLecture.php';
 ?>
@@ -185,5 +185,5 @@ include '../../model/selectLecture.php';
         });
 </script>
 <?php
-include '../common/footer.php';
+include '../common/footer.html';
 ?>

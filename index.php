@@ -1,5 +1,5 @@
 <?php
-include 'view/common/header.php';
+include 'view/common/header.html';
 ?>
 
     <!--body-->
@@ -354,5 +354,5 @@ include 'view/common/header.php';
     <!--body-->
 
 <?php
-include 'view/common/footer.php';
+include 'view/common/footer.html';
 ?>

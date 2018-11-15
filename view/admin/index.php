@@ -1,6 +1,6 @@
 <?php
-include '../common/header.php';
-include '../common/adminLeftNav.php';
+include '../common/header.html';
+include '../common/adminLeftNav.html';
 include '../../model/selectLectureList.php';
 ?>
 
@@ -63,5 +63,5 @@ include '../../model/selectLectureList.php';
 </div>
 
 <?php
-include '../common/footer.php';
+include '../common/footer.html';
 ?>

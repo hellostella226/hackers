@@ -3,6 +3,8 @@ session_start();
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 ?>
 <?php
+
+
 $userNo = $_SESSION['userNo'];
 $userName = $_SESSION['userName'];
 $title = $_POST['title'];

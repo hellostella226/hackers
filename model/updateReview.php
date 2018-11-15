@@ -29,7 +29,7 @@ $result = mysql_query($sql);
 
 if(isset($result)) {
 
-    echo "<script> alert('강의가 수정되었습니다.'); location.href='/view/review/reviewList.html'</script>";
+    echo "<script> alert('강의 후기가 수정되었습니다.'); location.href='/view/review/reviewList.html'</script>";
 
 } else {
 

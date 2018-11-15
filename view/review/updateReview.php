@@ -1,6 +1,6 @@
 <?
 session_start();
-include '../common/header.php';
+include '../common/header.html';
 include '../common/reviewLeftNav.php';
 include_once '../../model/selectLecture.php';
 include_once '../../model/selectDetails.php';
@@ -181,5 +181,5 @@ include_once '../../model/selectDetails.php';
     });
 </script>
 <?
-include '../common/footer.php';
+include '../common/footer.html';
 ?>
