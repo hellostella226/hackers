@@ -2,6 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
 ?>
 
+    <input type="hidden" id="user_no" value="<?=$_SESSION[num]?>">
 
     <div id="container" class="container-full">
         <div id="content" class="content">
@@ -210,6 +211,8 @@ $("#pChk").click(function(event) {
     var b = $("input:text[name='p2']").val();
     var c = $("input:text[name='p3']").val();
     var phoneVal = a+"-"+b+"-"+c;
+
+
     /*alert(pEnroll);*/
     //유효한 형식의 휴대폰번호일 경우
         if(phoneVal.match(phoneNumberRegex) != null) {
@@ -286,8 +289,10 @@ var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?
 <script>
     //인증번호 확인
     $("#pChkVal").on("click", function(){
+        var user_no = $('#user_no').val();
+
         //세션값과 텍스트박스의 값이 같을 경우
-        if($("input:text[id='pChk_Cp']").val() === '<?=$_SESSION['num']?>'){
+        if($("input:text[id='pChk_Cp']").val() === user_no ){
             alert("인증되었습니다.");
 
             $('#sendFrm').attr("action","/controller/memberController.php?mode=findId2");
