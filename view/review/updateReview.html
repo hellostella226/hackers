@@ -31,7 +31,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
 			</colgroup>
 
 
-            <form id="reviewFrm">
+            <form id="updateFrm">
 			<tbody>
 				<tr>
 					<th scope="col">강의</th>
@@ -134,26 +134,39 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
 
 <script type="text/javascript">
 
-    var oEditors = [];
+var oEditors = [];
 
-    nhn.husky.EZCreator.createInIFrame ({
-        oAppRef: oEditors,
-        elPlaceHolder: "ir1",
-        sSkinURI: "/smarteditor2-2.3.1/SmartEditor2Skin.html",
-        fCreator: "createSEditor2"
-    });
+nhn.husky.EZCreator.createInIFrame ({
+    oAppRef: oEditors,
+    elPlaceHolder: "ir1",
+    sSkinURI: "/smarteditor2-2.3.1/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
+});
 
-    $('#sendContents').on('click',function() {
+$('#sendContents').on('click',function() {
 
-        // 에디터 내용 textarea에 적용
-        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+    // 에디터 내용 textarea에 적용
+    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 
+    //수강후기 폼 값 전송
+    $.post('/controller/reviewController.php', $('#updateFrm').serialize(), function(data) {
 
-        //수강후기 폼 값 전송
-        $('#reviewFrm').attr('action','/controller/reviewController.php');
-        $('#reviewFrm').submit();
+        if(data.success == false) {
 
-    });
+            alert(data.msg);
+            return false;
+
+        }
+        if(data.success == true) {
+
+            alert(data.msg);
+            location.href = "/controller/reviewController.php?mode=list";
+            return true;
+        }
+
+    }, 'json')
+
+});
 </script>
 <script>
 
@@ -166,7 +179,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
             url: '/model/selectDynamicLecName.php',
             type: 'post',
             data: {
-                /*searchType : encodeURIComponent(searchType)*/
                 searchType: searchType
             },
             success: function (data) {

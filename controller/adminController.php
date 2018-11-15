@@ -17,7 +17,7 @@ header("Pragma:no-cache");
         /*강의 등록*/
         case "write" :
 
-            echo"<meta http-equiv='refresh' content='0; url=/view/admin/writeLec.php'>";
+            echo"<meta http-equiv='refresh' content='0; url=/view/admin/writeLec.html'>";
             break;
 
         /*강의 등록 확인*/
@@ -94,7 +94,7 @@ header("Pragma:no-cache");
         /*강의 수정*/
         case "updateLecture" :
 
-            echo "<meta http-equiv='refresh' content='0; url=/view/admin/updateLec.php?lecNo=".$_GET['lecNo']."'>";
+            echo "<meta http-equiv='refresh' content='0; url=/view/admin/updateLec.html?lecNo=".$_GET['lecNo']."'>";
 
 
     }

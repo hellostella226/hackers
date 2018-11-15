@@ -1,3 +1,7 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'].'/model/pagination.php';
+?>
+
 <table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
     <caption class="hidden">수강후기</caption>
     <colgroup>
@@ -28,7 +32,7 @@
             <td><?=$row['cateName']?></td>
             <td>
                 <!--카운트-->
-                <a href="./reviewDetail.php?reviewNo=<?=$row['reviewNo']?>">
+                <a href="./reviewDetail.html?reviewNo=<?=$row['reviewNo']?>">
                     <span class="tc-gray ellipsis_line"><?=$row['lecName']?></span>
                     <strong class="ellipsis_line"><?=$row['title']?></strong>
                 </a>

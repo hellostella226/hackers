@@ -1,63 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
-/*include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';*/
 include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
-
-if($_GET['p']) {
-    $p = $_GET['p'];
-} else {
-    $p = 1;
-}
-
-if($_GET['cateS'] && $_GET['searchLW'] && $_GET['lacOrUser']) {
-    $where .= " AND c.cateNo = '".$_GET['cateS']."' AND ".$_GET['searchLW']." LIKE '%".$_GET['lacOrUser']."%' ";
-}
-
-if($_GET['cateNo']) {
-    $where .= "AND c.cateNo = '".$_GET['cateNo']."'";
-}
-
-
-
-$sql= "SELECT r.userName, r.reviewNo, c.cateName, r.title, l.lecName, r.starChk, r.lecCnt
-        FROM review r, lecture l, category c
-         WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo ".$where."
-          ORDER BY r.reviewNo DESC";
-
-
-
-
-$result = mysql_query($sql);
-$total_cnt = mysql_num_rows($result);
-
-$list_cnt = 5;
-$start = ($list_cnt * $p) - $list_cnt;
-$page_cnt = ceil($total_cnt/$list_cnt);
-
-$page_num_cnt = 5;
-if($page_cnt > $page_num_cnt) {
-    $block = (ceil($p / $page_num_cnt) * $page_num_cnt);
-    $num_cnt_s = $block - $page_num_cnt + 1;
-    if($page_cnt < $block) {
-        $num_cnt = $page_cnt;
-    } else {
-        $num_cnt = $block;
-    }
-
-} else {
-    $num_cnt = $page_cnt;
-    $num_cnt_s = 1;
-}
-
-
-$sql2 = "SELECT r.userName, r.reviewNo, c.cateName, r.title, l.lecName, r.starChk, r.lecCnt
-        FROM review r, lecture l, category c
-         WHERE l.lecNo = r.lecNo AND l.cateNo = c.cateNo ".$where."
-          ORDER BY r.reviewNo DESC limit $start, $list_cnt";
-
-$result2 = mysql_query($sql2);
-
-
+include_once  $_SERVER['DOCUMENT_ROOT'].'/model/pagination.php';
 ?>
 
 	<div id="content" class="content">
@@ -97,7 +41,7 @@ $result2 = mysql_query($sql2);
 		
 		
 		<p class="mb15"><strong class="tc-brand fs16"><?=$row['userId']?>님의 수강하신 강의 정보</strong></p>
-        <input type="hidden" id="countNo" value="<?=$row['reviewNo']?>">
+        <input type="hidden" name="reviewNo" value="<?=$row['reviewNo']?>">
 		<input type="hidden" id="userId" value="<?=$row['userId']?>">
         <input type="hidden" id="sessionUser" value="<?=$_SESSION['userId']?>">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-lecture-list">
@@ -119,7 +63,7 @@ $result2 = mysql_query($sql2);
 						<em class="tit mt10"><?=$row['lecName']?></em>
 						<p class="tc-gray mt20">강사: <?=$row['teacher']?> | 학습난이도 : <?=$row['lecLevel']?> | 교육시간: <?=$row['lecTime']?>시간 (<?=$row['lecNum']?>강)</p>
 					</td>
-					<td class="t-r"><a href="./detailLec.php?lecNo=<?=$row['lecNo']?>" class="btn-square-line">강의<br />상세</a></td>
+					<td class="t-r"><a href="./detailLec.html?lecNo=<?=$row['lecNo']?>" class="btn-square-line">강의<br />상세</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -132,9 +76,7 @@ $result2 = mysql_query($sql2);
         <br>
 
         <?php
-
-        include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/listTable.php';
-
+        include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/listTable.html';
         ?>
 
 </div>
@@ -180,7 +122,7 @@ $result2 = mysql_query($sql2);
 
     $('document').ready(function() {
 
-        var rNo = $("input:hidden[name=countNo]").val();
+        var rNo = $("input:hidden[name=reviewNo]").val();
 
       $.ajax({
 

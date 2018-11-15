@@ -138,7 +138,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
         // 에디터 내용 textarea에 적용
         oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 
-
         //수강후기 폼 값 전송
         $.post('/controller/reviewController.php', $('#reviewFrm').serialize(), function(data) {
 
@@ -171,7 +170,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
                 url: '/model/selectDynamicLecName.php',
                 type: 'post',
                 data: {
-                    /*searchType : encodeURIComponent(searchType)*/
                     searchType: searchType
                 },
                 success: function (data) {

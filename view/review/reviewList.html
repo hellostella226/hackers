@@ -47,10 +47,10 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/pagination.php';
 
 		<?php
 
-        include_once '../common/listTable.php';
-
+		include $_SERVER['DOCUMENT_ROOT'].'/view/common/listTable.html';
         $addParam = '&cateNo='.$_GET[cateNo].'&cateS='.$_GET[cateS].'&searchLW='.$_GET[searchLW].'&lacOrUser='.$_GET[lacOrUser];
-        ?>
+
+		?>
 
         <div class="box-paging">
             <a href="?p=1<?=$addParam?>"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
@@ -73,7 +73,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/pagination.php';
     $('#writeFrm').on('click', function() {
         <?php
         if(isset($_SESSION['token'])!=null) {
-            echo "location.href='./wirteReview.php';";
+            echo "location.href='/controller/reviewController.php?mode=writeReview';";
         }
         else {
             echo "alert('회원만 등록이 가능해요. 로그인 해 주세요.');";

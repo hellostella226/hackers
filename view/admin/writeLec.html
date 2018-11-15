@@ -90,9 +90,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
                 <tr>
                     <th scope="col">썸네일</th>
                     <td>
-                        <!--<input type="hidden" id = "MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="10485760" />-->
-<!--                        <input type="file" id="thumbnail" name="thumbnail" style="height:25px" accept=".jpg, .gif, .jpeg, .png" required/>-->
-                        <input type="file" name="myfile" id="myfile">
+                         <input type="file" name="myfile" id="myfile">
                     </td>
                 </tr>
 			</tbody>
@@ -158,24 +156,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 
             }
 
-
         });
 
-        //수강후기 폼 값 전송
-        // $.post('/controller/adminController.php', $('#adminFrm').serialize(), function(data) {
-        //
-        //     if(data.success == false) {
-        //
-        //         alert(data.msg);
-        //         return false;
-        //
-        //     }
-        //
-        // }, 'json')
-
-    });
 </script>
-
 
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';

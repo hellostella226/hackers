@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/view/admin/writeLec.php" line="160" />
+    <bookmark url="file://$PROJECT_DIR$/view/admin/writeLec.html" line="157" />
     <bookmark url="file://$PROJECT_DIR$/controller/memberController.php" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e5a7c0b-552c-4b51-9dce-aae0a6722a78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/adminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/adminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/reviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/reviewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/insertReview.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/insertReview.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/review/reviewDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/reviewDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/review/wirteReview.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/wirteReview.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/updateReview.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/updateReview.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/updateLec.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/updateLec.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/writeLec.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/writeLec.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/common/listTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/common/listTable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/review/detailLec.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/detailLec.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/review/reviewDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/reviewDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/review/reviewList.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/reviewList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/review/updateReview.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/updateReview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/review/wirteReview.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/review/wirteReview.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,42 +39,42 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="4" />
-          <entry key="html" value="80" />
+          <entry key="html" value="87" />
           <entry key="jpg" value="2" />
           <entry key="js" value="12" />
           <entry key="member" value="1" />
-          <entry key="php" value="259" />
+          <entry key="php" value="274" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="4" />
-          <entry key="HTML" value="80" />
+          <entry key="HTML" value="87" />
           <entry key="Image" value="2" />
           <entry key="JavaScript" value="12" />
-          <entry key="PHP" value="259" />
+          <entry key="PHP" value="274" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="3" />
-          <entry key="html" value="5996" />
+          <entry key="html" value="6066" />
           <entry key="js" value="28" />
           <entry key="member" value="27" />
-          <entry key="php" value="18866" />
-          <entry key="txt" value="827" />
+          <entry key="php" value="19153" />
+          <entry key="txt" value="894" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="3" />
-          <entry key="HTML" value="6009" />
+          <entry key="HTML" value="6079" />
           <entry key="JavaScript" value="28" />
-          <entry key="PHP" value="18773" />
-          <entry key="PLAIN_TEXT" value="843" />
+          <entry key="PHP" value="19060" />
+          <entry key="PLAIN_TEXT" value="910" />
           <entry key="SQL" value="91" />
           <entry key="XML" value="1" />
         </counts>
@@ -91,91 +98,91 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/adminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/insertLecture.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="50" selection-start-line="50" selection-end-line="53" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/reviewController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-285">
-              <caret line="9" column="18" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="18" />
+            <state relative-caret-position="512">
+              <caret line="116" column="20" lean-forward="true" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/updateReview.php">
+        <entry file="file://$PROJECT_DIR$/view/common/listTable.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+            <state relative-caret-position="950">
+              <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/insertReview.php">
+        <entry file="file://$PROJECT_DIR$/view/review/reviewDetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/review/updateReview.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1334">
-              <caret line="152" column="74" lean-forward="true" selection-start-line="152" selection-start-column="74" selection-end-line="152" selection-end-column="74" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/review/wirteReview.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2869">
-              <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="349" column="18" lean-forward="true" selection-start-line="349" selection-start-column="18" selection-end-line="349" selection-end-column="18" />
+            <state relative-caret-position="223">
+              <caret line="78" column="70" selection-start-line="78" selection-start-column="61" selection-end-line="78" selection-end-column="70" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/view/review/reviewDetail.php">
+        <entry file="file://$PROJECT_DIR$/view/review/reviewList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="2" selection-start-line="2" selection-end-line="2" selection-end-column="77" />
+            <state relative-caret-position="19">
+              <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/review/reviewList.html">
+        <entry file="file://$PROJECT_DIR$/view/review/detailLec.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="102" lean-forward="true" selection-start-line="20" selection-start-column="102" selection-end-line="20" selection-end-column="102" />
+            <state relative-caret-position="261">
+              <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/review/updateReview.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="156" column="25" lean-forward="true" selection-start-line="156" selection-start-column="25" selection-end-line="156" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/admin/updateLec.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="479">
+              <caret line="162" column="9" lean-forward="true" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/admin/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="475">
+              <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/review/wirteReview.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/admin/detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2041">
+              <caret line="129" column="29" lean-forward="true" selection-start-line="129" selection-start-column="29" selection-end-line="129" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -198,6 +205,8 @@
       <find>SignUp</find>
       <find>userfr</find>
       <find>adminController</find>
+      <find>reviewNo</find>
+      <find>listTable</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -225,8 +234,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/model/selectMemInfo.php" />
-        <option value="$PROJECT_DIR$/model/selectNameEmail.php" />
         <option value="$PROJECT_DIR$/model/selectNameEmailPw.php" />
         <option value="$PROJECT_DIR$/model/selectReviewList.php" />
         <option value="$PROJECT_DIR$/model/updateLecture.php" />
@@ -235,7 +242,6 @@
         <option value="$PROJECT_DIR$/view/common/adminLeftNav.php" />
         <option value="$PROJECT_DIR$/model/deleteReview.php" />
         <option value="$PROJECT_DIR$/view/common/reviewLeftNav.php" />
-        <option value="$PROJECT_DIR$/view/common/listTable.php" />
         <option value="$PROJECT_DIR$/model/dbcontroller.php" />
         <option value="$PROJECT_DIR$/model/updateLectureFrm.php" />
         <option value="$PROJECT_DIR$/view/member/find_id.php" />
@@ -245,7 +251,6 @@
         <option value="$PROJECT_DIR$/model/selectMem.php" />
         <option value="$PROJECT_DIR$/view/common/header.php" />
         <option value="$PROJECT_DIR$/model/DBconfig.php" />
-        <option value="$PROJECT_DIR$/controller/adminController.php" />
         <option value="$PROJECT_DIR$/view/admin/detail.php" />
         <option value="$PROJECT_DIR$/model/regist.php" />
         <option value="$PROJECT_DIR$/model/logInCheck.php" />
@@ -253,13 +258,11 @@
         <option value="$PROJECT_DIR$/model/updateMem.php" />
         <option value="$PROJECT_DIR$/view/member/modify.html" />
         <option value="$PROJECT_DIR$/model/insertLecture.php" />
-        <option value="$PROJECT_DIR$/model/updateReview.php" />
         <option value="$PROJECT_DIR$/model/pagination.class.php" />
         <option value="$PROJECT_DIR$/model/selectLecture.php" />
         <option value="$PROJECT_DIR$/view/admin/detail.html" />
         <option value="$PROJECT_DIR$/view/admin/index.php" />
         <option value="$PROJECT_DIR$/view/admin/updateLec.php" />
-        <option value="$PROJECT_DIR$/view/admin/writeLec.php" />
         <option value="$PROJECT_DIR$/view/member/complete.html" />
         <option value="$PROJECT_DIR$/view/member/findId.html" />
         <option value="$PROJECT_DIR$/view/member/findId2.html" />
@@ -269,13 +272,19 @@
         <option value="$PROJECT_DIR$/view/member/step_02.html" />
         <option value="$PROJECT_DIR$/view/member/step_03.html" />
         <option value="$PROJECT_DIR$/view/review/detailLec.php" />
-        <option value="$PROJECT_DIR$/view/review/updateReview.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/model/insertReview.php" />
-        <option value="$PROJECT_DIR$/controller/reviewController.php" />
         <option value="$PROJECT_DIR$/view/review/wirteReview.php" />
-        <option value="$PROJECT_DIR$/view/review/reviewList.html" />
+        <option value="$PROJECT_DIR$/view/review/updateReview.php" />
+        <option value="$PROJECT_DIR$/model/updateReview.php" />
         <option value="$PROJECT_DIR$/view/review/reviewDetail.php" />
+        <option value="$PROJECT_DIR$/view/admin/writeLec.php" />
+        <option value="$PROJECT_DIR$/controller/adminController.php" />
+        <option value="$PROJECT_DIR$/view/admin/updateLec.html" />
+        <option value="$PROJECT_DIR$/controller/reviewController.php" />
+        <option value="$PROJECT_DIR$/view/common/listTable.php" />
+        <option value="$PROJECT_DIR$/view/review/reviewDetail.html" />
+        <option value="$PROJECT_DIR$/view/review/reviewList.html" />
       </list>
     </option>
   </component>
@@ -309,11 +318,6 @@
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
@@ -361,6 +365,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\web\test\view\review" />
       <recent name="C:\web\test\controller" />
     </key>
   </component>
@@ -393,7 +398,7 @@
       <workItem from="1541974835486" duration="37518000" />
       <workItem from="1542062692158" duration="30690000" />
       <workItem from="1542151887509" duration="8227000" />
-      <workItem from="1542237818712" duration="13841000" />
+      <workItem from="1542237818712" duration="18285000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1541569231214</created>
@@ -661,11 +666,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542250529843</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="dev source 18/11/15 13:13&#10;&#10;reviewDetail -&gt; reviewLeftNav 경로 오류&#10;수강후기 입력 한글 테스트 완료">
+      <created>1542255190645</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1542255190645</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="158069000" />
+    <option name="totallyTimeSpent" value="162513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="806" y="0" width="1114" height="1040" extended-state="0" />
@@ -750,7 +762,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="dev source" />
     <MESSAGE value="dev source 17:56" />
     <MESSAGE value="dev source 18:02" />
     <MESSAGE value="dev source&#10;&#10;step_03 -&gt; memberController&#10;유효성검사 수정중" />
@@ -775,7 +786,8 @@
     <MESSAGE value="dev source 18/11/14 18:00&#10;회원가입 이메일 인증 오류&#10;Fatal error: Call to undefined function filter_var() in /home/git/Desktop/html/test/controller/memberController.php on line 318&#10;&#10;-filter_var 함수 사용 문제" />
     <MESSAGE value="dev source 18/11/15 11:12&#10;&#10;-한글 깨짐 현상 수정 완료&#10;-과제1 수정 완료" />
     <MESSAGE value="dev source 18/11/15 11:56&#10;&#10;경로 수정 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev source 18/11/15 11:56&#10;&#10;경로 수정 완료" />
+    <MESSAGE value="dev source 18/11/15 13:13&#10;&#10;reviewDetail -&gt; reviewLeftNav 경로 오류&#10;수강후기 입력 한글 테스트 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev source 18/11/15 13:13&#10;&#10;reviewDetail -&gt; reviewLeftNav 경로 오류&#10;수강후기 입력 한글 테스트 완료" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -799,13 +811,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/updateLecture.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/selectDetails.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-71">
@@ -830,13 +835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/insertCnt.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -903,13 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/memberController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1351">
-          <caret line="378" column="29" lean-forward="true" selection-start-line="378" selection-start-column="29" selection-end-line="378" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/regist.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -917,59 +908,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/selectLecture.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/pagination.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/passChange.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/updateMem.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="138" column="2" lean-forward="true" selection-start-line="138" selection-start-column="2" selection-end-line="138" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="65" selection-start-line="3" selection-start-column="65" selection-end-line="3" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/updateLec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="185" column="59" selection-start-line="185" selection-start-column="59" selection-end-line="185" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/writeLec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2624">
-          <caret line="3" column="61" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -987,13 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2584">
           <caret line="136" column="27" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/common/listTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="25" column="58" lean-forward="true" selection-start-line="25" selection-start-column="58" selection-end-line="25" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -1060,41 +995,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/step_03.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="61" selection-start-line="1" selection-start-column="61" selection-end-line="1" selection-end-column="61" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/review/detailLec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="139" column="54" selection-start-line="139" selection-start-column="54" selection-end-line="139" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
           <caret line="349" column="18" lean-forward="true" selection-start-line="349" selection-start-column="18" selection-end-line="349" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/adminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/updateReview.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -1105,45 +1009,153 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/review/updateReview.php">
+    <entry file="file://$PROJECT_DIR$/model/insertReview.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1334">
-          <caret line="152" column="74" lean-forward="true" selection-start-line="152" selection-start-column="74" selection-end-line="152" selection-end-column="74" />
+        <state relative-caret-position="456">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/memberController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-209">
+          <caret line="399" column="41" selection-start-line="399" selection-start-column="41" selection-end-line="399" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/selectLecture.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/pagination.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/insertCnt.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/member/step_03.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="142" selection-start-line="142" selection-end-line="158" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/updateMem.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="12" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/writeLec.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1402">
+          <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/updateReview.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/adminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="96" column="85" selection-start-line="96" selection-start-column="85" selection-end-line="96" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/updateLec.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="162" column="9" lean-forward="true" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2041">
+          <caret line="129" column="29" lean-forward="true" selection-start-line="129" selection-start-column="29" selection-end-line="129" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/review/updateReview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="973">
+          <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/reviewController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="18" />
+        <state relative-caret-position="512">
+          <caret line="116" column="20" lean-forward="true" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/insertReview.php">
+    <entry file="file://$PROJECT_DIR$/view/common/listTable.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        <state relative-caret-position="950">
+          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/review/wirteReview.php">
+    <entry file="file://$PROJECT_DIR$/view/review/updateReview.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2869">
-          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+        <state relative-caret-position="408">
+          <caret line="156" column="25" lean-forward="true" selection-start-line="156" selection-start-column="25" selection-end-line="156" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/review/wirteReview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/review/detailLec.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/review/reviewDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="78" column="70" selection-start-line="78" selection-start-column="61" selection-end-line="78" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/review/reviewList.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="102" lean-forward="true" selection-start-line="20" selection-start-column="102" selection-end-line="20" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/review/reviewDetail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="2" selection-start-line="2" selection-end-line="2" selection-end-column="77" />
+        <state relative-caret-position="19">
+          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
         </state>
       </provider>
     </entry>

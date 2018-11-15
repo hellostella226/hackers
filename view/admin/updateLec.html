@@ -131,32 +131,15 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
         // 에디터 내용 textarea에 적용
         oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 
-
         var fileObj = document.getElementById('thumbnail').files[0];
-
         var fileObjValue = document.getElementById('thumbnail').value;
-
-
         var img_all_names = fileObj['name'].split('.');
-
         var name = img_all_names[0];//이미지 이름
-
         var ext = img_all_names[1].toLowerCase();//확장자
-
         var size = fileObj['size'];//파일사이즈
-
-
-/*        if (name.val() == "undefined") {
-
-            alert("썸네일을 등록해주세요");
-            $('#thumbnail').focus();
-            return false;
-
-        }*/
 
         //이미지 확장자 검사
         if(ext != 'jpg' && ext != 'jpeg' && ext != 'png' && ext != 'gif') {
-
 
             alert('이미지 파일 업로드만 가능합니다.');
             $('#thumbnail').focus();
@@ -171,8 +154,6 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
             $('#thumbnail').focus();
 
         }
-
-
 
         //수강후기 폼 값 전송
         $('#updateLecture').attr('action','/model/updateLectureFrm.php');
