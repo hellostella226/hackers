@@ -1,6 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
-include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';
+/*include_once $_SERVER['DOCUMENT_ROOT'].'/view/common/reviewLeftNav.html';*/
 include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectDetails.php';
 
 if($_GET['p']) {

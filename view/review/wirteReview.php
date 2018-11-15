@@ -151,7 +151,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
             if(data.success == true) {
 
                 alert(data.msg);
-                location.href = "/controller/memberController.php?mode=writeFrm";
+                location.href = "/controller/reviewController.php?mode=list";
                 return true;
             }
 

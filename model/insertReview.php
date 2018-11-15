@@ -7,10 +7,11 @@ include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 
 $userNo = $_SESSION['userNo'];
 $userName = $_SESSION['userName'];
-$title = $_POST['title'];
-$content = $_POST['ir1'];
 $lecNo = $_POST['lecNo'];
 $starChk = $_POST['starChk'];
+$title = iconv("utf-8", "euc-kr", $_POST['title']);
+$content = iconv("utf-8", "euc-kr", $_POST['ir1']);
+
 
 $sql = "INSERT INTO review (`userNo`,`userName`,`title`,`content`,`lecNo`,`starChk`)
         VALUES (
@@ -23,8 +24,6 @@ $sql = "INSERT INTO review (`userNo`,`userName`,`title`,`content`,`lecNo`,`starC
         )";
 
 $result = mysql_query($sql);
-
-/*    echo "<script> alert('수강후기가 입력되었습니다.'); location.href='/view/review/reviewList.html';</script>";*/
 
 ?>
 

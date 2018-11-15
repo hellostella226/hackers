@@ -16,43 +16,44 @@ header("Pragma:no-cache");
         /*강의 후기 쓰기*/
         case "write" :
 
-            $result = array('success'=> false, 'msg'=>'msg');
+            $results = array('success'=> false, 'msg'=>'msg');
 
             if($lecNo == "") {
 
-                $result['success']=false;
-                $result['msg'] = '강의 분류를 선택해주세요';
-                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
-                echo json_encode($result);
+                $results['success']=false;
+                $results['msg'] = '강의 분류를 선택해주세요';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
                 return false;
 
             }
             if($title == "") {
 
-                $result['success']=false;
-                $result['msg'] = '제목을 입력해주세요';
-                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
-                echo json_encode($result);
+                $results['success']=false;
+                $results['msg'] = '제목을 입력해주세요';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
                 return false;
 
             }
             if($ir1 == "") {
 
-                $result['success']=false;
-                $result['msg'] = '내용을 입력해주세요';
-                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
-                echo json_encode($result);
+                $results['success']=false;
+                $results['msg'] = '내용을 입력해주세요';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
                 return false;
 
             } else {
 
                 include_once $_SERVER['DOCUMENT_ROOT'].'/model/insertReview.php';
 
-                $result['success'] = true;
-                $result['msg'] = '글이 등록되었습니다.';
-                $result['msg'] = iconv("EUC-KR","UTF-8",$result['msg']);
-                echo json_encode($result);
+                $results['success'] = true;
+                $results['msg'] = '글이 등록되었습니다.';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
                 return true;
+
             } break;
 
 
