@@ -65,9 +65,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
 						<tr>
 							<th scope="col"><span class="icons">*</span>휴대폰 번호</th>
 							<td>
-								<input type="text" class="input-text" name="phone[0]" style="width:50px" value=<?php echo $_SESSION["phone1"];?> readonly="readonly" required /> -
-								<input type="text" class="input-text" name="phone[1]" style="width:50px" value=<?php echo $_SESSION["phone2"];?> readonly="readonly" required /> -
-								<input type="text" class="input-text" name="phone[2]" style="width:50px" value=<?php echo $_SESSION["phone3"];?> readonly="readonly" required/>
+								<input type="text" class="input-text" name="phone[0]" style="width:50px" value=<?php echo $_GET["phone1"];?> readonly="readonly" required /> -
+								<input type="text" class="input-text" name="phone[1]" style="width:50px" value=<?php echo $_GET["phone2"];?> readonly="readonly" required /> -
+								<input type="text" class="input-text" name="phone[2]" style="width:50px" value=<?php echo $_GET["phone3"];?> readonly="readonly" required/>
 							</td>
 						</tr>
 						<tr>
@@ -151,7 +151,7 @@ $('#signUpBtn').click(function() {
 		if(data.success == true) {
 
 			alert(data.msg);
-			location.href='/controller/memberController.php?mode=complete';
+			location.href='/view/member/index.php?mode=complete';
 			return true;
 
 		}

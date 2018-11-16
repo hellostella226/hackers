@@ -1,4 +1,5 @@
 <?
+session_start();
 $_SESSION['num'] = '123456';
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 /*header("Content-Type: text/html; charset=KS_C_5601-1987");
@@ -13,9 +14,46 @@ header("Pragma:no-cache");*/
 
 
         /*로그인*/
-        case "logIn" :
+       /* case "logIn" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/member/logIn.html' >";
+            break;*/
+
+        /*회원가입 완료*/
+        /*case "complete" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/complete.html'>";
+            break;*/
+
+
+        /*회원가입 1단계*/
+      /*  case "step_01" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_01.html' >";
+            break;*/
+
+        /*회원가입 2단계*/
+        /*case "step_02" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_02.html'>";
+            break;*/
+
+        /*회원가입 3단계*/
+       /* case "step_03" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_03.html'>";
+            break;*/
+
+        /*회원가입 유효성 검사 후 등록*/
+        /*case "regist" :
+
+            echo "<meta http-equiv='refresh' content='0; url=/model/regist.php'>";
+            break;*/
+
+        /*로그인 확인*/
+        case "logInChk" :
+
+            include_once  $_SERVER['DOCUMENT_ROOT'].'/model/logInCheck.php';
             break;
 
         /*로그아웃*/
@@ -24,52 +62,10 @@ header("Pragma:no-cache");*/
             echo "<meta http-equiv='refresh' content='0; url=/model/logOut.php' >";
             break;
 
-        /*회원가입 완료*/
-        case "complete" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/complete.html'>";
-            break;
-
-        /*로그인 확인*/
-        case "logInChk" :
-
-           include_once  $_SERVER['DOCUMENT_ROOT'].'/model/logInCheck.php';
-            break;
-
-
-        /*회원가입 1단계*/
-        case "step_01" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_01.html' >";
-            break;
-
-        /*회원가입 2단계*/
-        case "step_02" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_02.html'>";
-            break;
-
-        /*회원가입 3단계*/
-        case "step_03" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_03.html'>";
-            break;
-
-        /*회원가입 유효성 검사 후 등록*/
-        case "regist" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/model/regist.php'>";
-            break;
-
-
         /*휴대폰 인증값 체크 후 세션번호 출력*/
         case "phoneValidation" :
 
-            /*$_SESSION['phone1'] = $phone[0];
-            $_SESSION['phone2'] = $phone[1];
-            $_SESSION['phone3'] = $phone[2];*/
-
-            $phone = $phone[0] . '-' . $phone[1] . '-' . $phone[2];
+            $phone = $phone1 . '-' . $phone2 . '-' . $phone3;
             $phone = preg_replace("/[^0-9]/", "", $phone);
 
             if (!preg_match("/^01[0-9]{8,9}$/", $phone)) {
@@ -85,8 +81,10 @@ header("Pragma:no-cache");*/
             if (preg_match("/^01[0-9]{8,9}$/", $phone)) {
 
                 $resultSets['success'] = true;
-                $resultSets['phone'] = $phone;
                 $resultSets['msg'] = '인증번호는 '.$_SESSION['num'].'입니다.';
+                $resultSets['phone1'] = $phone1;
+                $resultSets['phone2'] = $phone2;
+                $resultSets['phone3'] = $phone3;
                 $resultSets['msg'] = iconv("EUC-KR","UTF-8",$resultSets['msg']);
                 echo json_encode($resultSets);
                 return true;
@@ -101,6 +99,9 @@ header("Pragma:no-cache");*/
             if($_SESSION['num'] == $certificationNumber) {
 
                 $resultSet['success']=true;
+                $resultSet['phone1'] = $phone1;
+                $resultSet['phone2'] = $phone2;
+                $resultSet['phone3'] = $phone3;
                 $resultSet['msg']= '인증에 성공하였습니다.';
 
             }
@@ -377,10 +378,10 @@ header("Pragma:no-cache");*/
             break;*/
 
         /*회원정보 수정*/
-        case "modify" :
+       /* case "modify" :
 
             include_once $_SERVER['DOCUMENT_ROOT'].'/view/member/modify.html';
-            break;
+            break;*/
 
         /*회원정보 업데이트*/
         case "updateMember" :
@@ -491,6 +492,161 @@ header("Pragma:no-cache");*/
             echo "<meta http-equiv='refresh' content='0; url=/index.php'>";
             break;
 
+        /*아이디 찾기 -휴대폰인증*/
+        case "phoneValidations" :
+
+            $phone = $phone1 . '-' . $phone2 . '-' . $phone3;
+            $phone = preg_replace("/[^0-9]/", "", $phone);
+
+            if (!preg_match("/^01[0-9]{8,9}$/", $phone)) {
+
+                $resultSets['success'] = false;
+                $resultSets['msg'] = '유효하지 않은 형식입니다. 다시 입력해주세요.';
+                $resultSets['msg'] = iconv("EUC-KR","UTF-8",$resultSets['msg']);
+                echo json_encode($resultSets);
+                return false;
+
+            }
+
+            if (preg_match("/^01[0-9]{8,9}$/", $phone)) {
+
+                include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectNamePhone.php';
+                if(!empty($resultSets)) {
+
+                    $resultSets['success'] = true;
+                    $resultSets['msg'] = '인증번호는 ' . $_SESSION['num'] . '입니다.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+                    return true;
+
+                }
+                if(empty($resultSets)) {
+
+                    $resultSets['success'] = 'none';
+                    $resultSets['msg'] = '입력하신 정보와 일치하는 회원이 없습니다.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+                    return false;
+                }
+
+            } break;
+
+        /*아이디 찾기 : 메일 인증*/
+        case "mailValidation" :
+
+            if(empty($email)) {
+
+                $result['success'] =  false;
+                $result['msg'] = '메일의 입력값이 없습니다. 다시 입력 해 주세요.';
+                $result['msg'] = iconv("EUC-KR","UTF-8", $result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if(!empty($email)) {
+
+                $result['success'] = true;
+
+            }
+                break;
+
+
+        /*세션번호와 같은지 확인*/
+        case 'randomFrm'  :
+
+            if($inputNumber != $_SESSION['num']) {
+
+                $result['success'] = false;
+                $result['msg'] = '인증번호가 일치하지 않습니다. 다시 시도 해 주세요';
+                $result['msg'] = iconv("EUC-KR", "UTF-8", $result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
+            if($inputNumber == $_SESSION['num']) {
+
+                $result['success'] = true;
+                $result['msg'] = '인증되었습니다.';
+                $result['msg'] = iconv("EUC-KR", "UTF-8", $result['msg']);
+                echo json_encode($result);
+                return true;
+
+            } break;
+
+
+        /*비밀번호 찾기 : 휴대폰 인증*/
+        case 'phoneValidations2' :
+
+            $phone = $phone1 . '-' . $phone2 . '-' . $phone3;
+            $phone = preg_replace("/[^0-9]/", "", $phone);
+
+            if (!preg_match("/^01[0-9]{8,9}$/", $phone)) {
+
+                $resultSets['success'] = false;
+                $resultSets['msg'] = '유효하지 않은 형식입니다. 다시 입력해주세요.';
+                $resultSets['msg'] = iconv("EUC-KR","UTF-8",$resultSets['msg']);
+                echo json_encode($resultSets);
+                return false;
+
+            }
+
+            if (preg_match("/^01[0-9]{8,9}$/", $phone)) {
+
+                include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectNamePhonePw.php';
+                if(!empty($resultSets)) {
+
+                    $resultSets['success'] = true;
+                    $resultSets['msg'] = '인증번호는 ' . $_SESSION['num'] . '입니다.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+                    return true;
+
+                }
+                if(empty($resultSets)) {
+
+                    $resultSets['success'] = 'none';
+                    $resultSets['msg'] = '입력하신 정보와 일치하는 회원이 없습니다.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+                    return false;
+                }
+
+            } break;
+
+        case 'changePassword' :
+
+            if(empty($userId) || $userPw != $userPw2) {
+
+                $resultSet['success'] = false;
+                $resultSet['msg'] = '비밀번호가 일치하지 않거나 형식이 올바르지 않습니다. 다시 시도해 주세요';
+                $resultSet['msg'] = iconv("EUC-KR","UTF-8",$resultSet['msg']);
+                echo json_encode($resultSet);
+                return false;
+
+            }
+
+            if(!empty($userId) && $userPw == $userPw2) {
+
+                include_once $_SERVER['DOCUMENT_ROOT'].'/model/passChange.php';
+
+                if ($resultData == false) {
+
+                    $resultSets['success'] = false;
+                    $resultSets['msg'] = '작업에 문제가 있습니다. 다시 시도해 주세요.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+
+                }
+                if ($resultData == true) {
+
+                    $resultSets['success'] = true;
+                    $resultSets['msg'] = '비밀번호가 변경되었습니다. 로그인 해 주세요.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+
+                }
+
+            } break;
 
 
     }

@@ -43,15 +43,18 @@ $_SESSION['num'] = '123456';
 						<p>주민번호 없이 메시지 수신가능한 휴대폰으로 1개 아이디만 회원가입이 가능합니다. </p>
 						<br />
                         <form id="pNumber">
-							<input type="text" maxlength = "3" class="input-text" style="width:50px" id="phone1" name="phone[0]"/> -
-							<input type="text" maxlength = "4" class="input-text" style="width:50px" id="phone2" name="phone[1]"/> -
-							<input type="text" maxlength = "4" class="input-text" style="width:50px" id="phone3" name="phone[2]"/>
+							<input type="text" maxlength = "3" class="input-text" style="width:50px" id="phone1" name="phone1"/> -
+							<input type="text" maxlength = "4" class="input-text" style="width:50px" id="phone2" name="phone2"/> -
+							<input type="text" maxlength = "4" class="input-text" style="width:50px" id="phone3" name="phone3"/>
 							<input type="hidden" name="mode" value="phoneValidation">
 							<input type="submit" class="btn-s-line" value="인증번호 받기">
                         </form>
 						<br /><br />
 						<form id="certificationCheck">
 							<input type="text" name="certificationNumber" class="input-text" style="width:200px"/>
+							<input type="hidden" name="phone1">
+							<input type="hidden" name="phone2">
+							<input type="hidden" name="phone3">
 							<input type="hidden" name="mode" value="certificationCheck">
 							<input type="button" id="certButton" class="btn-s-line" value="인증번호 확인">
 						</form>
@@ -70,7 +73,7 @@ $("#pNumber").submit(function(event) {
 
     event.preventDefault();
 
-    $.post('/controller/memberController.php', $("#pNumber").serialize()).done(function(data) {
+    $.post('/controller/memberController.php', $("#pNumber").serialize(), function(data) {
 
        if(data.success == false) {
 
@@ -81,7 +84,9 @@ $("#pNumber").submit(function(event) {
 	   if(data.success == true) {
 
 	       alert(data.msg);
-	       alert(data.phone);
+	       $('input:hidden[name=phone1]').val(data.phone1);
+           $('input:hidden[name=phone2]').val(data.phone2);
+           $('input:hidden[name=phone3]').val(data.phone3);
 	       return true;
 	   }
 
@@ -100,7 +105,7 @@ $("#certButton").click(function(event) {
 
 		alert(data.msg);
 
-	    if(data.success == true) location.href="/controller/memberController.php?mode=step_03&&phone=";
+	    if(data.success == true) location.href="/view/member/index.php?mode=step_03&&phone1="+data.phone1+"&phone2="+data.phone2+"+&phone3="+data.phone3;
 		else $('#certificationNumber').focus();
 
 	}, 'json');
