@@ -1,7 +1,4 @@
 <?php
-header("Content-Type: text/html; charset=KS_C_5601-1987");
-header("Cache-Control:no-cache");
-header("Pragma:no-cache");
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
 ?>
 
@@ -18,7 +15,6 @@ email = '$email' ";
 
 
 $getMail = mysql_query($getMail);
-$getMail = mysql_fetch_array($getMail);
-
-print_r($getMail[0]);
+$resultSets = mysql_fetch_array($getMail);
+$resultSets['userId'];
 ?>

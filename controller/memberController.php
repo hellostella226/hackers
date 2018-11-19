@@ -534,6 +534,15 @@ header("Pragma:no-cache");*/
         /*아이디 찾기 : 메일 인증*/
         case "mailValidation" :
 
+            if (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email)) {
+
+                $result['success'] = false;
+                $result['msg'] = '올바른 메일 형식이 아닙니다. 다시 입력 해 주세요';
+                $result['msg'] = iconv("EUC-KR", "UTF-8", $result['msg']);
+                echo json_encode($result);
+                return false;
+
+            }
             if(empty($email)) {
 
                 $result['success'] =  false;
@@ -545,10 +554,25 @@ header("Pragma:no-cache");*/
             }
             if(!empty($email)) {
 
-                $result['success'] = true;
+                include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectNameEmail.php';
+                if(!empty($resultSets)) {
 
-            }
-                break;
+                    $resultSets['success'] = true;
+                    $resultSets['msg'] = '인증번호는 ' . $_SESSION['num'] . '입니다.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+                    return true;
+
+                }
+                if(empty($resultSets)) {
+
+                    $resultSets['success'] = 'none';
+                    $resultSets['msg'] = '입력하신 정보와 일치하는 회원이 없습니다.';
+                    $resultSets['msg'] = iconv("EUC-KR", "UTF-8", $resultSets['msg']);
+                    echo json_encode($resultSets);
+                    return false;
+                }
+            }  break;
 
 
         /*세션번호와 같은지 확인*/
