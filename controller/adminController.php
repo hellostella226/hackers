@@ -8,18 +8,6 @@ header("Pragma:no-cache");
 
     switch ($mode) {
 
-        /*강의 리스트*/
-        case "list" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/admin/index.php' >";
-            break;
-
-        /*강의 등록*/
-        case "write" :
-
-            echo"<meta http-equiv='refresh' content='0; url=/view/admin/writeLec.html'>";
-            break;
-
         /*강의 등록 확인*/
         case "lectureFrm" :
 

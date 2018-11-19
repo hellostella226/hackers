@@ -1,6 +1,4 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
-include $_SERVER['DOCUMENT_ROOT'].'/view/common/adminLeftNav.html';
 include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 ?>
     <!--스마트에디터 소스-->
@@ -101,7 +99,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 		</div>
         <input type="hidden" id="cateNo" name="cateNo" value="">
         <input type="hidden" name="mode" value="lectureFrm">
-        <input type="button" class="btn-m ml5" id="sendContents" value="강의등록">
+        <button type="button" class="btn-m ml5" id="sendContents">강의등록</button>
         </form>
 	</div>
 </div>
@@ -118,7 +116,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
         fCreator: "createSEditor2"
     });
 
-    $('#sendContents').on('click',function() {
+    $('#sendContents').click(function() {
 
         var a = $('option:selected').attr('name');
         var b = $('input:hidden[name=cateNo]').val(a);
@@ -137,29 +135,27 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
             dataType: "json",
             contentType: false,
             cache: false,
-            processData:false,
-            success: function(data) {
+            processData: false,
+            success: function (data) {
 
-                   if(data.success == false) {
+                if (data.success == false) {
 
-                       alert(data.msg);
-                       return false;
+                    alert(data.msg);
+                    return false;
 
-                   }
-                   if(data.success == true) {
+                }
+                if (data.success == true) {
 
-                       alert(data.msg);
-                       location.href='/controller/adminController.php?mode=list';
-                       return true;
+                    alert(data.msg);
+                    location.href = '/view/admin/index.php?mode=list';
+                    return true;
 
-                   }
+                }
 
             }
 
         });
 
-</script>
+    });
 
-<?php
-include $_SERVER['DOCUMENT_ROOT'].'/view/common/footer.html';
-?>
+</script>

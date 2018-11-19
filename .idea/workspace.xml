@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/view/admin/writeLec.html" line="157" />
+    <bookmark url="file://$PROJECT_DIR$/view/admin/writeLec.html" line="155" />
     <bookmark url="file://$PROJECT_DIR$/controller/memberController.php" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e5a7c0b-552c-4b51-9dce-aae0a6722a78" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/adminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/adminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/selectReviewList.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/selectReviewList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/updateLec.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/updateLec.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/writeLec.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/writeLec.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/common/adminLeftNav.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/common/adminLeftNav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/common/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/member/findPassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/member/findPassword.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,53 +26,53 @@
     <session id="1945270885">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="6" />
-          <entry key="project.open.time.6" value="3" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.open.time.6" value="4" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="4" />
-          <entry key="html" value="116" />
+          <entry key="html" value="121" />
           <entry key="jpg" value="2" />
           <entry key="js" value="12" />
           <entry key="member" value="1" />
-          <entry key="php" value="313" />
+          <entry key="php" value="318" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="4" />
-          <entry key="HTML" value="116" />
+          <entry key="HTML" value="121" />
           <entry key="Image" value="2" />
           <entry key="JavaScript" value="12" />
-          <entry key="PHP" value="313" />
+          <entry key="PHP" value="318" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="3" />
-          <entry key="html" value="9022" />
+          <entry key="html" value="9200" />
           <entry key="js" value="28" />
           <entry key="member" value="27" />
-          <entry key="php" value="22902" />
-          <entry key="txt" value="1118" />
+          <entry key="php" value="23147" />
+          <entry key="txt" value="1134" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="4" />
-          <entry key="HTML" value="9034" />
+          <entry key="HTML" value="9212" />
           <entry key="JavaScript" value="28" />
-          <entry key="PHP" value="22796" />
-          <entry key="PLAIN_TEXT" value="1134" />
+          <entry key="PHP" value="23041" />
+          <entry key="PLAIN_TEXT" value="1150" />
           <entry key="SQL" value="104" />
           <entry key="XML" value="1" />
         </counts>
@@ -88,97 +96,94 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/memberController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="512" column="72" selection-start-line="512" selection-start-column="72" selection-end-line="512" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1621">
-              <caret line="320" column="43" lean-forward="true" selection-start-line="320" selection-start-column="43" selection-end-line="320" selection-end-column="43" />
+            <state relative-caret-position="-5675">
+              <caret line="20" column="18" lean-forward="true" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/member/step_03.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3331">
-              <caret line="278" column="21" lean-forward="true" selection-start-line="278" selection-start-column="21" selection-end-line="278" selection-end-column="21" />
-              <folding>
-                <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/selectNamePhone.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/member/step_01.html">
+        <entry file="file://$PROJECT_DIR$/view/member/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
-              <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+              <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/member/findId.html">
+        <entry file="file://$PROJECT_DIR$/view/admin/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="260" column="9" lean-forward="true" selection-start-line="215" selection-end-line="260" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/selectNameEmail.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state relative-caret-position="918">
+              <caret line="66" column="57" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/view/member/findPassword.html">
+        <entry file="file://$PROJECT_DIR$/model/selectReviewList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
+            <state relative-caret-position="57">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
               <folding>
-                <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#form#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#span#0;n#td#3;n#tr#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/member/findId2.html">
+        <entry file="file://$PROJECT_DIR$/model/selectLectureList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+            <state relative-caret-position="152">
+              <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/member/findPassword2.html">
+        <entry file="file://$PROJECT_DIR$/view/admin/updateLec.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2337">
-              <caret line="123" column="7" lean-forward="true" selection-start-line="123" selection-start-column="7" selection-end-line="123" selection-end-column="7" />
+            <state relative-caret-position="-2274">
+              <caret line="2" column="47" lean-forward="true" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/admin/writeLec.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/common/adminLeftNav.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/common/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2223">
+              <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/adminController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1312">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
             </state>
           </provider>
         </entry>
@@ -244,9 +249,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/view/common/adminLeftNav.php" />
-        <option value="$PROJECT_DIR$/model/deleteReview.php" />
-        <option value="$PROJECT_DIR$/view/common/reviewLeftNav.php" />
         <option value="$PROJECT_DIR$/model/updateLectureFrm.php" />
         <option value="$PROJECT_DIR$/view/member/find_id.php" />
         <option value="$PROJECT_DIR$/model/selectMem.php" />
@@ -261,7 +263,6 @@
         <option value="$PROJECT_DIR$/model/pagination.class.php" />
         <option value="$PROJECT_DIR$/model/selectLecture.php" />
         <option value="$PROJECT_DIR$/view/admin/detail.html" />
-        <option value="$PROJECT_DIR$/view/admin/index.php" />
         <option value="$PROJECT_DIR$/view/admin/updateLec.php" />
         <option value="$PROJECT_DIR$/view/review/detailLec.php" />
         <option value="$PROJECT_DIR$/model/insertReview.php" />
@@ -270,8 +271,6 @@
         <option value="$PROJECT_DIR$/model/updateReview.php" />
         <option value="$PROJECT_DIR$/view/review/reviewDetail.php" />
         <option value="$PROJECT_DIR$/view/admin/writeLec.php" />
-        <option value="$PROJECT_DIR$/controller/adminController.php" />
-        <option value="$PROJECT_DIR$/view/admin/updateLec.html" />
         <option value="$PROJECT_DIR$/controller/reviewController.php" />
         <option value="$PROJECT_DIR$/view/common/listTable.php" />
         <option value="$PROJECT_DIR$/view/review/reviewList.html" />
@@ -284,7 +283,6 @@
         <option value="$PROJECT_DIR$/view/member/logIn.html" />
         <option value="$PROJECT_DIR$/view/member/complete.html" />
         <option value="$PROJECT_DIR$/view/member/index.php" />
-        <option value="$PROJECT_DIR$/view/common/header.html" />
         <option value="$PROJECT_DIR$/model/selectNamePhone.php" />
         <option value="$PROJECT_DIR$/view/member/findId2.html" />
         <option value="$PROJECT_DIR$/model/selectNamePhonePw.php" />
@@ -295,6 +293,13 @@
         <option value="$PROJECT_DIR$/model/selectNameEmail.php" />
         <option value="$PROJECT_DIR$/view/member/findId.html" />
         <option value="$PROJECT_DIR$/view/member/findPassword.html" />
+        <option value="$PROJECT_DIR$/view/common/header.html" />
+        <option value="$PROJECT_DIR$/controller/adminController.php" />
+        <option value="$PROJECT_DIR$/view/common/adminLeftNav.html" />
+        <option value="$PROJECT_DIR$/view/admin/updateLec.html" />
+        <option value="$PROJECT_DIR$/view/admin/writeLec.html" />
+        <option value="$PROJECT_DIR$/view/admin/index.php" />
+        <option value="$PROJECT_DIR$/model/selectReviewList.php" />
       </list>
     </option>
   </component>
@@ -317,7 +322,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -344,6 +348,12 @@
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -356,6 +366,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -404,7 +415,8 @@
       <workItem from="1542237818712" duration="29278000" />
       <workItem from="1542273885228" duration="64000" />
       <workItem from="1542324039032" duration="27140000" />
-      <workItem from="1542582283119" duration="6362000" />
+      <workItem from="1542582283119" duration="6617000" />
+      <workItem from="1542665619747" duration="4544000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1541569231214</created>
@@ -714,17 +726,24 @@
       <option name="project" value="LOCAL" />
       <updated>1542617982006</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="dev source 18/11/19 18:03&#10;&#10;아이디/ 패스워드 찾기 완료">
+      <created>1542618169674</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1542618169674</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207072000" />
+    <option name="totallyTimeSpent" value="211871000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="790" y="0" width="1114" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20588236" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20967741" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -803,7 +822,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="dev source 16:07&#10;&#10;step_03 -&gt; memberController -&gt; id유효성검사 오류//" />
     <MESSAGE value="dev source 16:50&#10;&#10;step_03 -&gt; memberController -&gt; id유효성검사 작동" />
     <MESSAGE value="dev source 16:50&#10;                                         &#10;step_03 -&gt; memberController -&gt; id value 초기화 작동" />
     <MESSAGE value="dev source 18:10&#10;                                         &#10;memberController 'mode'값 확인 가능" />
@@ -828,7 +846,8 @@
     <MESSAGE value="dev source 18/11/15 18:26&#10;&#10;memberController -&gt; 휴대폰 인증 세션단계 메시지 미출력" />
     <MESSAGE value="dev source 18/11/16 16:27&#10;&#10;memberController -&gt; 휴대폰 인증 세션단계 메시지 미출력 [수정완료]&#10;memberController -&gt; 메일 인증단계 수정중" />
     <MESSAGE value="dev source 18/11/19 18:00&#10;&#10;memberController -&gt; 메일 인증단계 수정중 -&gt;아이디찾기 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev source 18/11/19 18:00&#10;&#10;memberController -&gt; 메일 인증단계 수정중 -&gt;아이디찾기 완료" />
+    <MESSAGE value="dev source 18/11/19 18:03&#10;&#10;아이디/ 패스워드 찾기 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev source 18/11/19 18:03&#10;&#10;아이디/ 패스워드 찾기 완료" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -852,13 +871,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/common/adminLeftNav.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/common/footer.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -883,31 +895,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/writeLec.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1402">
-          <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/updateLec.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="162" column="9" lean-forward="true" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/admin/detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2041">
           <caret line="129" column="29" lean-forward="true" selection-start-line="129" selection-start-column="29" selection-end-line="129" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -981,20 +972,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/selectLectureList.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/selectMem.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="15" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/selectReviewList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="2" lean-forward="true" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -1061,13 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/adminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/member/logIn.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
@@ -1075,24 +1049,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/common/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="129" column="94" selection-start-line="129" selection-start-column="94" selection-end-line="129" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/member/step_02.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="49" column="84" lean-forward="true" selection-start-line="49" selection-start-column="84" selection-end-line="49" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/modify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="39" column="187" lean-forward="true" selection-start-line="39" selection-start-column="187" selection-end-line="39" selection-end-column="187" />
         </state>
       </provider>
     </entry>
@@ -1117,48 +1077,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/selectNameEmailPw.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/findPassword2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2337">
-          <caret line="123" column="7" lean-forward="true" selection-start-line="123" selection-start-column="7" selection-end-line="123" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1621">
-          <caret line="320" column="43" lean-forward="true" selection-start-line="320" selection-start-column="43" selection-end-line="320" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/step_01.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/selectNameEmail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/memberController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
+        <state relative-caret-position="9728">
           <caret line="512" column="72" selection-start-line="512" selection-start-column="72" selection-end-line="512" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/member/step_03.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5282">
+          <caret line="278" column="21" lean-forward="true" selection-start-line="278" selection-start-column="21" selection-end-line="278" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1169,13 +1104,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/step_03.html">
+    <entry file="file://$PROJECT_DIR$/view/member/step_01.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3331">
-          <caret line="278" column="21" lean-forward="true" selection-start-line="278" selection-start-column="21" selection-end-line="278" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="228">
+          <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/member/findId.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4940">
+          <caret line="260" column="9" lean-forward="true" selection-start-line="215" selection-end-line="260" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/selectNameEmail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1186,19 +1132,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/member/findId.html">
+    <entry file="file://$PROJECT_DIR$/view/member/findPassword2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="260" column="9" lean-forward="true" selection-start-line="215" selection-end-line="260" selection-end-column="9" />
+        <state relative-caret-position="2337">
+          <caret line="123" column="7" lean-forward="true" selection-start-line="123" selection-start-column="7" selection-end-line="123" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/member/findPassword.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
+        <state relative-caret-position="3572">
+          <caret line="188" column="31" lean-forward="true" selection-start-line="188" selection-start-column="31" selection-end-line="188" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#form#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/member/modify.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="196" column="41" lean-forward="true" selection-start-line="196" selection-start-column="41" selection-end-line="196" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/member/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5675">
+          <caret line="20" column="18" lean-forward="true" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/adminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1312">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/common/adminLeftNav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/updateLec.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2274">
+          <caret line="2" column="47" lean-forward="true" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/common/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2223">
+          <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/writeLec.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/selectLectureList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="66" column="57" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/selectReviewList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#span#0;n#td#3;n#tr#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

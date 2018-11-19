@@ -1,8 +1,29 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
-include $_SERVER['DOCUMENT_ROOT'].'/view/common/adminLeftNav.html';
-include $_SERVER['DOCUMENT_ROOT'].'/model/selectLectureList.php';
-?>
+
+    include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+    include $_SERVER['DOCUMENT_ROOT'].'/view/common/adminLeftNav.html';
+    include $_SERVER['DOCUMENT_ROOT'].'/model/selectLectureList.php';
+
+    if($fileName) include_once $_SERVER['DOCUMENT_ROOT'].$fileName ;
+
+    switch ($_GET[mode]) {
+
+        case 'list' :
+            $fileName = "/view/admin/list.php";
+            break;
+
+        case 'write' :
+            $fileName = "/view/admin/writeLec.html";
+            break;
+
+        case 'update' :
+            $fileName = "/view/admin/updateLec.html";
+            break;
+
+    }
+
+    ?>
+
 
 	<div id="content" class="content">
 		<div class="tit-box-h3">
@@ -15,12 +36,14 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLectureList.php';
 		</div>
 
 		<ul class="tab-list tab5">
-            <li class="on"><a href="/" id="searchT" name="c.cateNo">전체</a></li>
-			<li><a href="?searchType=1" id="searchT" name="1">일반직무</a></li>
-			<li><a href="?searchType=2" id="searchT" name="2">산업직무</a></li>
-			<li><a href="?searchType=3" id="searchT" name="3">공통역량</a></li>
-			<li><a href="?searchType=4" id="searchT" name="4">어학 및 자격증</a></li>
-		</ul>
+            <li class="on"><a href="/view/admin/index.php" id="searchT" name="c.cateNo">전체</a></li>
+			<form id="selectCategory">
+                <li><a href="?searchType=1" id="searchT" name="1">일반직무</a></li>
+                <li><a href="?searchType=2" id="searchT" name="2">산업직무</a></li>
+                <li><a href="?searchType=3" id="searchT" name="3">공통역량</a></li>
+                <li><a href="?searchType=4" id="searchT" name="4">어학 및 자격증</a></li>
+            </form>
+        </ul>
 
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
 			<caption class="hidden">수강후기</caption>
