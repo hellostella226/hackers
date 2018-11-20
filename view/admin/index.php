@@ -36,15 +36,22 @@
 		</div>
 
 		<ul class="tab-list tab5">
-            <li class="on"><a href="/view/admin/index.php" id="searchT" name="c.cateNo">전체</a></li>
-			<form id="selectCategory">
-                <li><a href="?searchType=1" id="searchT" name="1">일반직무</a></li>
-                <li><a href="?searchType=2" id="searchT" name="2">산업직무</a></li>
-                <li><a href="?searchType=3" id="searchT" name="3">공통역량</a></li>
-                <li><a href="?searchType=4" id="searchT" name="4">어학 및 자격증</a></li>
-            </form>
+            <li class="on"><a href="/view/admin/index.php">전체</a></li>
+            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=1">일반직무</a></li>
+            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=2">산업직무</a></li>
+            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=3">공통역량</a></li>
+            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=4">어학 및 자격증</a></li>
         </ul>
+<script>
+    $.post('/controller/adminController.php?',$('#selectCategory').serialize(), function(data){
 
+        event.preventDefault();
+
+        alert('hi');
+
+    },"json")
+
+</script>
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
 			<caption class="hidden">수강후기</caption>
 			<colgroup>
@@ -63,7 +70,7 @@
                     <col style="width:110px"/>
                 </colgroup>
                 <form id="deleteLecture" method="post">
-                <tbody>
+                <tbody id="test1">
                 <? while($row = mysql_fetch_array($result)) { ?>
                     <tr>
                         <td>
