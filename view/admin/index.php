@@ -36,22 +36,15 @@
 		</div>
 
 		<ul class="tab-list tab5">
-            <li class="on"><a href="/view/admin/index.php">전체</a></li>
-            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=1">일반직무</a></li>
-            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=2">산업직무</a></li>
-            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=3">공통역량</a></li>
-            <li><a href="/controller/adminController.php?mode=selectCategory&cateNo=4">어학 및 자격증</a></li>
+            <form id="searchBox" method="get">
+                <li <? if($_GET['cateNo'] == '') { ?>class="on"<? } ?>><a href="?cateNo=" id="searchT">전체</a></li>
+                <li <? if($_GET['cateNo'] == 1) { ?>class="on"<? } ?>><a href="?cateNo=1" class="searchT" name="1">일반직무</a></li>
+                <li <? if($_GET['cateNo'] == 2) { ?>class="on"<? } ?>><a href="?cateNo=2" class="searchT" name="2">산업직무</a></li>
+                <li <? if($_GET['cateNo'] == 3) { ?>class="on"<? } ?>><a href="?cateNo=3" class="searchT" name="3">공통역량</a></li>
+                <li <? if($_GET['cateNo'] == 4) { ?>class="on"<? } ?>><a href="?cateNo=4" class="searchT" name="4">어학 및 자격증</a></li>
+            </form>
         </ul>
-<script>
-    $.post('/controller/adminController.php?',$('#selectCategory').serialize(), function(data){
 
-        event.preventDefault();
-
-        alert('hi');
-
-    },"json")
-
-</script>
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
 			<caption class="hidden">수강후기</caption>
 			<colgroup>

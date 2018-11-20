@@ -85,16 +85,5 @@ header("Pragma:no-cache");
             echo "<meta http-equiv='refresh' content='0; url=/view/admin/updateLec.html?lecNo=".$_GET['lecNo']."'>";
 
 
-        case "selectCategory" :
-
-            if(isset($_GET['cateNo'])) {
-
-                echo 'hi';
-
-                include_once $_SERVER['DOCUMENT_ROOT'].'/model/selectLectureList.php';
-                echo "<script>$('test1').append().html('hi');</script>";
-
-            }
-
 
     }
