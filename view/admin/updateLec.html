@@ -1,5 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/view/common/header.html';
+include $_SERVER['DOCUMENT_ROOT'].'/view/common/adminLeftNav.html';
 include $_SERVER['DOCUMENT_ROOT'].'/model/updateLecture.php';
 include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 ?>
@@ -22,7 +23,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 
     <div class="user-notice">
         <strong class="fs16">강의 수정하기</strong>
-        <ul class="list-guide mt15">
+        <ul class="list-guide mt15">git
             <li class="tc-brand">썸네일 파일 첨부시 웹 관련 파일 업로드를 할 수 업습니다.(ex: php/html/.c 등)</li>
             <li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
         </ul>
@@ -102,6 +103,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 
     <div class="box-btn t-r">
         <a href="#" class="btn-m-gray">목록</a>
+        <a href="#" class="btn-m-gray" id="deleteLecture">강의삭제</a>
         <a href="#" class="btn-m ml5" id="sendContents">강의등록</a>
     </div>
     <input type="hidden" id="cateNo" name="cateNo" value="">
@@ -110,7 +112,25 @@ include $_SERVER['DOCUMENT_ROOT'].'/model/selectLecture.php';
 </div>
 </div>
 
+<script>
 
+    $('#deleteLecture').click(function() {
+        alert('hi');
+
+       $.post('/controller/adminController.php',{mode : 'deleteLecture' , lecNo : $('#lecNo').val()}, function(data) {
+           alert('hi ajax');
+           if(data.success == false) {
+               alert(data.msg);
+           }
+           if(data.success == true) {
+               alert(data.msg);
+               location.href = '/view/admin/index.php?mode=list';
+           }
+       },'json');
+
+    });
+
+</script>
 <script type="text/javascript">
 
     var oEditors = [];

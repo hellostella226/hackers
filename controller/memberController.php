@@ -1,10 +1,6 @@
 <?
-session_start();
 $_SESSION['num'] = '123456';
 include  $_SERVER['DOCUMENT_ROOT'].'/model/DBconfig.php';
-/*header("Content-Type: text/html; charset=KS_C_5601-1987");
-header("Cache-Control:no-cache");
-header("Pragma:no-cache");*/
 ?>
 
 <?php
@@ -12,45 +8,7 @@ header("Pragma:no-cache");*/
 
     switch($mode) {
 
-
-        /*로그인*/
-       /* case "logIn" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/logIn.html' >";
-            break;*/
-
-        /*회원가입 완료*/
-        /*case "complete" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/complete.html'>";
-            break;*/
-
-
-        /*회원가입 1단계*/
-      /*  case "step_01" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_01.html' >";
-            break;*/
-
-        /*회원가입 2단계*/
-        /*case "step_02" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_02.html'>";
-            break;*/
-
-        /*회원가입 3단계*/
-       /* case "step_03" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/view/member/step_03.html'>";
-            break;*/
-
-        /*회원가입 유효성 검사 후 등록*/
-        /*case "regist" :
-
-            echo "<meta http-equiv='refresh' content='0; url=/model/regist.php'>";
-            break;*/
-
-        /*로그인 확인*/
+        /*로그인 체크*/
         case "logInChk" :
 
             include_once  $_SERVER['DOCUMENT_ROOT'].'/model/logInCheck.php';

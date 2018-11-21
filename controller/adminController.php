@@ -83,6 +83,28 @@ header("Pragma:no-cache");
         case "updateLecture" :
 
             echo "<meta http-equiv='refresh' content='0; url=/view/admin/updateLec.html?lecNo=".$_GET['lecNo']."'>";
+            break;
+
+        case "deleteLecture" :
+
+            include_once $_SERVER['DOCUMENT_ROOT'].'/model/deleteLecture.php';
+
+            if(!isset($result)) {
+                $results['success'] = false;
+                $results['msg'] = '삭제에 실패했습니다.';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
+                return false;
+            }
+            if(isset($result)) {
+                $results['success'] = true;
+                $results['msg'] = '삭제되었습니다.';
+                $results['msg'] = iconv("EUC-KR","UTF-8",$results['msg']);
+                echo json_encode($results);
+                return true;
+            } break;
+
+
 
 
 
